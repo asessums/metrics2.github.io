@@ -305,11 +305,11 @@ let medium = 'transit';
             }
         setData('transit');
          async function fetchAPI(){
-                url = 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token;
-                response = await fetch(url, {method: 'GET', headers:{connection: 'close', Access-Control-Allow-Origin: *}});
-                let json = await response.json();
-                console.log(json);
-                marker.bindPopup("<b>Population: </b>" + json.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY ).openPopup();
+                    url = 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close', Access-Control-Allow-Origin: *}};
+                    response = await fetch(url);
+                    let json = await response.json();
+                    console.log(json);
+                    marker.bindPopup("<b>Population: </b>" + json.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY ).openPopup();
                 };
         map.on('click', onMapClick);
 
