@@ -159,6 +159,7 @@ let medium = 'transit';
         // set the attribution
         const attributionText = `<a href='https://www.hraadvisors.com' target='_blank'>&copy; Kevin Clyne</a> <a href='http://mapbox.com/' target='_blank'>&copy; MapBox</a> <a href='https://targomo.com/developers/attribution/' target='_blank'>&copy; Targomo</a>`
         map.attributionControl.addAttribution(attributionText);
+        var token = 'DyQ1CBflybQI_4WdJzCz1noCVqCajMwsmtODv9V3ouNXZh5rxlVdN28ZthEkYEJS2eEoXLdPYQttKlzTL_aM6fhhZbiC9xkHfVXp6GhFiaync4rg_2os2xhadMH_piGs19yr87tQjZaE0nHgED_7XkhH-XdspHx9wHqJdaTkZfqe-OQTwvplmnlz0GAiYFxELcc-St9ub8IgAHYqx6_GYg..';
         var geocodeService = L.esri.Geocoding.geocodeService();
         var today = new Date();
         var dd = today.getDate();
@@ -237,7 +238,6 @@ let medium = 'transit';
                 geo = result.address.City;
                 name = today + '_' + geo + '_' + medium;
                 newname = name.toUpperCase()
-                console.log(newname);
                 document.getElementById('export').onclick = function(e) {
                 document.getElementById('export').setAttribute('href', 'data:' + convertedData);
                 document.getElementById('export').setAttribute('download', newname +'.geojson');
@@ -281,7 +281,7 @@ let medium = 'transit';
                 const polygons2 = await client.polygons.fetch([source], options2);
                 var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(polygons2));
                 geom = polygons2.features[0].geometry.coordinates[0];
-                convertedStudy2 = encodeURIComponent(JSON.stringify(geom));
+                convertedStudy = encodeURIComponent(JSON.stringify(geom));
                 // add polygons to overlay
                 setTimeout(function () {
                     polygonOverlayLayer.setData(polygons);
@@ -303,15 +303,12 @@ let medium = 'transit';
             });
 
             }
-        var token = 'DyQ1CBflybQI_4WdJzCz1noCVqCajMwsmtODv9V3ouNXZh5rxlVdN28ZthEkYEJS2eEoXLdPYQttKlzTL_aM6fhhZbiC9xkHfVXp6GhFiaync4rg_2os2xhadMH_piGs19yr87tQjZaE0nHgED_7XkhH-XdspHx9wHqJdaTkZfqe-OQTwvplmnlz0GAiYFxELcc-St9ub8IgAHYqx6_GYg..';
-        async function fetchAPI(){
-                    response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy2+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token);
-                    json2 = await response2.json();
-                    console.log(json2);
-                    marker.bindPopup("<b>Population: </b>" + json2.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY ).openPopup();
-                }
         setData('transit');
-
+         async function fetchAPI(){
+                    response = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close'}});
+                    json = await response.json();
+                    marker.bindPopup("<b>Population: </b>" + json.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY ).openPopup();
+                };
         map.on('click', onMapClick);
 
             Object.keys(polygonOverlayLayer.options.colors).forEach(time => {

@@ -1,0 +1,57 @@
+<html>
+<head>
+  <style>
+    body, html {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+      .button {
+            font-family: sans-serif;
+            text-transform: uppercase;
+            color: #666;
+            cursor: pointer;
+            padding: 10px 10px 8px 10px;
+            display: inline-block;
+            font-size: 14px;
+        }
+  </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.29/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.29/esri/dijit/geoenrichment/themes/common/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.29/esri/css/esri.css">
+  </head>
+<body class = claro>
+  <script src="https://js.arcgis.com/3.29/"></script>
+  <div id="button" onclick="callAPI()" class="button">request</div>
+  <div id="button" onclick="callAPI2()" class="button">request2</div>
+ 
+ <script>
+  //geometry here
+  var token = 'DyQ1CBflybQI_4WdJzCz1noCVqCajMwsmtODv9V3ouNXZh5rxlVdN28ZthEkYEJS2eEoXLdPYQttKlzTL_aM6fhhZbiC9xkHfVXp6GhFiaync4rg_2os2xhadMH_piGs19yr87tQjZaE0nHgED_7XkhH-XdspHx9wHqJdaTkZfqe-OQTwvplmnlz0GAiYFxELcc-St9ub8IgAHYqx6_GYg..';
+  geo = '[[[-75.080566,40.031821],[-75.234375,39.91395],[-74.970703,39.800096],[-75.080566,40.031821]]]';
+
+  geo2 = '[[[-76.091309,40.697299],[-76.409912,40.313043],[-75.767212,40.292097],[-76.091309,40.697299]]]';
+  
+
+  //fuctions and shit
+  
+
+  callAPI = async function fetchAPI(){
+  let response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+geo+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'keep-alive'}});
+    // &token=' + json.token
+    let json2 = await response2.json();
+    console.log(json2);
+}
+  callAPI2 = async function fetchAPI2(){
+  let response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+geo2+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'keep-alive'}});
+    // &token=' + json.token
+    let json2 = await response2.json();
+    console.log(json2);
+}
+
+</script>
+</body>
+
+</html>
+
+
