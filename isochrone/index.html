@@ -305,7 +305,7 @@ let medium = 'transit';
             }
         setData('transit');
          async function fetchAPI(){
-                    url = 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close', Access-Control-Allow-Origin: *}};
+                    url = 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close'}};
                     console.log(url);
                     response = await fetch(url);
                     let json = await response.json();
