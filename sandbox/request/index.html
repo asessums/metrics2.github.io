@@ -37,13 +37,13 @@
   
 
   callAPI = async function fetchAPI(){
-  let response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+geo+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'keep-alive'}});
+  let response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+geo+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close', Access-Control-Allow-Origin: *}});
     // &token=' + json.token
     let json2 = await response2.json();
     console.log(json2);
 }
   callAPI2 = async function fetchAPI2(){
-  let response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+geo2+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'keep-alive'}});
+  let response2 = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+geo2+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close', Access-Control-Allow-Origin: *}});
     // &token=' + json.token
     let json2 = await response2.json();
     console.log(json2);

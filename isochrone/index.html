@@ -305,8 +305,9 @@ let medium = 'transit';
             }
         setData('transit');
          async function fetchAPI(){
-                    response = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close'}});
-                    json = await response.json();
+                    response = await fetch('https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+convertedStudy+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, {method: 'GET', headers:{connection: 'close',}});
+                    let json = await response.json();
+                    console.log(json);
                     marker.bindPopup("<b>Population: </b>" + json.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY ).openPopup();
                 };
         map.on('click', onMapClick);
