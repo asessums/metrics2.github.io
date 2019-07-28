@@ -73,10 +73,10 @@ function showPop(str) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var ESRI = JSON.parse(this.responseText);
-      document.getElementById("txtHint").innerHTML = ESRI.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY;
+      document.getElementById("txtHint").innerHTML = ESRI
     }
   };
-  xhttp.open("GET", 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+str+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, true);
+  xhttp.open("GET", 'https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer?StudyAreas=[{"geometry":{"rings":'+str+',"spatialReference":{"wkid":4326}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&returngeometry=true&f=pjson&token=' + token, true);
   xhttp.send();
 }
 

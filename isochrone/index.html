@@ -84,7 +84,7 @@
             text-decoration:none;
         }
         #export {
-            top:80px;
+            top:40px;
         }
         #request {
             position: absolute;
@@ -199,7 +199,8 @@ let medium = 'transit';
         <div id="btn-car" onclick="setData(&apos;car&apos;); medium = 'car'"" class="button">car</div>
         <div id="btn-transit" onclick="setData(&apos;transit&apos;); medium = 'transit'"" class="button">transit</div>
         <a href='#' id='export'>Export Features</a>
-        <div id="request" onclick="fetchAPI()" class="button">Calcuate Demographics</div>
+        <!-- <div id="request" onclick="showPop(convertedStudy2)" class="button">Calcuate Demographics</div> -->
+      <!-- fetchAPI(); -->  
     </div>
         <img src="logo.png" class="logo">
 
@@ -276,7 +277,10 @@ let medium = 'transit';
                 const polygons2 = await client.polygons.fetch([source], options2);
                 var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(polygons2));
                 geom = polygons2.features[0].geometry.coordinates[0];
-                convertedStudy2 = encodeURIComponent(JSON.stringify(geom));
+                geom2 = polygons2.features[0].geometry.coordinates;
+                console.log(geom2);
+                convertedStudy = encodeURIComponent(JSON.stringify(geom));
+                convertedStudy2 = encodeURIComponent(JSON.stringify(geom2));
                 // add polygons to overlay
                 setTimeout(function () {
                     polygonOverlayLayer.setData(polygons);
@@ -367,7 +371,10 @@ let medium = 'transit';
                 const polygons2 = await client.polygons.fetch([source], options2);
                 var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(polygons2));
                 geom = polygons2.features[0].geometry.coordinates[0];
-                convertedStudy2 = encodeURIComponent(JSON.stringify(geom));
+                geom2 = polygons2.features[0].geometry.coordinates;
+                console.log(geom2);
+                convertedStudy = encodeURIComponent(JSON.stringify(geom));
+                convertedStudy2 = encodeURIComponent(JSON.stringify(geom2));
                 // add polygons to overlay
                 setTimeout(function () {
                     polygonOverlayLayer.setData(polygons);
@@ -426,7 +433,10 @@ let medium = 'transit';
                 const polygons2 = await client.polygons.fetch([source], options2);
                 var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(polygons2));
                 geom = polygons2.features[0].geometry.coordinates[0];
-                convertedStudy2 = encodeURIComponent(JSON.stringify(geom));
+                geom2 = polygons2.features[0].geometry.coordinates;
+                console.log(geom2);
+                convertedStudy = encodeURIComponent(JSON.stringify(geom));
+                convertedStudy2 = encodeURIComponent(JSON.stringify(geom2));
                 // add polygons to overlay
                 setTimeout(function () {
                     polygonOverlayLayer.setData(polygons);
@@ -456,6 +466,22 @@ let medium = 'transit';
                     marker.bindPopup("<b>Population: </b>" + json2.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY ).openPopup();
                 }
         setData('transit');
+
+        // Blegh
+
+        function showPop(str) {
+          var xhttp;    
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              var ESRI = JSON.parse(this.responseText);
+              // console.log(str);
+              console.log(ESRI.results[0].value.FeatureSet[0].features[0].attributes.TOTPOP_CY);
+            }
+          };
+          xhttp.open("GET", 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/GeoEnrichment/enrich?StudyAreas=[{"geometry":{"rings":'+str+',"spatialReference":{"wkid":3857}}}]&StudyAreasOptions={"GeometryType":"esriGeometryPolygon","SpatialRelationship":"esriSpatialRelIntersects"}&dataCollections=["KeyUSFacts"]&returngeometry=true&f=pjson&token=' + token, true);
+          xhttp.send();
+        }
 
         map.on('click', onMapClick);
 
