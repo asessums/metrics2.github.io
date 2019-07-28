@@ -60,7 +60,7 @@
             background-color: #EEE;
         }
         .button.active {
-            color: #50B0B5;
+            color: #003E7A;
         }
         #btn-spin {
          position: absolute;
@@ -141,7 +141,7 @@
           appearance: none;
           width: 25px; /* Set a specific slider handle width */
           height: 25px; /* Slider handle height */
-          background: #50B0B5; /* Green background */
+          background: #003E7A; /* Green background */
           cursor: pointer; /* Cursor on hover */
         }
 
@@ -154,7 +154,7 @@
          .minute {
             font-family: sans-serif;
             text-transform: uppercase;
-            color: #50B0B5;
+            color: #003E7A;
             cursor: pointer;
             padding: 30px 10px 0px 10px;
             display: inline-block;
@@ -213,6 +213,18 @@ let medium = 'transit';
             layers: [tileLayer],
             scrollWheelZoom: true
         }).setView(center, 12);
+        
+        var markerimage = L.icon({
+            iconUrl: 'bluemarker.png',
+            shadowUrl: 'markershadow.png',
+
+            iconSize:     [35.5, 46], // size of the icon
+            shadowSize:   [36, 16], // size of the shadow
+            iconAnchor:   [18.5, 43], // point of the icon which will correspond to marker's location
+            shadowAnchor: [10, 10],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
         var geocoder = L.Control.geocoder({
             defaultMarkGeocode: false,
             position: "topleft"
@@ -224,7 +236,7 @@ let medium = 'transit';
                 if (marker != undefined) {
                   map.removeLayer(marker);
                 };
-                marker = L.marker((e.geocode.center)).addTo(map);
+                marker = L.marker((e.geocode.center), {icon: markerimage}).addTo(map);
                 async function setData(medium) {
                 const selector = `btn-${medium}`;
                 map.spin(false);
@@ -302,7 +314,7 @@ let medium = 'transit';
         var today = yy + mm + dd;
         // const travelTimes = [300, 600, 900, 1200, 1500, 1800];
         let source = {id: 0, lat: 40.719040, lng: -74.008927};
-        let marker = L.marker([40.719040, -74.008927]).addTo(map);
+        let marker = L.marker([40.719040, -74.008927], {icon: markerimage}).addTo(map);
         const polygonOverlayLayer = new tgm.leaflet.TgmLeafletPolygonOverlay({ strokeWidth: 20 });
         polygonOverlayLayer.addTo(map);
         polygonOverlayLayer.setColors(colorModes[0].data)
@@ -315,7 +327,7 @@ let medium = 'transit';
             if (marker != undefined) {
               map.removeLayer(marker);
             };
-            marker = L.marker((e.latlng)).addTo(map);
+            marker = L.marker((e.latlng), {icon: markerimage}).addTo(map);
             async function setData(medium) {
                 const selector = `btn-${medium}`;
                 map.spin(true);
