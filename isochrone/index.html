@@ -167,6 +167,49 @@
             z-index:400;
             cursor: pointer;
         }
+        #info {
+            position: absolute;
+            bottom:10px;
+            left:10px;
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .4);
+            color:#666;
+            padding:10px 10px 8px 10px;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size:14px;
+            text-decoration:none;
+            z-index:400;
+        }
+        #infowindow {
+           position: absolute;
+            bottom:111px;
+            width: 90%;
+            height: 77%;
+            margin-left: 5%;
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .4);
+            color:#666;
+            padding:10px 10px 8px 10px;
+            font-family: sans-serif;
+            cursor: pointer;
+            font-size:14px;
+            text-decoration:none;
+            z-index:400;
+        }
+        #closewindow {
+        position: absolute;
+            top:10%;
+            right:4.5%;
+            font-size:15px;
+            z-index:-1;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            text-decoration:none;
+            color: #003E7A;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -189,6 +232,8 @@ let medium = 'transit';
     slider.oninput = function() {
           output.innerHTML = this.value + ' min';
           travelTimes = [this.value*60]
+    }
+    slider.onchange = function() {
             setData(medium);
     }
 </script>
@@ -202,6 +247,11 @@ let medium = 'transit';
         <!-- <div id="request" onclick="showPop(convertedStudy2)" class="button">Calcuate Demographics</div> -->
       <!-- fetchAPI(); -->  
     </div>
+        <div id="info" class="button">Assumptions and Sources</div>
+        <span id="info2"></span>
+        <div id=closewindow> X </div>
+
+        </div>
         <img src="logo.png" class="logo">
 
 
@@ -500,6 +550,20 @@ let medium = 'transit';
         }
 
         map.on('click', onMapClick);
+
+        var assumptions = 
+        "<div id=infowindow> Assumptions will go here eventually </div>";
+        
+        document.getElementById('info').onclick = function(e) {
+                document.getElementById('info2').innerHTML = assumptions;
+                document.getElementById('closewindow').style.zIndex ='400';
+        }; 
+        
+        document.getElementById('closewindow').onclick = function() {
+                document.getElementById('info2').innerHTML = "";
+                document.getElementById('closewindow').style.zIndex ='-1';
+        }
+
 
         </script>
 </body>
