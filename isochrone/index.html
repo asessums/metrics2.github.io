@@ -291,7 +291,7 @@ The resulting travelshed geometries give a quick visual cue about access, but ca
 We have provided geojson download links so you can easily save your travelsheds and continue your analysis elsewhere.
 <h4>Routing - Streets</h4>
 <h5>Edge Defaults</h5>
-<p>The core routing technology is the <a href="https://targomo.com/developers/attribution/">Targomo API</a> which utilizes <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> for street network data. The trip planning software takes into account different types of roads as well as access flags, if present. Roads like motorways and other major roads are not accessible for pedestrians, while footways and pedestrian-only streets are not accessible for cars, unless they are flagged otherwise. It also fully considers turning restrictions for cars and bikes. If a crossing has a restriction that forbids turning from one street to another the algorithm will not take this route. Speed limitations of streets are also taken into account if present otherwise the following defaults are used. Elevation data has no impact on car routing.</p>
+<p>The core routing technology is the <a href="https://targomo.com/developers/attribution/"  target="_blank">Targomo API</a> which utilizes <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> for street network data. The trip planning software takes into account different types of roads as well as access flags, if present. Roads like motorways and other major roads are not accessible for pedestrians, while footways and pedestrian-only streets are not accessible for cars, unless they are flagged otherwise. It also fully considers turning restrictions for cars and bikes. If a crossing has a restriction that forbids turning from one street to another the algorithm will not take this route. Speed limitations of streets are also taken into account if present otherwise the following defaults are used. Elevation data has no impact on car routing.</p>
 <center>
 <h5>Open Street Map Edge Type Defaults</h5>
 <table>
@@ -455,7 +455,7 @@ We have provided geojson download links so you can easily save your travelsheds 
 <hr>
 <h4>Routing - Transit</h4>
 <h5 id="public-transportation">Data Sources and Coverage</h5>
-<p> The generated transit routes where available are based on GTFS (General Transit Feed Specification) data provided by local transit agencies. A list of cities currently covered is available <a href="https://targomo.com/developers/availability/northamerica/">here</a>. If you are unsure if the transit system you are looking for is represented, you can confirm by toggling between "Walk" and "Transit" to check for differences. By default, this analysis assumes one will walk to the nearest transit stops before boarding. If no transit data is available, the Walk and Transit layers will be the same.     
+<p> The generated transit routes where available are based on GTFS (General Transit Feed Specification) data provided by local transit agencies. A list of cities currently covered is available <a href="https://targomo.com/developers/availability/northamerica/"  target="_blank">here</a>. If you are unsure if the transit system you are looking for is represented, you can confirm by toggling between "Walk" and "Transit" to check for differences. By default, this analysis assumes one will walk to the nearest transit stops before boarding. If no transit data is available, the Walk and Transit layers will be the same.     
 <h5 id="public-transportation">Edge Defaults</h5>
 
 <p>When using public transportation the routing is performed for a time window (frame). The algorithm searches for the shortest route(s) in the given time frame. For example, using a transit frame starting at 8:00 and a duration of 2 hours, a polygon ring for 20 minutes will include all points reachable within 20 min regardless of starting the travel at 8:00 or 9:40. The default travel time for this analysis is set at 1.30 p.m. with a furation of 2 hours (unless requested otherwise).</p>
@@ -464,7 +464,7 @@ We have provided geojson download links so you can easily save your travelsheds 
 <hr>
 <h4>Custom Inputs</h4>
 If you are looking for a variance from the default assumptions, contact <a href="mailto:kclyne@hraadvisors.com">Kevin</a> or <a href="mailto:agsarma@hraadvisors.com">Arjun</a> who can set-up the analysis.
-If the transit system you are looking for is not represented, check <a href="https://transitfeeds.com/feeds">TransitFeeds</a> to check if your locality provides transit data in GTFS format, in which case, it can be added to our system. 
+If the transit system you are looking for is not represented, check <a href="https://transitfeeds.com/feeds"  target="_blank">TransitFeeds</a> to check if your locality provides transit data in GTFS format, in which case, it can be added to our system. 
 </div>
 </div>
 
