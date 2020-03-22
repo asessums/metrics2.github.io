@@ -487,7 +487,7 @@ If the transit system you are looking for is not represented, check <a href="htt
         const colorModes = [
             {text: 'Standard', value:"standard", data: {60: '#11FF00', 120: '#11FF00', 180: '#11FF00', 240: '#11FF00', 300: '#11FF00', 360: '#11FF00', 420: '#11FF00', 480: '#11FF00', 540: '#11FF00', 600: '#11FF00', 660: '#11FF00', 720: '#11FF00', 780: '#11FF00', 840: '#11FF00', 900: '#11FF00', 960: '#11FF00', 1020: '#11FF00', 1080: '#11FF00', 1140: '#11FF00', 1200: '#11FF00', 1260: '#11FF00', 1320: '#11FF00', 1380: '#11FF00', 1440: '#11FF00', 1500: '#11FF00', 1560: '#11FF00', 1620: '#11FF00', 1680: '#11FF00', 1740: '#11FF00', 1800: '#11FF00', 1860: '#11FF00', 1920: '#11FF00', 1980: '#11FF00', 2040: '#11FF00', 2100: '#11FF00', 2160: '#11FF00', 2220: '#11FF00', 2280: '#11FF00',2340: '#11FF00',2400: '#11FF00',2460: '#11FF00',2520: '#11FF00',2580: '#11FF00',2640: '#11FF00',2700: '#11FF00',2760: '#11FF00',2820: '#11FF00',2880: '#11FF00',2940: '#11FF00',3000: '#11FF00',3060: '#11FF00',3120: '#11FF00',3180: '#11FF00',3240: '#11FF00',3300: '#11FF00',3360: '#11FF00',3420: '#11FF00',3480: '#11FF00',3540: '#11FF00',3600: '#11FF00'}},
         ];
-        const tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/kpclyne/cjy9ts3mh0y9j1do9uss5fz8o/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg');
+        const tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/kpclyne/ck82gt47u0gc11il8fmks6fqk/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg');
         // Coordinates to center the map
         const center = [40.696447, -73.966770];
 
@@ -528,7 +528,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 1800,
+                maxEdgeWeight: 3600,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -537,7 +537,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 1800,
+                maxEdgeWeight: 3600,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'geojson',
@@ -627,7 +627,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 1800,
+                maxEdgeWeight: 3600,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -636,7 +636,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 1800,
+                maxEdgeWeight: 3600,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'geojson',
@@ -694,7 +694,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: mode,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 1800,
+                maxEdgeWeight: 3600,
                 edgeWeight: 'time',
                 transitMaxTransfers: mode === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -703,7 +703,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: mode,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 1800,
+                maxEdgeWeight: 3600,
                 edgeWeight: 'time',
                 transitMaxTransfers: mode === 'transit' ? 5 : null,
                 serializer: 'geojson',
