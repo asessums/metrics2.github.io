@@ -250,7 +250,7 @@ let medium = 'transit';
 </script>
 
 <div class="slidecontainer">
-    <center><input type="range" min="1" max="60" value="30" class="slider" id="myRange">
+    <center><input type="range" min="5" max="120" value="30" step="5" class="slider" id="myRange">
     <p style ="margin-bottom: 6px;"><span id="demo" class = "minute"> min</span></p></center>
 </div>
 <script>
@@ -478,18 +478,19 @@ If the transit system you are looking for is not represented, check <a href="htt
 
         //slider
         // create targomo client
-        const client = new tgm.TargomoClient('northamerica', 'S8ROYL6SVRDRG3UXY76Q227719011');
+        const client = new tgm.TargomoClient('northamerica', '1AVFMMCTC28HZN1PPSN7JAG');
         //const client = new tgm.TargomoClient('northamerica', '1AVFMMCTC28HZN1PPSN7JAG');
         // define the basemap
         // const colorModes = [
-        //    {text: 'Standard', value:"standard", data: {60: '#11FF00', 120: '#22FF00', 180: '#33FF00', 240: '#44FF00', 300: '#55FF00', 360: '#66FF00', 420: '#77FF00', 480: '#88FF00', 540: '#99FF00', 600: '#AAFF00', 660: '#BBFF00', 720: '#CCFF00', 780: '#DDFF00', 840: '#EEFF00', 900: '#FFFF00', 960: '#FEEE00', 1020: '#FEDD00', 1080: '#FECC00', 1140: '#FDBB00', 1200: '#FDAA00', 1260: '#FD9900', 1320: '#FC8800', 1380: '#FC7700', 1440: '#FC6600', 1500: '#FB5500', 1560: '#FB4400', 1620: '#FB3300', 1680: '#FA2200', 1740: '#FA1100', 1800: '#FA0000', 3600: '#FA0000'}},
+        //    {text: 'Standard', value:"standard", data: {60: '#11FF00', 120: '#22FF00', 180: '#33FF00', 240: '#44FF00', 300: '#55FF00', 360: '#66FF00', 420: '#77FF00', 480: '#88FF00', 540: '#99FF00', 600: '#AAFF00', 660: '#BBFF00', 720: '#CCFF00', 780: '#DDFF00', 840: '#EEFF00', 900: '#FFFF00', 960: '#FEEE00', 1020: '#FEDD00', 1080: '#FECC00', 1140: '#FDBB00', 1200: '#FDAA00', 1260: '#FD9900', 1320: '#FC8800', 1380: '#FC7700', 1440: '#FC6600', 1500: '#FB5500', 1560: '#FB4400', 1620: '#FB3300', 1680: '#FA2200', 1740: '#FA1100', 1800: '#FA0000', 7200: '#FA0000'}},
         //];
         const colorModes = [
-            {text: 'Standard', value:"standard", data: {60: '#11FF00', 120: '#11FF00', 180: '#11FF00', 240: '#11FF00', 300: '#11FF00', 360: '#11FF00', 420: '#11FF00', 480: '#11FF00', 540: '#11FF00', 600: '#11FF00', 660: '#11FF00', 720: '#11FF00', 780: '#11FF00', 840: '#11FF00', 900: '#11FF00', 960: '#11FF00', 1020: '#11FF00', 1080: '#11FF00', 1140: '#11FF00', 1200: '#11FF00', 1260: '#11FF00', 1320: '#11FF00', 1380: '#11FF00', 1440: '#11FF00', 1500: '#11FF00', 1560: '#11FF00', 1620: '#11FF00', 1680: '#11FF00', 1740: '#11FF00', 1800: '#11FF00', 1860: '#11FF00', 1920: '#11FF00', 1980: '#11FF00', 2040: '#11FF00', 2100: '#11FF00', 2160: '#11FF00', 2220: '#11FF00', 2280: '#11FF00',2340: '#11FF00',2400: '#11FF00',2460: '#11FF00',2520: '#11FF00',2580: '#11FF00',2640: '#11FF00',2700: '#11FF00',2760: '#11FF00',2820: '#11FF00',2880: '#11FF00',2940: '#11FF00',3000: '#11FF00',3060: '#11FF00',3120: '#11FF00',3180: '#11FF00',3240: '#11FF00',3300: '#11FF00',3360: '#11FF00',3420: '#11FF00',3480: '#11FF00',3540: '#11FF00',3600: '#11FF00'}},
+            {text: 'Standard', value:"standard", data: {300: '#11FF00', 600: '#22FF00', 900: '#33FF00', 1200: '#44FF00', 1500: '#55FF00', 1800: '#66FF00', 2100: '#77FF00', 2400: '#88FF00', 2700: '#99FF00', 3000: '#AAFF00', 3300: '#BBFF00', 3600: '#CCFF00', 3900: '#DDFF00', 4200: '#EEFF00', 4500: '#FFFF00', 4800: '#FEEE00', 5100: '#FEDD00', 5400: '#FECC00', 5700: '#FDBB00', 6000: '#FDAA00', 6300: '#FD9900', 6600: '#FC8800', 6900: '#FC7700', 7200: '#FC6600'}},
         ];
         const tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/kpclyne/ck82gt47u0gc11il8fmks6fqk/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg');
         // Coordinates to center the map
-        const center = [40.696447, -73.966770];
+        const center = [34.048536, -118.258595];
+    
 
         // define the map
         var map = L.map('map', {
@@ -528,7 +529,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 3600,
+                maxEdgeWeight: 7200,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -537,7 +538,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 3600,
+                maxEdgeWeight: 7200,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'geojson',
@@ -604,8 +605,9 @@ If the transit system you are looking for is not represented, check <a href="htt
 
         var today = yy + mm + dd;
         // const travelTimes = [300, 600, 900, 1200, 1500, 1800];
-        let source = {id: 0, lat: 40.696447, lng: -73.966770};
-        let marker = L.marker([40.696447, -73.966770], {icon: markerimage}).addTo(map);
+
+        let source = {id: 0, lat: 34.048536, lng: -118.258595};
+        let marker = L.marker([34.048536, -118.258595], {icon: markerimage}).addTo(map);
         const polygonOverlayLayer = new tgm.leaflet.TgmLeafletPolygonOverlay({ strokeWidth: 20 });
         polygonOverlayLayer.addTo(map);
         polygonOverlayLayer.setColors(colorModes[0].data)
@@ -627,7 +629,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 3600,
+                maxEdgeWeight: 7200,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -636,7 +638,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 3600,
+                maxEdgeWeight: 7200,
                 edgeWeight: 'time',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'geojson',
@@ -694,7 +696,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: mode,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 3600,
+                maxEdgeWeight: 7200,
                 edgeWeight: 'time',
                 transitMaxTransfers: mode === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -703,7 +705,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: mode,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 3600,
+                maxEdgeWeight: 7200,
                 edgeWeight: 'time',
                 transitMaxTransfers: mode === 'transit' ? 5 : null,
                 serializer: 'geojson',
