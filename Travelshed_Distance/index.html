@@ -8,7 +8,7 @@
 
     <!--  Include targomo core -->
     <script src="https://releases.targomo.com/core/latest.min.js"></script>
-    <script src="https://releases.targomo.com/leaflet/latest.min.js"></script>
+    <script src="latest.min.js"></script>
 
      <script src="spin/dist/spin.min.js" charset="utf-8"></script>
     <script src="leaflet.spin.min.js" charset="utf-8"></script>
@@ -250,7 +250,7 @@ let medium = 'walk';
 </script>
 
 <div class="slidecontainer">
-    <center><input type="range" min="5" max="20000" value="10000" step="10" class="slider" id="myRange">
+    <center><input type="range" min="5" max="20000" value="10000" step="5" class="slider" id="myRange">
     <p style ="margin-bottom: 6px;"><span id="demo" class = "minute"> min</span></p></center>
 </div>
 <script>
@@ -487,6 +487,10 @@ If the transit system you are looking for is not represented, check <a href="htt
         const colorModes = [
             {text: 'Standard', value:"standard", data: {300: '#11FF00', 600: '#22FF00', 900: '#33FF00', 1200: '#44FF00', 1500: '#55FF00', 1800: '#66FF00', 2100: '#77FF00', 2400: '#88FF00', 2700: '#99FF00', 3000: '#AAFF00', 3300: '#BBFF00', 3600: '#CCFF00', 3900: '#DDFF00', 4200: '#EEFF00', 4500: '#FFFF00', 4800: '#FEEE00', 5100: '#FEDD00', 5400: '#FECC00', 5700: '#FDBB00', 6000: '#FDAA00', 6300: '#FD9900', 6600: '#FC8800', 6900: '#FC7700', 7200: '#FC6600'}},
         ];
+
+        const staticColor = [
+            {text: 'Standard', value:"standard", data:'#11FF00'},
+        ];
         const tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/kpclyne/ck82gt47u0gc11il8fmks6fqk/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg');
         // Coordinates to center the map
         const center = [38.890036, -77.009059];
@@ -610,7 +614,8 @@ If the transit system you are looking for is not represented, check <a href="htt
         let marker = L.marker([38.890036, -77.009059], {icon: markerimage}).addTo(map);
         const polygonOverlayLayer = new tgm.leaflet.TgmLeafletPolygonOverlay({ strokeWidth: 20 });
         polygonOverlayLayer.addTo(map);
-        polygonOverlayLayer.setColors(colorModes[0].data)
+        //polygonOverlayLayer.setColors(colorModes[0].data)
+        polygonOverlayLayer.setColors('#11FF00')
         
         // draw marker and add source
         function onMapClick(e) {
