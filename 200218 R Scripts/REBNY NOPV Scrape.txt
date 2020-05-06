@@ -1,0 +1,68 @@
+tempdir()
+dir.create(tempdir())
+
+#Import packages
+library(pdftools)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(readr)
+library(httr)
+library(rvest)
+
+#Set working directory
+setwd("U:/Project/REBNY Just Cause Eviction/3. Analysis & Research/Data/DOF/Expenses/NOPV Download")
+bbls <- read.csv("2016_BBLS.csv")
+n <- runif(600, min=0, max=17589)
+
+random_bbls <- data.frame()
+for (i in n){
+  random_bbls <- rbind((bbls[i,]),random_bbls)
+}
+
+
+dates <- c(20190115,20180115,20170115,20160115)
+
+#Import data file
+prefix <- "https://a836-mspuvw-dofptsz.nyc.gov/PTSCM/StatementSearch?bbl="
+middle <- "&stmtDate="
+end <- "&stmtType=NPV"
+
+multi_join <- function(list_of_loaded_data, join_func, ...){
+  require("dplyr")
+  output <- Reduce(function(x, y) {join_func(x, y, ...)}, list_of_loaded_data)
+  return(output)
+}
+
+rows <- vector(mode = "list")
+
+testit <- function(x)
+{
+  p1 <- proc.time()
+  Sys.sleep(x)
+  proc.time() - p1 # The cpu usage should be negligible
+}
+
+for (year in dates){
+  for (i in random_bbls[1:2,1]){
+    url <- paste(prefix,i,middle,year,end, sep = "")
+    print(url)
+    download.file(url, paste(i,"_",year,".pdf", sep = ""), "wininet", mode="wb")
+    testit(runif(1, min=4, max=10))
+    # Pull Data from Prop Taxes Page (Page 2)
+    #suppressWarnings(prop_taxes <- pdf_data(url)[[2]])
+    #ee <- prop_taxes$text[prop_taxes$y == prop_taxes$y[prop_taxes$text == "Expenses:"]][3]
+    #print(paste("Year: ",year," | BBL: ",i," |  Expenses: ",ee))
+    #row <- c(i,ee)
+    #rows <- rbind(rows, row)
+  }
+}
+
+files <- list.files("NOPV Download", pattern="*.pdf", full.names=TRUE)
+
+for (file in files){
+  
+}
+
+
+prop_taxes <- pdf_data(files[4])[[2]]

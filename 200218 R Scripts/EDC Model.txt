@@ -1,0 +1,904 @@
+###############################COVER############################################
+#                                                                              #
+#  PROGRAM NAME:  DRAFT R  CODE FOR NYCEDC FISCAL IMPACT UPDATE                #
+#                 IMPACT MODEL                                                 #
+#                                                                              #
+#  DATE:          12 DECEMBER 2019                                             #
+#  VERSION:       R Version 3.5.3                                              #
+#                                                                              #
+#  This program outlines the procedures for computing the impact of program    #
+# components using standard and developer specific inputs.                     #
+#                                                                              #
+################################1. SET-UP#######################################
+
+#Set working directory to project folder
+setwd("C:/Users/kclyne/Desktop/R_EDC_Final")
+
+#Set Project Name (For use in output file naming)
+Proj_Name <- "Test_RTC"
+
+library(readxl)
+library (lubridate)
+library (dplyr)
+library(tidyr)
+library(reshape2)
+library(XLConnect)
+library(censusapi)
+#library(xlsx)
+
+#######Functions
+#Functions
+NPV <- function(rate, values) sum(values/(1+rate)^seq_along(values))
+
+elapsed_days <- function(start_date, end_date){
+  sd <- as.POSIXlt(start_date)
+  ed <- as.POSIXlt(end_date)
+  as.numeric(ed-sd)
+}
+EndOfFY <- function(date){
+  m <- month(date)
+  fy <- ifelse(m<=6, year(date), year(date)+1)
+  as.Date(paste0(fy,"-06-30"))
+}
+elapsed_months <- function(start_date, end_date) {
+  ed <- as.POSIXlt(end_date)
+  sd <- as.POSIXlt(start_date)
+  12*(ed$year - sd$year) + (ed$mon - sd$mon)
+}
+
+#########Read in Input Sheets
+
+#Import Property Inputs
+Toggles <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A7:B12", col_names = TRUE)
+Analysis_Period <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A15:B17", col_names = TRUE)
+ConstructionCosts <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A21:B28", col_names = TRUE)
+BuildoutTimeline <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A32:B34", col_names = TRUE)
+BuildoutSchedule <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A43:G73", col_names = TRUE)
+MortgageDetails <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A76:B80", col_names = TRUE)
+Acquisition <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A84:B86", col_names = TRUE)
+suppressWarnings(DOFAssessment <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A90:B93", col_names = TRUE))
+suppressWarnings(Pre_MarketValue <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A97:G99", col_names = TRUE))
+AssessmentGuidelines_Year <- as.double(read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "B101", col_names = FALSE)[1,1])
+Exemptions <- read_excel("20200215_Inputs.xlsx", sheet = "Property_Inputs", range = "A104:D106", col_names = TRUE)
+
+#Import Use Inputs
+suppressWarnings(DevelopmentProgram <- read_excel("20200215_Inputs.xlsx", sheet = "Use_Inputs", range = "A8:G13", col_names = TRUE))
+DevelopmentPhasing <- read_excel("20200215_Inputs.xlsx", sheet = "Use_Inputs", range = "A24:G54", col_names = TRUE)
+names(DevelopmentPhasing) <- c("Category","OfficeA_OccupancyRate", "Retail_OccupancyRate", "OfficeB_OccupancyRate", "Condo_OccupancyRate", "ResMR_OccupancyRate", "ResAfford_OccupancyRate")
+suppressWarnings(JobDensities <- read_excel("20200215_Inputs.xlsx", sheet = "Use_Inputs", range = "A58:B82", col_names = TRUE, col_types = c("guess","numeric")))
+NetNewPct <- read_excel("20200215_Inputs.xlsx", sheet = "Use_Inputs", range = "A86:B91", col_names = TRUE)
+suppressWarnings(TPW <- read_excel("20200215_Inputs.xlsx", sheet = "Use_Inputs", range = "A95:C105", col_names = TRUE, col_types = c("guess","numeric", "numeric")))
+
+#Import Inflation
+Inflation <- read_excel("20200215_Inputs.xlsx", sheet = "Inflation and Discount Rate", range = "A10:B18", col_names = TRUE)
+DiscountRate <- as.double(read_excel("20200215_Inputs.xlsx", sheet = "Inflation and Discount Rate", range = "B20", col_names = FALSE)[1,1])
+
+#Demographics
+suppressWarnings(MHIs <- read_excel("20200215_Inputs.xlsx", sheet = "Demographics", range = "A10:B17", col_names = TRUE))
+Expenditures <- read_excel("20200215_Inputs.xlsx", sheet = "Demographics", range = "A19:B21", col_names = TRUE)
+MHI_API <- read_excel("20200215_Inputs.xlsx", sheet = "Demographics", range = "A26:B29", col_names = TRUE)
+
+#Tax Rates
+KeyTaxRates <- read_excel("20200215_Inputs.xlsx", sheet = "Tax Rates", range = "A10:B24", col_names = TRUE)
+RPTRates <- read_excel("20200215_Inputs.xlsx", sheet = "Tax Rates", range = "A26:B31", col_names = TRUE)
+TaxRate_AssessmentRatio <- as.double(read_excel("20200215_Inputs.xlsx", sheet = "Tax Rates", range = "B34", col_names = FALSE)[1,1])
+
+#Construction
+suppressWarnings(Const_Base <- read_excel("20200215_Inputs.xlsx", sheet = "Construction", range = "A8:D69", col_names = TRUE, col_types = c("numeric","numeric","numeric","numeric")))
+
+#Exemption Schedule
+ExemptionSchedule <- read_excel("20200215_Inputs.xlsx", sheet = "Exemption Schedule", range = "A9:E50", col_names = TRUE)
+
+#Construction RIMS
+ConstructionRIMS <- read_excel("20200215_Inputs.xlsx", sheet = "Construction RIMS", range = "A8:B14", col_names = TRUE)
+
+#Retail
+suppressWarnings(Retail <- read_excel("20200215_Inputs.xlsx", sheet = "Retail", range = "A8:B10", col_names = TRUE))
+
+
+
+############################2. INPUTS AND ASSUMPTIONS#############################
+
+############################Assumptions
+
+#Toggles
+OMB <- ifelse(Toggles$Value[1] == "Yes", 1, 0) 
+NetNew <- ifelse(Toggles$Value[2] == "Yes", 1, 0)
+AV_Cap <- ifelse(Toggles$Value[5] == "Yes", 1, 2)
+ANY_Program <- ifelse(Toggles$Value[4] == "Regular", 2, 1)
+Preexisting_TaxClass <- Toggles$Value[3]
+MHI <- 6
+
+#Set budget year
+#0 means costs are in nominal dollars
+BudgetCY <- as.double(ConstructionCosts$Assumption[6])
+
+#Start and end year/date, construction schedule setup
+#Be careful about the sequence of the columns in the inputs tab
+#s1 refers to site 1
+#number in the square parentheses refers to the row/site number
+SD <- as.Date(BuildoutTimeline$Assumption[1], origin = "1899-12-30")
+ED <- as.Date(BuildoutTimeline$Assumption[2], origin = "1899-12-30")
+SDFY <- ifelse(month(SD)<=6, year(SD), year(SD)+1)
+EDFY <- ifelse(month(ED)<=6, year(ED), year(ED)+1)
+Period <- elapsed_days(SD, ED)
+
+#Timeframe
+Analysis_StartFY <- Analysis_Period$Assumption[1]
+Analysis_EndFY <- Analysis_Period$Assumption[2]
+MHI_Year <- as.double(MHIs[1,2])
+
+#Net New
+NetNew_Office <- NetNewPct$Assumption[1]
+NetNew_Retail <- NetNewPct$Assumption[2]
+NetNew_Res <- NetNewPct$Assumption[3]
+NetNew_OfficeRetail <- NetNewPct$Assumption[4]
+MRTNetNew <- NetNewPct$Assumption[5]
+
+#Taxes per Worker
+TPW_Year <- TPW$`Non-OMB`[10]
+TPW_Total_Office <- ifelse(OMB == 1,  TPW$OMB[1], TPW$`Non-OMB`[1])
+TPW_Total_Retail <- ifelse(OMB == 1,  TPW$OMB[2], TPW$`Non-OMB`[2])
+TPW_Total_Res <- ifelse(OMB == 1,  TPW$OMB[3], TPW$`Non-OMB`[3])
+
+#Personal Sales Tax TPW
+TPW_PersonSales_Office <- TPW$`Non-OMB`[7]
+TPW_PersonSales_Retail <- TPW$`Non-OMB`[8]
+TPW_PersonSales_Res <- TPW$`Non-OMB`[9]
+
+#TPW Construction
+TPW_Hard <- ifelse(OMB == 1,  TPW$OMB[4], TPW$`Non-OMB`[4])
+TPW_SoftandFinancing <- ifelse(OMB == 1,  TPW$OMB[5], TPW$`Non-OMB`[5])
+TPW_IndirectandInduced <- ifelse(OMB == 1,  TPW$OMB[6], TPW$`Non-OMB`[6])
+
+#Construction Costs
+STXToHardCostsRatio <- ConstructionCosts$Assumption[7]
+STXTaxedNYC <- as.double(KeyTaxRates[2,2])
+
+#Construction Mortgage
+MRTAmount <- MortgageDetails$Assumption[3]
+MRTFY <- MortgageDetails$Assumption[4]
+RPTTAmount <- Acquisition$Assumption[1]
+RPTTFY <- Acquisition$Assumption[2]
+MRTRate <- ifelse(MRTAmount<500000, as.double(KeyTaxRates[7,2]), as.double(KeyTaxRates[8,2]))
+RPTTRate <- ifelse(RPTTAmount>500000, as.double(KeyTaxRates[3,2]), as.double(KeyTaxRates[4,2]))
+
+#Tax Rate
+TaxRate_PersonalIncome <- as.double(KeyTaxRates[9,2])
+TaxRate_SalesTax <- as.double(KeyTaxRates[1,2])
+TaxRate_RPT_Class1 <- as.double(RPTRates[2,2])
+TaxRate_RPT_Class2 <- as.double(RPTRates[3,2])
+TaxRate_RPT_Class3 <- as.double(RPTRates[4,2])
+TaxRate_RPT_Class4 <- as.double(RPTRates[5,2])
+Preexisting_TaxClass_Values <- c(TaxRate_RPT_Class1, TaxRate_RPT_Class2, TaxRate_RPT_Class3, TaxRate_RPT_Class4)
+Preexisting_TaxRate <- Preexisting_TaxClass_Values[as.numeric(Preexisting_TaxClass)]
+
+#Assessed Value
+AV_Land <- DOFAssessment$Assumption[1]
+AV_Total <- DOFAssessment$Assumption[2]
+AV_Year <- DOFAssessment$Assumption[3]
+
+#Assessment Guidelines
+Assessment_MVGSF_Office <- Pre_MarketValue$`Class A Office`[1]
+Assessment_MVGSF_Retail <- Pre_MarketValue$`Neighborhood Retail`[1]
+Assessment_MVGSF_Res_Condo <- Pre_MarketValue$`Residential: Condo`[1]
+Assessment_MVGSF_Res_Rental <- Pre_MarketValue$`Residential: Rental`[1]
+Assessment_MVGSF_Res_Rental_MR <- Pre_MarketValue$`Residential: Market Rate Rental`[1]
+Assessment_MVGSF_Res_Rental_Afford <- Pre_MarketValue$`Residential: Affordable Rental`[1]
+Assessment_Land_Office <- Pre_MarketValue$`Class A Office`[2]
+Assessment_Land_Retail <- Pre_MarketValue$`Neighborhood Retail`[2]
+Assessment_Land_Res_Condo <- Pre_MarketValue$`Residential: Condo`[2]
+Assessment_Land_Res_Rental <- Pre_MarketValue$`Residential: Rental`[2]
+Assessment_Land_Res_Rental_MR <- Pre_MarketValue$`Residential: Market Rate Rental`[2]
+Assessment_Land_Res_Rental_Afford <- Pre_MarketValue$`Residential: Affordable Rental`[2]
+
+#MHI
+MHI_Bronx <- as.double(MHIs[2,2])
+MHI_Kings <- as.double(MHIs[3,2])
+MHI_NewYork <- as.double(MHIs[4,2])
+MHI_Queens <- as.double(MHIs[5,2])
+MHI_Richmond <- as.double(MHIs[6,2])
+MHI_NYC <- as.double(MHIs[7,2])
+MHI_Values <- c(MHI_NewYork, MHI_Bronx, MHI_Kings, MHI_Queens, MHI_Richmond, MHI_NYC)
+MHI_Value <- MHI_Values[MHI]
+
+
+#Consumer Expenditure Trends
+RetailSpending <- as.double(Expenditures[2,2])
+TaxableSales <- as.double(Expenditures[1,2])
+
+#Construction RIMS
+RIMSYear <- ConstructionRIMS$Assumption[6]
+FDOutput <- ConstructionRIMS$Assumption[1]
+FDEarning <- ConstructionRIMS$Assumption[2]
+FDEmp <- ConstructionRIMS$Assumption[3]
+DIEarning <- ConstructionRIMS$Assumption[4]
+DIEmp <- ConstructionRIMS$Assumption[5]
+
+#Job Density
+DR_ClassAOffice <- JobDensities$Assumption[1]
+DR_Retail <- JobDensities$Assumption[12]
+DR_ResMR <- JobDensities$Assumption[4]
+DR_ResAfford <- JobDensities$Assumption[4]
+
+###Inflation
+Infl_TaxBase <- as.double(Inflation[4,2])
+Infl_Wage <- as.double(Inflation[8,2])
+Infl_GenPrice <- as.double(Inflation[1,2])
+Infl_PropertyAssessment <- as.double(Inflation[3,2])
+
+
+
+############################Developer Inputs
+
+#Office Zone A
+OfficeA_RampUp_Max <- DevelopmentProgram$`Office Zone A`[5]
+OfficeA_LossFactor <- DevelopmentProgram$`Office Zone A`[4]
+OfficeA_GSF <- DevelopmentProgram$`Office Zone A`[1]
+OfficeA_USF <- DevelopmentProgram$`Office Zone A`[2]
+
+#Retail
+Retail_RampUp_Max <- DevelopmentProgram$`Retail`[5]
+Retail_LossFactor <- DevelopmentProgram$`Retail`[4]
+Retail_GSF <- DevelopmentProgram$`Retail`[1]
+Retail_USF <- DevelopmentProgram$`Retail`[2]
+
+Retail_Taxable <- Retail$Assumption[1]
+Retail_SalesPerUSF <- Retail$Assumption[2]
+
+#Office Zone B
+OfficeB_RampUp_Max <- DevelopmentProgram$`Office Zone B`[5]
+OfficeB_LossFactor <- DevelopmentProgram$`Office Zone A`[4]
+OfficeB_GSF <- DevelopmentProgram$`Office Zone A`[1]
+OfficeB_USF <- DevelopmentProgram$`Office Zone A`[2]
+
+#Residential Condo
+ResCondo_GSF <- DevelopmentProgram$`Condo`[1]
+ResCondo_Units <- DevelopmentProgram$`Condo`[3]
+ResCondo_LossFactor <- DevelopmentProgram$`Condo`[4]
+#ResCondo_RampUp_Max <-
+
+#Residential Market Rate
+ResMR_RampUp_Max <- DevelopmentProgram$`Market-Rate Rental`[5]
+ResMR_LossFactor <- DevelopmentProgram$`Market-Rate Rental`[4]
+ResMR_GSF <- DevelopmentProgram$`Market-Rate Rental`[1]
+ResMR_Units <- DevelopmentProgram$`Market-Rate Rental`[3]
+
+#Residential Affordable
+ResAfford_RampUp_Max <- DevelopmentProgram$`Affordable Rental`[5]
+ResAfford_LossFactor <- DevelopmentProgram$`Affordable Rental`[4]
+ResAfford_GSF <- DevelopmentProgram$`Affordable Rental`[1]
+ResAfford_Units <- DevelopmentProgram$`Affordable Rental`[3]
+
+# What percentage of Building is retail? (For Office Zone A + Retail)
+RetailPCT <- Retail_GSF/(Retail_GSF+OfficeA_GSF)
+
+#Abatement Schedules
+ICAP_Office_ZoneARetail_Start <- Exemptions$`Office Zone A`[1]
+ICAP_Office_ZoneARetail_YBeforeConst<- Exemptions$`Office Zone A`[2]
+ICAP_Office_ZoneB_Start <- Exemptions$`Office Zone B`[1]
+ICAP_Office_ZoneB_YBeforeConst <- Exemptions$`Office Zone B`[2]
+ANY_Start <- Exemptions$Residential[1]
+ANY_YBeforeConst <- Exemptions$Residential[2]
+
+################################3. CONSTRUCTION IMPACT: MODELING#######################################
+
+#Build construction schedule
+FirstYearConstruction <- elapsed_days(SD, EndOfFY(SD))/Period
+MiddleYearConstruction <- 365/Period
+LastYearConstruction <- elapsed_days(EndOfFY(ED-365), ED)/Period
+
+Const <- Const_Base %>%
+  mutate(Const_Schedule = ifelse(`Calendar Year` == SDFY, FirstYearConstruction,
+                                 ifelse(`Calendar Year`>SDFY & `Calendar Year`<EDFY, MiddleYearConstruction,
+                                        ifelse(`Calendar Year`==EDFY, LastYearConstruction, 0))))
+
+#Split hard, soft, financing and other related construction costs. 
+#Add demolition cost to the construction start year (may need to be edited based on project-specific info)
+#Add tenant improvement cost to the last year of construction (may need to be edited based on project-specific info)
+Const <- Const %>%
+  mutate(H_Inputs = Const_Schedule*ConstructionCosts$Assumption[2] + ifelse('Fiscal Year'==SDFY, ConstructionCosts$Assumption[1], 
+                                                                            ifelse('Fiscal Year'==EDFY, ConstructionCosts$Assumption[5], 0)),
+         S_Inputs = Const_Schedule*ConstructionCosts$Assumption[3],
+         F_Inputs = Const_Schedule*ConstructionCosts$Assumption[4])
+
+#Inflate/deflate inputs for RIMS analysis
+Const <- Const %>%
+  mutate(RIMSInflation = ifelse(`Calendar Year`==RIMSYear,Const$`Inflation Index`, 0), 
+         ConsInflation = ifelse(`Calendar Year`==BudgetCY,Const$`Inflation Index`, 0))%>%
+  mutate(H_RIMS_Gross = H_Inputs*ifelse(BudgetCY==0, sum(RIMSInflation)/Const$`Inflation Index`, sum(RIMSInflation)/sum(ConsInflation)), 
+         S_RIMS_Gross = S_Inputs*ifelse(BudgetCY==0, sum(RIMSInflation)/Const$`Inflation Index`, sum(RIMSInflation)/sum(ConsInflation)),
+         F_RIMS_Gross = F_Inputs*ifelse(BudgetCY==0, sum(RIMSInflation)/Const$`Inflation Index`, sum(RIMSInflation)/sum(ConsInflation))) %>%
+  mutate(H_RIMS_NN = H_RIMS_Gross*Const$'Net New',
+         S_RIMS_NN = S_RIMS_Gross*Const$'Net New',
+         F_RIMS_NN = F_RIMS_Gross*Const$'Net New')
+
+#Apply RIMS multipliers for construction jobs and earnings, gross and net new
+Const <- Const %>%
+  mutate(H_DirectEmp_Gross = H_RIMS_Gross/1000000*FDEmp/DIEmp, H_IndirectEmp_Gross = H_RIMS_Gross/1000000*FDEmp-H_DirectEmp_Gross,  
+         S_DirectEmp_Gross = S_RIMS_Gross/1000000*FDEmp/DIEmp, S_IndirectEmp_Gross = S_RIMS_Gross/1000000*FDEmp-S_DirectEmp_Gross, 
+         F_DirectEmp_Gross = F_RIMS_Gross/1000000*FDEmp/DIEmp, F_IndirectEmp_Gross = F_RIMS_Gross/1000000*FDEmp-F_DirectEmp_Gross) %>%
+  mutate(H_DirectEarning_Gross = H_RIMS_Gross*FDEarning/DIEarning, 
+         SF_DirectEarning_Gross = (S_RIMS_Gross+F_RIMS_Gross)*FDEarning/DIEarning, 
+         IndirectEarning_Gross = (H_RIMS_Gross+S_RIMS_Gross+F_RIMS_Gross)*FDEarning-H_DirectEarning_Gross-SF_DirectEarning_Gross) %>%
+  mutate(H_DirectEmp_NN = H_RIMS_NN/1000000*FDEmp/DIEmp, H_IndirectEmp_NN = H_RIMS_NN/1000000*FDEmp-H_DirectEmp_NN,  
+         S_DirectEmp_NN = S_RIMS_NN/1000000*FDEmp/DIEmp, S_IndirectEmp_NN = S_RIMS_NN/1000000*FDEmp-S_DirectEmp_NN, 
+         F_DirectEmp_NN = F_RIMS_NN/1000000*FDEmp/DIEmp, F_IndirectEmp_NN = F_RIMS_NN/1000000*FDEmp-F_DirectEmp_NN) %>%
+  mutate(H_DirectEarning_NN = H_RIMS_NN*FDEarning/DIEarning, 
+         SF_DirectEarning_NN = (S_RIMS_NN+F_RIMS_NN)*FDEarning/DIEarning, 
+         IndirectEarning_NN = (H_RIMS_NN+S_RIMS_NN+F_RIMS_NN)*FDEarning-H_DirectEarning_NN-SF_DirectEarning_NN)
+
+##################GROSS IMPACTS
+
+#Tax impacts of workers (direct, indirect, and induced)
+Const <- Const %>%
+  mutate(HardCosts_JobTax_Gross = H_DirectEarning_Gross*TPW_Hard*(1+Infl_Wage)^(Const$`Calendar Year`-RIMSYear),
+         SFCosts_JobTax_Gross = SF_DirectEarning_Gross*TPW_SoftandFinancing*(1+Infl_Wage)^(Const$`Calendar Year`-RIMSYear),
+         IndirectInduced_JobTax_Gross = IndirectEarning_Gross*TPW_IndirectandInduced*(1+Infl_Wage)^(Const$`Calendar Year`-RIMSYear)) %>%
+  mutate(Const_JobTax_Gross = HardCosts_JobTax_Gross + SFCosts_JobTax_Gross + IndirectInduced_JobTax_Gross)
+
+#Sales taxes
+Const <- Const %>%
+  mutate(Const_STX_Gross = H_RIMS_Gross*STXToHardCostsRatio*STXTaxedNYC*TaxRate_SalesTax*Const$`Inflation Index`/max(RIMSInflation))
+
+#MRT and RPTT (only calculate gross amount)
+Const <- Const %>%
+  mutate(MRT_Gross = MRTRate*ifelse(Const$`Fiscal Year`==MRTFY, MRTAmount, 0)*ifelse(NetNew == 1,NetNew_OfficeRetail,1),
+         RPTT_Gross = RPTTRate*ifelse(Const$`Fiscal Year`==RPTTFY, RPTTAmount, 0)) 
+
+#NET NEW IMPACTS
+
+#Tax impacts of workers (direct, indirect, and induced)
+Const <- Const %>%
+  mutate(HardCosts_JobTax_NN = H_DirectEarning_NN*TPW_Hard*(1+Infl_Wage)^(Const$`Calendar Year`-RIMSYear),
+         SFCosts_JobTax_NN = SF_DirectEarning_NN*TPW_SoftandFinancing*(1+Infl_Wage)^(Const$`Calendar Year`-RIMSYear),
+         IndirectInduced_JobTax_NN = IndirectEarning_NN*TPW_IndirectandInduced*(1+Infl_Wage)^(Const$`Calendar Year`-RIMSYear)) %>%
+  mutate(Const_JobTax_NN = HardCosts_JobTax_NN + SFCosts_JobTax_NN + IndirectInduced_JobTax_NN)
+
+#Sales taxes
+Const <- Const %>%
+  mutate(Const_STX_NN = H_RIMS_NN*STXToHardCostsRatio*STXTaxedNYC*TaxRate_SalesTax*Const$'Inflation Index'/max(RIMSInflation))
+
+
+
+
+################################4. CONSTRUCTION IMPACT: RESULTS#######################################
+
+#Results and NPVs
+#NPVs in first year (of the analysis period) dollars
+Const_Summary <- Const %>%
+  select('Fiscal Year', Const_JobTax_Gross, Const_STX_Gross, MRT_Gross, RPTT_Gross, Const_JobTax_NN, Const_STX_NN) %>%
+  filter(Const$'Fiscal Year'>=Analysis_StartFY & Const$'Fiscal Year'<=Analysis_EndFY)
+
+Const_NPV <- Const_Summary %>%
+  summarise('Fiscal Year' = "NPV",
+            Const_JobTax_Gross = NPV(DiscountRate, Const_JobTax_Gross)*(1+DiscountRate),
+            Const_STX_Gross = NPV(DiscountRate, Const_STX_Gross)*(1+DiscountRate),
+            MRT_Gross = NPV(DiscountRate, MRT_Gross)*(1+DiscountRate),
+            RPTT_Gross = NPV(DiscountRate, RPTT_Gross)*(1+DiscountRate),
+            Const_JobTax_NN = NPV(DiscountRate, Const_JobTax_NN)*(1+DiscountRate),
+            Const_STX_NN = NPV(DiscountRate, Const_STX_NN)*(1+DiscountRate))
+
+df <- rbind(Const_NPV, Const_Summary)
+
+
+
+
+################################5. CONSTRUCTION IMPACT: EXPORT#######################################
+
+#Export to Excel. Rename the file to avoid overwriting
+#If there's an error says "can't load rJava", contact MIS to get newest version of Java and make sure 64 bit version is installed
+#write.xlsx2(Const, "O:/RESEARCH/yzhong/YZ_Economic Impact Analysis/1807_RTC R Model/Construction Outputs.xlsx")
+
+
+write.csv(t(Const),paste(Proj_Name,"_ConstructionImpacts_",today(),".csv"))
+
+
+################################6. RESIDENTIAL IMPACT: MODELING#######################################
+
+################################Build Schedule
+
+#Set Timeframe
+ResAnalysisPeriod <- Analysis_EndFY - MHI_Year
+Res <- round(structure(MHI_Year:Analysis_EndFY, dim = ResAnalysisPeriod + 1:1),digits = 0)
+Res.Data <- data.frame(Res)
+
+#Median Household Income
+Res.Data["MedianHouseHoldIncome"] <- ifelse((Res == MHI_Year), MHI_Value, MHI_Value*(1+Infl_Wage)^(Res-MHI_Year))
+
+#Personal Income Tax
+Res.Data["TotalPersonalIncomeTaxHH"] <- Res.Data$MedianHouseHoldIncome*TaxRate_PersonalIncome
+
+#Sales Tax
+Res.Data["AvgHouseholdRetailExpend"] <- Res.Data$MedianHouseHoldIncome*RetailSpending
+Res.Data["TaxableRetailSales"] <- Res.Data$AvgHouseholdRetailExpend*TaxableSales
+Res.Data["TotalSalesTaxHH"] <- Res.Data$TaxableRetailSales*TaxRate_SalesTax
+
+
+
+
+
+################################7. RESIDENTIAL IMPACT: EXPORT#########################################
+Final.Res.Data <- data.frame(t(Res.Data))
+write.csv(Final.Res.Data, paste(Proj_Name,"_ResidentialImpact_",today(),".csv"))
+
+
+
+################################8. OPERATIONS IMPACT: MODELING#######################################
+
+
+################################Build Schedule
+
+#Set Timeframe
+AnalysisPeriod <- Analysis_EndFY - Analysis_StartFY
+Op <- structure(Analysis_StartFY:Analysis_EndFY, dim = AnalysisPeriod + 1:1)
+Op.Data <- data.frame(Op)
+
+#Pull in Residential Impacts
+Op.Data <- merge(x=Op.Data, y=Res.Data, by.x="Op", by.y="Res", all.x=TRUE)
+
+
+################################Office A
+
+#Pull in Occupancy Rates
+Op.Data <- merge(x= Op.Data, y=DevelopmentPhasing, by.x="Op", by.y="Category", all.x=TRUE)
+
+#OccupiedLSF
+Op.Data["OfficeA_OccupiedLSF"] <- OfficeA_USF*Op.Data$OfficeA_OccupancyRate*ifelse(NetNew == 1,NetNew_Office,1)
+
+#Direct Jobs
+Op.Data["OfficeA_DirectJobs"] <- Op.Data$OfficeA_OccupiedLSF/DR_ClassAOffice
+
+#Personal Sales Tax of Workers
+Op.Data["OfficeA_PSTXW"] <- Op.Data$OfficeA_DirectJobs*TPW_PersonSales_Office*((1+Infl_Wage)^(Op.Data$Op-TPW_Year))
+
+#All Other Tax Impacts of Workers
+Op.Data["OfficeA_AllOtherTax"] <- Op.Data$OfficeA_DirectJobs*TPW_Total_Office*(1+Infl_Wage)^(Op.Data$Op-TPW_Year)-Op.Data$OfficeA_PSTX
+
+
+################################Retail
+
+
+#OccupiedLSF
+Op.Data["Retail_OccupiedLSF"] <- Retail_USF*Op.Data$Retail_OccupancyRate*ifelse(NetNew == 1,NetNew_Retail,1)
+
+#Direct Jobs
+Op.Data["Retail_DirectJobs"] <- Op.Data$Retail_OccupiedLSF/DR_Retail
+
+#Personal Sales Tax of Workers
+Op.Data["Retail_PSTXW"] <- Op.Data$Retail_DirectJobs*TPW_PersonSales_Retail*((1+Infl_Wage)^(Op.Data$Op-TPW_Year))
+
+#All Other Tax Impacts of Workers
+Op.Data["Retail_AllOtherTax"] <- Op.Data$Retail_DirectJobs*TPW_Total_Retail*(1+Infl_Wage)^(Op.Data$Op-TPW_Year)-Op.Data$Retail_PSTX
+
+
+################################OfficeB
+
+
+#OccupiedLSF
+Op.Data["OfficeB_OccupiedLSF"] <- OfficeB_USF*Op.Data$OfficeB_OccupancyRate*ifelse(NetNew == 1,NetNew_Office,1)
+
+#Direct Jobs
+Op.Data["OfficeB_DirectJobs"] <- Op.Data$OfficeB_OccupiedLSF/DR_ClassAOffice
+
+#Personal Sales Tax of Workers
+Op.Data["OfficeB_PSTXW"] <- Op.Data$OfficeB_DirectJobs*TPW_PersonSales_Office*((1+Infl_Wage)^(Op.Data$Op-TPW_Year))
+
+#All Other Tax Impacts of Workers
+Op.Data["OfficeB_AllOtherTax"] <- Op.Data$OfficeB_DirectJobs*TPW_Total_Office*(1+Infl_Wage)^(Op.Data$Op-TPW_Year)-Op.Data$OfficeB_PSTX
+
+
+################################Residential: Market Rate
+
+
+#OccupiedLSF
+#(Sums Market Rate Residential and Condo Units)
+Op.Data["ResMR_OccupiedUnits"] <- (ResMR_Units+ResCondo_Units)*Op.Data$ResMR_OccupancyRate*ifelse(NetNew == 1,NetNew_Res,1)
+
+#Direct Jobs
+Op.Data["ResMR_DirectJobs"] <- Op.Data$ResMR_OccupiedUnits/DR_ResMR
+
+#Personal Sales Tax of Workers
+Op.Data["ResMR_PSTXW"] <- Op.Data$ResMR_DirectJobs*TPW_PersonSales_Res*((1+Infl_Wage)^(Op.Data$Op-TPW_Year))
+
+#All Other Tax Impacts of Workers
+Op.Data["ResMR_AllOtherTax"] <- Op.Data$ResMR_DirectJobs*TPW_Total_Res*(1+Infl_Wage)^(Op.Data$Op-TPW_Year)-Op.Data$ResMR_PSTX
+
+#Personal Income Tax of Residents
+Op.Data$ResMR_PIT <- Op.Data$ResMR_OccupiedUnits*Op.Data$TotalPersonalIncomeTax
+
+#Personal Sales Tax of Residents
+Op.Data$ResMR_STX <- Op.Data$ResMR_OccupiedUnits*Op.Data$TotalSalesTaxHH
+
+
+################################Residential: Affordable
+
+
+#OccupiedLSF
+Op.Data["ResAfford_OccupiedUnits"] <- (ResAfford_Units)*Op.Data$ResAfford_OccupancyRate*ifelse(NetNew == 1,NetNew_Res,1)
+
+#Direct Jobs
+Op.Data["ResAfford_DirectJobs"] <- Op.Data$ResAfford_OccupiedUnits/DR_ResAfford
+
+#Personal Sales Tax of Workers
+Op.Data["ResAfford_PSTXW"] <- Op.Data$ResAfford_DirectJobs*TPW_PersonSales_Res*((1+Infl_Wage)^(Op.Data$Op-TPW_Year))
+
+#All Other Tax Impacts of Workers
+Op.Data["ResAfford_AllOtherTax"] <- Op.Data$ResAfford_DirectJobs*TPW_Total_Res*(1+Infl_Wage)^(Op.Data$Op-TPW_Year)-Op.Data$ResAfford_PSTX
+
+#Personal Income Tax of Residents
+Op.Data$ResAfford_PIT <- Op.Data$ResAfford_OccupiedUnits*Op.Data$TotalPersonalIncomeTax
+
+#Personal Sales Tax of Residents
+Op.Data$ResAfford_STX <- Op.Data$ResAfford_OccupiedUnits*Op.Data$TotalSalesTaxHH
+
+
+
+
+
+################################9. OPERATIONS IMPACT: RESULTS##########################################
+#Select relevant columns
+Op.Data <- Op.Data %>%
+  select(Op,OfficeA_OccupancyRate,OfficeA_OccupiedLSF,OfficeA_DirectJobs,OfficeA_PSTXW,OfficeA_AllOtherTax,Retail_OccupancyRate,Retail_OccupiedLSF,Retail_DirectJobs,Retail_PSTXW,Retail_AllOtherTax,OfficeB_OccupancyRate,OfficeB_OccupiedLSF,OfficeB_DirectJobs,OfficeB_PSTXW,OfficeB_AllOtherTax,ResMR_OccupancyRate,ResMR_OccupiedUnits,ResMR_DirectJobs,ResMR_PSTXW,ResMR_AllOtherTax,ResMR_PIT,ResMR_STX,ResAfford_OccupancyRate,ResAfford_OccupiedUnits,ResAfford_DirectJobs,ResAfford_PSTXW,ResAfford_AllOtherTax,ResAfford_PIT,ResAfford_STX)
+
+#Add in Period Totals
+"Period_Total" <- Op.Data %>%
+  summarise(Op = "Period Total",
+            OfficeA_OccupancyRate = NA,
+            OfficeA_OccupiedLSF = NA,
+            OfficeA_DirectJobs = max(OfficeA_DirectJobs),
+            OfficeA_PSTXW = sum(OfficeA_PSTXW),
+            OfficeA_AllOtherTax = sum(OfficeA_AllOtherTax),
+            OfficeB_OccupancyRate = NA,
+            OfficeB_OccupiedLSF = NA,
+            OfficeB_DirectJobs = max(OfficeB_DirectJobs),
+            OfficeB_PSTXW = sum(OfficeB_PSTXW),
+            OfficeB_AllOtherTax = sum(OfficeB_AllOtherTax),
+            Retail_OccupancyRate = NA,
+            Retail_OccupiedLSF = NA,
+            Retail_DirectJobs = max(Retail_DirectJobs),
+            Retail_PSTXW = sum(Retail_PSTXW),
+            Retail_AllOtherTax = sum(Retail_AllOtherTax),
+            ResMR_OccupancyRate = NA,
+            ResMR_OccupiedUnits = NA,
+            ResMR_DirectJobs = max(ResMR_DirectJobs),
+            ResMR_PSTXW = sum(ResMR_PSTXW),
+            ResMR_AllOtherTax = sum(ResMR_AllOtherTax),
+            ResMR_PIT = sum(ResMR_PIT),
+            ResMR_STX = sum(ResMR_STX),
+            ResAfford_OccupancyRate = NA,
+            ResAfford_OccupiedUnits = NA,
+            ResAfford_DirectJobs = max(ResAfford_DirectJobs),
+            ResAfford_PSTXW = sum(ResAfford_PSTXW),
+            ResAfford_AllOtherTax = sum(ResAfford_AllOtherTax),
+            ResAfford_PIT = sum(ResAfford_PIT),
+            ResAfford_STX = sum(ResAfford_STX))
+
+#Add in Period NPVs
+"Period_NPV" <- Op.Data %>%
+  summarise(Op = "Period_NPV",
+            OfficeA_OccupancyRate = NA,
+            OfficeA_OccupiedLSF = NA,
+            OfficeA_DirectJobs = NA,
+            OfficeA_PSTXW = NPV(DiscountRate, OfficeA_PSTXW)*(1+DiscountRate),
+            OfficeA_AllOtherTax = NPV(DiscountRate, OfficeA_AllOtherTax)*(1+DiscountRate),
+            OfficeB_OccupancyRate = NA,
+            OfficeB_OccupiedLSF = NA,
+            OfficeB_DirectJobs = NA,
+            OfficeB_PSTXW = NPV(DiscountRate, OfficeB_PSTXW)*(1+DiscountRate),
+            OfficeB_AllOtherTax = NPV(DiscountRate, OfficeB_AllOtherTax)*(1+DiscountRate),
+            Retail_OccupancyRate = NA,
+            Retail_OccupiedLSF = NA,
+            Retail_DirectJobs = NA,
+            Retail_PSTXW = NPV(DiscountRate, Retail_PSTXW)*(1+DiscountRate),
+            Retail_AllOtherTax = NPV(DiscountRate, Retail_AllOtherTax)*(1+DiscountRate),
+            ResMR_OccupancyRate = NA,
+            ResMR_OccupiedUnits = NA,
+            ResMR_DirectJobs = NA,
+            ResMR_PSTXW = NPV(DiscountRate, ResMR_PSTXW)*(1+DiscountRate),
+            ResMR_AllOtherTax = NPV(DiscountRate, ResMR_AllOtherTax)*(1+DiscountRate),
+            ResMR_PIT = NPV(DiscountRate, ResMR_PIT)*(1+DiscountRate),
+            ResMR_STX = NPV(DiscountRate, ResMR_STX)*(1+DiscountRate),
+            ResAfford_OccupancyRate = NA,
+            ResAfford_OccupiedUnits = NA,
+            ResAfford_DirectJobs = NA,
+            ResAfford_PSTXW = NPV(DiscountRate, ResAfford_PSTXW)*(1+DiscountRate),
+            ResAfford_AllOtherTax = NPV(DiscountRate, ResAfford_AllOtherTax)*(1+DiscountRate),
+            ResAfford_PIT = NPV(DiscountRate, ResAfford_PIT)*(1+DiscountRate),
+            ResAfford_STX = NPV(DiscountRate, ResAfford_STX)*(1+DiscountRate))
+Final.Op.Data <- rbind(`Period_Total`, `Period_NPV`, Op.Data)
+
+
+
+
+
+################################10. OPERATIONS IMPACT: EXPORT##########################################
+
+#Export CSV
+Final.Op.Data <- t(Final.Op.Data)
+write.csv(Final.Op.Data, paste(Proj_Name,"_OperationsImpact_",today(),".csv"))
+
+
+
+
+
+################################11. PROPERTY TAX IMPACT: MODELING#######################################
+
+
+################################Build Schedule
+
+#Set Timeframe
+Prop <- structure(Analysis_StartFY:Analysis_EndFY, dim = AnalysisPeriod + 1:1)
+Prop.Data <- data.frame(Prop)
+
+
+################################Property Tax Growth
+Prop.Data["Baseline: Property Tax Rate, Class II"] <- TaxRate_RPT_Class2
+Prop.Data["Baseline: Property Tax Rate, Class IV"] <- TaxRate_RPT_Class4
+Prop.Data["Baseline: Office"] <- Assessment_MVGSF_Office*(1+Infl_PropertyAssessment)^(Prop-AssessmentGuidelines_Year)
+Prop.Data["Baseline: Retail"] <- Assessment_MVGSF_Retail*(1+Infl_PropertyAssessment)^(Prop-AssessmentGuidelines_Year)
+Prop.Data["Baseline: Residential: Condo"] <- Assessment_MVGSF_Res_Condo*(1+Infl_PropertyAssessment)^(Prop-AssessmentGuidelines_Year)
+Prop.Data["Baseline: Residential: Rental"] <- Assessment_MVGSF_Res_Rental*(1+Infl_PropertyAssessment)^(Prop-AssessmentGuidelines_Year)
+
+
+################################Buildout Schedule
+
+names(BuildoutSchedule) <- c("Category","Office_ZoneA_BuildOut", "Retail_BuildOut", "Office_ZoneB_BuildOut", "Condo_Buildout", "ResMR_BuildOut", "ResAfford_BuildOut")
+Prop.Data <- merge(x= Prop.Data, y=BuildoutSchedule, by.x="Prop", by.y="Category", all.x=TRUE)
+
+
+################################Pre-Existing Taxes
+
+#Assumes Year of Assessment Value is less than Construction Start Year.
+Prop.Data["Taxable AV - Total"] <- ifelse(Prop < year(SD), AV_Total*(1+Infl_PropertyAssessment)^(Prop - AV_Year),0)
+Prop.Data["Taxable AV - Land"] <- ifelse(Prop < year(SD), AV_Land*(1+Infl_PropertyAssessment)^(Prop - AV_Year),0)
+Prop.Data["Taxable AV - Building"] <- Prop.Data$"Taxable AV - Total" - Prop.Data$"Taxable AV - Land"
+Prop.Data["Tax Liability - Total"] <- Prop.Data$"Taxable AV - Total"*Preexisting_TaxRate
+Prop.Data["Tax Liability - Land"] <- Prop.Data$"Taxable AV - Land"*Preexisting_TaxRate
+Prop.Data["Tax Liability - Building"] <- Prop.Data$"Tax Liability - Total" - Prop.Data$"Tax Liability - Land"
+
+
+################################Taxes on Improvements
+#####################Office: Zone A + Retail
+
+#Office
+Prop.Data["OZAR_Office_PctConstructed"] <- Prop.Data$"Office_ZoneA_BuildOut"
+Prop.Data["OZAR_Office_ConstructedGSF"] <- OfficeA_GSF*Prop.Data$"Office_ZoneA_BuildOut"
+Prop.Data["OZAR_Office_MV"] <- Prop.Data$"OZAR_Office_ConstructedGSF"*Prop.Data$"Baseline: Office"
+Prop.Data["OZAR_Office_AV"] <- Prop.Data$"OZAR_Office_MV"*TaxRate_AssessmentRatio
+Prop.Data["OZAR_Office_AV_Land"] <-Prop.Data$"OZAR_Office_AV"*Assessment_Land_Office
+Prop.Data["OZAR_Office_AV_Building"] <-Prop.Data$"OZAR_Office_AV" - Prop.Data$"OZAR_Office_AV_Land"
+
+#Retail
+Prop.Data["OZAR_Retail_PctConstructed"] <- Prop.Data$"Retail_BuildOut"
+Prop.Data["OZAR_Retail_ConstructedGSF"] <- Retail_GSF*Prop.Data$"Retail_BuildOut"
+Prop.Data["OZAR_Retail_MV"] <- Prop.Data$"OZAR_Retail_ConstructedGSF"*Prop.Data$"Baseline: Retail"
+Prop.Data["OZAR_Retail_AV"] <- Prop.Data$"OZAR_Retail_MV"*TaxRate_AssessmentRatio
+Prop.Data["OZAR_Retail_AV_Land"] <-Prop.Data$"OZAR_Retail_AV"*Assessment_Land_Retail
+Prop.Data["OZAR_Retail_AV_Building"] <-Prop.Data$"OZAR_Retail_AV" - Prop.Data$"OZAR_Retail_AV_Land"
+
+#Pre-Abatement Tax Liability
+OfficeA_BuildOut_End <- min(BuildoutSchedule[BuildoutSchedule[,"Office_ZoneA_BuildOut"] == 1,]["Category"])
+OfficeB_BuildOut_End <- min(BuildoutSchedule[BuildoutSchedule[,"Office_ZoneB_BuildOut"] == 1,]["Category"])
+Retail_BuildOut_End <- min(BuildoutSchedule[BuildoutSchedule[,"Retail_BuildOut"] == 1,]["Category"])
+ResMR_BuildOut_Start <- max(BuildoutSchedule[BuildoutSchedule[,"ResMR_BuildOut"] == 0,]["Category"]) + 1
+Prop.Data["OZAR_Pre-Abatement_Liability_Land"] <- Prop.Data$"Baseline: Property Tax Rate, Class IV"*(Prop.Data$"OZAR_Retail_AV_Land"+Prop.Data$"OZAR_Office_AV_Land")
+Prop.Data["OZAR_Pre-Abatement_Liability_Building"] <- Prop.Data$"Baseline: Property Tax Rate, Class IV"*(Prop.Data$"OZAR_Retail_AV_Building"+Prop.Data$"OZAR_Office_AV_Building")
+Prop.Data["OZAR_Pre-Abatement_Liability_Building"] <- ifelse(Prop <= max(OfficeA_BuildOut_End,Retail_BuildOut_End),0,Prop.Data$"OZAR_Pre-Abatement_Liability_Building")
+Prop.Data["OZAR_Pre-Abatement_Liability_Total"] <- Prop.Data$"OZAR_Pre-Abatement_Liability_Land" + Prop.Data$"OZAR_Pre-Abatement_Liability_Building"
+
+#ICAP
+Prop.Data["OZAR_ICAP_AbatementYear"] <- ifelse(Prop >= ICAP_Office_ZoneARetail_Start, (Prop-ICAP_Office_ZoneARetail_Start+1), 0)
+Prop.Data["OZAR_ICAP_InitialBuildingAV"] <- ifelse(Prop == ICAP_Office_ZoneARetail_YBeforeConst, Prop.Data$"Taxable AV - Building", 0)
+Prop.Data["OZAR_ICAP_CorrespondingEffectiveTaxRate"] <- ifelse(Prop == ICAP_Office_ZoneARetail_YBeforeConst, Preexisting_TaxRate, 0)
+Prop.Data["OZAR_ICAP_AbatementBase"] <- ifelse( Prop == ICAP_Office_ZoneARetail_Start, max(Prop.Data$"OZAR_ICAP_CorrespondingEffectiveTaxRate")*((Prop.Data$"OZAR_Retail_AV_Building" + Prop.Data$"OZAR_Office_AV_Building")-1.15*max(Prop.Data["OZAR_ICAP_InitialBuildingAV"])),0)
+Prop.Data["OZAR_ICAP_AbatementBase_25YEligible"] <- ifelse(Prop == ICAP_Office_ZoneARetail_Start, Prop.Data$"OZAR_ICAP_AbatementBase"*1,0)
+Prop.Data["OZAR_ICAP_AbatementBase_15YEligible"] <- ifelse(Prop == ICAP_Office_ZoneARetail_Start, 0,0)
+
+#Merge Abatement Schedule
+names(ExemptionSchedule) <- c("Year","ICAP_AllUse", "ICAP_RetailUse", "ANY_Enhanced", "ANY_Regular")
+Prop.Data <- merge(x=Prop.Data, y=ExemptionSchedule, by.x="OZAR_ICAP_AbatementYear", by.y="Year", all.x=TRUE)
+ifelse(RetailPCT <= .1,
+       Prop.Data["OZAR_ICAP_AbatementBase_25YAbatementonImprovements"] <- Prop.Data$ICAP_AllUse*max(Prop.Data["OZAR_ICAP_AbatementBase_25YEligible"]),
+       Prop.Data["OZAR_ICAP_AbatementBase_25YAbatementonImprovements"] <- Prop.Data$ICAP_RetailUse*max(Prop.Data["OZAR_ICAP_AbatementBase_25YEligible"])
+)
+ifelse(RetailPCT <= .1,
+       Prop.Data["OZAR_ICAP_AbatementBase_15YAbatementonImprovements"] <- Prop.Data$ICAP_AllUse*max(Prop.Data["OZAR_ICAP_AbatementBase_15YEligible"]),
+       Prop.Data["OZAR_ICAP_AbatementBase_15YAbatementonImprovements"] <- Prop.Data$ICAP_RetailUse*max(Prop.Data["OZAR_ICAP_AbatementBase_15YEligible"])
+)
+
+######Inflation Protection Excluded Assuming Inflation < 5%
+
+#Office Zone A & Retail Total
+Prop.Data["OZAR_PropTaxPaid_Gross"] <- Prop.Data$"OZAR_Pre-Abatement_Liability_Total" - Prop.Data$"OZAR_ICAP_AbatementBase_25YAbatementonImprovements" - Prop.Data$"OZAR_ICAP_AbatementBase_15YAbatementonImprovements"
+Prop.Data["OZAR_PropTaxPaid_NetNew"] <- Prop.Data$"OZAR_PropTaxPaid_Gross"*NetNew_OfficeRetail
+
+
+#####################Office: Zone B
+
+#Office
+Prop.Data["OfficeZoneB_Office_PctConstructed"] <- Prop.Data$"Office_ZoneB_BuildOut"
+Prop.Data["OfficeZoneB_Office_ConstructedGSF"] <- OfficeB_GSF*Prop.Data$"Office_ZoneB_BuildOut"
+Prop.Data["OfficeZoneB_Office_MV"] <- Prop.Data$"OfficeZoneB_Office_ConstructedGSF"*Prop.Data$"Baseline: Office"
+Prop.Data["OfficeZoneB_Office_AV"] <- Prop.Data$"OfficeZoneB_Office_MV"*TaxRate_AssessmentRatio
+Prop.Data["OfficeZoneB_Office_AV_Land"] <-Prop.Data$"OfficeZoneB_Office_AV"*Assessment_Land_Office
+Prop.Data["OfficeZoneB_Office_AV_Building"] <-Prop.Data$"OfficeZoneB_Office_AV" - Prop.Data$"OfficeZoneB_Office_AV_Land"
+
+#Pre-Abatement Tax Liability
+Prop.Data["OfficeZoneB_Pre-Abatement_Liability_Land"] <- Prop.Data$"Baseline: Property Tax Rate, Class IV"*Prop.Data$"OfficeZoneB_Office_AV_Land"
+Prop.Data["OfficeZoneB_Pre-Abatement_Liability_Building"] <- Prop.Data$"Baseline: Property Tax Rate, Class IV"*Prop.Data$"OfficeZoneB_Office_AV_Building"
+Prop.Data["OfficeZoneB_Pre-Abatement_Liability_Building"] <- ifelse(Prop <= max(OfficeB_BuildOut_End),0,Prop.Data$"OfficeZoneB_Pre-Abatement_Liability_Building")
+Prop.Data["OfficeZoneB_Pre-Abatement_Liability_Total"] <- Prop.Data$"OfficeZoneB_Pre-Abatement_Liability_Land" + Prop.Data$"OfficeZoneB_Pre-Abatement_Liability_Building"
+
+#ICAP
+Prop.Data["OfficeZoneB_ICAP_AbatementYear"] <- ifelse(Prop >= ICAP_Office_ZoneB_Start, (Prop-ICAP_Office_ZoneB_Start+1), 0)
+Prop.Data["OfficeZoneB_ICAP_InitialBuildingAV"] <- ifelse(Prop == ICAP_Office_ZoneB_YBeforeConst, Prop.Data$"Taxable AV - Building", 0)
+Prop.Data["OfficeZoneB_ICAP_CorrespondingEffectiveTaxRate"] <- ifelse(Prop == ICAP_Office_ZoneB_YBeforeConst, Preexisting_TaxRate, 0)
+Prop.Data["OfficeZoneB_ICAP_AbatementBase"] <- ifelse( Prop == ICAP_Office_ZoneB_Start, max(Prop.Data$"OfficeZoneB_ICAP_CorrespondingEffectiveTaxRate")*(Prop.Data$"OfficeZoneB_Office_AV_Building"-1.15*max(Prop.Data["OfficeZoneB_ICAP_InitialBuildingAV"])),0)
+Prop.Data["OfficeZoneB_ICAP_AbatementBase_25YEligible"] <- ifelse(Prop == ICAP_Office_ZoneB_Start, Prop.Data$"OfficeZoneB_ICAP_AbatementBase"*1,0)
+Prop.Data["OfficeZoneB_ICAP_AbatementBase_15YEligible"] <- ifelse(Prop == ICAP_Office_ZoneB_Start, 0,0)
+
+#Merge Abatement Schedule
+Prop.Data <- merge(x=Prop.Data, y=ExemptionSchedule, by.x="OfficeZoneB_ICAP_AbatementYear", by.y="Year", all.x=TRUE)
+ifelse(RetailPCT <= .1,
+       Prop.Data["OfficeZoneB_ICAP_AbatementBase_25YAbatementonImprovements"] <- Prop.Data$ICAP_AllUse.y*max(Prop.Data["OfficeZoneB_ICAP_AbatementBase_25YEligible"]),
+       Prop.Data["OfficeZoneB_ICAP_AbatementBase_25YAbatementonImprovements"] <- Prop.Data$ICAP_RetailUse.y*max(Prop.Data["OfficeZoneB_ICAP_AbatementBase_25YEligible"]))
+ifelse(RetailPCT <= .1,
+       Prop.Data["OfficeZoneB_ICAP_AbatementBase_15YAbatementonImprovements"] <- Prop.Data$ICAP_AllUse.y*max(Prop.Data["OfficeZoneB_ICAP_AbatementBase_15YEligible"]),
+       Prop.Data["OfficeZoneB_ICAP_AbatementBase_15YAbatementonImprovements"] <- Prop.Data$ICAP_RetailUse.y*max(Prop.Data["OfficeZoneB_ICAP_AbatementBase_15YEligible"]))
+
+######Inflation Protection Excluded Assuming Inflation < 5%
+
+#Office Zone B Total
+Prop.Data["OfficeZoneB_PropTaxPaid_Gross"] <- Prop.Data$"OfficeZoneB_Pre-Abatement_Liability_Total" - Prop.Data$"OfficeZoneB_ICAP_AbatementBase_25YAbatementonImprovements" - Prop.Data$"OfficeZoneB_ICAP_AbatementBase_15YAbatementonImprovements"
+Prop.Data["OfficeZoneB_PropTaxPaid_NetNew"] <- Prop.Data$"OfficeZoneB_PropTaxPaid_Gross"*NetNew_Office
+
+
+#####################Residential
+
+
+#Condo
+Prop.Data["Residential_Condo_PctConstructed"] <- Prop.Data$"ResMR_BuildOut"
+Prop.Data["Residential_Condo_ConstructedGSF"] <- ResCondo_GSF*Prop.Data$"ResMR_BuildOut"
+Prop.Data["Residential_Condo_MV"] <- Prop.Data$"Residential_Condo_ConstructedGSF"*Prop.Data$"Baseline: Residential: Condo"
+Prop.Data["Residential_Condo_AV"] <- Prop.Data$"Residential_Condo_MV"*TaxRate_AssessmentRatio
+Prop.Data["Residential_Condo_AV_Land"] <-Prop.Data$"Residential_Condo_AV"*Assessment_Land_Res_Condo
+Prop.Data["Residential_Condo_AV_Building"] <-Prop.Data$"Residential_Condo_AV" - Prop.Data$"Residential_Condo_AV_Land"
+
+#Rental
+Prop.Data["Residential_Rental_PctConstructed"] <- Prop.Data$"ResAfford_BuildOut"
+Prop.Data["Residential_Rental_ConstructedGSF"] <- (ResAfford_GSF+ResMR_GSF)*Prop.Data$"ResAfford_BuildOut"
+Prop.Data["Residential_Rental_MV"] <- Prop.Data$"Residential_Rental_ConstructedGSF"*Prop.Data$"Baseline: Residential: Rental"
+Prop.Data["Residential_RentalAV"] <- Prop.Data$"Residential_Rental_MV"*TaxRate_AssessmentRatio
+Prop.Data["Residential_Rental_AV_Land"] <-Prop.Data$"Residential_RentalAV"*Assessment_Land_Res_Rental
+Prop.Data["Residential_Rental_AV_Building"] <-Prop.Data$"Residential_RentalAV" - Prop.Data$"Residential_Rental_AV_Land"
+
+#Pre-Abatement Tax Liability
+Prop.Data["Residential_Pre-Abatement_Liability_Land"] <- ifelse(Prop < ANY_Start, Prop.Data$"Baseline: Property Tax Rate, Class II"*Prop.Data$"Residential_Condo_AV_Land",Prop.Data$"Baseline: Property Tax Rate, Class II"*(Prop.Data$"Residential_Condo_AV_Land" + Prop.Data$"Residential_Rental_AV_Land"))
+#(Land for condo only - Progress assessments for residential only apply for one year during construction.  However, the rental units do get a 100% exemption over pre-existing taxes ($0, in this case) during the construction period for up to 3 years per 421a rules.)
+Prop.Data["Residential_Pre-Abatement_Liability_Building"] <- ifelse(Prop < ANY_Start, Prop.Data$"Baseline: Property Tax Rate, Class II"*Prop.Data$"Residential_Condo_AV_Building",Prop.Data$"Baseline: Property Tax Rate, Class II"*(Prop.Data$"Residential_Condo_AV_Building" + Prop.Data$"Residential_Rental_AV_Building"))
+Prop.Data["Residential_Pre-Abatement_Liability_Building"] <- ifelse(Prop == ResMR_BuildOut_Start,0, Prop.Data$"Residential_Pre-Abatement_Liability_Building")
+Prop.Data["Residential_Pre-Abatement_Liability_Total"] <- Prop.Data$"Residential_Pre-Abatement_Liability_Land" + Prop.Data$"Residential_Pre-Abatement_Liability_Building"
+
+#421-a
+Prop.Data["Residential_AbatementYear"] <- ifelse(Prop >= ANY_Start, (Prop-ANY_Start+1), 0)
+
+#Hard code Residential Non-exempt as 0
+Prop.Data["Residential_Not-ExemptAV"] <- 0
+
+#Merge Abatement Schedule
+Prop.Data <- merge(x=Prop.Data, y=ExemptionSchedule, by.x="Residential_AbatementYear", by.y="Year", all.x=TRUE)
+Prop.Data["Effective_ANY_Schedule"] <- ifelse(ANY_Program == 1, Prop.Data["ANY_Enhanced"], Prop.Data["ANY_Regular"])
+Prop.Data["Residential_ExemptAV"] <- (Prop.Data$"Residential_RentalAV"-Prop.Data$"Residential_Not-ExemptAV")*Prop.Data$"Effective_ANY_Schedule"
+Prop.Data["Residential_AV_Cap_per_Unit"] <- ifelse(Prop < 2008,0,65000*(1+.03)^(Prop-2008))
+Prop.Data["Residential_Capped_Exempt_AV"] <- Prop.Data$"Effective_ANY_Schedule"*Prop.Data$"Residential_AV_Cap_per_Unit"*(ResAfford_Units+ResMR_Units)
+
+# Find Total Exemption with AV_Cap Toggle
+ifelse(AV_Cap ==2,
+       Prop.Data$Residential_Exemption <- do.call(pmax, c(data.frame(c(0),Prop.Data$"Residential_ExemptAV")))*Prop.Data$`Baseline: Property Tax Rate, Class II`,
+       Prop.Data$Residential_Exemption <- do.call(pmin, c(data.frame(Prop.Data$"Residential_ExemptAV", Prop.Data$"Residential_Capped_Exempt_AV")))*Prop.Data$`Baseline: Property Tax Rate, Class II`
+)
+
+#Property Taxes Paid: Gross
+Prop.Data$Residential_PropTaxesPaid_Gross <- Prop.Data$`Residential_Pre-Abatement_Liability_Total`-Prop.Data$Residential_Exemption
+Prop.Data$Residential_PropTaxesPaid_NetNew <- Prop.Data$Residential_PropTaxesPaid_Gross*NetNew_Res
+
+#Total Property Taxes Paid
+Prop.Data$TotalPropTaxes_Gross <- Prop.Data$OZAR_PropTaxPaid_Gross+Prop.Data$OfficeZoneB_PropTaxPaid_Gross+Prop.Data$Residential_PropTaxesPaid_Gross
+Prop.Data$TotalPropTaxes_NetNew <- Prop.Data$OZAR_PropTaxPaid_NetNew + Prop.Data$OfficeZoneB_PropTaxPaid_NetNew + Prop.Data$Residential_PropTaxesPaid_NetNew
+
+
+
+
+
+################################12. PROPERTY TAX IMPACT: RESULTS##########################################
+
+#Select relevant columns
+Final.Prop.Data <- Prop.Data %>%
+  select("Prop","Baseline: Property Tax Rate, Class II","Baseline: Property Tax Rate, Class IV","Baseline: Office","Baseline: Retail","Baseline: Residential: Condo","Baseline: Residential: Rental","Taxable AV - Total","Taxable AV - Land","Taxable AV - Building","Tax Liability - Total","Tax Liability - Land","Tax Liability - Building","OZAR_Office_PctConstructed","OZAR_Office_ConstructedGSF","OZAR_Office_MV","OZAR_Office_AV","OZAR_Office_AV_Land","OZAR_Office_AV_Building","OZAR_Retail_PctConstructed","OZAR_Retail_ConstructedGSF","OZAR_Retail_MV","OZAR_Retail_AV","OZAR_Retail_AV_Land","OZAR_Retail_AV_Building","OZAR_Pre-Abatement_Liability_Total","OZAR_Pre-Abatement_Liability_Land","OZAR_Pre-Abatement_Liability_Building","OZAR_ICAP_AbatementYear","OZAR_ICAP_InitialBuildingAV","OZAR_ICAP_CorrespondingEffectiveTaxRate","OZAR_ICAP_AbatementBase","OZAR_ICAP_AbatementBase_25YEligible","OZAR_ICAP_AbatementBase_15YEligible","OZAR_ICAP_AbatementBase_25YAbatementonImprovements","OZAR_ICAP_AbatementBase_15YAbatementonImprovements","OZAR_PropTaxPaid_Gross","OZAR_PropTaxPaid_NetNew","OfficeZoneB_Office_PctConstructed","OfficeZoneB_Office_ConstructedGSF","OfficeZoneB_Office_MV","OfficeZoneB_Office_AV","OfficeZoneB_Office_AV_Land","OfficeZoneB_Office_AV_Building","OfficeZoneB_Pre-Abatement_Liability_Total","OfficeZoneB_Pre-Abatement_Liability_Land","OfficeZoneB_Pre-Abatement_Liability_Building","OfficeZoneB_ICAP_AbatementYear","OfficeZoneB_ICAP_InitialBuildingAV","OfficeZoneB_ICAP_CorrespondingEffectiveTaxRate","OfficeZoneB_ICAP_AbatementBase","OfficeZoneB_ICAP_AbatementBase_25YEligible","OfficeZoneB_ICAP_AbatementBase_15YEligible","OfficeZoneB_ICAP_AbatementBase_25YAbatementonImprovements","OfficeZoneB_ICAP_AbatementBase_15YAbatementonImprovements","OfficeZoneB_PropTaxPaid_Gross","OfficeZoneB_PropTaxPaid_NetNew","Residential_Condo_PctConstructed","Residential_Condo_ConstructedGSF","Residential_Condo_MV","Residential_Condo_AV","Residential_Condo_AV_Land","Residential_Condo_AV_Building","Residential_Rental_PctConstructed","Residential_Rental_ConstructedGSF","Residential_Rental_MV","Residential_RentalAV","Residential_Rental_AV_Land","Residential_Rental_AV_Building","Residential_Pre-Abatement_Liability_Total","Residential_Pre-Abatement_Liability_Land","Residential_Pre-Abatement_Liability_Building","Residential_AbatementYear","Residential_Not-ExemptAV","Residential_ExemptAV","Residential_AV_Cap_per_Unit","Residential_Capped_Exempt_AV","Residential_Exemption","Residential_PropTaxesPaid_Gross","Residential_PropTaxesPaid_NetNew","TotalPropTaxes_Gross","TotalPropTaxes_NetNew")
+
+#Add in Period totals
+"Prop_Period_Total" <- Final.Prop.Data %>%
+  summarise(Prop = "Period Total",
+            "TotalPropTaxes_Gross" = sum(TotalPropTaxes_Gross),
+            "TotalPropTaxes_NetNew" = sum(TotalPropTaxes_NetNew))
+
+#Add in Period NPVs
+"Prop_Period_NPV" <- Final.Prop.Data %>%
+  summarise(Prop = "Period Total",
+            "TotalPropTaxes_Gross" = NPV(DiscountRate, TotalPropTaxes_Gross)*(1+DiscountRate),
+            "TotalPropTaxes_NetNew" = NPV(DiscountRate, TotalPropTaxes_NetNew)*(1+DiscountRate)
+  )
+Final.Prop.Data <- t(Final.Prop.Data)
+Final.Prop.Data <-data.frame("Period Total" = c(0),"Period NPV" = c(0),Final.Prop.Data)
+Final.Prop.Data["TotalPropTaxes_Gross","Period.Total"] <- Prop_Period_Total$"TotalPropTaxes_Gross"
+Final.Prop.Data["TotalPropTaxes_NetNew","Period.Total"] <- Prop_Period_Total$"TotalPropTaxes_NetNew"
+Final.Prop.Data["TotalPropTaxes_Gross","Period.NPV"] <- Prop_Period_NPV$"TotalPropTaxes_Gross"
+Final.Prop.Data["TotalPropTaxes_NetNew","Period.NPV"] <- Prop_Period_NPV$"TotalPropTaxes_NetNew"
+
+
+
+
+
+################################13. PROPERTY TAX IMPACT: EXPORT##########################################
+write.csv(Final.Prop.Data,paste(Proj_Name, "_PropertyTaxImpact_",today(),".csv"))
+
+
+
+
+
+################################14. BUILD SUMMARY SHEET#################################################
+
+SummarySheet <-data.frame()
+
+SummarySheet['Impact of Construction Activity',1] <- ""
+SummarySheet['Tax Impact of Construction Jobs (Direct & Indirect/Induced)',1] <- Const_NPV$Const_JobTax_NN
+SummarySheet['Sales Tax from Spending on Materials',1] <- Const_NPV$Const_STX_NN
+SummarySheet['Subtotal: Construction Activity',1] <- Const_NPV$Const_JobTax_NN + Const_NPV$Const_STX_NN
+SummarySheet['Spacer1',1] <- ""
+SummarySheet['Impact of Operations',] <- ""
+SummarySheet['Real Estate-Related Taxes',1] <- ""
+SummarySheet['Real Property Taxes',1] <- Final.Prop.Data['TotalPropTaxes_NetNew','Period.NPV']
+SummarySheet['Real Property Transfer Tax',1] <- Const_NPV$RPTT_Gross
+SummarySheet['Mortgage Recording Tax',1] <- Const_NPV$MRT_Gross
+SummarySheet['Subtotal: Real Estate-Related Taxes',1] <- Final.Prop.Data['TotalPropTaxes_NetNew','Period.NPV'] + Const_NPV$RPTT_Gross + Const_NPV$MRT_Gross
+SummarySheet['Spacer6',1] <- ""
+SummarySheet['Tax Impacts of Operations Jobs(Direct Jobs Only)',1] <- ""
+SummarySheet['Office',1] <- ""
+SummarySheet['Office PSTX',1] <- as.numeric(Final.Op.Data['OfficeA_PSTXW',2]) + as.numeric(Final.Op.Data['OfficeB_PSTXW',2])
+SummarySheet['Office All Other',1] <- as.numeric(Final.Op.Data['OfficeA_AllOtherTax',2]) + as.numeric(Final.Op.Data['OfficeB_AllOtherTax',2])
+SummarySheet['Retail',1] <- ""
+SummarySheet['Retail PSTX',1] <- as.numeric(Final.Op.Data['Retail_PSTXW',2])
+SummarySheet['Retail All Other',1] <- as.numeric(Final.Op.Data['Retail_AllOtherTax',2])
+SummarySheet['Residential',1] <- ""
+SummarySheet['Residential PSTX',1] <- as.numeric(Final.Op.Data['ResAfford_PSTXW',2]) + as.numeric(Final.Op.Data['ResMR_PSTXW',2])
+SummarySheet['Residential All Other',1] <- as.numeric(Final.Op.Data['ResMR_AllOtherTax',2]) + as.numeric(Final.Op.Data['ResAfford_AllOtherTax',2])
+SummarySheet['Adjustment: MRT',1] <- -Const_NPV$MRT_Gross
+SummarySheet['Adjustment: RPTT',1] <- -Const_NPV$RPTT_Gross
+SummarySheet['Subtotal: Tax Impacts of Jobs',1] <- sum(as.numeric(SummarySheet['Office PSTX',1]),as.numeric(SummarySheet['Office All Other',1]),as.numeric(SummarySheet['Retail PSTX',1]),as.numeric(SummarySheet['Retail All Other',1]),as.numeric(SummarySheet['Residential PSTX',1]), as.numeric(SummarySheet['Residential All Other',1]),as.numeric(SummarySheet['Adjustment: MRT',1]),as.numeric(SummarySheet['Adjustment: RPTT',1]))
+SummarySheet['Spacer3',1] <- ""
+SummarySheet['Sales Tax from Retail Operations',1] <- ""
+SummarySheet['Spacer7',1] <- ""
+SummarySheet['Additional Residential Impacts',1] <- ""
+SummarySheet['Personal Income Tax from New Households',1] <- as.numeric(Final.Op.Data['ResAfford_PIT',2]) + as.numeric(Final.Op.Data['ResMR_PIT',2]) 
+SummarySheet['Sales Tax from New Households',1] <- as.numeric(Final.Op.Data['ResAfford_STX',2]) + as.numeric(Final.Op.Data['ResMR_STX',2]) 
+SummarySheet['Spacer4',1] <- ""
+SummarySheet['Subtotal: Operations',1] <- sum(as.numeric(SummarySheet['Subtotal: Real Estate-Related Taxes',1]),as.numeric(SummarySheet['Subtotal: Tax Impacts of Jobs',1]),as.numeric(SummarySheet['Personal Income Tax from New Households',1]),as.numeric(SummarySheet['Sales Tax from New Households',1]))
+SummarySheet['Spacer5',1] <- ""
+#  Less: Existing Impacts
+#    Sales and Execise Taxes from Retail and Parking Operations
+#    Tax Impacts of Operations Jobs (Direct Jobs)
+#  Subtotal: Existing Impacts
+#  
+#Total Benefits to NYC
+SummarySheet$V1 <- as.numeric(SummarySheet$V1)
+
+RTC <-loadWorkbook("RTC Example.xlsx", create=TRUE)
+setStyleAction(RTC,XLC$"STYLE_ACTION.NONE")
+
+writeWorksheet(RTC,SummarySheet,"Results", startRow = 9, startCol = 6, header = FALSE)
+saveWorkbook(RTC)
+
+
+write.csv(SummarySheet,paste(Proj_Name, "_SummarySheet_",today(),".csv"))
+#  

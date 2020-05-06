@@ -1,0 +1,168 @@
+###############################COVER############################################
+#                                                                              #
+#  PROGRAM NAME:  NYCEDC FISCAL IMPACT MODEL                                   #
+#                 ASSUMPTION SOURCING AND CALCULATION                          #
+#                                                                              #
+#  DATE:          17 FEBRUARY 2020                                             #
+#  VERSION:       R Version 3.5.3                                              #
+#                                                                              #
+#                                                                              #
+################################1. SET-UP#######################################
+
+#Set working directory to project folder
+setwd("C:/Users/kclyne/Desktop/R_EDC_Final")
+
+#Name Necessary Packages
+pkgs <- c("realxl", "lubridate", "dplyr", "tidyr", "reshape2", "XLConnect", "censusapi", "blsAPI","zoo")
+
+# If packages arent installed, install them
+sapply(pkgs, function(x) if (!x %in% installed.packages()) install.packages(x))
+
+#Import necessary packages
+library(readxl)
+library (lubridate)
+library (dplyr)
+library(tidyr)
+library(reshape2)
+library(XLConnect)
+library(censusapi)
+library(blsAPI)
+library(zoo)
+
+#Functions
+#Inlaftion
+inflate <- function(value,SY,EY,rate){
+  value*(1+rate)^(EY-SY)
+}
+#Find the latest available data year
+Latest_Data <- function(variable,range){
+  for (year in length(range):1){
+    if (is.na(variable[[1,year]]) == FALSE){
+      return(colnames(variable[,year]))
+      break
+    }
+  }
+}
+
+#Import Initilization Toggles
+Toggles <- read_excel("20200215_Inputs.xlsx", sheet = "Initialization", range = "A7:B15", col_names = TRUE)
+Analysis_Period <- read_excel("20200215_Inputs.xlsx", sheet = "Initialization", range = "A18:B20", col_names = TRUE)
+
+#Import Financial Assumptions
+Inflation <- read_excel("20200215_Inputs.xlsx", sheet = "Inflation and Discount Rate", range = "A8:B20", col_names = TRUE, rownames = TRUE)
+KeyTaxRates <- read_excel("20200215_Inputs.xlsx", sheet = "Tax Rates", range = "A10:B24", col_names = TRUE, .name_repair = "minimal")
+GeneralTax <- read_excel("20200215_Inputs.xlsx", sheet = "Tax Rates", range = "A36:B37", col_names = TRUE, .name_repair = "minimal")
+Range <- unname(unlist(read_excel("20200215_Inputs.xlsx", sheet = "Manual Inputs", range = "A8:W8", col_names = FALSE, .name_repair = "minimal")))
+
+#Import Industry Classifications
+Industry_Codes <- read_excel("20200215_Inputs.xlsx", sheet = "Job Density NAICS Crosswalk", range = "A6:W74", col_names = TRUE, .name_repair = "minimal")
+
+
+
+
+#########################################Pull Quarterly Census of Employment and Wages for New York City from BLS API######################
+#Create a function to check for errors from the BLS API
+blsAPI_error <- function(yr){
+  tryCatch(blsQCEW('Area', year=yr, quarter='a', area='36061')[1,1] != 1,
+           error = function(e){
+             FALSE
+           },
+           warning = function(e){
+             FALSE
+           })
+}
+
+#Using error handling function, find the most recent year of available BLS data.
+for (i in year(today()):1){
+  if(blsAPI_error(i) != FALSE){
+    BLS_year <- i
+    break
+  }
+}
+
+#Create list of NYC County FIPS
+NYC_Counties <- c(36061,36005,36081,36047,36085)
+
+#Pull Annual Avg. Employment and Total Annual Wages from QCEW Data for each county; bind all county data together
+NYCBLS <- data.frame()
+for (i in NYC_Counties){
+  newbls <- blsQCEW('Area', year=BLS_year, quarter='a', area=i)[,c("industry_code","annual_avg_emplvl","total_annual_wages")]
+  NYCBLS <- rbind(newbls,NYCBLS)
+  
+}
+
+#Sum all county totals by Industry Code to create city totals
+NYCBLS <- NYCBLS %>%
+  group_by(industry_code) %>%
+  summarise(
+    annual_avg_emplvl = sum(annual_avg_emplvl),
+    total_annual_wages = sum(total_annual_wages)
+  )
+
+#Convert Industry Codes into Numeric, replacing hyphenated two-digit NAICs with one-digit
+levels(NYCBLS$industry_code) <- c(levels(NYCBLS$industry_code), "31", "44","48")
+NYCBLS[NYCBLS[,"industry_code"] == "31-33",][1] <- '31'
+NYCBLS[NYCBLS[,"industry_code"] == "44-45",][1] <- '44'
+NYCBLS[NYCBLS[,"industry_code"] == "48-49",][1] <- '48'
+NYCBLS$industry_code <- as.numeric(as.character(NYCBLS$industry_code))
+
+#Make Table for each NAIS digit level
+NYCBLS_2 <- NYCBLS[NYCBLS[,"industry_code"]> 10 & NYCBLS[,"industry_code"]< 100,]
+NYCBLS_3 <- NYCBLS[NYCBLS[,"industry_code"]>100 & NYCBLS[,"industry_code"]<1000,]
+NYCBLS_4 <- NYCBLS[NYCBLS[,"industry_code"]>1000 & NYCBLS[,"industry_code"]<10000,]
+NYCBLS_5 <- NYCBLS[NYCBLS[,"industry_code"]>10000 & NYCBLS[,"industry_code"]<100000,]
+NYCBLS_6 <- NYCBLS[NYCBLS[,"industry_code"]>100000 & NYCBLS[,"industry_code"]<1000000,]
+
+
+######################################################Median Household Income Calculation#########################################
+
+##################################################Taxes per Worker Calculations###################################################
+###################Commercial Rent Tax
+
+#Import Commercial Rents for Office, Retail, and Industrial properites south of 96th Street
+Comm_Rents <- read_excel("20200215_Inputs.xlsx", sheet = "Manual Inputs", range = "A99:W101", col_names = Range)
+
+#Find the most recent year of Commercial Rent Data
+Comm_Rents_Y <- Latest_Data(Comm_Rents,Range)
+
+#Find the Average Commercial Rent and inflate to first year of Analysis Period.
+Avg_Comm_Rent <- inflate(mean(Comm_Rents[[Comm_Rents_Y]]),as.numeric(Comm_Rents_Y),Analysis_Period[[2]][1],Inflation[[2]][3])
+
+!!!!!!########CALC TO MOVE TO OPERATIONS IMPACT SHEET - ONLY IF PROJECT IN MANHATTAN SOUTH OF 96th STREET
+(as.numeric(Toggles[[2]][6])*Avg_Comm_Rent)*(1-KeyTaxRates[[2]][12])*KeyTaxRates[[2]][11]
+
+
+
+###################Business Sales Tax
+GSTX <- read_excel("20200215_Inputs.xlsx", sheet = "Manual Inputs", range = "A54:W54", col_names = Range)
+
+#Find the latest year of data, replace GSTX with the latest year
+GSTX_Y <- Latest_Data(GSTX,Range)
+GSTX <- GSTX[[GSTX_Y]]
+
+
+#Make and empty Taxes per Worker Table with Columns for each industry cluster
+TaxesPerWorker <- data.frame(matrix(ncol =length(Industry_Codes), nrow=0))
+colnames(TaxesPerWorker) <- colnames(Industry_Codes)
+
+
+#Loop through industry clusters and find the TPW value for each
+x <- 0
+for (inds in Industry_Codes){
+  x <- x + 1
+  #Find the Industry Share of Citywide Payroll from NYC QCEW, Find Number of Industry Workers
+  Share_Payroll <- sum(NYCBLS$total_annual_wages[NYCBLS$industry_code %in% na.trim(inds[])])/sum(NYCBLS_2[["total_annual_wages"]])
+  Workers <-sum(NYCBLS$annual_avg_emplvl[NYCBLS$industry_code %in% na.trim(inds[])])
+  
+  #Taxes per Worker: Business Sales Tax
+  #Multiply the Total General Sales Tax Revenue by the Business Share of Sales Tax and the Industry Share of Revenue and Divide by the Total Number of Retail Workers
+  TaxesPerWorker[1,x] <- (GSTX*GeneralTax[[2]][1]*Share_Payroll)/Workers
+  TaxesPerWorker[2,x] <- (GSTX*GeneralTax[[2]][1]*Share_Payroll)/Workers
+}
+
+rownames(TaxesPerWorker) = c("Business Sales Tax","Other Example Tax")
+
+
+
+
+
