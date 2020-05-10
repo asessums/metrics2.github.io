@@ -13,12 +13,9 @@ body {
 }
 
 #header {
-    position: relative;
-    display: inline-block;
-    width: 100px;
-    top: 60px;
+    position: absolute;
+    width: 100%;
     z-index: 90;
-    margin-right: 50px;
     font-family: Gotham;
 }
 
