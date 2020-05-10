@@ -2,10 +2,26 @@
 @import url('https://fonts.googleapis.com/css?family=Kosugi&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Domine:400,700&display=swap');
 
+@font-face {
+  font-family: Gotham;
+  src: url(http://clynekp.github.io/scroll2/fonts/Gotham-Medium.woff);
+}
+
 body {
     background-color: rgb(245, 244, 241);
     overflow-x: hidden;
 }
+
+#header {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    top: 60px;
+    z-index: 90;
+    margin-right: 50px;
+    font-family: Gotham;
+}
+
 
 #sections {
     position: relative;
