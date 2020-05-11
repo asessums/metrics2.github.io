@@ -1,0 +1,51 @@
+name,cat,white,non_white
+New York City,virtual,61,39
+New York City,investments,61,39
+New York City,cannot_essential,44,56
+New York City,cannot_nonessential,45,55
+New York City,automated,46,54
+Los Angeles,virtual,46,54
+Los Angeles,investments,47,53
+Los Angeles,cannot_essential,31,69
+Los Angeles,cannot_nonessential,31,69
+Los Angeles,automated,31,69
+"Washington, D.C.",virtual,59,41
+"Washington, D.C.",investments,61,39
+"Washington, D.C.",cannot_essential,46,54
+"Washington, D.C.",cannot_nonessential,47,53
+"Washington, D.C.",automated,43,57
+Dallas,virtual,69,31
+Dallas,investments,75,25
+Dallas,cannot_essential,61,39
+Dallas,cannot_nonessential,66,34
+Dallas,automated,63,37
+Seattle,virtual,69,31
+Seattle,investments,75,25
+Seattle,cannot_essential,61,39
+Seattle,cannot_nonessential,66,34
+Seattle,automated,63,37
+Detroit,virtual,77,23
+Detroit,investments,79,21
+Detroit,cannot_essential,65,35
+Detroit,cannot_nonessential,65,35
+Detroit,automated,63,37
+New Orleans,virtual,70,30
+New Orleans,investments,66,34
+New Orleans,cannot_essential,53,47
+New Orleans,cannot_nonessential,55,45
+New Orleans,automated,48,52
+Denver,virtual,77,23
+Denver,investments,79,21
+Denver,cannot_essential,64,36
+Denver,cannot_nonessential,64,36
+Denver,automated,63,37
+Atlanta,virtual,58,42
+Atlanta,investments,61,39
+Atlanta,cannot_essential,50,50
+Atlanta,cannot_nonessential,47,53
+Atlanta,automated,43,57
+Indianapolis,virtual,82,18
+Indianapolis,investments,84,16
+Indianapolis,cannot_essential,75,25
+Indianapolis,cannot_nonessential,75,25
+Indianapolis,automated,73,27
