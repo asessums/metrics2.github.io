@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<center><div id="my_dataviz"></div>
+<style>
+@GothamLight {
+  font-family: GothamLight;
+  src: url(/Gotham-Light.otf);
+}  
+
+.circle:hover{
+  stroke: black;
+  stroke-width: 4px;
+}
+  
+.item2 { grid-area: aleft;
+  font-weight: bold;
+  cursor: pointer;
+}
+.item4 { grid-area: aright;
+  font-weight: bold;
+  cursor: pointer;}
+.item3 { grid-area: title;
+  text-align: center;}
+.item5 { grid-area: content; }
+.item1 { grid-area: cityname;
+background-color: #d8d8d8;
+  text-align: center;
+  font-weight: bold;
+}
+  
+  .item2:hover{
+  color: #d8d8d8;
+  stroke-width: 4px;
+}
+  
+    .item4:hover{
+  color: #d8d8d8;
+  stroke-width: 4px;
+}
+
+ #text1 {
+    padding: 7px;
+    border-radius: 5px;
+    z-index: -1;
+ }
+    
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'cityname cityname cityname cityname cityname cityname cityname cityname cityname cityname'
+    'aleft title title title title title title title title aright'
+    'content content content content content content content content content content'
+    'content content content content content content content content content content'
+    'content content content content content content content content content content'
+    'content content content content content content content content content content';
+  grid-gap: 1px;
+}
+.d3-tip {
+  line-height: .5;
+  padding: 0px;
+  background: white;
+  border: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: #d8d8d8;
+  font-size: 12px;
+  font-family: "Open Sans";
+  z-index: 100;
+}
+</style>
+<script src="https://d3js.org/d3.v3.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
+<script src="https://d3js.org/d3-array.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+<script src="https://clynekp.github.io/d3-tip.min.js"></script>
+<script src="https://d3js.org/d3-scale.v3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<body>
+<script>
+var width = 800
+var height = 500
+
+
+var tool_tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([50, 170])
+  .html(function(d) {
+    return "<div class='grid-container'><div class='item1'><div id = 'text1'>" + d.name +"</div></div><div class='item2'><div id = 'text1', style = 'text-align: left' class = 'aleft'></div></div><div class='item3'><div id = 'text1', class = 'title'></div></div><div class='item4'><div id = 'text1', style = 'text-align: right', class = 'aright'></div></div><div class='item5'><svg id= 'WFH' width='300' height='50'></svg></div></div>"
+  });
+
+  //〈〉
+
+// The svg
+var svg = d3.select("body")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height)
+
+svg.call(tool_tip);   
+    
+   
+// Map and projection
+var projection = d3.geoMercator()
+    .center([-123.3125, 44.9672431])         
+    .scale(600)                       
+    .translate([ width/5, height/3.44 ])
+
+// Load external data and boot
+d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
+    data.features = data.features.filter( function(d){return d.properties.name=="USA"} )
+
+    // Draw the map
+    svg.append("g")
+        .selectAll("path")
+        .data(data.features)
+        .enter()
+        .append("path")
+          .attr("fill", "#b8b8b8")
+          .attr("d", d3.geoPath()
+              .projection(projection)
+          )
+        .style("stroke", "black")
+        .style("opacity", .3)
+		
+
+d3.csv("data.csv", function(d){
+  return{
+    name: d.name,
+    long: +d.long,
+    lat: +d.lat,
+    virtual: +d.virtual*.01,
+    automated: +d.automated*.01,
+    investments: +d.investments*.01, 
+    cannot_essential: +d.cannot_essential*.01, 
+    cannot_nonessential: +d.cannot_nonessential*.01,
+    robots: +d.robots
+  };
+}, function(error, rows){
+if (error) throw error;
+// Add circles:
+
+  var circles = svg
+      .selectAll("myCircles")
+      .data(rows)
+      .enter()
+      .append("circle")
+        .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
+        .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
+        .attr("r", 10)
+        .attr("class", "circle")
+        .style("fill", "003E7A")
+        .attr("stroke", "#003E7A")
+        .attr("stroke-width", 3)
+        .attr("fill-opacity", .4)
+    
+    circles
+    .on('mouseover', function(d) {
+      d3.select(".d3-tip").transition().style("opacity", "1");
+    	tool_tip.show(d);
+    var tipSVG = d3.select("#tipDiv")
+      .append("svg")
+      .attr("width", 250)
+      .attr("height", 5);
+      
+      
+    function Pages(n){
+      if (n === 1){
+        
+        
+      var leftbox = d3.select(".item2")
+     .style("cursor", "default")
+     .on("click", function(d){
+          console.log("Nothing!")})
+        
+        
+        left.style("opacity", "0");
+         right.style("opacity", "1");
+        
+         newdata = [d]
+      newdata.columns = ["name", "virtual", "investments", "cannot_essential", "cannot_nonessential","automated"]
+      
+ 				d3.select(".pagetwo").remove()
+        d3.select(".title2").remove()
+  			d3.select("#WFH").transition().duration(200).attr("height", "50");
+   			left.style("opacity", "0");
+   ///Draw the stacked barchart
+      
+            width1 = 290,
+            height1 = 50,
+          gWFH = svgWFH.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")").attr("class","pageone");
+            
+          var y = d3.scale.ordinal()
+            .rangeRoundBands([0, height1],0.1)
+            //.align(0.1);
+
+        	var x = d3.scale.linear()
+            .rangeRound([width1, 0]);
+
+      		
+      
+        	var z = d3.scale.ordinal()
+            .range(["#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+      
+          y.domain(newdata.map(function (d) {return d.name;}));
+          
+      		z.domain(newdata.columns.slice(1));
+          
+            
+      
+    newdata.forEach(function(d) {
+    var y0 = 0;
+    d.wfh = z.domain().map(function(name) { 
+      var map = [y0, y0 += d[name]]
+      map['data'] = d
+      var newmap = [map]
+      newmap.key = name
+      return newmap; });
+    d.total = d.wfh[d.wfh.length - 1].y1;
+  });
+      
+      
+
+      			keys = newdata[0].wfh
+    
+      
+            var serie = gWFH.selectAll(".serie")
+                .data(keys)
+                .enter().append("g")
+                .attr("class", "serie")
+                .attr("fill", function (d) {return z(d.key);});
+
+      
+            var bar = serie.selectAll("rect")
+                .data(function (d) {return d;})
+                .enter().append("rect")
+                .attr("y", function (d) {return y(d.data.name);})
+                .attr("x", 0)
+                .attr("width", 0)
+                .attr("height", y.rangeBand())
+            		.transition()
+            		.duration(500)
+            		.attr("x", function (d) {return x(d[1]);})
+                .attr("width", function (d) {return x(d[0]) - x(d[1]);})
+                
+            
+            var text = serie.selectAll("text")
+                .data(function (d) {return d;})
+                .enter().append("text")
+                .attr("y", function (d) {return y(d.data.name) + ((y.rangeBand()/2)+7);})
+                .attr("x", function (d) {return x(d[1]) + ((x(d[0]) - x(d[1]))/2);})
+            		.text(function (d) { return d3.format(".0%")(Math.abs(d[0] - d[1])); })
+            		.style("text-anchor", "middle")
+                .attr("fill", "#ffffff")
+                .attr("font-family", "Open Sans")
+            		.attr("font-weight", 600)
+                .style("opacity", "0")
+            		.transition()
+            		.duration(1200)
+            		.style("opacity", "1")
+            
+       	var title = d3.select(".title")
+   			.append("text")
+   			.attr("class","title1")
+   			.text("Employment by Ability to Work From Home")
+   
+   
+   var rightbox = d3.select(".item4")
+   			
+   rightbox
+     .datum(d)
+     .on("click", function(d){
+          Pages(2)})
+         
+      }
+    if (n === 2){
+        
+        d3.select(".pagethree").remove()
+        d3.select(".title3").remove()
+        d3.select(".pageone").remove()
+        d3.select(".title1").remove()
+        
+         left.style("opacity", "1");
+         right.style("opacity", "1");
+        
+        
+        var title = d3.select(".title")
+   			.append("text")
+   			.attr("class","title2")
+   			.text("% Non-White")
+        
+        d3.select("#WFH").transition().duration(200).attr("height", "200");
+				d3.csv("nonwhite.csv", function(d){
+          return{
+            name: d.name,
+            cat: d.cat,
+            white: +d.white*.01,
+            non_white: +d.non_white*.01,
+            };
+          }, function(error, rows){
+          if (error) throw error;  
+			
+      width2 = +svgWFH.attr("width") - margin.left - margin.right,
+      height2 = 200 - margin.top - margin.bottom,
+      gWFH = svgWFH.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")").attr("class","pagetwo");
+          
+
+      var y = d3.scale.ordinal()
+            .rangeRoundBands([height2, 0],0.1)
+        
+
+      var x = d3.scale.linear()
+            .rangeRound([1.5, width2]);
+    			
+
+      var z = d3.scale.ordinal()
+            .range(["#7b6888", "#6b486b"]);
+
+      var stack = d3.layout.stack()
+            .offset("expand")
+
+      rows = rows.filter(function(r){return r["name"] === d.name})
+			rows.sort(function(a, b) { return b.white - a.white;});
+      factors = ["white","non_white"]
+      
+      layers = d3.layout.stack()(factors.map(function(c) {
+    return rows.map(function(d) {
+      return {x: d.cat, y: d[c]};});}))	
+     
+          console.log(layers)
+            y.domain(layers[0].map(function(d) { return d.x; }));
+          	
+            z.domain(["white","non_white"]);
+
+
+            var serie = gWFH.selectAll(".serie")
+                .data(layers)
+                .enter().append("g")
+                .attr("class", "serie")
+                .attr("fill", function(d, i) { return z(i); });
+
+            var bar = serie.selectAll("rect")
+                .data(function (d) {return d;})
+                .enter().append("rect")
+                .attr("y", function(d) { return y(d.x); })
+                .attr("x", function(d) {return x(d.y0); })
+                .attr("width", function(d) {return x(d.y); })
+                .attr("height", y.rangeBand())
+                
+      
+            var text = serie.selectAll("text")
+                .data(function (d) {return d;})
+                .enter().append("text")
+                .attr("y",  function(d) { return y(d.x) + ((y.rangeBand()/2)+7);})
+                .attr("x", function(d) {return (x(d.y)/2)+x(d.y0)})
+                .style("text-anchor", "middle")
+                .text(function (d) { return d3.format(".0%")(Math.abs(d.y)); })
+                .attr("fill", "#ffffff")
+                .attr("font-family", "Open Sans")
+            		.attr("font-weight", 600)
+            });
+var leftbox = d3.select(".item2")
+   			.datum(d)
+        .on("click", function(d){
+          Pages(1)})
+      
+      var rightbox = d3.select(".item4")
+     .datum(d)
+     .on("click", function(d){
+          Pages(3)})
+        }  
+      
+      
+      if(n === 3){
+        
+        left.style("opacity", "1");
+         right.style("opacity", "0");
+        
+        var title = d3.select(".title")
+   			.append("text")
+   			.attr("class","title3")
+   			.text("Educational Attainment/ Broadband")
+        
+        
+        d3.select(".pagetwo").remove()
+        d3.select(".title2").remove()
+        
+        var leftbox = d3.select(".item2")
+   			.datum(d)
+        .on("click", function(d){
+          Pages(2)})
+        
+        var rightbox = d3.select(".item4")
+     .datum(d)
+     .style("cursor", "default")
+     .on("click", function(d){
+          console.log("Nothing!")})
+      }
+    }  
+      
+   var svgWFH = d3.select("#WFH"),
+   margin = {
+                top: 0,
+                right: 5,
+                bottom: 0,
+                left: 5,
+            };  
+
+	var right = d3.select(".aright")
+  			.append("text")
+   			.text("〉")
+  
+  var left = d3.select(".aleft")
+  			.append("text")
+   			.text("〈")
+  			.style("opacity", "0");
+  
+   Pages(1)
+   
+
+
+      //tipSVG.append("rect")
+      //.attr("fill", "#003E7A")
+      //.attr("y", 20)
+    	//.attr("x", 20)
+      //.attr("width", 0)
+      //.attr("height", 30)
+      //.transition()
+      //.duration(d.virtual * 20)
+      //.attr("width", d.virtual * 4)
+    
+    //tipSVG.append("rect")
+      //.attr("fill", "#003E7A")
+      //.attr("y", 20)
+    	//.attr("x", 20+ d.virtual * 4)
+      //.attr("width", 0)
+      //.attr("height", 30)
+      //.transition()
+    	//.delay(d.virtual * 20)
+      //.duration(d.automated * 20)
+      //.attr("width", d.automated * 4);
+      
+      
+      //tipSVG.append("text")
+    	//.text("Employment by Ability to Work From Home")
+    	//.attr("x", 0)
+    	//.attr("y", 15)
+    	//.transition()
+        //.delay(function(d,i) { return i * 1000 })
+          //.attr("x", function(d) { return  xScale(d[0]); })
+          //.attr("width", function(d) { return xScale(d[1]) - xScale(d[0]) })
+     
+    //▶
+		
+    
+    
+    
+    })
+  .on('mouseout', function(d) {
+       d3.select(".d3-tip").transition().duration(200).style("opacity", "0").each("end", tool_tip.hide);
+     })
+  });
+});
+    d3.select(".d3-tip").on('mouseover', function(d) {
+       d3.select(".d3-tip").transition().style("opacity", "1");
+     }).on('mouseout', function(d) {
+       d3.select(".d3-tip").transition().duration(0).style("opacity", "0").each("end", tool_tip.hide);
+     });
+    
+    
+
+
+</script>
+</body>
