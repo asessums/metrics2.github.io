@@ -558,6 +558,8 @@ function draw8(){
         .force('forceY', d3.forceY(500))
         .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) * 1.6 + 4))
         .alpha(0.6).alphaDecay(0.05).restart()
+
+    createLegend(20, 50)
         
 }
 
