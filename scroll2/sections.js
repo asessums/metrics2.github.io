@@ -141,15 +141,7 @@ function drawInitial(){
                     .ticks(4)
                     .tickSize(height + 80)
 
-    let xAxisGroup = svg.append('g')
-        .attr('class', 'first-axis')
-        .attr('transform', 'translate(0, 0)')
-        .call(xAxis)
-        .call(g => g.select('.domain')
-            .remove())
-        .call(g => g.selectAll('.tick line'))
-            .attr('stroke-opacity', 0.2)
-            .attr('stroke-dasharray', 2.5)
+
 
     // Instantiates the force simulation
     // Has no forces. Actual forces are added and removed as required
@@ -167,16 +159,7 @@ function drawInitial(){
     simulation.stop()
 
     // Selection of all the circles 
-    nodes = svg
-        .selectAll('circle')
-        .data(dataset)
-        .enter()
-        .append('circle')
-            .attr('fill', 'black')
-            .attr('r', 3)
-            .attr('cx', (d, i) => salaryXScale(d.Median) + 5)
-            .attr('cy', (d, i) => i * 5.2 + 30)
-            .attr('opacity', 0.8)
+
         
     // Add mouseover and mouseout events for all circles
     // Changes opacity and adds border
