@@ -564,6 +564,7 @@ function draw8(){
         .transition()
         .attr('r', d => salarySizeScale(d.Median) * 1.6)
         .attr('fill', d => categoryColorScale(d.Category))
+        .attr('opacity', 1)
 
     simulation 
         .force('forceX', d3.forceX(500))
