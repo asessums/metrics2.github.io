@@ -185,8 +185,7 @@ function drawInitial(){
             .style('left', (d3.event.pageX + 10)+ 'px')
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
-            .html(`<strong>Major:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()} 
-                <br> <strong>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}`)
+            .html(`<strong>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}`)
     }
     
     function mouseOut(d, i){
