@@ -150,6 +150,7 @@ function drawInitial(){
         .call(g => g.selectAll('.tick line'))
             .attr('stroke-opacity', 0.2)
             .attr('stroke-dasharray', 2.5)
+            .attr('opacity', 0)
 
     // Instantiates the force simulation
     // Has no forces. Actual forces are added and removed as required
@@ -561,14 +562,14 @@ function draw8(){
 //Will be called from the scroller functionality
 
 let activationFunctions = [
+    draw1,
     draw8,
     draw2,
     draw3,
-    draw4,
+    draw4, 
     draw5, 
-    draw6, 
-    draw7,
-    draw1
+    draw6,
+    draw7
 ]
 
 //All the scrolling function
