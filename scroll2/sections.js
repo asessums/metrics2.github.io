@@ -3,9 +3,7 @@ let salarySizeScale, salaryXScale, categoryColorScale
 let simulation, nodes
 let categoryLegend, salaryLegend
 
-const categories = ['Engineering', 'Business', 'Physical Sciences', 'Law & Public Policy', 'Computers & Mathematics', 'Agriculture & Natural Resources',
-'Industrial Arts & Consumer Services','Arts', 'Health','Social Science', 'Biology & Life Science','Education','Humanities & Liberal Arts',
-'Psychology & Social Work','Communications & Journalism','Interdisciplinary']
+const categories = ['Job can be conducted virtually','Job can be made virtual with institutional investments and planning','Cannot work remotely','Job likely to be automated']
 
 const categoriesXY = {'Job can be conducted virtually': [200, 400, 42745, 31.2],
                         'Job can be made virtual with institutional investments and planning': [200, 600, 36900, 40.5],
