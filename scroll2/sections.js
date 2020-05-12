@@ -135,13 +135,22 @@ function drawInitial(){
                     .append('svg')
                     .attr('width', 1000)
                     .attr('height', 950)
-                    .attr('opacity', 0)
+                    .attr('opacity', 1)
 
     let xAxis = d3.axisBottom(salaryXScale)
                     .ticks(4)
                     .tickSize(height + 80)
 
-
+    let xAxisGroup = svg.append('g')
+        .attr('class', 'first-axis')
+        .attr('transform', 'translate(0, 0)')
+        .call(xAxis)
+        .call(g => g.select('.domain')
+            .remove())
+        .call(g => g.selectAll('.tick line'))
+            .attr('stroke-opacity', 0)
+            .attr('stroke-dasharray', 0)
+            .attr('opacity', 0)
 
     // Instantiates the force simulation
     // Has no forces. Actual forces are added and removed as required
@@ -159,7 +168,16 @@ function drawInitial(){
     simulation.stop()
 
     // Selection of all the circles 
-
+    nodes = svg
+        .selectAll('circle')
+        .data(dataset)
+        .enter()
+        .append('circle')
+            .attr('fill', 'black')
+            .attr('r', 3)
+            .attr('cx', (d, i) => salaryXScale(d.Median) + 5)
+            .attr('cy', (d, i) => i * 5.2 + 30)
+            .attr('opacity', 0)
         
     // Add mouseover and mouseout events for all circles
     // Changes opacity and adds border
@@ -205,6 +223,7 @@ function drawInitial(){
             .attr('y', (d, i) => i * 5.2 + 30)
             .attr('font-size', 7)
             .attr('text-anchor', 'end')
+            .attr('opacity', 0)
     
     //All the required components for the small multiples charts
     //Initialises the text and rectangles, and sets opacity to 0 
@@ -538,7 +557,7 @@ function draw4(){
 }
 
 function draw8(){
-    clean('none')
+    clean('isFirst')
 
     let svg = d3.select('#vis').select('svg')
     svg.selectAll('circle')
