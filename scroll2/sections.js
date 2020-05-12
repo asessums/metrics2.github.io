@@ -7,22 +7,11 @@ const categories = ['Engineering', 'Business', 'Physical Sciences', 'Law & Publi
 'Industrial Arts & Consumer Services','Arts', 'Health','Social Science', 'Biology & Life Science','Education','Humanities & Liberal Arts',
 'Psychology & Social Work','Communications & Journalism','Interdisciplinary']
 
-const categoriesXY = {'Engineering': [0, 400, 57382, 23.9],
-                        'Business': [0, 600, 43538, 48.3],
-                        'Physical Sciences': [0, 800, 41890, 50.9],
-                        'Law & Public Policy': [0, 200, 42200, 48.3],
-                        'Computers & Mathematics': [200, 400, 42745, 31.2],
-                        'Agriculture & Natural Resources': [200, 600, 36900, 40.5],
-                        'Industrial Arts & Consumer Services': [200, 800, 36342, 35.0],
-                        'Arts': [200, 200, 33062, 60.4],
-                        'Health': [400, 400, 36825, 79.5],
-                        'Social Science': [400, 600, 37344, 55.4],
-                        'Biology & Life Science': [400, 800, 36421, 58.7],
-                        'Education': [400, 200, 32350, 74.9],
-                        'Humanities & Liberal Arts': [600, 400, 31913, 63.2],
-                        'Psychology & Social Work': [600, 600, 30100, 79.4],
-                        'Communications & Journalism': [600, 800, 34500, 65.9],
-                        'Interdisciplinary': [600, 200, 35000, 77.1]}
+const categoriesXY = {'Job can be conducted virtually': [200, 400, 42745, 31.2],
+                        'Job can be made virtual with institutional investments and planning': [200, 600, 36900, 40.5],
+                        'Cannot work remotely': [200, 800, 36342, 35.0],
+                        'Job likely to be automated': [200, 200, 33062, 60.4],
+                        }
 
 const margin = {left: 170, top: 50, bottom: 50, right: 20}
 const width = 1000 - margin.left - margin.right
