@@ -198,10 +198,7 @@ function drawInitial(){
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>Major:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()} 
-                <br> <strong>Median Salary:</strong> $${d3.format(",.2r")(d.Median)} 
-                <br> <strong>Category:</strong> ${d.Category}
-                <br> <strong>% Female:</strong> ${Math.round(d.ShareWomen*100)}%
-                <br> <strong># Enrolled:</strong> ${d3.format(",.2r")(d.Total)}`)
+                <br> <strong>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}`)
     }
     
     function mouseOut(d, i){
@@ -578,14 +575,14 @@ function draw8(){
 //Will be called from the scroller functionality
 
 let activationFunctions = [
-    draw1,
+    draw8,
     draw2,
     draw3,
     draw4,
     draw5, 
     draw6, 
     draw7,
-    draw8
+    draw1
 ]
 
 //All the scrolling function
