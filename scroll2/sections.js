@@ -135,7 +135,7 @@ function drawInitial(){
                     .append('svg')
                     .attr('width', 1000)
                     .attr('height', 950)
-                    .attr('opacity', 1)
+                    .attr('opacity', 0)
 
     let xAxis = d3.axisBottom(salaryXScale)
                     .ticks(4)
@@ -150,7 +150,6 @@ function drawInitial(){
         .call(g => g.selectAll('.tick line'))
             .attr('stroke-opacity', 0.2)
             .attr('stroke-dasharray', 2.5)
-            .attr('opacity', 0)
 
     // Instantiates the force simulation
     // Has no forces. Actual forces are added and removed as required
@@ -360,6 +359,20 @@ function draw1(){
 
     d3.select('.categoryLegend').transition().remove()
 
+    svg.select('.first-axis')
+        .attr('opacity', 1)
+    
+    svg.selectAll('circle')
+        .transition().duration(500).delay(100)
+        .attr('fill', 'black')
+        .attr('r', 3)
+        .attr('cx', (d, i) => salaryXScale(d.Median)+5)
+        .attr('cy', (d, i) => i * 5.2 + 30)
+
+    svg.selectAll('.small-text').transition()
+        .attr('opacity', 1)
+        .attr('x', margin.left)
+        .attr('y', (d, i) => i * 5.2 + 30)
 }
 
 
