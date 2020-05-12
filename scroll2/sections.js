@@ -100,7 +100,7 @@ function createSizeLegend2(){
         .shape('circle')
         .shapePadding(55)
         .orient('horizontal')
-        .title('Enrolment Scale')
+        .title('Scale 2')
         .labels(['1000', '200000', '400000'])
         .labelOffset(30)
         .cells(3)
