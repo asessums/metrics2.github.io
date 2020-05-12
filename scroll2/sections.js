@@ -557,7 +557,7 @@ function draw4(){
 }
 
 function draw8(){
-    clean('isFirst')
+    clean('none')
 
     let svg = d3.select('#vis').select('svg')
     svg.selectAll('circle')
