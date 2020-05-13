@@ -420,9 +420,11 @@ function draw9(){
     simulation.stop()
 
     svg.selectAll('circle')
-        .transition().duration(400).delay((d, i) => i * 5)
-        .attr('cx', 200)   
-        .attr('cy', 700)
+        .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
+            .attr('r', 10)
+            .attr('cx', 200)
+            .attr('cy', 700)
+            .attr('fill', #000000)
 
 }
 
