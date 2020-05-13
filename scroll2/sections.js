@@ -461,8 +461,8 @@ function center(){
         .attr('r', d => salarySizeScale(d.Median) * 1.2)
         .attr('fill', d => categoryColorScale(d.Category))
         .duration(2000).delay(function(d,i) { return i*10; })
-        .attr("cx", projection(200)
-        .attr("cy", projection(700)
+        .attr("cx", 200)
+        .attr("cy", 700)
 
 
 }
