@@ -412,6 +412,20 @@ function draw3(){
 
 }
 
+
+function draw9(){
+    let svg = d3.select("#vis").select('svg')
+    clean('isMultiples')
+    
+    simulation.stop()
+
+    svg.selectAll('circle')
+        .transition().duration(400).delay((d, i) => i * 5)
+        .attr('x', 200)   
+        .attr('y', 700)
+
+}
+
 function draw5(){
     
     let svg = d3.select('#vis').select('svg')
@@ -556,7 +570,7 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw3,
+    draw9,
     draw4, 
     draw5, 
     draw6,
