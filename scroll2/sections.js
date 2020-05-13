@@ -346,7 +346,7 @@ function drawInitial(){
                 .attr("class", "occCover")
                 .attr("r", coverCirleRadius)
                 .attr("cx", 200)
-                .attr("cy", 700;
+                .attr("cy", 700);
 
 }
 
