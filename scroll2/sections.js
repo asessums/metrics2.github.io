@@ -15,6 +15,37 @@ const margin = {left: 170, top: 50, bottom: 50, right: 20}
 const width = 1000 - margin.left - margin.right
 const height = 950 - margin.top - margin.bottom
 
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////// Create filter ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////// 
+
+            //SVG filter for the gooey effect
+            //Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
+            var defs = svg.append("defs");
+            var filter = defs.append("filter").attr("id","gooeyCodeFilter");
+            filter.append("feGaussianBlur")
+                .attr("in","SourceGraphic")
+                .attr("stdDeviation","10")
+                //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
+                .attr("color-interpolation-filters","sRGB") 
+                .attr("result","blur");
+            filter.append("feColorMatrix")
+                .attr("class", "blurValues")
+                .attr("in","blur")
+                .attr("mode","matrix")
+                .attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5")
+                .attr("result","gooey");
+            filter.append("feBlend")
+                .attr("in","SourceGraphic")
+                .attr("in2","gooey")
+                .attr("operator","atop");
+
+
+
+
+
+
 //Read Data, convert numerical categories into floats
 //Create the initial visualisation
 
@@ -301,6 +332,22 @@ function drawInitial(){
         .attr('transform', 'translate(0, 700)')
         .attr('opacity', 0)
         .call(histxAxis)
+
+
+    //Wrapper for points
+    var occWrapper = svg.append("g")
+                .attr("class", "cityWrapper")
+                .style("filter", "url(#gooeyCodeFilter)");
+
+
+    var coverCirleRadius = 40;
+            //Circle over all others
+            occWrapper.append("circle")
+                .attr("class", "occCover")
+                .attr("r", coverCirleRadius)
+                .attr("cx", 200)
+                .attr("cy", 700;
+
 }
 
 //Cleaning Function
@@ -403,12 +450,20 @@ function draw3(){
                 .text(d => `Average: $${d3.format(",.2r")(categoriesXY[d][2])}`)
         })
 
-    simulation  
-        .force('charge', d3.forceManyBody().strength([2]))
-        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] + 200))
-        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] - 50))
-        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) + 4))
-        .alpha(0.7).alphaDecay(0.02).restart()
+function center(){
+    let svg = d3.select("#vis").select('svg')
+    clean('isMultiples')
+    
+    simulation.stop()
+
+    svg.selectAll('circle')
+        .transition().duration(300).delay((d, i) => i * 5)
+        .attr('r', d => salarySizeScale(d.Median) * 1.2)
+        .attr('fill', d => categoryColorScale(d.Category))
+        .duration(2000).delay(function(d,i) { return i*10; })
+        .attr("cx", projection(200)
+        .attr("cy", projection(700)
+
 
 }
 
@@ -556,7 +611,7 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw3,
+    center, //draw3
     draw4, 
     draw5, 
     draw6,
