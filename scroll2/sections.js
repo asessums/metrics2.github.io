@@ -74,6 +74,19 @@ const colors = ['#ffcc00', '#ff6666', '#cc0066', '#66cccc', '#f688bb', '#65587f'
 
 //Create all the scales and save to global variables
 
+var occWrapper = svg.append("g")
+        .attr("class", "cityWrapper")
+        .style("filter", "url(#gooeyCodeFilter)");
+
+var coverCirleRadius = 40;
+    //Circle over all others
+    occWrapper.append("circle")
+        .attr("class", "occCover")
+        .attr("r", coverCirleRadius)
+        .attr("cx", 200)
+        .attr("cy", 700);
+
+
 function createScales(){
     salarySizeScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [5, 35])
     salaryXScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [margin.left, margin.left + width+250])
@@ -335,18 +348,7 @@ function drawInitial(){
 
 
     //Wrapper for points
-    var occWrapper = svg.append("g")
-                .attr("class", "cityWrapper")
-                .style("filter", "url(#gooeyCodeFilter)");
-
-
-    var coverCirleRadius = 40;
-            //Circle over all others
-            occWrapper.append("circle")
-                .attr("class", "occCover")
-                .attr("r", coverCirleRadius)
-                .attr("cx", 200)
-                .attr("cy", 700);
+ 
 
 }
 
@@ -450,20 +452,12 @@ function draw3(){
                 .text(d => `Average: $${d3.format(",.2r")(categoriesXY[d][2])}`)
         })
 
-function center(){
-    let svg = d3.select("#vis").select('svg')
-    clean('isMultiples')
-    
-    simulation.stop()
-
-    svg.selectAll('circle')
-        .transition().duration(300).delay((d, i) => i * 5)
-        .attr('r', d => salarySizeScale(d.Median) * 1.2)
-        .attr('fill', d => categoryColorScale(d.Category))
-        .duration(2000).delay(function(d,i) { return i*10; })
-        .attr("cx", 200)
-        .attr("cy", 700)
-
+    simulation  
+        .force('charge', d3.forceManyBody().strength([2]))
+        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] + 200))
+        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] - 50))
+        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) + 4))
+        .alpha(0.7).alphaDecay(0.02).restart()
 
 }
 
@@ -611,7 +605,7 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw3, //draw3
+    draw3,
     draw4, 
     draw5, 
     draw6,
