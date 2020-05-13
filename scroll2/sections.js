@@ -611,7 +611,7 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    center, //draw3
+    draw3, //draw3
     draw4, 
     draw5, 
     draw6,
