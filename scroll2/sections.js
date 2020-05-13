@@ -15,37 +15,6 @@ const margin = {left: 170, top: 50, bottom: 50, right: 20}
 const width = 1000 - margin.left - margin.right
 const height = 950 - margin.top - margin.bottom
 
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////// Create filter ///////////////////////////////
-/////////////////////////////////////////////////////////////////////////// 
-
-            //SVG filter for the gooey effect
-            //Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
-            var defs = svg.append("defs");
-            var filter = defs.append("filter").attr("id","gooeyCodeFilter");
-            filter.append("feGaussianBlur")
-                .attr("in","SourceGraphic")
-                .attr("stdDeviation","10")
-                //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
-                .attr("color-interpolation-filters","sRGB") 
-                .attr("result","blur");
-            filter.append("feColorMatrix")
-                .attr("class", "blurValues")
-                .attr("in","blur")
-                .attr("mode","matrix")
-                .attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5")
-                .attr("result","gooey");
-            filter.append("feBlend")
-                .attr("in","SourceGraphic")
-                .attr("in2","gooey")
-                .attr("operator","atop");
-
-
-
-
-
-
 //Read Data, convert numerical categories into floats
 //Create the initial visualisation
 
@@ -73,19 +42,6 @@ d3.csv('data/recent-grads.csv', function(d){
 const colors = ['#ffcc00', '#ff6666', '#cc0066', '#66cccc', '#f688bb', '#65587f', '#baf1a1', '#333333', '#75b79e',  '#66cccc', '#9de3d0', '#f1935c', '#0c7b93', '#eab0d9', '#baf1a1', '#9399ff']
 
 //Create all the scales and save to global variables
-
-var occWrapper = svg.append("g")
-        .attr("class", "cityWrapper")
-        .style("filter", "url(#gooeyCodeFilter)");
-
-var coverCirleRadius = 40;
-    //Circle over all others
-    occWrapper.append("circle")
-        .attr("class", "occCover")
-        .attr("r", coverCirleRadius)
-        .attr("cx", 200)
-        .attr("cy", 700);
-
 
 function createScales(){
     salarySizeScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [5, 35])
@@ -345,11 +301,6 @@ function drawInitial(){
         .attr('transform', 'translate(0, 700)')
         .attr('opacity', 0)
         .call(histxAxis)
-
-
-    //Wrapper for points
- 
-
 }
 
 //Cleaning Function
