@@ -421,8 +421,8 @@ function draw9(){
 
     svg.selectAll('circle')
         .transition().duration(400).delay((d, i) => i * 5)
-        .attr('x', 200)   
-        .attr('y', 700)
+        .attr('cx', 200)   
+        .attr('cy', 700)
 
 }
 
