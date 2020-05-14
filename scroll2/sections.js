@@ -147,7 +147,7 @@ function drawInitial(){
         .attr("class", "blurValues")
         .attr("in","blur")
         .attr("mode","matrix")
-        .attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5")
+        .attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5")
         .attr("result","gooey");
     filter.append("feBlend")
         .attr("in","SourceGraphic")
@@ -156,12 +156,6 @@ function drawInitial(){
 
 
 
-    d3.selectAll(".blurValues")
-                    .transition().duration(4000)
-                    .attrTween("values", function() { 
-                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
-                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
-                    });
 
     let xAxis = d3.axisBottom(salaryXScale)
                     .ticks(4)
@@ -654,7 +648,7 @@ function draw8(){
     d3.selectAll(".blurValues")
                     .transition().duration(4000)
                     .attrTween("values", function() { 
-                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
+                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5", 
                                                     "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
                     });
 
