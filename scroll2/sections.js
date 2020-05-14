@@ -632,7 +632,7 @@ function draw4(){
     svg.selectAll('.occs')
         .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
             .attr('r', 5)
-            .attr('cx', d => histXScale(d.Median))
+            .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
             .attr('fill', d => categoryColorScale(d.Category))
 
