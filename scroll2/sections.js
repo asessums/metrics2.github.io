@@ -521,6 +521,8 @@ function draw10(){
 
 let svg = d3.select("#vis").select('svg')
 
+svg.selectAll('.hist-axis').transition().attr('opacity', 0)
+
 var virtual = svg.selectAll('.occs')
         .filter(function(d, i){
 
@@ -644,7 +646,7 @@ function draw4(){
     simulation.stop()
 
     svg.selectAll('.occs')
-        .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
+        .transition().duration(300).delay((d, i) => i * 2).ease(d3.easeBack)
             .attr('r', 2)
             .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
