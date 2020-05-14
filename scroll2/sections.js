@@ -413,10 +413,10 @@ function draw2(){
         .attr('fill', d => categoryColorScale(d.Category))
 
     simulation  
-        .force('charge', d3.forceManyBody().strength([1]))
+        .force('charge', d3.forceManyBody().strength([2]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .75))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
         .alphaDecay([0.02])
 
     //Reheat simulation and restart
@@ -458,10 +458,10 @@ function draw3(){
         })
 
     simulation  
-        .force('charge', d3.forceManyBody().strength([1]))
+        .force('charge', d3.forceManyBody().strength([2]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .75))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
         .alpha(0.7).alphaDecay(0.02).restart()
 
 }
@@ -537,7 +537,7 @@ function draw5(){
     simulation
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] + 200))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] - 50))
-        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) * .75))
+        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) * .5))
 
     simulation.alpha(1).restart()
    
@@ -609,7 +609,7 @@ function draw7(){
     simulation
         .force('forceX', d3.forceX(d => enrollmentScale(d.Total)))
         .force('forceY', d3.forceY(500))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .75))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
         .alpha(0.8).alphaDecay(0.05).restart()
 
     svg.selectAll('.occs')
@@ -632,7 +632,7 @@ function draw4(){
     svg.selectAll('.occs')
         .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
             .attr('r', 5)
-            .attr('cx', d => histXScale(d.Midpoint))
+            .attr('cx', d => histXScale(d.Median))
             .attr('cy', d => histYScale(d.HistCol))
             .attr('fill', d => categoryColorScale(d.Category))
 
@@ -666,7 +666,7 @@ function draw8(){
     simulation 
         .force('forceX', d3.forceX(500))
         .force('forceY', d3.forceY(500))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) *.75 ))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) *.5 ))
         .alpha(0.6).alphaDecay(0.05).restart()
 
     createLegend(20, 50)
