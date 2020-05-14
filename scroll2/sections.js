@@ -5,10 +5,10 @@ let categoryLegend, salaryLegend
 
 const categories = ['Job can be conducted virtually','Job can be made virtual with institutional investments and planning','Cannot work remotely, non-essential','Cannot work remotely, essential']
 
-const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 31.2],
-                        'Job can be made virtual with institutional investments and planning': [333, 666, 36900, 40.5],
-                        'Cannot work remotely, non-essential': [666, 333, 36342, 35.0],
-                        'Cannot work remotely, essential': [666, 666, 33062, 60.4],
+const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23],
+                        'Job can be made virtual with institutional investments and planning': [333, 666, 36900, 19],
+                        'Cannot work remotely, non-essential': [666, 333, 36342, 19],
+                        'Cannot work remotely, essential': [666, 666, 33062, 40],
                         }
 
 const margin = {left: 170, top: 50, bottom: 50, right: 20} 
