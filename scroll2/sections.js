@@ -261,6 +261,16 @@ function drawInitial(){
             .attr('font-size', 7)
             .attr('text-anchor', 'end')
             .attr('opacity', 0)
+
+
+    svg.append('text')
+            .text('Female')
+            .attr('class', 'female-text')
+            .attr('x', 600)
+            .attr('y', 300)
+            .attr('font-size', 7)
+            .attr('text-anchor', 'end')
+            .attr('opacity', 0)
     
     //All the required components for the small multiples charts
     //Initialises the text and rectangles, and sets opacity to 0 
@@ -590,7 +600,10 @@ function gender(){
     svg.selectAll('.dash-line').transition().duration(300)
     .attr('opacity', 1)
 
-    vg.selectAll('.arrow').transition().duration(300)
+    svg.selectAll('.arrow').transition().duration(300)
+    .attr('opacity', 1)
+
+    svg.selectAll('.female-text').transition().duration(300)
     .attr('opacity', 1)
 
 
