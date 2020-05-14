@@ -524,20 +524,11 @@ svg.selectAll('.occs')
         { 
             return d;
         }
-}).each(function(d){
-    d3.select(this)
-            .transition('mouseover').duration(100)
-            .attr('opacity', 1)
-            .attr('stroke-width', 5)
-            .attr('stroke', 'black')
-            
-        d3.select('#tooltip')
-            .style('left', (d3.event.pageX + 10)+ 'px')
-            .style('top', (d3.event.pageY - 25) + 'px')
-            .style('display', 'inline-block')
-            .html(`<strong>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}`)
-})
-
+}).append("text")
+        .attr("class","textlabel")
+        .text('HEYYYYY')
+        .attr("x", function(d) {return d.x;})
+        .attr("y", function(d) {return d.y;});
 
 }
 
