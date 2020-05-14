@@ -433,6 +433,8 @@ function draw2(){
     simulation.alpha(0.9).restart()
     
     createLegend(20, 50)
+
+    console.log(d)
 }
 
 function draw3(){
