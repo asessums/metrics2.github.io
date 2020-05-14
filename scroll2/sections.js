@@ -434,7 +434,7 @@ function draw3(){
 
     svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 5)
-        .attr('r', d => enrollmentSizeScale(d.Total) * 1.2)
+        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
         .attr('fill', d => categoryColorScale(d.Category))
 
     svg.selectAll('.cat-rect').transition().duration(300).delay((d, i) => i * 30)
