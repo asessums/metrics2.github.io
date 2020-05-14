@@ -11,7 +11,7 @@ const categoriesXY = {'Job can be conducted virtually': [200, 400, 42745, 31.2],
                         'Job likely to be automated': [200, 200, 33062, 60.4],
                         }
 
-const margin = {left: 170, top: 50, bottom: 50, right: 20}
+const margin = {left: 170, top: 50, bottom: 50, right: 20} 
 const width = 1000 - margin.left - margin.right
 const height = 950 - margin.top - margin.bottom
 
@@ -179,7 +179,12 @@ function drawInitial(){
     simulation.stop()
 
     // Selection of all the circles 
-    nodes = svg
+    
+    var nodeWrapper = svg.append("g")
+                .attr("class", "cityWrapper")
+                .style("filter", "url(#gooeyCodeFilter)");
+
+    nodes = nodeWrapper
         .selectAll('circle')
         .data(dataset)
         .enter()
@@ -446,9 +451,32 @@ function draw9(){
     svg.selectAll('circle')
         .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
             .attr('r', 10)
-            .attr('cx', width/2)
-            .attr('cy', height/2)
+            .attr('cx', 500)
+            .attr('cy', 500)
             .attr('fill', '#000000')
+
+    var cityWrapper = svg.append("g")
+                .attr("class", "cityWrapper")
+                .style("filter", "url(#gooeyCodeFilter)");
+                
+            //Place the city circles
+            var cities = cityWrapper.selectAll(".cities")
+                .data(populations)
+                .enter().append("circle")
+                .attr("class", "cities")
+                .attr("r", function(d) { return d.radius ;})
+                .attr("cx", projection([0,0])[0])
+                .attr("cy", projection([0,0])[1])
+                .style("opacity", 1);
+
+            var coverCirleRadius = 40;
+            //Circle over all others
+            cityWrapper.append("circle")
+                .attr("class", "cityCover")
+                .attr("r", coverCirleRadius)
+                .attr("cx", projection([0,0])[0])
+                .attr("cy", projection([0,0])[1]);
+        
 
 }
 
