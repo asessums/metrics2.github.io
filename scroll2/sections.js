@@ -512,6 +512,15 @@ function draw9(){
 
 }
 
+function draw10(){
+
+svg.selectAll('.occs')
+        .transition().duration(1000).delay((d, i) => i * 10)
+        .filter(function(d) { return d.Category == 'Job can be made virtual with institutional investments and planning' })
+            .attr('fill', '#000000')
+
+}
+
 function draw5(){
     
     let svg = d3.select('#vis').select('svg')
@@ -656,11 +665,11 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw9,
-    draw4, 
-    draw5, 
-    draw6,
-    draw7
+    draw10,
+    draw9, 
+    draw3, 
+    draw4,
+    draw5
 ]
 
 //All the scrolling function
