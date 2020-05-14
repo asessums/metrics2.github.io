@@ -615,11 +615,11 @@ function gender(){
     svg.selectAll('.dash-line').transition().duration(300)
     .attr('opacity', 1)
 
-    //svg.selectAll('.arrow').transition().duration(300)
-    //.attr('opacity', 1)
+    svg.selectAll('.arrow').transition().duration(300)
+    .attr('opacity', 1)
 
-    //svg.selectAll('.female-text').transition().duration(300)
-    //.attr('opacity', 1)
+    svg.selectAll('.female-text').transition().duration(300)
+    .attr('opacity', 1)
 
 
 
@@ -632,7 +632,7 @@ function gender(){
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
         .force('forceY', d3.forceY(500).strength(.5))
-        .force('collide', d3.forceCollide(1) //d => enrollmentSizeScale(d.Total) * .5)
+        .force('collide', d3.forceCollide(1)) //d => enrollmentSizeScale(d.Total) * .5)
         .alpha(0.7).alphaDecay(0.02).restart()
 
 }
@@ -652,7 +652,7 @@ function race(){
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
         .force('forceY', d3.forceY(500).strength(.5))
-        .force('collide', d3.forceCollide(1) //d => enrollmentSizeScale(d.Total) * .5)
+        .force('collide', d3.forceCollide(1)) //d => enrollmentSizeScale(d.Total) * .5)
         .alpha(0.7).alphaDecay(0.02).restart()
 
 }
