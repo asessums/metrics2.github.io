@@ -653,7 +653,7 @@ function draw8(){
         .force('forceX', d3.forceX(500))
         .force('forceY', d3.forceY(500))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) *.5 ))
-        //.alpha(0.6).alphaDecay(0.05).restart()
+        .alphaDecay([0.02])
 
     createLegend(20, 50)
         
