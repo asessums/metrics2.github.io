@@ -178,7 +178,7 @@ function drawInitial(){
     simulation = d3.forceSimulation(dataset)
 
      // Define each tick of simulation
-    simulation.on('tick', (10) => {
+    simulation.on('tick', () => {
         nodes
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
