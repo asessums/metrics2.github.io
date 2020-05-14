@@ -520,7 +520,7 @@ let svg = d3.select("#vis").select('svg')
 svg.selectAll('.occs')
         .filter(function(d, i){
 
-            if(d.Category == 'Job can be made virtual with institutional investments and planning') && (d.Major == 'Health Educators')
+            if(d.Category == 'Job can be made virtual with institutional investments and planning' && d.Major == 'Health Educators')
         { 
             return d;
         }
