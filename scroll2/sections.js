@@ -666,6 +666,11 @@ function draw4(){
 function draw8(){
     //clean('none')
 
+
+    svg.selectAll('.lab-text')
+        .attr('opacity', 0)
+        
+
     d3.selectAll(".blurValues")
                     .transition().duration(4000)
                     .attrTween("values", function() { 
