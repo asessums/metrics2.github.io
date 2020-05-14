@@ -204,11 +204,11 @@ function drawInitial(){
         .data(dataset)
         .enter()
         .append('circle')
-            .attr('fill', 'black')
+            .attr('fill', 'white')
             .attr("class", "occs")
-            .attr('r', 3)
-            .attr('cx', (d, i) => salaryXScale(d.Median) + 5)
-            .attr('cy', (d, i) => i * 5.2 + 30)
+            .attr('r', 0)
+            .attr('cx', 500)
+            .attr('cy', 500)
             .attr('opacity', 0)
     
     var coverCirleRadius = 40;
