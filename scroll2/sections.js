@@ -424,8 +424,8 @@ function draw2(){
 
     simulation  
         .force('charge', d3.forceManyBody().strength([2]))
-        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] + 200))
-        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] - 50))
+        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
+        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
         .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) + 4))
         .alphaDecay([0.02])
 
@@ -526,6 +526,9 @@ svg.selectAll('.occs')
         }
 }).append('text')
         .text('d.Major')
+        .attr('class', 'tooltip2')
+        .style('left', (d3.event.pageX + 10)+ 'px')
+        .style('top', (d3.event.pageY - 25) + 'px')
 
 
 }
