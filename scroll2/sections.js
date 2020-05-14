@@ -445,12 +445,12 @@ function draw3(){
 
     svg.selectAll('.cat-rect').transition().duration(300).delay((d, i) => i * 30)
         .attr('opacity', 0.2)
-        .attr('x', d => categoriesXY[d][0] + 120)
+        .attr('x', d => categoriesXY[d][0])
         
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
         .text(d)
-        .attr('x', d => categoriesXY[d][0] + 200)   
-        .attr('y', d => categoriesXY[d][1] + 50)
+        .attr('x', d => categoriesXY[d][0])   
+        .attr('y', d => categoriesXY[d][1])
         .attr('opacity', 1)
 
     svg.selectAll('.lab-text')
@@ -506,6 +506,9 @@ function draw9(){
                         return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
                                                     "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
                     });
+
+    svg.selectAll('.lab-text')
+        .on('mouseout', )
 
 }
 
@@ -647,6 +650,13 @@ function draw4(){
 
 function draw8(){
     //clean('none')
+
+    d3.selectAll(".blurValues")
+                    .transition().duration(4000)
+                    .attrTween("values", function() { 
+                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
+                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
+                    });
 
     let svg = d3.select('#vis').select('svg')
     svg.selectAll('.occs')
