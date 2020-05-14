@@ -36,6 +36,8 @@ d3.csv('data/occupations.csv', function(d){
         ShareWomen: +d.ShareWomen, 
         HistCol: +d.Histogram_column,
         Midpoint: +d.midpoint
+        Gender: +d.gender
+        Race: +d.race
     };
 }).then(data => {
     dataset = data
@@ -54,6 +56,8 @@ function createScales(){
     salaryYScale = d3.scaleLinear([20000, 110000], [margin.top + height, margin.top])
     categoryColorScale = d3.scaleOrdinal(categories, colors)
     shareWomenXScale = d3.scaleLinear(d3.extent(dataset, d => d.ShareWomen), [margin.left, margin.left + width])
+    GenderScale = d3.scaleLinear(d3.extent(dataset, d => d.Gender), [margin.left, margin.left + width])
+    RaceScale = d3.scaleLinear(d3.extent(dataset, d => d.Race), [margin.left, margin.left + width])
     enrollmentScale = d3.scaleLinear(d3.extent(dataset, d => d.Total), [margin.left + 120, margin.left + width - 50])
     enrollmentSizeScale = d3.scaleLinear(d3.extent(dataset, d=> d.Total), [10,60])
     histXScale = d3.scaleLinear(d3.extent(dataset, d => d.Midpoint), [margin.left, margin.left + width])
@@ -536,6 +540,27 @@ function draw3(){
 }
 
 
+function gender(){
+    let svg = d3.select("#vis").select('svg')
+    clean('isMultiples')
+
+    svg.selectAll('.hist-axis').transition().attr('opacity', 0)
+
+    svg.selectAll('.occs')
+        .transition().duration(400).delay((d, i) => i * 5)
+        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
+        .attr('fill', d => categoryColorScale(d.Category))
+        
+    simulation  
+        .force('charge', d3.forceManyBody().strength([-6]))
+        .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(.5))
+        .force('forceY', d3.forceY(500).strength(.5))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
+        .alpha(0.7).alphaDecay(0.02).restart()
+
+}
+
+
 function draw9(){
     let svg = d3.select("#vis").select('svg')
     clean('isMultiples')
@@ -766,7 +791,7 @@ let activationFunctions = [
     draw8,
     draw2,
     draw4, 
-    draw10, //9
+    gender, //9
     draw4, //10
     draw4, //1
     draw4 //4
