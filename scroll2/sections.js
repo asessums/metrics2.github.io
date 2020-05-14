@@ -448,7 +448,7 @@ function draw3(){
         .attr('x', d => categoriesXY[d][0] + 120)
         
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
-        .text(d => `Average: $${d3.format(",.2r")(categoriesXY[d][2])}`)
+        .text(d)
         .attr('x', d => categoriesXY[d][0] + 200)   
         .attr('y', d => categoriesXY[d][1] + 50)
         .attr('opacity', 1)
@@ -460,13 +460,13 @@ function draw3(){
         })
         .on('mouseout', function(d, i){
             d3.select(this)
-                .text(d => `Average: $${d3.format(",.2r")(categoriesXY[d][2])}`)
+                .text(d)
         })
 
     simulation  
         .force('charge', d3.forceManyBody().strength([2]))
-        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] + 200))
-        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] - 50))
+        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ))
+        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]))
         .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) + 4))
         .alpha(0.7).alphaDecay(0.02).restart()
 
