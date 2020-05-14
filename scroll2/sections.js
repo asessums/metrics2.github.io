@@ -609,7 +609,7 @@ function draw7(){
     simulation
         .force('forceX', d3.forceX(d => enrollmentScale(d.Total)))
         .force('forceY', d3.forceY(500))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 2))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 1))
         .alpha(0.8).alphaDecay(0.05).restart()
 
     svg.selectAll('.occs')
@@ -666,7 +666,7 @@ function draw8(){
     simulation 
         .force('forceX', d3.forceX(500))
         .force('forceY', d3.forceY(500))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5 + 1))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total)  + 1))
         .alpha(0.6).alphaDecay(0.05).restart()
 
     createLegend(20, 50)
