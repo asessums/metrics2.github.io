@@ -472,6 +472,10 @@ function draw9(){
     clean('isMultiples')
     
 
+    svg.selectAll('.lab-text')
+        .oattr('opacity',0)
+
+
     // Stop force
     simulation.stop()
 
