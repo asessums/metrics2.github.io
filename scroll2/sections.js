@@ -276,8 +276,8 @@ function drawInitial(){
     .attr("orient", "auto")
     .append("path")
     .attr("d", "M 0 0 12 6 0 12 3 6")
-    .style("fill", "black");
-    .attr('opacity', 0)
+    .style("fill", "black")
+    .attr('opacity', 0);
 
     
     
@@ -290,8 +290,8 @@ function drawInitial(){
             .attr("y2", 300)
             .attr("stroke-width", 1)
             .attr("stroke", "black")
-            .attr("marker-end", "url(#triangle)");
-            .attr('opacity', 0)
+            .attr("marker-end", "url(#triangle)")
+            .attr('opacity', 0);
 
 
 
@@ -368,9 +368,9 @@ function drawInitial(){
         .style("stroke", "black")
         .style("stroke-dasharray", ("3, 3"))
         .attr("x1", 500)
-        .attr("y1", 200)    
+        .attr("y1", 300)    
         .attr("x2", 500)      
-        .attr("y2", 800) 
+        .attr("y2", 700) 
         .attr('opacity', 0)
 
     // Best fit line for gender scatter plot
