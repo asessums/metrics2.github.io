@@ -515,6 +515,8 @@ function draw9(){
 
 function draw10(){
 
+let svg = d3.select("#vis").select('svg')
+
 console.log(svg.selectAll('.occs')
         .data())
 }
