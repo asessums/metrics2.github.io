@@ -600,11 +600,11 @@ function gender(){
     svg.selectAll('.dash-line').transition().duration(300)
     .attr('opacity', 1)
 
-    svg.selectAll('.arrow').transition().duration(300)
-    .attr('opacity', 1)
+    //svg.selectAll('.arrow').transition().duration(300)
+    //.attr('opacity', 1)
 
-    svg.selectAll('.female-text').transition().duration(300)
-    .attr('opacity', 1)
+    //svg.selectAll('.female-text').transition().duration(300)
+    //.attr('opacity', 1)
 
 
 
