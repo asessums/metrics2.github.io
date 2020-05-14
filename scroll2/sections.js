@@ -177,6 +177,8 @@ function drawInitial(){
 
     simulation = d3.forceSimulation(dataset)
 
+    simulation.force('charge', d3.forceManyBody().strength([-3]))
+
      // Define each tick of simulation
     simulation.on('tick', () => {
         nodes
@@ -403,7 +405,7 @@ function draw2(){
         .attr('fill', d => categoryColorScale(d.Category))
 
     simulation  
-        .force('charge', d3.forceManyBody().strength([-8]))
+        .force('charge', d3.forceManyBody().strength([-3]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
@@ -445,7 +447,7 @@ function draw3(){
         })
 
     simulation  
-        .force('charge', d3.forceManyBody().strength([-8]))
+        .force('charge', d3.forceManyBody().strength([-3]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
