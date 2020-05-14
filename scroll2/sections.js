@@ -278,7 +278,7 @@ function drawInitial(){
         .raise()
 
     svg.selectAll('.lab-text')
-        .text(d)
+        .text(function(d){return d})
         .attr('x', d => categoriesXY[d][0] + 200 + 1000)
         .attr('y', d => categoriesXY[d][1] - 500)
         .attr('font-family', 'Domine')
@@ -442,7 +442,7 @@ function draw3(){
         .attr('x', d => categoriesXY[d][0])
         
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
-        .text(d)
+        .text(function(d){return d})
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1])
         .attr('opacity', 1)
@@ -450,11 +450,11 @@ function draw3(){
     svg.selectAll('.lab-text')
         .on('mouseover', function(d, i){
             d3.select(this)
-                .text(d)
+                .text(function(d){return d})
         })
         .on('mouseout', function(d, i){
             d3.select(this)
-                .text(d)
+                .text(function(d){return d})
         })
 
     simulation  
