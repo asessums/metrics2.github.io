@@ -265,6 +265,38 @@ function drawInitial(){
     //All the required components for the small multiples charts
     //Initialises the text and rectangles, and sets opacity to 0 
 
+    svg.append("svg:defs").append("svg:marker")
+    .attr("id", "triangle")
+    .attr('class', 'arrow')
+    .attr("refX", 6)
+    .attr("refY", 6)
+    .attr("markerWidth", 30)
+    .attr("markerHeight", 30)
+    .attr("markerUnits","userSpaceOnUse")
+    .attr("orient", "auto")
+    .append("path")
+    .attr("d", "M 0 0 12 6 0 12 3 6")
+    .style("fill", "black");
+    .attr('opacity', 0)
+
+    
+    
+    //line              
+        svg.append("line")
+            .attr('class', 'arrow')
+            .attr("x1",  600)
+            .attr("y1", 300)
+            .attr("x2", 625)
+            .attr("y2", 300)
+            .attr("stroke-width", 1)
+            .attr("stroke", "black")
+            .attr("marker-end", "url(#triangle)");
+            .attr('opacity', 0)
+
+
+
+
+
 
     svg.selectAll('.cat-text')
         .data(categories).enter()
@@ -336,9 +368,9 @@ function drawInitial(){
         .style("stroke", "black")
         .style("stroke-dasharray", ("3, 3"))
         .attr("x1", 500)
-        .attr("y1", 100)    
+        .attr("y1", 200)    
         .attr("x2", 500)      
-        .attr("y2", 900) 
+        .attr("y2", 800) 
         .attr('opacity', 0)
 
     // Best fit line for gender scatter plot
@@ -558,6 +590,9 @@ function gender(){
     svg.selectAll('.dash-line').transition().duration(300)
     .attr('opacity', 1)
 
+    vg.selectAll('.arrow').transition().duration(300)
+    .attr('opacity', 1)
+
 
 
     svg.selectAll('.occs')
@@ -767,6 +802,9 @@ function draw7(){
 
 function draw4(){
     let svg = d3.select('#vis').select('svg')
+
+    svg.selectAll('.dash-line').transition().duration(300)
+    .attr('opacity', 0)
 
     clean('isHist')
 
