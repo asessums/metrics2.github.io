@@ -672,9 +672,9 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw10,
+    draw3,
+    draw10, 
     draw9, 
-    draw3, 
     draw4,
     draw5
 ]
