@@ -12,8 +12,8 @@ const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37
                         }
 
 const margin = {left: 170, top: 50, bottom: 50, right: 20} 
-const width = 1000 - margin.left - margin.right
-const height = 950 - margin.top - margin.bottom
+const width = 800 - margin.left - margin.right
+const height = 700 - margin.top - margin.bottom
 
 
 
