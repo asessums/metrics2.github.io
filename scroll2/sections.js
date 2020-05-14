@@ -520,8 +520,8 @@ let svg = d3.select("#vis").select('svg')
 svg.selectAll('.occs')
         .filter(function(d, i){ // i is the index
     return d.Category === 'Job can be made virtual with institutional investments and planning';
-});
-        .attr('fill', '#000000')
+}).attr('fill', '#000000')
+
 
 }
 
