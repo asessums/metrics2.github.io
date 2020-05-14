@@ -6,7 +6,7 @@ let categoryLegend, salaryLegend
 const categories = ['Job can be conducted virtually','Job can be made virtual with institutional investments and planning','Cannot work remotely','Job likely to be automated']
 
 const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 31.2],
-                        'Job can be made virtual with institutional investments and planning': [333, 6666, 36900, 40.5],
+                        'Job can be made virtual with institutional investments and planning': [333, 666, 36900, 40.5],
                         'Cannot work remotely': [666, 333, 36342, 35.0],
                         'Job likely to be automated': [666, 666, 33062, 60.4],
                         }
