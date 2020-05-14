@@ -3,12 +3,12 @@ let salarySizeScale, salaryXScale, categoryColorScale
 let simulation, nodes
 let categoryLegend, salaryLegend
 
-const categories = ['Job can be conducted virtually','Job can be made virtual with institutional investments and planning','Cannot work remotely','Job likely to be automated']
+const categories = ['Job can be conducted virtually','Job can be made virtual with institutional investments and planning','Cannot work remotely, non-essential','Cannot work remotely, essential']
 
-const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 31.2],
-                        'Job can be made virtual with institutional investments and planning': [333, 666, 36900, 40.5],
-                        'Cannot work remotely': [666, 333, 36342, 35.0],
-                        'Job likely to be automated': [666, 666, 33062, 60.4],
+const categoriesXY = {'Job can be conducted virtually': [200, 400, 42745, 31.2],
+                        'Job can be made virtual with institutional investments and planning': [200, 600, 36900, 40.5],
+                        'Cannot work remotely, non-essential': [200, 800, 36342, 35.0],
+                        'Cannot work remotely, essential': [200, 200, 33062, 60.4],
                         }
 
 const margin = {left: 170, top: 50, bottom: 50, right: 20} 
@@ -24,7 +24,7 @@ const height = 950 - margin.top - margin.bottom
 //Create the initial visualisation
 
 
-d3.csv('data/recent-grads.csv', function(d){
+d3.csv('data/occupations.csv', function(d){
     return {
         Major: d.Major,
         Total: +d.Total,
@@ -409,14 +409,14 @@ function draw2(){
 
     svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 5)
-        .attr('r', d => salarySizeScale(d.Median) * 1.2)
+        .attr('r', d => enrollmentSizeScale(d.Total) * 1.2)
         .attr('fill', d => categoryColorScale(d.Category))
 
     simulation  
         .force('charge', d3.forceManyBody().strength([2]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
-        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) + 4))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 4))
         .alphaDecay([0.02])
 
     //Reheat simulation and restart
@@ -434,7 +434,7 @@ function draw3(){
 
     svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 5)
-        .attr('r', d => salarySizeScale(d.Median) * 1.2)
+        .attr('r', d => enrollmentSizeScale(d.Total) * 1.2)
         .attr('fill', d => categoryColorScale(d.Category))
 
     svg.selectAll('.cat-rect').transition().duration(300).delay((d, i) => i * 30)
@@ -461,7 +461,7 @@ function draw3(){
         .force('charge', d3.forceManyBody().strength([2]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]))
-        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) + 4))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 4))
         .alpha(0.7).alphaDecay(0.02).restart()
 
 }
@@ -659,14 +659,14 @@ function draw8(){
     let svg = d3.select('#vis').select('svg')
     svg.selectAll('.occs')
         .transition()
-        .attr('r', d => salarySizeScale(d.Median) * 1.6)
+        .attr('r', d => enrollmentSizeScale(d.Total) * 1.6)
         .attr('fill', d => categoryColorScale(d.Category))
         .attr('opacity', 1)
 
     simulation 
         .force('forceX', d3.forceX(500))
         .force('forceY', d3.forceY(500))
-        .force('collide', d3.forceCollide(d => salarySizeScale(d.Median) * 1.6 + 4))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * 1.6 + 4))
         .alpha(0.6).alphaDecay(0.05).restart()
 
     createLegend(20, 50)
