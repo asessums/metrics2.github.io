@@ -331,6 +331,16 @@ function drawInitial(){
                     .text(d)
             })
 
+    svg.selectAll('.dash-line')
+        .append('line')
+        .attr('class', 'dash-line')
+        .style("stroke", "black")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("x1", 500)
+        .attr("y1", 100)    
+        .attr("x2", 500)      
+        .attr("y2", 900) 
+        .attr('opacity', 0)
 
     // Best fit line for gender scatter plot
 
@@ -546,17 +556,9 @@ function gender(){
 
     svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
+    svg.selectAll('.dash-line').transition().duration(300)
+    .attr('opacity', 1)
 
-    svg.selectAll('.dash-line')
-        .append('line')
-        .attr('class', 'dash-line')
-        .style("stroke", "black")
-        .style("stroke-dasharray", ("3, 3"))
-        .attr("x1", 500)
-        .attr("y1", 100)    
-        .attr("x2", 500)      
-        .attr("y2", 900) 
-        .attr('opacity', 1)
 
 
     svg.selectAll('.occs')
