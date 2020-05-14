@@ -812,9 +812,9 @@ let activationFunctions = [
     draw2,
     draw4, 
     gender, //9
-    draw4, //10
-    draw4, //1
-    draw4 //4
+    race, //10
+    race, //1
+    race //4
 ]
 
 //All the scrolling function
