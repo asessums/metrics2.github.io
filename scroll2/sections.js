@@ -501,7 +501,17 @@ function draw2(){
     svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 5)
         .attr('r', d => enrollmentSizeScale(d.Total) * .5)
-        .attr('fill', d => categoryColorScale(d.Category))
+        .attr('fill', d => categoryColorScale(d.Category)).on("end", function(d){
+        simulation  
+        .force('charge', d3.forceManyBody().strength([-6]))
+        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]).strength(.5))
+        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ).strength(.5))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
+        .alphaDecay([0.02])
+
+    //Reheat simulation and restart
+    simulation.alpha(0.9).restart()
+        });
 
 
     svg.selectAll('.cat-text').transition().duration(300).delay((d, i) => i * 30)
@@ -554,15 +564,7 @@ function draw2(){
                 .text(d => `${(categoriesXY[d][3])}%`)
         })
 
-    simulation  
-        .force('charge', d3.forceManyBody().strength([-6]))
-        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]).strength(.5))
-        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ).strength(.5))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
-        .alphaDecay([0.02])
-
-    //Reheat simulation and restart
-    simulation.alpha(0.9).restart()
+    
     
     createLegend(20, 50)
 
