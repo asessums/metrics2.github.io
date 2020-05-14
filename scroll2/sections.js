@@ -454,30 +454,6 @@ function draw9(){
             .attr('cx', 500)
             .attr('cy', 500)
             .attr('fill', '#000000')
-
-    var cityWrapper = svg.append("g")
-                .attr("class", "cityWrapper")
-                .style("filter", "url(#gooeyCodeFilter)");
-                
-            //Place the city circles
-            var cities = cityWrapper.selectAll(".cities")
-                .data(populations)
-                .enter().append("circle")
-                .attr("class", "cities")
-                .attr("r", function(d) { return d.radius ;})
-                .attr("cx", projection([0,0])[0])
-                .attr("cy", projection([0,0])[1])
-                .style("opacity", 1);
-
-            var coverCirleRadius = 40;
-            //Circle over all others
-            cityWrapper.append("circle")
-                .attr("class", "cityCover")
-                .attr("r", coverCirleRadius)
-                .attr("cx", projection([0,0])[0])
-                .attr("cy", projection([0,0])[1]);
-        
-
 }
 
 function draw5(){
