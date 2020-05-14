@@ -270,6 +270,7 @@ function drawInitial(){
 
     svg.selectAll('.lab-text')
         .text(function(d){return d})
+        .style("text-anchor", "middle")
         .attr('x', d => categoriesXY[d][0] + 200 + 1000)
         .attr('y', d => categoriesXY[d][1] - 500)
         .attr('font-family', 'Domine')
@@ -402,7 +403,7 @@ function draw2(){
         .attr('fill', d => categoryColorScale(d.Category))
 
     simulation  
-        .force('charge', d3.forceManyBody().strength([1]))
+        .force('charge', d3.forceManyBody().strength([3]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
@@ -428,6 +429,7 @@ function draw3(){
         
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
         .text(function(d){return d})
+        .style("text-anchor", "middle")
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1])
         .attr('opacity', 1)
@@ -443,7 +445,7 @@ function draw3(){
         })
 
     simulation  
-        .force('charge', d3.forceManyBody().strength([1]))
+        .force('charge', d3.forceManyBody().strength([3]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
