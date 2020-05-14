@@ -5,10 +5,10 @@ let categoryLegend, salaryLegend
 
 const categories = ['Job can be conducted virtually','Job can be made virtual','Cannot work remotely, non-essential','Cannot work remotely, essential']
 
-const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23],
-                        'Job can be made virtual': [333, 666, 36900, 19],
-                        'Cannot work remotely, non-essential': [666, 333, 36342, 19],
-                        'Cannot work remotely, essential': [666, 666, 33062, 40],
+const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37532652],
+                        'Job can be made virtual': [333, 666, 36900, 19, 30292450],
+                        'Cannot work remotely, non-essential': [666, 333, 36342, 19, 30289608],
+                        'Cannot work remotely, essential': [666, 666, 33062, 40, 64438818],
                         }
 
 const margin = {left: 170, top: 50, bottom: 50, right: 20} 
@@ -125,7 +125,7 @@ function createSizeLegend2(){
 
 function drawInitial(){
     //createSizeLegend()
-    createSizeLegend2()
+    //createSizeLegend2()
 
     let svg = d3.select("#vis")
                     .append('svg')
@@ -280,7 +280,23 @@ function drawInitial(){
         .attr('fill', 'black')
         .attr('text-anchor', 'middle')
 
+    svg.selectAll('.tot-text')
+        .data(categories).enter()
+        .append('text')
+        .attr('class', 'tot-text')
+        .attr('opacity', 0)
+        .raise()
 
+    svg.selectAll('.tot-text')
+        .text(function(d){return d})
+        .style("text-anchor", "middle")
+        .attr('x', d => categoriesXY[d][0] + 200 + 1000)
+        .attr('y', d => categoriesXY[d][1] - 500)
+        .attr('font-family', 'Domine')
+        .attr('font-size', '12px')
+        .attr('font-weight', 700)
+        .attr('fill', 'black')
+        .attr('text-anchor', 'middle')
 
 
     svg.selectAll('.lab-text')
@@ -377,6 +393,8 @@ function clean(chartType){
             .attr('x', 1800)
         svg.selectAll('.cat-text').transition().attr('opacity', 0)
             .attr('x', 1800)
+        svg.selectAll('.tot-text').transition().attr('opacity', 0)
+            .attr('x', 1800)
 
     }
     if (chartType !== "isFirst"){
@@ -435,6 +453,15 @@ function draw2(){
         .style("font-size", "1.1em")
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1]+ 50)
+        .attr('opacity', 1)
+
+        svg.selectAll('.tot-text').transition().duration(300).delay((d, i) => i * 30)
+        .text(d => `${d3.format(",.2r")(categoriesXY[d][4])}`)  
+        .style("text-anchor", "middle")
+        .style("font-weight", "700")
+        .style("font-size", "1.1em")
+        .attr('x', d => categoriesXY[d][0])   
+        .attr('y', d => categoriesXY[d][1]+ 25)
         .attr('opacity', 1)
 
 
@@ -518,6 +545,9 @@ function draw9(){
         .attr('opacity',0)
 
     svg.selectAll('.cat-text')
+        .attr('opacity',0)
+
+    svg.selectAll('.tot-text')
         .attr('opacity',0)
 
 
