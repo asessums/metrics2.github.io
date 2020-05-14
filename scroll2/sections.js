@@ -490,7 +490,7 @@ function draw9(){
             .attr('cy', 500)
             .attr('fill', '#1A818C')
 
-    d3.selectAll(".cityCover")
+    d3.selectAll(".nodeCover")
                     .transition().duration(3000).delay(500)
                     .attr("r", coverCirleRadius);
 
