@@ -434,7 +434,6 @@ function draw2(){
     
     createLegend(20, 50)
 
-    console.log(d)
 }
 
 function draw3(){
