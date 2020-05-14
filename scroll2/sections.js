@@ -486,7 +486,7 @@ function draw9(){
 
     //Apply gooey filter
     d3.selectAll(".blurValues")
-                    .transition().duration(2000)
+                    .transition().duration(2000).delay(500)
                     .attrTween("values", function() { 
                         return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5", 
                                                     "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -6"); 
