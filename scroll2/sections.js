@@ -406,6 +406,8 @@ function draw2(){
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
         .text(d => `%${(categoriesXY[d][3])}%`)
         .style("text-anchor", "middle")
+        .style("font-weight", "700")
+        .style("font-size", "1.1em")
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1])
         .attr('opacity', 1)
@@ -519,18 +521,29 @@ function draw10(){
 
 let svg = d3.select("#vis").select('svg')
 
-svg.selectAll('.occs')
+var virtual = svg.selectAll('.occs')
         .filter(function(d, i){
 
-            if(d.Category == 'Job can be made virtual' && d.Major == 'Health Educators')
+            if(d.Category == 'Job can be made virtual')
         { 
             return d;
         }
-}).append("text")
-        .attr("class","textlabel")
-        .text('HEYYYYY')
-        .attr("x", function(d) {return d.x;})
-        .attr("y", function(d) {return d.y;});
+}).transition().duration(1000).delay((d, i) => i * 10)
+    .force('forceX', d3.forceX(500))
+    .force('forceY', d3.forceY(500))
+
+
+var non_virtual = svg.selectAll('.occs')
+        .filter(function(d, i){
+
+            if(d.Category != 'Job can be made virtual')
+        { 
+            return d;
+        }
+}).transition().duration(1000).delay((d, i) => i * 10)
+    .attr('opacity',0)
+    .force('forceX', d3.forceX(0))
+    .force('forceY', d3.forceY(0))
 
 }
 
@@ -683,7 +696,7 @@ let activationFunctions = [
     draw8,
     draw2,
     draw4, 
-    draw4, //9
+    draw10, //9
     draw4, //10
     draw4, //1
     draw4 //4
