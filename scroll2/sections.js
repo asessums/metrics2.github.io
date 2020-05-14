@@ -485,6 +485,8 @@ function draw9(){
     svg.selectAll('circle')
         .transition().duration(500).delay((d, i) => i * 5)
         .attr('fill', '#1A818C')
+
+    svg.selectAll('circle')
         .transition().duration(2000).delay((d, i) => i * 10)
             .attr('r', 10)
             .attr('cx', 500)
