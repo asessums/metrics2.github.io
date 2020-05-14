@@ -567,7 +567,6 @@ function gender(){
         .attr('fill', d => categoryColorScale(d.Category))
         
     simulation
-        .transition().duration(100).delay((d, i) => i * 2)  
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
         .force('forceY', d3.forceY(500).strength(.5))
