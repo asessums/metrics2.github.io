@@ -409,7 +409,7 @@ function draw2(){
 
     svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 5)
-        .attr('r', d => enrollmentSizeScale(d.Total) * 1.2)
+        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
         .attr('fill', d => categoryColorScale(d.Category))
 
     simulation  
