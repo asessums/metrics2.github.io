@@ -15,26 +15,7 @@ const margin = {left: 170, top: 50, bottom: 50, right: 20}
 const width = 1000 - margin.left - margin.right
 const height = 950 - margin.top - margin.bottom
 
-//SVG filter for the gooey effect
-//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
-var defs = svg.append("defs");
-var filter = defs.append("filter").attr("id","gooeyCodeFilter");
-filter.append("feGaussianBlur")
-    .attr("in","SourceGraphic")
-    .attr("stdDeviation","10")
-    //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
-    .attr("color-interpolation-filters","sRGB") 
-    .attr("result","blur");
-filter.append("feColorMatrix")
-    .attr("class", "blurValues")
-    .attr("in","blur")
-    .attr("mode","matrix")
-    .attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5")
-    .attr("result","gooey");
-filter.append("feBlend")
-    .attr("in","SourceGraphic")
-    .attr("in2","gooey")
-    .attr("operator","atop");
+
 
 
 
@@ -132,6 +113,30 @@ function createSizeLegend2(){
     d3.select('.sizeLegend2')
         .call(sizeLegend2)
 }
+
+//SVG filter for the gooey effect
+//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
+var defs = svg.append("defs");
+var filter = defs.append("filter").attr("id","gooeyCodeFilter");
+filter.append("feGaussianBlur")
+    .attr("in","SourceGraphic")
+    .attr("stdDeviation","10")
+    //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
+    .attr("color-interpolation-filters","sRGB") 
+    .attr("result","blur");
+filter.append("feColorMatrix")
+    .attr("class", "blurValues")
+    .attr("in","blur")
+    .attr("mode","matrix")
+    .attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5")
+    .attr("result","gooey");
+filter.append("feBlend")
+    .attr("in","SourceGraphic")
+    .attr("in2","gooey")
+    .attr("operator","atop");
+
+
+
 
 // All the initial elements should be create in the drawInitial function
 // As they are required, their attributes can be modified
