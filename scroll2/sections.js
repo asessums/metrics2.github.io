@@ -404,7 +404,7 @@ function draw1(){
 function draw2(){
     let svg = d3.select("#vis").select('svg')
     
-    clean('none')
+    //clean('none')
 
 
 
@@ -646,7 +646,7 @@ function draw4(){
 }
 
 function draw8(){
-    clean('none')
+    //clean('none')
 
     let svg = d3.select('#vis').select('svg')
     svg.selectAll('.occs')
