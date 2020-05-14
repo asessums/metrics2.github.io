@@ -515,11 +515,8 @@ function draw9(){
 
 function draw10(){
 
-svg.selectAll('.occs')
-        .data(dataset.filter(function(d) { return d.Category == 'Job can be made virtual with institutional investments and planning' }))
-        .transition().duration(1000).delay((d, i) => i * 10)
-            .attr('fill', '#000000')
-
+console.log(svg.selectAll('.occs')
+        .data())
 }
 
 function draw5(){
