@@ -154,6 +154,15 @@ function drawInitial(){
         .attr("in2","gooey")
         .attr("operator","atop");                
 
+
+
+    d3.selectAll(".blurValues")
+                    .transition().duration(4000)
+                    .attrTween("values", function() { 
+                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
+                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
+                    });
+
     let xAxis = d3.axisBottom(salaryXScale)
                     .ticks(4)
                     .tickSize(height + 80)
@@ -452,7 +461,17 @@ function draw9(){
     let svg = d3.select("#vis").select('svg')
     clean('isMultiples')
     
+
+    // Stop force
     simulation.stop()
+
+    //Apply gooey filter
+    d3.selectAll(".blurValues")
+                    .transition().duration(2000)
+                    .attrTween("values", function() { 
+                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5", 
+                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -6"); 
+                    });
 
     svg.selectAll('circle')
         .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
