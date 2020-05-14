@@ -506,6 +506,9 @@ function draw2(){
         .style("text-anchor", "middle")
         .style("font-weight", "700")
         .style("font-size", "1.1em")
+        .style('stroke', '#FFFFFF')
+        .style('stroke-opacity', .8)
+        .style('paint-order', 'stroke')
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1]+ 50)
         .attr('opacity', 1)
@@ -515,6 +518,9 @@ function draw2(){
         .style("text-anchor", "middle")
         .style("font-weight", "500")
         .style("font-size", "14.5px")
+        .style('stroke', '#FFFFFF')
+        .style('stroke-opacity', .8)
+        .style('paint-order', 'stroke')
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1]+ 25)
         .attr('opacity', 1)
@@ -525,6 +531,9 @@ function draw2(){
         .style("text-anchor", "middle")
         .style("font-weight", "700")
         .style("font-size", "3.1em")
+        .style('stroke', '#FFFFFF')
+        .style('stroke-opacity', .8)
+        .style('paint-order', 'stroke')
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1])
         .attr('opacity', 1)
@@ -610,7 +619,7 @@ function gender(){
 
     svg.selectAll('.occs')
         .transition().duration(100).delay((d, i) => i * 2)
-        .attr('r', 5) //d => enrollmentSizeScale(d.Total) * .5
+        .attr('r', d => enrollmentSizeScale(d.Total) * .2) //d => enrollmentSizeScale(d.Total) * .5
         .attr('fill', d => categoryColorScale(d.Category))
         
     simulation
@@ -630,7 +639,7 @@ function race(){
 
     svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 2)
-        .attr('r', 5) //
+        .attr('r', d => enrollmentSizeScale(d.Total) * .2) //
         .attr('fill', d => categoryColorScale(d.Category))
         
     simulation  
