@@ -473,7 +473,7 @@ function draw9(){
     
 
     svg.selectAll('.lab-text')
-        .oattr('opacity',0)
+        .attr('opacity',0)
 
 
     // Stop force
