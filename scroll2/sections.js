@@ -772,7 +772,7 @@ function draw4(){
     simulation.stop()
 
     svg.selectAll('.occs')
-        .transition().duration(300).delay((d, i) => i * 2).ease(d3.easeBack)
+        .transition().duration(200).delay((d, i) => i * 1.2).ease(d3.easeBack)
             .attr('r', 5)
             .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
