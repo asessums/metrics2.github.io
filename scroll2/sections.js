@@ -390,14 +390,13 @@ function clean(chartType){
 
 function draw1(){
     //Stop simulation
-    simulation.stop()
+    
     
     let svg = d3.select("#vis")
                     .select('svg')
                     .attr('width', 1000)
                     .attr('height', 950)
     
-    clean('isFirst')
 
     d3.select('.categoryLegend').transition().remove()
 
