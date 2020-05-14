@@ -431,7 +431,21 @@ function draw2(){
 function draw3(){
     let svg = d3.select("#vis").select('svg')
     clean('isMultiples')
-    
+
+
+    d3.selectAll(".nodeCover")
+                    .transition().duration(3000).delay(500)
+                    .attr("r", 0);
+
+
+    d3.selectAll(".blurValues")
+                    .transition().duration(4000)
+                    .attrTween("values", function() { 
+                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
+                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
+                    });
+
+
     svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 5)
         .attr('r', d => salarySizeScale(d.Median) * 1.2)
@@ -492,7 +506,7 @@ function draw9(){
 
     d3.selectAll(".nodeCover")
                     .transition().duration(3000).delay(500)
-                    .attr("r", coverCirleRadius);
+                    .attr("r", 300);
 
 
 }
