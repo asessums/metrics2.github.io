@@ -425,8 +425,8 @@ function draw2(){
 
     simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
-        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]).strength(1))
-        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ).strength(1))
+        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]).strength(.5))
+        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
         .alphaDecay([0.02])
 
@@ -467,8 +467,8 @@ function draw3(){
 
     simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
-        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ).strength(1))
-        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]).strength(1))
+        .force('forceX', d3.forceX(d => categoriesXY[d.Category][0] ).strength(.5))
+        .force('forceY', d3.forceY(d => categoriesXY[d.Category][1]).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
         .alpha(0.7).alphaDecay(0.02).restart()
 
@@ -532,8 +532,8 @@ var virtual = svg.selectAll('.occs')
             return d;
         }
 }).transition().duration(1000).delay((d, i) => i * 10)
-    .force('forceX', d3.forceX(500).strength(1))
-    .force('forceY', d3.forceY(500).strength(1))
+    .force('forceX', d3.forceX(500).strength(.5))
+    .force('forceY', d3.forceY(500).strength(.5))
 
 
 var non_virtual = svg.selectAll('.occs')
@@ -545,8 +545,8 @@ var non_virtual = svg.selectAll('.occs')
         }
 }).transition().duration(1000).delay((d, i) => i * 10)
     .attr('opacity',0)
-    .force('forceX', d3.forceX(0).strength(1))
-    .force('forceY', d3.forceY(0).strength(1))
+    .force('forceX', d3.forceX(0).strength(.5))
+    .force('forceY', d3.forceY(0).strength(.5))
 
 }
 
@@ -682,8 +682,8 @@ function draw8(){
 
     simulation 
         .force('charge', d3.forceManyBody().strength([-6]))
-        .force('forceX', d3.forceX(500).strength(1))
-        .force('forceY', d3.forceY(500).strength(1))
+        .force('forceX', d3.forceX(500).strength(.5))
+        .force('forceY', d3.forceY(500).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) *.5 ))
         .alpha(0.6).alphaDecay(0.05).restart()
 
