@@ -404,7 +404,7 @@ function draw2(){
 
 
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
-        .text(d => `%${(categoriesXY[d][3])}%`)
+        .text(d => `${(categoriesXY[d][3])}%`)
         .style("text-anchor", "middle")
         .style("font-weight", "700")
         .style("font-size", "1.1em")
@@ -415,11 +415,11 @@ function draw2(){
     svg.selectAll('.lab-text')
         .on('mouseover', function(d, i){
             d3.select(this)
-                .text(d => `%${(categoriesXY[d][3])}%`)
+                .text(d => `${(categoriesXY[d][3])}%`)
         })
         .on('mouseout', function(d, i){
             d3.select(this)
-                .text(d => `%${(categoriesXY[d][3])}%`)
+                .text(d => `${(categoriesXY[d][3])}%`)
         })
 
     simulation  
@@ -448,7 +448,7 @@ function draw3(){
         .attr('fill', d => categoryColorScale(d.Category))
         
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
-        .text(d => `%${(categoriesXY[d][3])}%`)
+        .text(d => `${(categoriesXY[d][3])}%`)
         .style("text-anchor", "middle")
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1])
@@ -457,11 +457,11 @@ function draw3(){
     svg.selectAll('.lab-text')
         .on('mouseover', function(d, i){
             d3.select(this)
-                .text(d => `%${(categoriesXY[d][3])}%`)
+                .text(d => `${(categoriesXY[d][3])}%`)
         })
         .on('mouseout', function(d, i){
             d3.select(this)
-                .text(d => `%${(categoriesXY[d][3])}%`)
+                .text(d => `${(categoriesXY[d][3])}%`)
         })
 
     simulation  
