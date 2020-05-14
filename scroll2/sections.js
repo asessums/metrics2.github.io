@@ -404,7 +404,7 @@ function draw2(){
 
 
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
-        .text(function(d){return d})
+        .text(d => ${(categoriesXY[d][3])}%)
         .style("text-anchor", "middle")
         .attr('x', d => categoriesXY[d][0])   
         .attr('y', d => categoriesXY[d][1])
@@ -413,11 +413,11 @@ function draw2(){
     svg.selectAll('.lab-text')
         .on('mouseover', function(d, i){
             d3.select(this)
-                .text(function(d){return d})
+                .text(${(categoriesXY[d][3])}%)
         })
         .on('mouseout', function(d, i){
             d3.select(this)
-                .text(function(d){return d})
+                .text(${(categoriesXY[d][3])}%)
         })
 
     simulation  
