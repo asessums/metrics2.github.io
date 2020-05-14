@@ -331,8 +331,7 @@ function drawInitial(){
                     .text(d)
             })
 
-    svg.selectAll('.dash-line')
-        .append('line')
+    svg.append('line')
         .attr('class', 'dash-line')
         .style("stroke", "black")
         .style("stroke-dasharray", ("3, 3"))
