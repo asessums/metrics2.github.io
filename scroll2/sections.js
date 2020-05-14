@@ -259,16 +259,6 @@ function drawInitial(){
     
     //All the required components for the small multiples charts
     //Initialises the text and rectangles, and sets opacity to 0 
-    svg.selectAll('.cat-rect')
-        .data(categories).enter()
-        .append('rect')
-            .attr('class', 'cat-rect')
-            .attr('x', d => categoriesXY[d][0] + 120 + 1000)
-            .attr('y', d => categoriesXY[d][1] + 30)
-            .attr('width', 160)
-            .attr('height', 30)
-            .attr('opacity', 0)
-            .attr('fill', 'grey')
 
 
     svg.selectAll('.lab-text')
@@ -362,8 +352,6 @@ function clean(chartType){
     if (chartType !== "isMultiples"){
         svg.selectAll('.lab-text').transition().attr('opacity', 0)
             .attr('x', 1800)
-        svg.selectAll('.cat-rect').transition().attr('opacity', 0)
-            .attr('x', 1800)
     }
     if (chartType !== "isFirst"){
         svg.select('.first-axis').transition().attr('opacity', 0)
@@ -437,10 +425,6 @@ function draw3(){
         .transition().duration(400).delay((d, i) => i * 5)
         .attr('r', d => enrollmentSizeScale(d.Total) * .5)
         .attr('fill', d => categoryColorScale(d.Category))
-
-    svg.selectAll('.cat-rect').transition().duration(300).delay((d, i) => i * 30)
-        .attr('opacity', 0.2)
-        .attr('x', d => categoriesXY[d][0])
         
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
         .text(function(d){return d})
@@ -557,10 +541,6 @@ function draw5(){
             d3.select(this)
                 .text(d => `% Female: ${(categoriesXY[d][3])}%`)
         })
-   
-    svg.selectAll('.cat-rect').transition().duration(300).delay((d, i) => i * 30)
-        .attr('opacity', 0.2)
-        .attr('x', d => categoriesXY[d][0] + 120)
 
     svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 4)
