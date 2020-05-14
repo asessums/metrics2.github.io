@@ -35,8 +35,8 @@ d3.csv('data/occupations.csv', function(d){
         Category: d.Major_category,
         ShareWomen: +d.ShareWomen, 
         HistCol: +d.Histogram_column,
-        Midpoint: +d.midpoint
-        Gender: +d.gender
+        Midpoint: +d.midpoint,
+        Gender: +d.gender,
         Race: +d.race
     };
 }).then(data => {
