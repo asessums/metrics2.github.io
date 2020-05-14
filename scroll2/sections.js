@@ -524,7 +524,7 @@ svg.selectAll('.occs')
         { 
             return d;
         }
-}).attr('fill', '#000000')
+}).each(mouseover)
 
 
 }
