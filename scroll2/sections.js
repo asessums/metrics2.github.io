@@ -410,17 +410,10 @@ function draw2(){
     
     clean('none')
 
-    
-    d3.selectAll(".blurValues")
-                    .transition().duration(4000)
-                    .attrTween("values", function() { 
-                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
-                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
-                    });
 
 
     d3.selectAll(".nodeCover")
-                    .transition().duration(3000).delay(500)
+                    .transition().duration(200)
                     .attr("r", 0);
 
 
@@ -510,7 +503,12 @@ function draw9(){
                     .transition().duration(3000).delay(500)
                     .attr("r", 300);
 
-    
+    d3.selectAll(".blurValues")
+                    .transition().duration(4000)
+                    .attrTween("values", function() { 
+                        return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
+                                                    "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
+                    });
 
 }
 
