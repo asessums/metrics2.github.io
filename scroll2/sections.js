@@ -200,11 +200,12 @@ function drawInitial(){
                 .style("filter", "url(#gooeyCodeFilter)");
 
     nodes = nodeWrapper
-        .selectAll('circle')
+        .selectAll('.occs')
         .data(dataset)
         .enter()
         .append('circle')
             .attr('fill', 'black')
+            .attr("class", "occs")
             .attr('r', 3)
             .attr('cx', (d, i) => salaryXScale(d.Median) + 5)
             .attr('cy', (d, i) => i * 5.2 + 30)
@@ -221,7 +222,7 @@ function drawInitial(){
 
     // Add mouseover and mouseout events for all circles
     // Changes opacity and adds border
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .on('mouseover', mouseOver)
         .on('mouseout', mouseOut)
 
@@ -409,7 +410,7 @@ function draw2(){
     
     clean('none')
 
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 5)
         .attr('r', d => salarySizeScale(d.Median) * 1.2)
         .attr('fill', d => categoryColorScale(d.Category))
@@ -431,7 +432,7 @@ function draw3(){
     let svg = d3.select("#vis").select('svg')
     clean('isMultiples')
     
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 5)
         .attr('r', d => salarySizeScale(d.Median) * 1.2)
         .attr('fill', d => categoryColorScale(d.Category))
@@ -482,16 +483,12 @@ function draw9(){
                                                     "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -6"); 
                     });
 
-    svg.selectAll('circle')
-        .transition().duration(500).delay((d, i) => i * 5)
-        .attr('fill', '#1A818C')
-
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(2000).delay((d, i) => i * 10)
             .attr('r', 10)
             .attr('cx', 500)
             .attr('cy', 500)
-            
+            .attr('fill', '#1A818C')
 
     d3.selectAll(".cityCover")
                     .transition().duration(3000).delay(500)
@@ -532,7 +529,7 @@ function draw5(){
         .attr('opacity', 0.2)
         .attr('x', d => categoriesXY[d][0] + 120)
 
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 4)
             .attr('fill', colorByGender)
             .attr('r', d => salarySizeScale(d.Median))
@@ -558,12 +555,12 @@ function draw6(){
     svg.selectAll('.scatter-x').transition().attr('opacity', 0.7).selectAll('.domain').attr('opacity', 1)
     svg.selectAll('.scatter-y').transition().attr('opacity', 0.7).selectAll('.domain').attr('opacity', 1)
 
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(800).ease(d3.easeBack)
         .attr('cx', d => shareWomenXScale(d.ShareWomen))
         .attr('cy', d => salaryYScale(d.Median))
     
-    svg.selectAll('circle').transition(1600)
+    svg.selectAll('.occs').transition(1600)
         .attr('fill', colorByGender)
         .attr('r', 10)
 
@@ -583,7 +580,7 @@ function draw7(){
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 2))
         .alpha(0.8).alphaDecay(0.05).restart()
 
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 4)
         .attr('r', d => enrollmentSizeScale(d.Total))
         .attr('fill', d => categoryColorScale(d.Category))
@@ -600,7 +597,7 @@ function draw4(){
 
     simulation.stop()
 
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition().duration(600).delay((d, i) => i * 2).ease(d3.easeBack)
             .attr('r', 10)
             .attr('cx', d => histXScale(d.Midpoint))
@@ -621,7 +618,7 @@ function draw8(){
     clean('none')
 
     let svg = d3.select('#vis').select('svg')
-    svg.selectAll('circle')
+    svg.selectAll('.occs')
         .transition()
         .attr('r', d => salarySizeScale(d.Median) * 1.6)
         .attr('fill', d => categoryColorScale(d.Category))
