@@ -124,8 +124,8 @@ function createSizeLegend2(){
 // Each element should also have an associated class name for easy reference
 
 function drawInitial(){
-    createSizeLegend()
-    createSizeLegend2()
+    //createSizeLegend()
+    //createSizeLegend2()
 
     let svg = d3.select("#vis")
                     .append('svg')
@@ -402,6 +402,24 @@ function draw2(){
         .attr('r', d => enrollmentSizeScale(d.Total) * .5)
         .attr('fill', d => categoryColorScale(d.Category))
 
+
+    svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
+        .text(function(d){return d})
+        .style("text-anchor", "middle")
+        .attr('x', d => categoriesXY[d][0])   
+        .attr('y', d => categoriesXY[d][1])
+        .attr('opacity', 1)
+
+    svg.selectAll('.lab-text')
+        .on('mouseover', function(d, i){
+            d3.select(this)
+                .text(function(d){return d})
+        })
+        .on('mouseout', function(d, i){
+            d3.select(this)
+                .text(function(d){return d})
+        })
+
     simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
@@ -664,9 +682,9 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw3,
+    draw3, 
+    draw9,
     draw10, 
-    draw9, 
     draw4,
     draw5
 ]
