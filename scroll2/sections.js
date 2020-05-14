@@ -262,6 +262,27 @@ function drawInitial(){
     //Initialises the text and rectangles, and sets opacity to 0 
 
 
+    svg.selectAll('.cat-text')
+        .data(categories).enter()
+        .append('text')
+        .attr('class', 'cat-text')
+        .attr('opacity', 0)
+        .raise()
+
+    svg.selectAll('.cat-text')
+        .text(function(d){return d})
+        .style("text-anchor", "middle")
+        .attr('x', d => categoriesXY[d][0] + 200 + 1000)
+        .attr('y', d => categoriesXY[d][1] - 500)
+        .attr('font-family', 'Domine')
+        .attr('font-size', '12px')
+        .attr('font-weight', 700)
+        .attr('fill', 'black')
+        .attr('text-anchor', 'middle')
+
+
+
+
     svg.selectAll('.lab-text')
         .data(categories).enter()
         .append('text')
@@ -354,6 +375,9 @@ function clean(chartType){
     if (chartType !== "isMultiples"){
         svg.selectAll('.lab-text').transition().attr('opacity', 0)
             .attr('x', 1800)
+        svg.selectAll('.cat-text').transition().attr('opacity', 0)
+            .attr('x', 1800)
+
     }
     if (chartType !== "isFirst"){
         svg.select('.first-axis').transition().attr('opacity', 0)
@@ -402,6 +426,16 @@ function draw2(){
         .transition().duration(300).delay((d, i) => i * 5)
         .attr('r', d => enrollmentSizeScale(d.Total) * .5)
         .attr('fill', d => categoryColorScale(d.Category))
+
+
+    svg.selectAll('.cat-text').transition().duration(300).delay((d, i) => i * 30)
+        .text(function(d){return d})
+        .style("text-anchor", "middle")
+        .style("font-weight", "700")
+        .style("font-size", "1.1em")
+        .attr('x', d => categoriesXY[d][0])   
+        .attr('y', d => categoriesXY[d][1]+ 50)
+        .attr('opacity', 1)
 
 
     svg.selectAll('.lab-text').transition().duration(300).delay((d, i) => i * 30)
@@ -481,6 +515,9 @@ function draw9(){
     
 
     svg.selectAll('.lab-text')
+        .attr('opacity',0)
+
+    svg.selectAll('.cat-text')
         .attr('opacity',0)
 
 
