@@ -474,7 +474,7 @@ function draw9(){
                     });
 
     svg.selectAll('circle')
-        .duration(2000).delay(function(d,i) { return i*10; })
+        .duration(2000).delay((d, i) => i * 30)
             .attr('r', 10)
             .attr('cx', 500)
             .attr('cy', 500)
