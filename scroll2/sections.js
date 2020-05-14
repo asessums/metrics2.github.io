@@ -518,8 +518,12 @@ function draw10(){
 let svg = d3.select("#vis").select('svg')
 
 svg.selectAll('.occs')
-        .filter(function(d, i){ // i is the index
-    return d.Category === 'Job can be made virtual with institutional investments and planning';
+        .filter(function(d, i){
+
+            if(d.Category == 'Job can be made virtual with institutional investments and planning') || (d.Major == 'Health Educators')
+        { 
+            return d;
+        }
 }).attr('fill', '#000000')
 
 
