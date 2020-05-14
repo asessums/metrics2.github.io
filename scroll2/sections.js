@@ -484,7 +484,7 @@ function draw9(){
                     });
 
     svg.selectAll('.occs')
-        .transition().duration(2000).delay((d, i) => i * 10)
+        .transition().duration(1000).delay((d, i) => i * 10)
             .attr('r', 10)
             .attr('cx', 500)
             .attr('cy', 500)
