@@ -206,9 +206,6 @@ function drawInitial(){
         .append('circle')
             .attr('fill', 'white')
             .attr("class", "occs")
-            .attr('r', 0)
-            .attr('cx', 500)
-            .attr('cy', 500)
             .attr('opacity', 0)
     
     var coverCirleRadius = 40;
