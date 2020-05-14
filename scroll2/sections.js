@@ -819,6 +819,9 @@ function draw4(){
     svg.selectAll('.dash-line').transition().duration(300)
     .attr('opacity', 0)
 
+    svg.selectAll('.female-text').transition().duration(300)
+    .attr('opacity', 0)
+
     clean('isHist')
 
     simulation.stop()
