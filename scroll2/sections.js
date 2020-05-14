@@ -682,11 +682,11 @@ let activationFunctions = [
     draw1,
     draw8,
     draw2,
-    draw3, 
-    draw9,
-    draw10, 
-    draw4,
-    draw5
+    draw4, 
+    draw4, //9
+    draw4, //10
+    draw4, //1
+    draw4 //4
 ]
 
 //All the scrolling function
