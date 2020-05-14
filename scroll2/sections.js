@@ -209,7 +209,16 @@ function drawInitial(){
             .attr('cx', (d, i) => salaryXScale(d.Median) + 5)
             .attr('cy', (d, i) => i * 5.2 + 30)
             .attr('opacity', 0)
-        
+    
+    var coverCirleRadius = 40;
+            //Circle over all others
+            nodeWrapper.append("circle")
+                .attr("class", "nodeCover")
+                .attr("r", 0)
+                .attr("cx", 500)
+                .attr("cy", 500);
+
+
     // Add mouseover and mouseout events for all circles
     // Changes opacity and adds border
     svg.selectAll('circle')
@@ -474,11 +483,19 @@ function draw9(){
                     });
 
     svg.selectAll('circle')
-        .transition().duration(400).delay((d, i) => i * 5)
+        .transition().duration(500)
+        .attr('fill', '#1A818C')
+        .transition().duration(2000).delay((d, i) => i * 10)
             .attr('r', 10)
             .attr('cx', 500)
             .attr('cy', 500)
-            .attr('fill', '#000000')
+            
+
+    d3.selectAll(".cityCover")
+                    .transition().duration(3000).delay(500)
+                    .attr("r", coverCirleRadius);
+
+
 }
 
 function draw5(){
