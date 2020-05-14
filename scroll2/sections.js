@@ -247,6 +247,9 @@ function drawInitial(){
             .transition('mouseout').duration(100)
             .attr('opacity', 0.8)
             .attr('stroke-width', 0)
+
+        svg.selectAll('.occ')
+            .attr('stroke-width', 0)
     }
 
     //Small text label for first graph
