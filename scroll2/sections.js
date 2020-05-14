@@ -284,7 +284,7 @@ function drawInitial(){
         .raise()
 
     svg.selectAll('.lab-text')
-        .text(d => `Average: $${d3.format(",.2r")(categoriesXY[d][2])}`)
+        .text(d)
         .attr('x', d => categoriesXY[d][0] + 200 + 1000)
         .attr('y', d => categoriesXY[d][1] - 500)
         .attr('font-family', 'Domine')
@@ -300,7 +300,7 @@ function drawInitial(){
             })
             .on('mouseout', function(d, i){
                 d3.select(this)
-                    .text(d => `Average: $${d3.format(",.2r")(categoriesXY[d][2])}`)
+                    .text(d)
             })
 
 
