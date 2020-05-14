@@ -524,7 +524,8 @@ svg.selectAll('.occs')
         { 
             return d;
         }
-}).each(mouseover)
+}).append('text')
+        .text('d.Major')
 
 
 }
