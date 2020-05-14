@@ -44,7 +44,7 @@ d3.csv('data/occupations.csv', function(d){
     setTimeout(drawInitial(), 100)
 })
 
-const colors = ['#ffcc00', '#ff6666', '#cc0066', '#66cccc', '#f688bb', '#65587f', '#baf1a1', '#333333', '#75b79e',  '#66cccc', '#9de3d0', '#f1935c', '#0c7b93', '#eab0d9', '#baf1a1', '#9399ff']
+const colors = ['#64B3FF', '#002E5C', '#D9D9D9', '#A5A5A5']
 
 //Create all the scales and save to global variables
 
@@ -83,7 +83,7 @@ function createSizeLegend(){
         .attr('transform', `translate(100,50)`)
 
     sizeLegend2 = d3.legendSize()
-        .scale(salarySizeScale)
+        .scale(enrollmentSizeScale)
         .shape('circle')
         .shapePadding(15)
         .title('Salary Scale')
@@ -105,8 +105,8 @@ function createSizeLegend2(){
         .shape('circle')
         .shapePadding(55)
         .orient('horizontal')
-        .title('Scale 2')
-        .labels(['1000', '200000', '400000'])
+        .title('Total Employment')
+        .labels(['10000', '500000', '4000000'])
         .labelOffset(30)
         .cells(3)
 
@@ -125,7 +125,7 @@ function createSizeLegend2(){
 
 function drawInitial(){
     //createSizeLegend()
-    //createSizeLegend2()
+    createSizeLegend2()
 
     let svg = d3.select("#vis")
                     .append('svg')
