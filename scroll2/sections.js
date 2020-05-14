@@ -546,9 +546,22 @@ function gender(){
 
     svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
+
+    svg.selectAll('.dash-line')
+        .append('line')
+        .attr('class', 'dash-line')
+        .style("stroke", "black")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("x1", 500)
+        .attr("y1", 100)    
+        .attr("x2", 500)      
+        .attr("y2", 900) 
+        .attr('opacity', 1)
+
+
     svg.selectAll('.occs')
         .transition().duration(100).delay((d, i) => i * 5)
-        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
+        .attr('r', 10) //d => enrollmentSizeScale(d.Total) * .5
         .attr('fill', d => categoryColorScale(d.Category))
         
     simulation  
@@ -568,7 +581,7 @@ function race(){
 
     svg.selectAll('.occs')
         .transition().duration(400).delay((d, i) => i * 5)
-        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
+        .attr('r', 10) //
         .attr('fill', d => categoryColorScale(d.Category))
         
     simulation  
@@ -760,7 +773,7 @@ function draw4(){
 
     svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 2).ease(d3.easeBack)
-            .attr('r', 2)
+            .attr('r', 5)
             .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
             .attr('fill', d => categoryColorScale(d.Category))
