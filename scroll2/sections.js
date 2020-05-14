@@ -506,7 +506,7 @@ let svg = d3.select("#vis").select('svg')
 svg.selectAll('.occs')
         .filter(function(d, i){
 
-            if(d.Category == 'Job can be made virtual with institutional investments and planning' && d.Major == 'Health Educators')
+            if(d.Category == 'Job can be made virtual' && d.Major == 'Health Educators')
         { 
             return d;
         }
@@ -649,10 +649,11 @@ function draw8(){
         .attr('opacity', 1)
 
     simulation 
+        .force('charge', d3.forceManyBody().strength([-3]))
         .force('forceX', d3.forceX(500))
         .force('forceY', d3.forceY(500))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) *.5 ))
-        .alpha(0.6).alphaDecay(0.05).restart()
+        //.alpha(0.6).alphaDecay(0.05).restart()
 
     createLegend(20, 50)
         
