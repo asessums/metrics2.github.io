@@ -560,11 +560,12 @@ function gender(){
 
 
     svg.selectAll('.occs')
-        .transition().duration(100).delay((d, i) => i * 5)
-        .attr('r', 10) //d => enrollmentSizeScale(d.Total) * .5
+        .transition().duration(100).delay((d, i) => i * 2)
+        .attr('r', 5) //d => enrollmentSizeScale(d.Total) * .5
         .attr('fill', d => categoryColorScale(d.Category))
         
-    simulation  
+    simulation
+        .transition().duration(100).delay((d, i) => i * 2)  
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
         .force('forceY', d3.forceY(500).strength(.5))
@@ -580,8 +581,8 @@ function race(){
     svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
     svg.selectAll('.occs')
-        .transition().duration(400).delay((d, i) => i * 5)
-        .attr('r', 10) //
+        .transition().duration(400).delay((d, i) => i * 2)
+        .attr('r', 5) //
         .attr('fill', d => categoryColorScale(d.Category))
         
     simulation  
