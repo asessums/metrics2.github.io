@@ -103,7 +103,7 @@ svg.call(tool_tip);
 var projection = d3.geoMercator()
     .center([-123.3125, 44.9672431])         
     .scale(400)                       
-    .translate([ width/14, height/5 ])
+    .translate([ width/20 - 20, height/5 ])
 
 // Load external data and boot
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
@@ -474,20 +474,20 @@ var leftbox = d3.select(".item2")
        d3.select(".d3-tip").transition().duration(0).style("opacity", "0").each("end", tool_tip.hide);
      });
     
-svg.append("rect").attr("x",10).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#64B3FF')
-svg.append("rect").attr("x",80).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#002E5C')
-svg.append("rect").attr("x",250).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#D9D9D9')
-svg.append("rect").attr("x",400).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#A5A5A5')
-svg.append("text").attr("x", 25).attr("y", 306).text("Yes").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+svg.append("rect").attr("x",0).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#64B3FF')
+svg.append("rect").attr("x",70).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#002E5C')
+svg.append("rect").attr("x",240).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#D9D9D9')
+svg.append("rect").attr("x",390).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#A5A5A5')
+svg.append("text").attr("x", 15).attr("y", 306).text("Yes").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
                 .attr("font-family", "Open Sans")
             		.attr("font-weight", 400)
-svg.append("text").attr("x", 95).attr("y", 306).text("Yes, with investment").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+svg.append("text").attr("x", 85).attr("y", 306).text("Yes, with investment").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
                 .attr("font-family", "Open Sans")
             		.attr("font-weight", 400)
-svg.append("text").attr("x", 265).attr("y", 306).text("No, non-essential").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+svg.append("text").attr("x", 255).attr("y", 306).text("No, non-essential").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
                 .attr("font-family", "Open Sans")
             		.attr("font-weight", 400)
-svg.append("text").attr("x", 415).attr("y", 306).text("No, essential").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+svg.append("text").attr("x", 405).attr("y", 306).text("No, essential").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
                 .attr("font-family", "Open Sans")
             		.attr("font-weight", 400)
 
