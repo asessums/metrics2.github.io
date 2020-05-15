@@ -139,7 +139,7 @@ function drawInitial(){
 
     //SVG filter for the gooey effect
     //Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
-    var defs = svg.append("defs");
+    /* var defs = svg.append("defs");
     var filter = defs.append("filter").attr("id","gooeyCodeFilter");
     filter.append("feGaussianBlur")
         .attr("in","SourceGraphic")
@@ -156,7 +156,7 @@ function drawInitial(){
     filter.append("feBlend")
         .attr("in","SourceGraphic")
         .attr("in2","gooey")
-        .attr("operator","atop");                
+        .attr("operator","atop");*/                
 
 
 
