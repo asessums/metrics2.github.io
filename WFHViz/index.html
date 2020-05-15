@@ -102,8 +102,8 @@ svg.call(tool_tip);
 // Map and projection
 var projection = d3.geoMercator()
     .center([-123.3125, 44.9672431])         
-    .scale(600)                       
-    .translate([ width/20, height/3.44 ])
+    .scale(400)                       
+    .translate([ width/5, height/5 ])
 
 // Load external data and boot
 d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
@@ -174,10 +174,14 @@ if (error) throw error;
         
         
         left.style("opacity", "0");
-         right.style("opacity", "1");
+         right.style("opacity", "0")
+         .style("cursor", "default");
+        
         
          newdata = [d]
-      newdata.columns = ["name", "virtual", "investments", "cannot_essential", "cannot_nonessential","automated"]
+      newdata.columns = ["name", "virtual", "investments", "cannot_nonessential", "cannot_essential"]
+      
+ 
       
  				d3.select(".pagetwo").remove()
         d3.select(".title2").remove()
@@ -199,14 +203,14 @@ if (error) throw error;
       		
       
         	var z = d3.scale.ordinal()
-            .range(["#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+            .range(['#64B3FF', '#002E5C', '#D9D9D9', '#A5A5A5'].reverse());
       
           y.domain(newdata.map(function (d) {return d.name;}));
           
-      		z.domain(newdata.columns.slice(1));
+      		z.domain(newdata.columns.slice(1).reverse());
           
             
-      
+    console.log(newdata)
     newdata.forEach(function(d) {
     var y0 = 0;
     d.wfh = z.domain().map(function(name) { 
@@ -221,10 +225,11 @@ if (error) throw error;
       
 
       			keys = newdata[0].wfh
+            
     
       
             var serie = gWFH.selectAll(".serie")
-                .data(keys)
+                .data(keys.reverse())
                 .enter().append("g")
                 .attr("class", "serie")
                 .attr("fill", function (d) {return z(d.key);});
@@ -265,6 +270,9 @@ if (error) throw error;
    
    
    var rightbox = d3.select(".item4")
+   .style('opacity',0)
+   .style("cursor", "default");
+   
    			
    rightbox
      .datum(d)
@@ -466,7 +474,22 @@ var leftbox = d3.select(".item2")
        d3.select(".d3-tip").transition().duration(0).style("opacity", "0").each("end", tool_tip.hide);
      });
     
-    
+svg.append("rect").attr("x",110).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#64B3FF')
+svg.append("rect").attr("x",180).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#002E5C')
+svg.append("rect").attr("x",350).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#D9D9D9')
+svg.append("rect").attr("x",500).attr("y",300).attr("width", 10).attr("height", 10).style("fill", '#A5A5A5')
+svg.append("text").attr("x", 125).attr("y", 306).text("Yes").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+                .attr("font-family", "Open Sans")
+            		.attr("font-weight", 400)
+svg.append("text").attr("x", 195).attr("y", 306).text("Yes, with investment").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+                .attr("font-family", "Open Sans")
+            		.attr("font-weight", 400)
+svg.append("text").attr("x", 365).attr("y", 306).text("No, non-essential").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+                .attr("font-family", "Open Sans")
+            		.attr("font-weight", 400)
+svg.append("text").attr("x", 515).attr("y", 306).text("No, essential").style("font-size", "15px").attr("alignment-baseline","middle").attr("fill", "#000000")
+                .attr("font-family", "Open Sans")
+            		.attr("font-weight", 400)
 
 
 </script>
