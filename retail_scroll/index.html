@@ -18,7 +18,6 @@
 <link rel="stylesheet" id="font-awesome" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/css/font-awesome.css" type="text/css" media="all">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/topojson.v1.min.js"></script>
 <script src="https://d3js.org/d3-tile.v0.0.min.js"></script>
 <script src="jquery-3.5.1.min.js"></script>
@@ -528,6 +527,7 @@ d3.graphScroll()
 </footer>
 </body>
 <script src="d3v4+jetpack.js"></script>
+<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
 <script src="graph-scroll.js"></script>
 <script>
 
@@ -551,12 +551,12 @@ function render(){
     .append('svg')
       .attrs({width: width, height: height})
 
-    tau = 2 * Math.PI;
+  tau = 2 * Math.PI;
 
-  /*var circle = svg.append('circle')
-      .attrs({cx: 0, cy: 0, r: r}) */
+  var circle = svg.append('circle')
+      .attrs({cx: 0, cy: 0, r: r})
 
-  /*svg.append('text')
+  svg.append('text')
         .text("Hello")
         .attr('class','test')
         .attr('text-anchor', 'middle')
@@ -614,10 +614,9 @@ function render(){
         steptwo,
         stepthree,
         stepfour]
-  */
 
   var colors = ['orange', 'purple', 'steelblue', 'pink', 'black']
-  /*
+  
   var gs = d3.graphScroll()
       .container(d3.select('.container-1'))
       .graph(d3.selectAll('container-1 #graph'))
@@ -626,17 +625,17 @@ function render(){
       // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
       .on('active', function(i){
 
-        */
+        
         /*circle.transition().duration(1000)
             .attrs(pos)
           .transition()
             .style('fill', colors[i])*/
 
-        /*functions[i]()    
+        functions[i]()    
       })
-*/
 
-d3.queue()
+
+/*d3.queue()
                 .defer(d3.json, "gemeenten2017.topojson")
                 .defer(d3.json, "aardbevingen_NL.geojson")
                 .await(ready);
@@ -680,7 +679,7 @@ d3.queue()
                     .attr("class",function(d) {
                         return d.properties.TYPE == "ind" ? "quakes induced" : "quakes tectonic";
                     });
-            }
+            } */
 
 
 
