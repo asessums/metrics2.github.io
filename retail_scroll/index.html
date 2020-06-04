@@ -565,6 +565,8 @@ function render(){
     interactive: false,
     attributionControl: false
   });
+
+  console.log(map)
   
    function project(d) {
         return map.project(new mapboxgl.LngLat(d[0], d[1]));
@@ -646,6 +648,7 @@ if (error) throw error;
                     {cx: width/2,   cy: height/2} ]
 
   function stepone(){
+    map.flyTo({center: [-73.928148, 40.782896], zoom:11});
       /*d3.select('.test')
         .attr('opacity',0)
 
@@ -656,6 +659,8 @@ if (error) throw error;
     }
 
   function steptwo(){
+    map.flyTo({center: [-73.888122, 40.748345], zoom:13});
+
       /*circle.transition().duration(1000)
           .attrs({cx: r,         cy: r})
         .transition()
