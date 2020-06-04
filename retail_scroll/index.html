@@ -18,13 +18,9 @@
 <link rel="stylesheet" id="font-awesome" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/css/font-awesome.css" type="text/css" media="all">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<script src="https://d3js.org/topojson.v1.min.js"></script>
-<script src="https://d3js.org/d3-tile.v0.0.min.js"></script>
-<script src="jquery-3.5.1.min.js"></script>
 
 
 
-<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
 <link
       href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
       rel="stylesheet"
@@ -539,6 +535,7 @@ d3.graphScroll()
 </body>
 <script src="d3v4+jetpack.js"></script>
 <script src="graph-scroll.js"></script>
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
 <script>
 
 var oldWidth = 0
@@ -561,7 +558,7 @@ function render(){
 
 
   var map = new mapboxgl.Map({
-    container: "graph",
+    container: 'graph',
     style: "mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk",
     center: [-74.5, 40.0],
     zoom: 1,
@@ -582,20 +579,6 @@ function render(){
         .style("position", "absolute")
         .style("z-index", 2);
  
-
-  // Render method redraws circles
-      function render() {
-        circles
-          .attr("cx", function(d){ return project([d.long, d.lat]).x })
-          .attr("cy", function(d){ return project([d.long, d.lat]).y });
-      }
-
-      // Call render method, and whenever map changes
-      render();
-      map.on("viewreset", render);
-      map.on("move", render);
-      map.on("moveend", render);
-
 
   var circle = svg.append('circle')
       .attrs({cx: 0, cy: 0, r: r})
