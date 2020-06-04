@@ -522,11 +522,11 @@ if (error) throw error;
       .data(rows)
       .enter()
       .append("circle")
-        .attr("r", 3)
+        .attr("r", 2)
         .attr("class", "circle")
         .style("fill", "003E7A")
         .attr("stroke", "#003E7A")
-        .attr("stroke-width", 3)
+        .attr("stroke-width", 1)
         .attr("fill-opacity", .4)
   
  
@@ -579,7 +579,7 @@ if (error) throw error;
     }
 
   function steptwo(){
-    map.flyTo({center: [-73.888122, 40.748345], zoom:13});
+    map.flyTo({center: [-73.888122, 40.748345], zoom:14});
 
       /*circle.transition().duration(1000)
           .attrs({cx: r,         cy: r})
@@ -593,8 +593,8 @@ if (error) throw error;
     }
 
   function stepthree(){
-    svg
-      .selectAll("myCircles")
+    d3
+      .selectAll(".circle")
       .transition().duration(1000)
       .attr("fill","#e8133a")
       .attr("stroke-width", 0)
