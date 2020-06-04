@@ -593,6 +593,10 @@ if (error) throw error;
     }
 
   function stepthree(){
+    circles.transition().duration(1000)
+      .attr("fill","#e8133a")
+      .attr("stroke-width", 0)
+
       /*circle.transition().duration(1000)
           .attrs({cx: width - r, cy: height - r})
         .transition()
