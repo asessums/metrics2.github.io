@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<link rel="icon" type="image/x-icon" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/img/favicon.ico">
+<link rel="icon" type="image/png" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/img/favicon-16x16.png" sizes="16x16">
+<script src="https://www.hraadvisors.com/wp-includes/js/wp-emoji-release.min.js?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/javascript" defer=""></script>
+<link rel="stylesheet" id="dashicons-css" href="https://www.hraadvisors.com/wp-includes/css/dashicons.min.css?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="https://www.hraadvisors.com/wp-includes/css/dist/block-library/style.min.css?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css" href="https://www.hraadvisors.com/wp-content/themes/madeo/_include/css/bootstrap.min.css?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+
+<link rel="stylesheet" id="main-styles-css" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/style.css?ver=1.10.10" type="text/css" media="all">
+    <link rel="stylesheet" id="custom-css" href="https://www.hraadvisors.com/wp-content/themes/madeo/_include/css/custom.css.php?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+    <link rel="stylesheet" id="dynamic-colors-css" href="https://www.hraadvisors.com/wp-content/themes/madeo/_include/css/color.css.php?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/css/font-awesome.css" type="text/css" media="all">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+ <script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://d3js.org/d3-tile.v0.0.min.js"></script>
+<script src="jquery-3.5.1.min.js"></script>
+<style>
+
+@font-face {
+  font-family: GothamLight;
+  src: url(/Users/ClyneKP/Documents/GitHub/graph-scroll-gh-pages/Gotham-Light.otf);
+} 
+
+  @font-face {
+  font-family: GothamBook;
+  src: url(Gotham-Book.otf);}
+
+  @font-face {
+  font-family: GothamMedium;
+  src: url(/Users/ClyneKP/Documents/GitHub/graph-scroll-gh-pages/Gotham-Medium.otf);
+}
+
+
+
+
+    .title{
+    color: #2d2d35;
+    font-family: GothamMedium;
+    text-align: center;
+    pointer-events: all;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    margin: auto;
+    width: 80%;
+    font-size: 1.8em;
+    line-height: 1.2em;
+    opacity: 1;
+    justify-content: center
+    }
+
+    .timestamp{
+      user-select: none;
+    pointer-events: all;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    color: #626262;
+    text-align: center;
+    width: auto;
+    font-family: GothamLight;
+    margin: 10px auto;
+    font-size: 12px;
+    opacity: 1;
+    justify-content: center
+    }
+
+    .bodywrapper{
+     padding-left:10%;
+     padding-right:10%;
+    }
+
+body{
+  margin: 0px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1{
+  margin: 50px;
+}
+
+h1{
+  text-align: center;
+}
+
+
+#container{
+  position: relative;
+}
+
+#sections{
+  width: 340px;
+}
+
+#sections > div{
+  background: white;
+  opacity: .2;
+  margin-bottom: 200px;
+}
+#sections > div:last-child{
+  margin-bottom: 30px;
+}
+#sections > div.graph-scroll-active{
+  opacity: 1;
+}
+
+#graph{
+  margin-left: 40px;
+  width: 500px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+}
+
+@media (max-width: 925px)  {
+  #graph{
+    width: 100%;
+    margin-left: 0px;
+    float: none;
+  }
+
+  #sections{
+    width: auto;
+    position: relative;
+    margin: 0px auto;
+  }
+
+  #sections > div{
+    background: rgba(255,255,255,.5);
+    padding: 10px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 80vh;
+  }
+
+  pre{
+    overflow: hidden;
+  }
+
+  h1{
+    margin: 10px;
+  }
+}
+
+
+circle{
+  fill: steelblue;
+}
+
+.mono{
+  font-family: monospace;
+}
+
+svg{
+  background-color: #eee;
+}
+
+</style>
+<body class="home page-template page-template-homepage page-template-homepage-php page page-id-5319 chrome page-homepage az wpb-js-composer js-comp-ver-3.6.2 vc_responsive is-device" data-gr-c-s-loaded="true" style="zoom: 1;">
+<div id="bg-blue">
+  <header class="normal-header">
+
+  <div class="container">
+      <div class="row hidden-xs hidden-sm visible-md-block visible-lg-block">
+            
+    <div class="col-md-2 col-sm-3 col-xs-6">
+    <div id="logo">
+      <a href="https://www.hraadvisors.com" title="HR&amp;A">
+                              <img class="standard" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo.png" alt="HR&amp;A" width="89" height="41">
+            <img class="retina" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A" width="89" height="41">
+                        </a>
+    </div>
+    </div>
+            
+        <div class="col-md-10 col-sm-9 col-xs-6" style="font-size: 1em;
+    line-height: 1.750em;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;">
+            <!-- Mobile Menu -->
+            <a id="mobile-nav" class="menu-nav" href="#menu-nav"><span class="menu-icon"></span></a>
+            <a id="search-button" class="search-toggle" href="#"><i class="fa fa-search fa-1"></i></a>
+            <!-- Standard Menu -->
+            <div id="menu" class="ajax-menu">
+                <ul id="menu-nav" class="superfish">
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5457"><a href="https://www.hraadvisors.com/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8714"><a href="https://www.hraadvisors.com/team/">Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9885"><a href="https://www.hraadvisors.com/practice-areas/">Practice Areas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5354"><a href="https://www.hraadvisors.com/services/">Services</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5404"><a href="https://www.hraadvisors.com/portfolio/">Portfolio</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5419"><a href="https://www.hraadvisors.com/news/">News</a></li>
+  
+                <div id="marker" style="left: 838.969px; width: 63px; display: block;"></div>
+                </ul>
+            </div>
+        </div>
+      
+        </div>
+        
+            
+        <div class="row hidden-md hidden-lg visible-xs-block visible-sm-block">
+            
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <!-- Mobile Menu -->
+                <a id="mobile-nav" class="menu-trigger menu-nav" href="#"><span class="menu-icon"></span></a>
+                
+            </div>
+            
+            <div class="col-md-8 col-sm-8 col-xs-8 text-center">
+    <div id="logo">
+      <a href="https://www.hraadvisors.com" title="HR&amp;A">
+                              <img class="standard" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo.png" alt="HR&amp;A" width="89" height="41">
+            <img class="retina" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A" width="89" height="41">
+                        </a>
+    </div>
+            </div>
+            
+            <div class="col-md-2 col-sm-2 col-xs-2 text-right">
+                <!-- Search Icon -->
+                <script src="https://kit.fontawesome.com/7a4305c6cb.js" crossorigin="anonymous"></script>
+                <a id="search-button" class="search-toggle" href="#"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+            </div>
+</header>
+</div>
+
+<div class="bodywrapper">
+<div class="title" style="opacity: 1;">HR&A Advisors / LiveXYZ Collab</div>
+<div class="timestamp" style="opacity: 1;">By <a target="_blank" href="https://twitter.com/clynekp" alt="@eroston">XXXXXX</a> , <a target="_blank" href="https://twitter.com/clynekp" alt="@eroston">XXXXX</a> , and <a target="_blank" href="https://twitter.com/clynekp" alt="@eroston">XXXXX</a>  | June 4, 2020</div>
+<br>
+<br>
+<br>
+
+<div id='container' class='container-1'>
+  <div id='graph'></div>
+  <div id='sections'>
+    <div>
+      <h3>Connect text and graphics</h3>
+      <span class='mono'>graph-scroll</span> 
+      takes a selection of explanatory text sections and dispatches <span class='mono'>active</span> events as different sections are scrolled into to view. These active events are used to update a graph's state.
+      <pre>
+d3.graphScroll()
+  .sections(d3.selectAll('#sections > div'))
+  .on('active', function(i){
+    console.log(i + 'th section active') })
+      </pre>
+
+    </div>
+
+    <div>
+      <h3>Highlight active text</h3>
+      The top most text section scrolled into view is classed <span class='mono'>graph-scroll-active</span>. This makes it easy to highlight the active section with css: 
+<pre>
+#sections > div{
+  opacity: .3
+} 
+
+#sections div.graph-scroll-active{
+  opacity: 1;
+}
+</pre>
+    </div>
+
+
+    <div>
+      <h3>Headers and footers</h3>
+      To support headers and intro images/text, the explanatory text and graphic are wrapped with a container element:    
+<pre>
+&lt;h1&gt;Page Title&lt;/div&gt;
+&lt;div id='container'&gt;
+  &lt;div id='graph'&gt;&lt;/div&gt;
+  &lt;div id='sections'&gt;
+    &lt;div&gt;Section 0&lt;/div&gt;
+    &lt;div&gt;Section 1&lt;/div&gt;
+    &lt;div&gt;Section 2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h1&gt;Footer&lt;/h1&gt;
+</pre>
+
+    and passed to <span class='mono'>graphScroll</span>
+
+<pre>
+d3.graphScroll()
+  .graph(d3.select('#graph'))
+  .container(d3.select('#container'))
+<pre>
+    </div>
+
+    <div>
+      <h3>Sticky graph</h3>
+      When the graph starts to scroll out of view, <span class='mono'>postiion: sticky</span> keeps the graph element stuck to the top of the page while the text scrolls by.
+<pre>
+#container{
+  position: relative;
+}
+
+#sections{
+  width: 340px;
+}
+
+#graph{
+  margin-left: 40px;
+  width: 500px;
+  position: sticky;
+  top: 0px;
+  float: right;
+}
+</pre>
+    </div>
+
+  </div>
+
+</div>
+
+<h1>
+  Multiple graphs work too!
+</h1>
+
+<div id='container' class='container-2'>
+  <div id='graph'></div>
+
+  <div id='sections'>
+    <div>
+      <h3>Mobile</h3>
+
+      On mobile centering the graph and sections while adding a some padding for the first slide is a good option: 
+<pre>
+@media (max-width: 925px)  {
+  #graph{
+    width: 100%;
+    transform: translate(-50%, 0);
+    margin-left: 50%;
+  }
+
+  #sections{
+    position: relative;
+    margin: 0px auto;
+    padding-top: 400px;
+  }
+}
+</pre>
+    </div>
+
+    <div>
+      <h3>Examples</h3>
+      <p><a href='http://www.bloomberg.com/graphics/2015-auto-sales/'>Auto Sales</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/2015-measles-outbreaks/'>Measles</a></p>
+      <p><a href='http://roadtolarissa.com/blog/2015/01/04/coloring-maps-with-d3/'>Coloring Maps</a></p>
+      <!--<p><a href='http://www.bloomberg.com/graphics/2015-fifa-scandal/'>FIFA Scandal</a></p>-->
+      <p><a href='http://www.bloomberg.com/graphics/2015-whats-warming-the-world/'>Global Warming</a></p>
+      <p><a href='http://www.bloomberg.com/politics/graphics/2015-hillary-womens-movement-timeline/'>Hillary Clinton’s Debt to Feminism
+</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/year-ahead-2016/'>The Year Ahead</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/2015-pace-of-social-change/'>Pace of Social Change</a></p>
+      <p><a href='http://www.bloomberg.com/graphics/2015-red-meat-cancer/'>Red Meat</a></p>
+    </div>
+
+    <div>
+      <h3>More reading</h3>
+      <p><a href='http://bost.ocks.org/mike/scroll/'>How To Scroll</a></p>
+      <p><a href='http://vallandingham.me/scroller.html/'>So You Want to Build A Scroller</a></p>
+      <p><a href='https://source.opennews.org/en-US/articles/behind-scenes-fewer-helmets-more-deaths/'>Making “Fewer Helmets, More Deaths”</a></p>
+      <p><a href='http://www.nytimes.com/interactive/2015/10/27/world/greenland-is-melting-away.html'>Greenland Is Melting Away</a></p>
+      <p><a href='http://www.theguardian.com/us-news/ng-interactive/2015/oct/19/homan-square-chicago-police-detainees'>Homan Square</a></p>
+   </div>
+
+    <div>
+      <h3>Todos</h3>
+      <p>- Simple examples
+      <p>- Self explanatory graphics
+      <p>- Swiper 
+    </div>
+  </div>
+
+
+</div>
+<br>
+<br>
+<br>
+</div>
+<footer>
+
+<!-- Start Footer Credits -->
+<section id="footer-content">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-12 locations">
+                <div class="col-md-6 col-xs-12 col-sm-6 hidden-lg hidden-md hidden-sm hidden-xs social-links-mobile">
+                    <div class="inner-content">
+                        <div class="social-links">
+                                    <li id="menu-item-7109" class="fa fa-linkedin menu-item menu-item-type-custom menu-item-object-custom menu-item-7109"><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/82288">LinkedIn</a></li>
+<li id="menu-item-7110" class="fa fa-twitter menu-item menu-item-type-custom menu-item-object-custom menu-item-7110"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/hraadvisors">Twitter</a></li>
+<li id="menu-item-7111" class="fa fa-facebook menu-item menu-item-type-custom menu-item-object-custom menu-item-7111"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hraadvisors/">Facebook</a></li>
+<li id="menu-item-7112" class="fa fa-slideshare menu-item menu-item-type-custom menu-item-object-custom menu-item-7112"><a target="_blank" rel="noopener noreferrer" href="http://www.slideshare.net/HRAadvisors">Slide Share</a></li>
+                        </div>
+                        
+                        
+                    </div>
+                </div>  
+                
+                
+                
+                               
+            </div>
+            
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                                        <div class="inner-content" id="footer-logo">
+                        <a href="https://www.hraadvisors.com" title="HR&amp;A">
+                        <!--<img src="http://hraadvisors.pairserver.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A" >-->
+                                                                    <img src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A">
+                                        </a>
+                    </div>
+            </div>
+                    <!--col-md-offset-4-->
+            <div class="col-md-8">
+            <!-- footer sign up form  -->
+            <div class="col-md-12 subscribe-done" style="display: none;">
+                <h3>Thanks for signing up for our email list. Look out for our insights and updates in your inbox!</h3>
+            </div>    
+            <div class="form-div-container">    
+                <div class="col-md-12 intro-form-desc">
+                    <p>Stay up to date with our insights on the future of city building</p>
+                </div>
+                <div class="col-md-12">
+                    <div class="footer-form">
+                        <div class="row">
+                        <!-- Mailchimp singup form -->
+                        <div id="mc_embed_signup">
+                        <form action="https://hraadvisors.us9.list-manage.com/subscribe/post-json?u=569e6215860c116586a158d8f&amp;id=0f2eb5bc7f&amp;c=?" method="post" class="signup-email-form" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" novalidate="novalidate">
+                        <!-- <div class="indicates-required"><span class="asterisk"></span> indicates required</div> -->
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            
+                                <!-- <label for="mce-FNAME">First Name </label> -->
+                                <input type="text" value="" name="FNAME" required="" class="form-control footer-input" id="mce-FNAME" placeholder="First Name" aria-required="true">
+                           
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            
+                                <!-- <label for="mce-LNAME">Last Name </label> -->
+                                <input type="text" value="" name="LNAME" required="" class="form-control footer-input" id="mce-LNAME" placeholder="Last Name" aria-required="true">
+                            
+                        </div>
+
+                        <div class="col-md-5 col-sm-5 col-xs-10">
+                            
+                                <!-- <label for="mce-EMAIL">Email Address <span class="asterisk"></span>
+                                </label> -->
+                                <input type="email" value="" name="EMAIL" required="" class="required email form-control footer-input" id="mce-EMAIL" placeholder="Email Address" aria-required="true">
+                            
+                        </div>
+                        
+                        
+                        <div id="mce-responses" class="clear">
+                        <div class="response" id="mce-error-response" style="display:none"></div>
+                        <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_569e6215860c116586a158d8f_0f2eb5bc7f" tabindex="-1" value=""></div>
+                        
+                        <div class="col-md-1 col-sm-1 col-xs-2 submit-col">
+                        <!-- <input type="submit" value="Subscribe" name="subscribe" class="submit-btn" id="mc-embedded-subscribe" class="button"> -->
+                            <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button submit-btn"><i class="fa fa-angle-right"></i></button>
+                        </div>
+
+                        <div class="col-md-12" id="subscribe-result"></div>
+                        </form>
+
+                        </div>
+                        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='text';fnames[4]='MMERGE4';ftypes[4]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                        <!-- Mailchimp signup form end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- end of sign up form  -->
+
+                <div class="col-md-6">
+                    <div class="inner-content">
+                        <ul class="footer-menu">
+                            <li id="menu-item-6124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6124"><a href="https://www.hraadvisors.com/about/">About</a></li>
+<li id="menu-item-8715" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8715"><a href="https://www.hraadvisors.com/contact/">Contact</a></li>
+<li id="menu-item-6125" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6125"><a href="https://www.hraadvisors.com/clients/">Clients</a></li>
+<li id="menu-item-6126" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6126"><a href="https://www.hraadvisors.com/portfolio/">Portfolio</a></li>
+<li id="menu-item-4169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4169"><a href="https://www.hraadvisors.com/about/awards-and-recognition/">Awards</a></li>
+<li id="menu-item-6127" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6127"><a href="https://www.hraadvisors.com/news/">News</a></li>
+<li id="menu-item-8557" class="no-ajaxy menu-item menu-item-type-post_type menu-item-object-page menu-item-8557"><a href="https://www.hraadvisors.com/career-opportunities/">Careers</a></li>
+<li id="menu-item-5625" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5625"><a href="https://www.hraadvisors.com/services/">Services</a></li>
+<li id="menu-item-7929" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7929"><a href="https://www.hraadvisors.com/privacy-policy/">Privacy Policy</a></li>
+    
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="inner-content">
+                        <div class="social-links visible-sm-block visible-md-block visible-lg-block visible-md-block">
+                                        <li class="fa fa-linkedin menu-item menu-item-type-custom menu-item-object-custom menu-item-7109"><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/82288">LinkedIn</a></li>
+<li class="fa fa-twitter menu-item menu-item-type-custom menu-item-object-custom menu-item-7110"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/hraadvisors">Twitter</a></li>
+<li class="fa fa-facebook menu-item menu-item-type-custom menu-item-object-custom menu-item-7111"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hraadvisors/">Facebook</a></li>
+<li class="fa fa-slideshare menu-item menu-item-type-custom menu-item-object-custom menu-item-7112"><a target="_blank" rel="noopener noreferrer" href="http://www.slideshare.net/HRAadvisors">Slide Share</a></li>
+                        </div>
+                        <ul>
+                                        <li>New York</li><li>Los Angeles</li><li>Washington, DC</li><li>Dallas</li><li>Raleigh</li>                                        
+                            
+                        </ul>
+                        <p class="copyright">© 2020 HR&amp;A Advisors. All Rights Reserved</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!-- Start Footer Credits -->
+
+</footer>
+</body>
+<script src="d3v4+jetpack.js"></script>
+<script src="graph-scroll.js"></script>
+<script>
+
+var oldWidth = 0
+function render(){
+  if (oldWidth == innerWidth) return
+  oldWidth = innerWidth
+
+  var width = height = d3.select('#graph').node().offsetWidth
+  var r = 40
+
+
+  if (innerWidth <= 925){
+    width = innerWidth
+    height = innerHeight*.7
+  }
+
+  // return console.log(width, height)
+
+  var svg = d3.select('#graph').html('')
+    .append('svg')
+      .attrs({width: width, height: height})
+
+    tau = 2 * Math.PI;
+
+  /*var circle = svg.append('circle')
+      .attrs({cx: 0, cy: 0, r: r}) */
+
+  /*svg.append('text')
+        .text("Hello")
+        .attr('class','test')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline','middle')
+        .attr('x',r)
+        .attr('y',r)
+        .attr('opacity',0)
+
+  var pos = [ {cx: width - r, cy: r},
+                    {cx: r,         cy: r},
+                    {cx: width - r, cy: height - r},
+                    {cx: width/2,   cy: height/2} ]
+
+  function stepone(){
+      d3.select('.test')
+        .attr('opacity',0)
+
+      circle.transition().duration(1000)
+          .attrs({cx: width - r, cy: r})
+        .transition()
+          .style('fill', 'orange')
+    }
+
+  function steptwo(){
+      circle.transition().duration(1000)
+          .attrs({cx: r,         cy: r})
+        .transition()
+          .style('fill', 'purple')
+
+      d3.select('.test')
+        .transition().duration(1000)
+        .transition()
+        .attr('opacity',1)
+    }
+
+  function stepthree(){
+      circle.transition().duration(1000)
+          .attrs({cx: width - r, cy: height - r})
+        .transition()
+          .style('fill', 'steelblue')
+
+      d3.select('.test')
+        .attr('opacity',0)
+    }
+
+    function stepfour(){
+      circle.transition().duration(1000)
+          .attrs({cx: width/2,   cy: height/2})
+        .transition()
+          .style('fill', 'pink')
+    }
+
+    let functions = [
+        stepone,
+        steptwo,
+        stepthree,
+        stepfour]
+  */
+
+  var colors = ['orange', 'purple', 'steelblue', 'pink', 'black']
+  /*
+  var gs = d3.graphScroll()
+      .container(d3.select('.container-1'))
+      .graph(d3.selectAll('container-1 #graph'))
+      .eventId('uniqueId1')  // namespace for scroll and resize events
+      .sections(d3.selectAll('.container-1 #sections > div'))
+      // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+      .on('active', function(i){
+
+        */
+        /*circle.transition().duration(1000)
+            .attrs(pos)
+          .transition()
+            .style('fill', colors[i])*/
+
+        /*functions[i]()    
+      })
+*/
+
+d3.queue()
+                .defer(d3.json, "gemeenten2017.topojson")
+                .defer(d3.json, "aardbevingen_NL.geojson")
+                .await(ready);
+            function ready(error, municipalities,earthquakes){
+                if (error) throw error;
+                let gemeenten = topojson.feature(municipalities, municipalities.objects.municipalities);
+                earthquakes.features.sort(function(a, b) { return b.properties.MAG - a.properties.MAG; });
+                let projection = d3.geoMercator()
+                    .fitSize([width, height], gemeenten);
+                let path = d3.geoPath()
+                    .projection(projection);
+                let tiles = d3.tile()
+                      .size([width, height])
+                      .scale(projection.scale() * tau)
+                      .translate(projection([0, 0]))
+                      ();
+                svg.selectAll("image")
+                    .data(tiles)
+                    .enter().append("image")
+                    .attr("xlink:href", function(d) { return "https://geodata.nationaalgeoregister.nl/tiles/service/wmts/brtachtergrondkaartgrijs/EPSG:3857/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"; })
+                    .attr("x", function(d) { return (d[0] + tiles.translate[0]) * tiles.scale; })
+                    .attr("y", function(d) { return (d[1] + tiles.translate[1]) * tiles.scale; })
+                    .attr("width", tiles.scale)
+                    .attr("height", tiles.scale);
+                svg.append("g")
+                    .selectAll("path")
+                    .data(gemeenten.features)
+                    .enter()
+                    .append("path")
+                    .attr("class","gemeente")
+                    .attr("d", path)
+                    .append("title")
+                    .text(function(d) { return d.properties.name});
+                svg.selectAll(".quakes")
+                    .data(earthquakes.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", path.pointRadius(function(d) {
+                        return 2.5*Math.sqrt((Math.exp(parseFloat(d.properties.MAG))));
+                    })) 
+                    .attr("class",function(d) {
+                        return d.properties.TYPE == "ind" ? "quakes induced" : "quakes tectonic";
+                    });
+            }
+
+
+
+  var svg2 = d3.select('.container-2 #graph').html('')
+    .append('svg')
+      .attrs({width: width, height: height})
+
+  var path = svg2.append('path')
+
+  var gs2 = d3.graphScroll()
+      .container(d3.select('.container-2'))
+      .graph(d3.selectAll('.container-2 #graph'))
+      .eventId('uniqueId2')  // namespace for scroll and resize events
+      .sections(d3.selectAll('.container-2 #sections > div'))
+      .on('active', function(i){
+        var h = height
+        var w = width
+        var dArray = [
+          [[w/4, h/4], [w*3/4, h/4],  [w*3/4, h*3/4], [w/4, h*3/4]],
+          [[0, 0],     [w*3/4, h/4],  [w*3/4, h*3/4], [w/4, h*3/4]],
+          [[w/2, h/2], [w, h/4],      [w, h],         [w/4, h]],
+          [[w/2, h/2], [w, h/4],      [w, h],         [w/4, h]],
+          [[w/2, h/2], [w, h/2],      [0, 0],         [w/4, h/2]],
+          [[w/2, h/2], [0, h/4],      [0, h/2],         [w/4, 0]],
+        ].map(function(d){ return 'M' + d.join(' L ') })
+
+
+        path.transition().duration(1000)
+            .attr('d', dArray[i])
+            .style('fill', colors[i])
+      })
+
+  
+}
+render()
+d3.select(window).on('resize', render)
+
+
+</script>
