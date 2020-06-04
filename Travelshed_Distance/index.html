@@ -250,7 +250,7 @@ let medium = 'walk';
 </script>
 
 <div class="slidecontainer">
-    <center><input type="range" min="5" max="20000" value="10000" step="5" class="slider" id="myRange">
+    <center><input type="range" min="5" max="100000" value="10000" step="5" class="slider" id="myRange">
     <p style ="margin-bottom: 6px;"><span id="demo" class = "minute"> min</span></p></center>
 </div>
 <script>
@@ -533,7 +533,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 20000,
+                maxEdgeWeight: 100000,
                 edgeWeight: 'distance',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -542,7 +542,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 20000,
+                maxEdgeWeight: 100000,
                 edgeWeight: 'distance',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'geojson',
@@ -634,7 +634,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 20000,
+                maxEdgeWeight: 100000,
                 edgeWeight: 'distance',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -643,7 +643,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: medium,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 20000,
+                maxEdgeWeight: 100000,
                 edgeWeight: 'distance',
                 transitMaxTransfers: medium === 'transit' ? 5 : null,
                 serializer: 'geojson',
@@ -701,7 +701,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options = {
                 travelType: mode,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 20000,
+                maxEdgeWeight: 100000,
                 edgeWeight: 'distance',
                 transitMaxTransfers: mode === 'transit' ? 5 : null,
                 serializer: 'json',
@@ -710,7 +710,7 @@ If the transit system you are looking for is not represented, check <a href="htt
                 const options2 = {
                 travelType: mode,
                 travelEdgeWeights: travelTimes,
-                maxEdgeWeight: 20000,
+                maxEdgeWeight: 100000,
                 edgeWeight: 'distance',
                 transitMaxTransfers: mode === 'transit' ? 5 : null,
                 serializer: 'geojson',
