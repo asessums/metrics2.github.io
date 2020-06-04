@@ -593,7 +593,9 @@ if (error) throw error;
     }
 
   function stepthree(){
-    circles.transition().duration(1000)
+    svg
+      .selectAll("myCircles")
+      .transition().duration(1000)
       .attr("fill","#e8133a")
       .attr("stroke-width", 0)
 
