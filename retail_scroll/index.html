@@ -18,13 +18,6 @@
 <link rel="stylesheet" id="font-awesome" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/css/font-awesome.css" type="text/css" media="all">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-
-
-
-<link
-      href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
 <style>
 
 @font-face {
@@ -119,13 +112,22 @@ h1{
 
 #graph{
   margin-left: 40px;
-  width: 500px;
+  width: 800px;
+  height: 800px;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
   float: right;
   z-index: 0
 }
+
+#map {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
 
 @media (max-width: 925px)  {
   #graph{
@@ -166,9 +168,7 @@ circle{
   font-family: monospace;
 }
 
-svg{
-  background-color: #eee;
-}
+
 
 </style>
 <body class="home page-template page-template-homepage page-template-homepage-php page page-id-5319 chrome page-homepage az wpb-js-composer js-comp-ver-3.6.2 vc_responsive is-device" data-gr-c-s-loaded="true" style="zoom: 1;">
@@ -550,19 +550,18 @@ function render(){
 
   if (innerWidth <= 925){
     width = innerWidth
-    height = innerHeight*.7
+    height = innerHeight*1.7
   }
 
   
   //Mapbox Data
   mapboxgl.accessToken = 'pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg';
 
-
   var map = new mapboxgl.Map({
-    container: 'graph',
+    container: "graph",
     style: "mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk",
-    center: [-74.5, 40.0],
-    zoom: 1,
+    center: [-73.928148, 40.782896],
+    zoom: 11,
     interactive: false,
     attributionControl: false
   });
@@ -579,24 +578,67 @@ function render(){
         .attr("height", height)
         .style("position", "absolute")
         .style("z-index", 2);
+
+  d3.csv("data.csv", function(d){
+  return{
+    name: d.name,
+    long: +d.long,
+    lat: +d.lat,
+    virtual: +d.virtual*.01,
+    automated: +d.automated*.01,
+    investments: +d.investments*.01, 
+    cannot_essential: +d.cannot_essential*.01, 
+    cannot_nonessential: +d.cannot_nonessential*.01,
+    robots: +d.robots
+  };
+}, function(error, rows){
+if (error) throw error;
+// Add circles:
+
+  var circles = svg
+      .selectAll("myCircles")
+      .data(rows)
+      .enter()
+      .append("circle")
+        .attr("r", 10)
+        .attr("class", "circle")
+        .style("fill", "003E7A")
+        .attr("stroke", "#003E7A")
+        .attr("stroke-width", 3)
+        .attr("fill-opacity", .4)
+  
  
 
-  var circle = svg.append('circle')
+      // Render method redraws circles
+      function render() {
+        circles
+          .attr("cx", function(d){ return project([d.long, d.lat]).x })
+          .attr("cy", function(d){ return project([d.long, d.lat]).y });
+      }
+
+      // Call render method, and whenever map changes
+      render();
+      map.on("viewreset", render);
+      map.on("move", render);
+      map.on("moveend", render);
+    
+  });
+ 
+
+  /*var circle = svg.append('circle')
       .attrs({cx: 0, cy: 0, r: r})
-      .attr("opacity",0)
+      .attr("opacity",0)*/
 
   
 
-
-
-  svg.append('text')
+  /*svg.append('text')
         .text("Hello")
         .attr('class','test')
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline','middle')
         .attr('x',r)
         .attr('y',r)
-        .attr('opacity',0)
+        .attr('opacity',0)*/
 
   var pos = [ {cx: width - r, cy: r},
                     {cx: r,         cy: r},
@@ -604,17 +646,17 @@ function render(){
                     {cx: width/2,   cy: height/2} ]
 
   function stepone(){
-      d3.select('.test')
+      /*d3.select('.test')
         .attr('opacity',0)
 
       circle.transition().duration(1000)
           .attrs({cx: width - r, cy: r})
         .transition()
-          .style('fill', 'orange')
+          .style('fill', 'orange')*/
     }
 
   function steptwo(){
-      circle.transition().duration(1000)
+      /*circle.transition().duration(1000)
           .attrs({cx: r,         cy: r})
         .transition()
           .style('fill', 'purple')
@@ -622,24 +664,24 @@ function render(){
       d3.select('.test')
         .transition().duration(1000)
         .transition()
-        .attr('opacity',1)
+        .attr('opacity',1)*/
     }
 
   function stepthree(){
-      circle.transition().duration(1000)
+      /*circle.transition().duration(1000)
           .attrs({cx: width - r, cy: height - r})
         .transition()
           .style('fill', 'steelblue')
 
       d3.select('.test')
-        .attr('opacity',0)
+        .attr('opacity',0)*/
     }
 
     function stepfour(){
-      circle.transition().duration(1000)
+      /*circle.transition().duration(1000)
           .attrs({cx: width/2,   cy: height/2})
         .transition()
-          .style('fill', 'pink')
+          .style('fill', 'pink')*/
     }
 
     let functions = [
