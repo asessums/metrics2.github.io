@@ -38,7 +38,7 @@
     display: none !important;
 }
 
-
+  
 
     .title{
     color: #2d2d35;
@@ -252,6 +252,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <div id='container' class='container-1'>
   <div id='graph'></div>
   <div id='sections'>
+    <div id="tooltip"></div>
     <div>
       <h3>Section 1</h3>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
@@ -528,6 +529,40 @@ if (error) throw error;
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 1)
         .attr("fill-opacity", .4)
+
+
+  svg.selectAll('.circle')
+        .on('mouseover', mouseOver)
+        .on('mouseout', mouseOut)
+
+    function mouseOver(d, i){
+
+        console.log('hi')
+        d3.select(this)
+            .transition('mouseover').duration(100)
+            .attr('opacity', 1)
+            .attr('stroke-width', 5)
+            .attr('stroke', 'black')
+            
+        d3.select('#tooltip')
+            .style('left', (d3.event.pageX + 10)+ 'px')
+            .style('top', (d3.event.pageY - 25) + 'px')
+            .style('display', 'inline-block')
+            .html(`<strong>Name:</strong> ${d.name}`)
+    }
+    
+    function mouseOut(d, i){
+        d3.select('#tooltip')
+            .style('display', 'none')
+
+        d3.select(this)
+            .transition('mouseout').duration(100)
+            .attr('opacity', 0.8)
+            .attr('stroke-width', 0)
+
+        svg.selectAll('.occ')
+            .attr('stroke-width', 0)
+    }
   
  
 
