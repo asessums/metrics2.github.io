@@ -486,6 +486,18 @@ function render(){
     height = innerHeight*1.7
   }
 
+
+  const categories = ["Food","Body","Groups","Misc","Fitness","Essentials","Services","Lodging","Home & Hobby","Fashion","Auto","Drinks","Arts & Culture","Entertainment",]
+  const colors = ["2ACEE6","FF57CF","B9DB46","000000","61CC8C","2E8EF5","B8A088","B29B83","F28A13","F9D406","B29B83","933EEF","E0A0FD","C35E4B"]
+
+  const categoriesXY = {'Jackson': [333, 333, 42745, 23, 37532652],
+                        'Hub': [333, 666, 36900, 19, 30292450],
+                        'UES': [666, 333, 36342, 19, 30289608]
+                        }
+
+
+
+  categoryColorScale = d3.scaleOrdinal(categories, colors)
   
   //Mapbox Data
   mapboxgl.accessToken = 'pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg';
@@ -519,12 +531,9 @@ function render(){
     name: d.name,
     long: +d.long,
     lat: +d.lat,
-    virtual: +d.virtual*.01,
-    automated: +d.automated*.01,
-    investments: +d.investments*.01, 
-    cannot_essential: +d.cannot_essential*.01, 
-    cannot_nonessential: +d.cannot_nonessential*.01,
-    robots: +d.robots
+    category: d.category,
+    essential: d.essential_flag
+    corridor: d.corridor
   };
 }, function(error, rows){
 if (error) throw error;
@@ -537,7 +546,7 @@ if (error) throw error;
       .append("circle")
         .attr("r", 2)
         .attr("class", "circle")
-        .style("fill", "003E7A")
+        .style("fill", d => categoryColorScale(d.Category))
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 1)
         .attr("fill-opacity", .4)
@@ -668,7 +677,8 @@ if (error) throw error;
         stepthree,
         stepfour]
 
-  var colors = ['orange', 'purple', 'steelblue', 'pink', 'black']
+
+
   
   var gs = d3.graphScroll()
       .container(d3.select('.container-1'))
