@@ -542,7 +542,7 @@ function render(){
 if (error) throw error;
 // Add circles:
   
-  simulation = d3.forceSimulation(dataset)
+  simulation = d3.forceSimulation(rows)
 
   simulation.on('tick', () => {
         nodes
