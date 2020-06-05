@@ -487,8 +487,8 @@ function render(){
   }
 
 
-  const categories = ["Food","Body","Groups","Misc","Fitness","Essentials","Services","Lodging","Home & Hobby","Fashion","Auto","Drinks","Arts & Culture","Entertainment",]
-  const colors = ["2ACEE6","FF57CF","B9DB46","000000","61CC8C","2E8EF5","B8A088","B29B83","F28A13","F9D406","B29B83","933EEF","E0A0FD","C35E4B"]
+  const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
+  const colors = ['2ACEE6','FF57CF','B9DB46','000000','61CC8C','2E8EF5','B8A088','B29B83','F28A13','F9D406','B29B83','933EEF','E0A0FD','C35E4B']
 
   const categoriesXY = {'Jackson': [333, 333, 42745, 23, 37532652],
                         'Hub': [333, 666, 36900, 19, 30292450],
@@ -539,7 +539,6 @@ function render(){
 if (error) throw error;
 // Add circles:
 
-  console.log(rows)
   var circles = svg
       .selectAll("myCircles")
       .data(rows)
@@ -650,10 +649,10 @@ if (error) throw error;
     }
 
   function stepthree(){
-    d3
+    svg
       .selectAll(".circle")
       .transition().duration(1000)
-      .style("fill", d => categoryColorScale(d.category))
+      .style("fill", categoryColorScale(d.category))
       .attr("stroke-width", 0)
 
       /*circle.transition().duration(1000)
