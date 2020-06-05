@@ -556,8 +556,6 @@ if (error) throw error;
         .on('mouseout', mouseOut)
 
     function mouseOver(d, i){
-
-        console.log('hi')
         d3.select(this)
             .transition('mouseover').duration(100)
             .attr('opacity', 1)
@@ -569,6 +567,8 @@ if (error) throw error;
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>Name:</strong> ${d.name}`)
+
+       console.log(d)
     }
     
     function mouseOut(d, i){
