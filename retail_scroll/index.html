@@ -594,6 +594,12 @@ if (error) throw error;
           .style("fill", function(d){ return categoryColorScale(d.category)});
       }
 
+      function group() {
+        circles
+          .attr("cx", function(d){ return categoriesXY[d.Category][0]})
+          .attr("cy", function(d){ return categoriesXY[d.Category][1]})
+      }
+
       // Call render method, and whenever map changes
       render();
       map.on("viewreset", render);
@@ -665,6 +671,8 @@ if (error) throw error;
     }
 
     function stepfour(){
+
+      group()
       /*circle.transition().duration(1000)
           .attrs({cx: width/2,   cy: height/2})
         .transition()
