@@ -550,6 +550,7 @@ if (error) throw error;
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 0)
         .attr("fill-opacity", 1)
+        .style("fill", function(d){ return categoryColorScale(d.category)});
 
 
   svg.selectAll('.circle')
@@ -592,7 +593,7 @@ if (error) throw error;
         circles
           .attr("cx", function(d){ return project([d.long, d.lat]).x })
           .attr("cy", function(d){ return project([d.long, d.lat]).y })
-          .style("fill", function(d, i){ return categoryColorScale(d.category)});
+          
       }
 
       // Call render method, and whenever map changes
