@@ -533,7 +533,10 @@ function render(){
     lat: +d.lat,
     category: d.category,
     essential: d.essential_flag,
-    corridor: d.corridor
+    corridor: d.corridor,
+    color: d.color,
+    newx: +d.newx
+    newy: +d.newy
   };
 }, function(error, rows){
 if (error) throw error;
