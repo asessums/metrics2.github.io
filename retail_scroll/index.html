@@ -558,7 +558,7 @@ if (error) throw error;
         .attr("fill-opacity", 1)
         .style("fill", function(d){ return d.color});
 
-  simulation = d3.forceSimulation(rows)
+  /*simulation = d3.forceSimulation(rows)
 
   simulation.on('tick', () => {
         circles
@@ -566,7 +566,7 @@ if (error) throw error;
             .attr('cy', d => d.y)
     })
 
-  simulation.stop()
+  simulation.stop()*/
 
   svg.selectAll('.circle')
         .on('mouseover', mouseOver)
