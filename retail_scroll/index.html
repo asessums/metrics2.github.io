@@ -539,6 +539,7 @@ function render(){
 if (error) throw error;
 // Add circles:
 
+  console.log(rows)
   var circles = svg
       .selectAll("myCircles")
       .data(rows)
@@ -666,9 +667,10 @@ if (error) throw error;
 
     function stepfour(){
 
-      d3.selectAll(".circle")
+      /*d3.selectAll(".circle")
       .attr("cx", function(d){ return categoriesXY[d.category][0]})
-      .attr("cy", function(d){ return categoriesXY[d.category][1]})
+      .attr("cy", function(d){ return categoriesXY[d.category][1]})*/
+
       /*circle.transition().duration(1000)
           .attrs({cx: width/2,   cy: height/2})
         .transition()
