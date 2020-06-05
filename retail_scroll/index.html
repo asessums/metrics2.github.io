@@ -548,7 +548,7 @@ if (error) throw error;
       .data(rows)
       .enter()
       .append("circle")
-        .attr("r", 2)
+        .attr("r", 1)
         .attr("class", "circle")
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 0)
@@ -671,9 +671,9 @@ if (error) throw error;
 
     function stepfour(){
 
-      /*d3.selectAll(".circle")
-      .attr("cx", function(d){ return categoriesXY[d.category][0]})
-      .attr("cy", function(d){ return categoriesXY[d.category][1]})*/
+      d3.selectAll(".circle")
+      .attr("cx", function(d){ return d.newx})
+      .attr("cy", function(d){ return d.newy})
 
       /*circle.transition().duration(1000)
           .attrs({cx: width/2,   cy: height/2})
