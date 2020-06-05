@@ -541,9 +541,6 @@ function render(){
 }, function(error, rows){
 if (error) throw error;
 // Add circles:
-  
-  
-
   categoryColorScale = d3.scaleOrdinal(categories, colors)
 
   var circles = svg
@@ -558,15 +555,6 @@ if (error) throw error;
         .attr("fill-opacity", 1)
         .style("fill", function(d){ return d.color});
 
-  /*simulation = d3.forceSimulation(rows)
-
-  simulation.on('tick', () => {
-        circles
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
-    })
-
-  simulation.stop()*/
 
   svg.selectAll('.circle')
         .on('mouseover', mouseOver)
