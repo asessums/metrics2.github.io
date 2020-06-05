@@ -546,7 +546,7 @@ if (error) throw error;
       .append("circle")
         .attr("r", 2)
         .attr("class", "circle")
-        .attr("fill", categoryColorScale(d.category))
+        .attr("fill", d => categoryColorScale(d.category))
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 0)
         .attr("fill-opacity", 1)
