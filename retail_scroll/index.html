@@ -538,7 +538,8 @@ function render(){
 }, function(error, rows){
 if (error) throw error;
 // Add circles:
-
+  categoryColorScale = d3.scaleOrdinal(categories, colors)
+  
   var circles = svg
       .selectAll("myCircles")
       .data(rows)
