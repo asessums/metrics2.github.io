@@ -591,7 +591,7 @@ if (error) throw error;
         circles
           .attr("cx", function(d){ return project([d.long, d.lat]).x })
           .attr("cy", function(d){ return project([d.long, d.lat]).y })
-          .attr("fill", function(d){ return categoryColorScale(d.category)});
+          .style("fill", function(d){ return categoryColorScale(d.category)});
       }
 
       // Call render method, and whenever map changes
