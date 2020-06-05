@@ -546,7 +546,7 @@ if (error) throw error;
       .append("circle")
         .attr("r", 2)
         .attr("class", "circle")
-        .style("fill", d => categoryColorScale(d.Category))
+        .style("fill", d => categoryColorScale(d.category))
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 0)
         .attr("fill-opacity", 1)
@@ -652,7 +652,7 @@ if (error) throw error;
     d3
       .selectAll(".circle")
       .transition().duration(1000)
-      .style("fill", d => categoryColorScale(d.Category))
+      .style("fill", d => categoryColorScale(d.category))
       .attr("stroke-width", 0)
 
       /*circle.transition().duration(1000)
