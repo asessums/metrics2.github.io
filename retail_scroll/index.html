@@ -550,7 +550,7 @@ if (error) throw error;
         .attr("stroke", "#003E7A")
         .attr("stroke-width", 0)
         .attr("fill-opacity", 1)
-        .style("fill", function(d){ return categoryColorScale(d.category)});
+        .style("fill", function(d){ return d.color});
 
 
   svg.selectAll('.circle')
