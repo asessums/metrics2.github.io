@@ -650,6 +650,7 @@ if (error) throw error;
 
   function stepthree(){
     svg
+      .data(function (d) {return d;})
       .selectAll(".circle")
       .transition().duration(1000)
       .style("fill", categoryColorScale(d.category))
