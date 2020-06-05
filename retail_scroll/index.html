@@ -495,7 +495,7 @@ function render(){
                         'UES': [666, 333, 36342, 19, 30289608]
                         }
 
-
+  let simulation, circles
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
   
@@ -545,7 +545,7 @@ if (error) throw error;
   simulation = d3.forceSimulation(rows)
 
   simulation.on('tick', () => {
-        nodes
+        circles
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
     })
