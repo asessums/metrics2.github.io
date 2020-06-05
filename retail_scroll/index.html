@@ -548,8 +548,8 @@ if (error) throw error;
         .attr("class", "circle")
         .style("fill", d => categoryColorScale(d.Category))
         .attr("stroke", "#003E7A")
-        .attr("stroke-width", 1)
-        .attr("fill-opacity", .4)
+        .attr("stroke-width", 0)
+        .attr("fill-opacity", 1)
 
 
   svg.selectAll('.circle')
@@ -652,7 +652,7 @@ if (error) throw error;
     d3
       .selectAll(".circle")
       .transition().duration(1000)
-      .style("fill","#e8133a")
+      .style("fill", d => categoryColorScale(d.Category))
       .attr("stroke-width", 0)
 
       /*circle.transition().duration(1000)
