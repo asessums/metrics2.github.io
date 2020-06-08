@@ -552,8 +552,8 @@ if (error) throw error;
 
   simulation.on('tick', () => {
         d3.selectAll('.circle')
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
+            .attr('cx', d => d.newx)
+            .attr('cy', d => d.newy)
     })
 
   simulation.stop()
