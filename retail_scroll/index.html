@@ -685,7 +685,7 @@ if (error) throw error;
 
     function stepfour(){
 
-      d3.selectAll(".mapboxgl-canvas").transition(1000)
+      d3.select(container).transition(1000)
       .attr("opacity",0)
 
 
