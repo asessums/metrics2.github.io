@@ -507,10 +507,11 @@ function draw2(){
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]).strength(.5))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) * .5))
-        .alphaDecay([0.02])
+        .alphaDecay(.0005)
+        .velocityDecay(0.6)
 
     //Reheat simulation and restart
-    simulation.alpha(0.9).restart()
+    simulation.alpha(0.1).restart()
         });
 
 
