@@ -697,7 +697,7 @@ if (error) throw error;
         .force('forceX', d3.forceX(d => d.newx).strength(.5))
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
         .force('collide', d3.forceCollide(3))
-        .alphaDecay([0.02])
+        .alphaDecay([0.09])
 
       simulation.alpha(0.9).restart()
 
