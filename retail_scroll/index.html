@@ -689,12 +689,7 @@ if (error) throw error;
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
         .force('collide', d3.forceCollide(3))
         .alphaDecay([0.02])
-
-      /*circle.transition().duration(1000)
-          .attrs({cx: width/2,   cy: height/2})
-        .transition()
-          .style('fill', 'pink')*/
-    }
+    })
 
   }
 
