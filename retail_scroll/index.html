@@ -515,7 +515,7 @@ function render(){
     zoom: 11,
     interactive: false,
     attributionControl: false
-  });
+  }).attr("class", "map");
 
   console.log(map)
   
@@ -527,7 +527,6 @@ function render(){
       var svg = d3
         .select(container)
         .append("svg")
-        .attr("class", "map")
         .attr("width", width)
         .attr("height", height)
         .style("position", "absolute")
@@ -686,7 +685,7 @@ if (error) throw error;
 
     function stepfour(){
 
-      svg
+      d3
       .selectAll(".map")
       .transition().duration(2000)
       .attr('opacity', 0)
