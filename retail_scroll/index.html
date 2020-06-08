@@ -680,6 +680,7 @@ if (error) throw error;
 
   function stepfive(){
     d3.selectAll(".circle")
+    .data(rows)
     .transition().duration(1000)
     .style("fill", function(d){ return d.color2 } )
 
