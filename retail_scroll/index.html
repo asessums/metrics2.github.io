@@ -707,7 +707,16 @@ if (error) throw error;
 
     function stepfour(){
 
-      map.setPaintProperty('background', 'background-opacity', 0)
+        map.addLayer(
+          {
+          'id': 'overlay',
+          'type': 'background',
+          'paint': {
+          'fill-color': 'white',
+          'fill-opacity': 1
+          }
+
+      //map.setPaintProperty('background', 'background-opacity', 0)
     
       //map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
 
