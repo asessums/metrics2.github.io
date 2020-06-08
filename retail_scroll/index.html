@@ -671,11 +671,6 @@ if (error) throw error;
   function stepfive(){
     simulation.stop()
 
-    svg
-      .selectAll(".circle")
-      .transition().duration(1000)
-      .style("fill", "black")
-      .attr("stroke-width", 0)
 
       /*circle.transition().duration(1000)
           .attrs({cx: width - r, cy: height - r})
@@ -709,7 +704,8 @@ if (error) throw error;
   }
 
   function stepthree(){
-
+    render()
+    map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk");
     map.flyTo({center: [-73.923511, 40.783584], zoom:11});
 
     svg
