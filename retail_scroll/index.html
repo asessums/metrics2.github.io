@@ -653,17 +653,19 @@ if (error) throw error;
           .attrs({cx: width - r, cy: r})
         .transition()
           .style('fill', 'orange')*/
+
+    d3.select(window).on('resize', render)
     }
 
   function steptwo(){
     map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
 
-    svg
-      .selectAll(".circle")
+    d3.
+      .select(circles)
       .transition().duration(1000)
       .attr("r", 2)
           
-     
+     d3.select(window).on('resize', render)
     }
 
   function stepfive(){
@@ -681,6 +683,7 @@ if (error) throw error;
           .style('fill', 'steelblue')
       d3.select('.test')
         .attr('opacity',0)*/
+
     }
 
     function stepfour(){
@@ -708,14 +711,14 @@ if (error) throw error;
 
   function stepthree(){
 
-    map.flyTo({center: [-73.886056, 40.748706], zoom:11});
+    map.flyTo({center: [-73.923511, 40.783584], zoom:11});
 
     svg
       .selectAll(".circle")
       .transition().duration(1000)
       .attr("r", 1)
           
-     
+    d3.select(window).on('resize', render)
     }
       
   
@@ -829,7 +832,7 @@ if (error) throw error;
   
 }
 render()
-d3.select(window).on('resize', render)
+
 
 
 </script>
