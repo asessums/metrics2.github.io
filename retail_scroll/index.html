@@ -540,9 +540,7 @@ function render(){
 }, function(error, rows){
 if (error) throw error;
 // Add circles:
-<<<<<<< HEAD
-=======
-  
+
   simulation = d3.forceSimulation(rows)
 
   simulation.on('tick', () => {
@@ -553,7 +551,6 @@ if (error) throw error;
 
   simulation.stop()
 
->>>>>>> parent of 4a75784... Update index.html
   categoryColorScale = d3.scaleOrdinal(categories, colors)
 
   var circles = svg
