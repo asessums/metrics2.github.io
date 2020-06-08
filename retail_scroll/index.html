@@ -686,10 +686,15 @@ if (error) throw error;
 
   
     function stepthree(){
+
+        function paint(){
+          map.getLayer('water').setPaintProperty('transition', {duration: 2000, delay: 0})
+          map.setPaintProperty('water', 'fill-color', '#f32039', "transition")
+        }
         simulation.stop()
         render()
-        map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk").on('end', map.setPaintProperty('water': {'fill-color': '#f32039'}));
-        map.flyTo({center: [-73.923511, 40.783584], zoom:11});
+        map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk")
+        map.flyTo({center: [-73.923511, 40.783584], zoom:11}).on('end', paint());;
 
         svg
           .selectAll(".circle")
