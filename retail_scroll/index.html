@@ -496,7 +496,7 @@ function render(){
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
   const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
 
-  const categoriesXY = {'Jackson': [333, 499.5, 42745, 23, 37532652],
+  const categoriesXY = {'Jackson': [499.5, 333, 42745, 23, 37532652],
                         'Hub': [333, 666, 36900, 19, 30292450],
                         'UES': [666, 333, 36342, 19, 30289608]
                         }
@@ -508,9 +508,6 @@ function render(){
   //Mapbox Data
   mapboxgl.accessToken = 'pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg';
 
-blankStyle = function(){
-  return {"version":8,"name":"Blank","center":[0,0],"zoom":0,"sources":{},"sprite":"file://roblabs.com/sprite","glyphs":"file://roblabs.com/fonts/mapbox/{fontstack}/{range}.pbf","layers":[{"id":"background","type":"background","paint":{"background-color":"rgba(255,255,255,1)"}}],"id":"blank"} 
-}
 
 
   var map = new mapboxgl.Map({
@@ -688,7 +685,8 @@ if (error) throw error;
 
     function stepfour(){
 
-      map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
+      d3.selectAll(".mapboxgl-canvas").transition(1000)
+      .attr("opacity",0)
 
 
       simulation  
