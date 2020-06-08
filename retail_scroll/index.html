@@ -547,7 +547,6 @@ function render(){
 }, function(error, rows){
 if (error) throw error;
 // Add circles:
-  
 
   simulation = d3.forceSimulation(rows)
 
@@ -611,7 +610,7 @@ if (error) throw error;
 
       // Render method redraws circles
       function render() {
-        d3.selectAll('.circle')
+        circles
           .attr("cx", function(d){ return project([d.long, d.lat]).x })
           .attr("cy", function(d){ return project([d.long, d.lat]).y })
           
@@ -661,11 +660,7 @@ if (error) throw error;
   function steptwo(){
     map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
 
-
       d3
-      .selectAll('.circle')
-
-    d3.
       .select(circles)
       .transition().duration(1000)
       .attr("r", 2)
@@ -693,22 +688,19 @@ if (error) throw error;
 
     function stepfour(){
 
-      map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
+      d3.select(container).transition(1000)
+      .attr("opacity",0)
 
-      
 
       simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => d.newx).strength(.5))
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
         .force('collide', d3.forceCollide(3))
-        .force('charge', d3.forceManyBody().strength([-6]))
-        .force('collide', d3.forceCollide(3))
         .alphaDecay(.0005)
-        .velocityDecay(0.6)
-      
-      simulation.alpha(0.1).restart;
+      .velocityDecay(0.6)
 
+      simulation.alpha(0.1).restart()
 
       svg
       .selectAll(".circle")
