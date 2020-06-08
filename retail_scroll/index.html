@@ -508,6 +508,11 @@ function render(){
   //Mapbox Data
   mapboxgl.accessToken = 'pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg';
 
+blankStyle = {
+ return {"version":8,"name":"Blank","center":[0,0],"zoom":0,"sources":{},"sprite":"file://roblabs.com/sprite","glyphs":"file://roblabs.com/fonts/mapbox/{fontstack}/{range}.pbf","layers":[{"id":"background","type":"background","paint":{"background-color":"rgba(255,255,255,1)"}}],"id":"blank"} 
+}
+
+
   var map = new mapboxgl.Map({
     container: "graph",
     style: "mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk",
@@ -515,9 +520,7 @@ function render(){
     zoom: 11,
     interactive: false,
     attributionControl: false
-  }).attr("class", "map");
-
-  console.log(map)
+  });
   
    function project(d) {
         return map.project(new mapboxgl.LngLat(d[0], d[1]));
@@ -685,10 +688,7 @@ if (error) throw error;
 
     function stepfour(){
 
-      d3
-      .selectAll(".map")
-      .transition().duration(2000)
-      .attr('opacity', 0)
+      map.setStyle(blankStyle);
 
 
       simulation  
