@@ -694,9 +694,10 @@ if (error) throw error;
         .force('forceX', d3.forceX(d => d.newx).strength(.5))
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
         .force('collide', d3.forceCollide(3))
-        .alphaDecay([0.09])
+        .alphaDecay(.0005)
+      .velocityDecay(0.6)
 
-      simulation.alpha(0.9).restart()
+      simulation.alpha(0.1).restart()
 
       svg
       .selectAll(".circle")
