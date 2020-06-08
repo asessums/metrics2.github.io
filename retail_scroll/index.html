@@ -496,7 +496,7 @@ function render(){
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
   const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
 
-  const categoriesXY = {'Jackson': [333, 333, 42745, 23, 37532652],
+  const categoriesXY = {'Jackson': [333, 499.5, 42745, 23, 37532652],
                         'Hub': [333, 666, 36900, 19, 30292450],
                         'UES': [666, 333, 36342, 19, 30289608]
                         }
@@ -646,7 +646,7 @@ if (error) throw error;
                     {cx: width/2,   cy: height/2} ]
 
   function stepone(){
-    map.flyTo({center: [-73.928148, 40.782896], zoom:11});
+    map.flyTo({center: [-73.886056, 40.748706], zoom:11});
       /*d3.select('.test')
         .attr('opacity',0)
       circle.transition().duration(1000)
@@ -666,7 +666,7 @@ if (error) throw error;
      
     }
 
-  function stepthree(){
+  function stepfour(){
     simulation.stop()
 
     svg
@@ -683,7 +683,7 @@ if (error) throw error;
         .attr('opacity',0)*/
     }
 
-    function stepfour(){
+    function stepthree(){
 
       simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
