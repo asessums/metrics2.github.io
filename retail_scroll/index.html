@@ -548,12 +548,11 @@ function render(){
 if (error) throw error;
 // Add circles:
 
-  simulation = d3.forceSimulation(rows)
+  simulation = d3.forceSimulation()
           .force('charge', d3.forceManyBody().strength([-6]))
           .force('collide', d3.forceCollide(3))
           .alphaDecay(.0005)
           .velocityDecay(0.6)
-          .alpha(0.1)
           .on("tick", () => {
         d3.selectAll('.circle')
             .each(collide(.5))
@@ -695,9 +694,9 @@ if (error) throw error;
       d3.select(container).transition(1000)
       .attr("opacity",0)
 
-      simulation.start();
+      simulation.alpha(0.1).restart
 
-      /*simulation  
+      /* simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => d.newx).strength(.5))
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
@@ -706,9 +705,8 @@ if (error) throw error;
         .force('collide', d3.forceCollide(3))
         .alphaDecay(.0005)
       .velocityDecay(0.6)
-      .alpha(0.1)
+      .alpha(0.1) */
 
-      simulation.alpha(0.1).restart*/
 
       svg
       .selectAll(".circle")
