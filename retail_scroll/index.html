@@ -267,29 +267,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
   <div id='graph'></div>
   <div id='sections'>
     <div>
-      <h3>Section 1</h3>
+      <h3>Show All Corridors; colored by category</h3>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
     </div>
 
     <div>
-      <h3>Section 2</h3>
+      <h3>Zoom into one corridor</h3>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
     </div>
 
 
     <div>
-      <h3>Section 3</h3>
+      <h3>Zoom back out</h3>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
     </div>
 
     <div>
-      <h3>Section 4</h3>
+      <h3>Remove map; group by corridor</h3>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
     </div>
 
     <div>
-      <h3>Section 5</h3>
+      <h3>Color by Essential/ Non-essential</h3>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
     </div>
 
@@ -679,20 +679,19 @@ if (error) throw error;
      d3.select(window).on('resize', render)
     }
 
-  function stepfive(){
-    d3.selectAll(".circle")
-    .transition().duration(1000)
-    .style("fill", function(d){ return d.color2 } )
+  
+    function stepthree(){
+        render()
+        map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk");
+        map.flyTo({center: [-73.923511, 40.783584], zoom:11});
 
-
-      /*circle.transition().duration(1000)
-          .attrs({cx: width - r, cy: height - r})
-        .transition()
-          .style('fill', 'steelblue')
-      d3.select('.test')
-        .attr('opacity',0)*/
-
-    }
+        svg
+          .selectAll(".circle")
+          .transition().duration(1000)
+          .attr("r", 1)
+              
+        d3.select(window).on('resize', render)
+        }
 
     function stepfour(){
 
@@ -716,18 +715,20 @@ if (error) throw error;
   
   }
 
-  function stepthree(){
-    render()
-    map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk");
-    map.flyTo({center: [-73.923511, 40.783584], zoom:11});
-
-    svg
-      .selectAll(".circle")
+    function stepfive(){
+      d3.selectAll(".circle")
       .transition().duration(1000)
-      .attr("r", 1)
-          
-    d3.select(window).on('resize', render)
-    }
+      .style("fill", function(d){ return d.color2 } )
+
+
+        /*circle.transition().duration(1000)
+            .attrs({cx: width - r, cy: height - r})
+          .transition()
+            .style('fill', 'steelblue')
+        d3.select('.test')
+          .attr('opacity',0)*/
+
+      }
       
   function stepsix(){
     
