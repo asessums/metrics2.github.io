@@ -671,6 +671,7 @@ if (error) throw error;
           .style('fill', 'orange')*/
 
     d3.select(window).on('resize', render)
+    map.setPaintProperty('water', 'fill-color', '#f32039')
     }
 
   function steptwo(){
@@ -687,14 +688,14 @@ if (error) throw error;
   
     function stepthree(){
 
-        function paint(){
+        /*function paint(){
           //map.getLayer('water').setPaintProperty('fill-color-transition', {duration: 2000, delay: 0})
           map.setPaintProperty('water', 'fill-color', '#f32039', "transition")
-        }
+        }*/
         simulation.stop()
         render()
         map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk")
-        map.flyTo({center: [-73.923511, 40.783584], zoom:11}).on('end', paint());;
+        map.flyTo({center: [-73.923511, 40.783584], zoom:11})
 
         svg
           .selectAll(".circle")
