@@ -601,7 +601,7 @@ if (error) throw error;
             .attr('opacity', 0.8)
             .attr('stroke-width', 0)
 
-        svg.selectAll('.occ')
+        svg.selectAll('.circle')
             .attr('stroke-width', 0)
     }
   
@@ -655,16 +655,12 @@ if (error) throw error;
     }
 
   function steptwo(){
-    map.flyTo({center: [-73.888122, 40.748345], zoom:14});
+    map.flyTo({center: [-73.888122, 40.748345], zoom:15});
 
-      /*circle.transition().duration(1000)
-          .attrs({cx: r,         cy: r})
-        .transition()
-          .style('fill', 'purple')
-      d3.select('.test')
-        .transition().duration(1000)
-        .transition()
-        .attr('opacity',1)*/
+      circle.transition().duration(1000)
+        .attr("r", 2)
+          
+     
     }
 
   function stepthree(){
