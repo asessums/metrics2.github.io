@@ -551,6 +551,7 @@ function render(){
     essential: d.essential_flag,
     corridor: d.corridor,
     color: d.color,
+    color: d.color2,
     newx: +d.newx,
     newy: +d.newy
   };
@@ -680,7 +681,6 @@ if (error) throw error;
 
   function stepfive(){
     d3.selectAll(".circle")
-    .data(rows)
     .transition().duration(1000)
     .style("fill", function(d){ return d.color2 } )
 
