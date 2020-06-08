@@ -669,7 +669,9 @@ if (error) throw error;
     }
 
   function stepfive(){
-    simulation.stop()
+    d3.selectAll(".circle")
+    .transition().duration(1000)
+    .style("fill", function(d){ return d.color2 } )
 
 
       /*circle.transition().duration(1000)
@@ -716,7 +718,9 @@ if (error) throw error;
     d3.select(window).on('resize', render)
     }
       
-  
+  function stepsix(){
+    
+    }
 
 
     let functions = [
@@ -724,7 +728,8 @@ if (error) throw error;
         steptwo,
         stepthree,
         stepfour,
-        stepfive]
+        stepfive,
+        stepsix]
 
 
 
