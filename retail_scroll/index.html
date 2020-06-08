@@ -680,7 +680,7 @@ if (error) throw error;
 
     function stepfour(){
 
-      d3.selectAll(".circle")
+      circles
       .transition().duration(300).delay((d, i) => i * 5)
       .attr('r', 2).on("end", function(d){
         simulation  
