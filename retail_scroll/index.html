@@ -555,7 +555,7 @@ if (error) throw error;
             .attr('cy', d => d.y)
     })
 
-  //simulation.stop()
+  simulation.stop()
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
 
