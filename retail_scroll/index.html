@@ -661,7 +661,7 @@ if (error) throw error;
     map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
 
       d3
-      .select(circles)
+      .selectAll(".circle")
       .transition().duration(1000)
       .attr("r", 2)
           
