@@ -689,7 +689,7 @@ if (error) throw error;
         simulation.stop()
         render()
         map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk");
-        map.setPaintProperty('water', 'fill-color', '#f32039')
+        map.setPaintProperty('water': {'fill-color': '#f32039'})
         map.flyTo({center: [-73.923511, 40.783584], zoom:11});
 
         svg
