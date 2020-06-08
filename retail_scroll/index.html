@@ -703,8 +703,8 @@ if (error) throw error;
 
       simulation  
         .force('charge', d3.forceManyBody().strength([-25]))
-        .force('forceX', d3.forceX(d => d.newx).strength(.5))
-        .force('forceY', d3.forceY(d => d.newy).strength(.5))
+        .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.5))
+        .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]).strength(.5))
         .force('collide', d3.forceCollide(3))
         .alphaDecay(.0005)
       .velocityDecay(0.3)
