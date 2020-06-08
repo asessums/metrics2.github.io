@@ -713,8 +713,13 @@ if (error) throw error;
           'type': 'background',
           'paint': {
           'background-color': 'white',
-          'background-opacity': 1
-          }
+          'background-opacity': 1,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
         },
         'country-label'
         );
