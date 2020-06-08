@@ -516,7 +516,7 @@ blankStyle = function(){
   var map = new mapboxgl.Map({
     container: "graph",
     style: "mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk",
-    center: [-73.886056, 40.748706],
+    center: [-73.923511, 40.783584],
     zoom: 11,
     interactive: false,
     attributionControl: false
@@ -649,7 +649,7 @@ if (error) throw error;
                     {cx: width/2,   cy: height/2} ]
 
   function stepone(){
-    map.flyTo({center: [-73.886056, 40.748706], zoom:11});
+    map.flyTo({center: [-73.923511, 40.783584], zoom:11});
       /*d3.select('.test')
         .attr('opacity',0)
       circle.transition().duration(1000)
@@ -688,7 +688,7 @@ if (error) throw error;
 
     function stepfour(){
 
-      map.setStyle(blankStyle);
+      map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
 
 
       simulation  
