@@ -533,6 +533,23 @@ function render(){
     interactive: false,
     attributionControl: false
   });
+
+  map.addLayer(
+          {
+          'id': 'overlay2',
+          'type': 'background',
+          'paint': {
+          'background-color': 'white',
+          'background-opacity': 1,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
+        },
+        'country-label'
+        );
   
    function project(d) {
         return map.project(new mapboxgl.LngLat(d[0], d[1]));
@@ -694,7 +711,7 @@ if (error) throw error;
         }*/
         simulation.stop()
         render()
-        map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk")
+        //map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk")
         map.flyTo({center: [-73.923511, 40.783584], zoom:11})
 
         svg
@@ -707,7 +724,7 @@ if (error) throw error;
 
     function stepfour(){
 
-        map.addLayer(
+        /*map.addLayer(
           {
           'id': 'overlay2',
           'type': 'background',
@@ -722,9 +739,9 @@ if (error) throw error;
           
         },
         'country-label'
-        );
+        ); */
 
-      //map.setPaintProperty('background', 'background-opacity', 0)
+      map.setPaintProperty('overlay2', 'background-opacity', 0)
     
       //map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
 
