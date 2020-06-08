@@ -547,9 +547,11 @@ function render(){
 }, function(error, rows){
 if (error) throw error;
 // Add circles:
+  
 
-  simulation = d3.forceSimulation()
-          .on("tick", () => {
+  simulation = d3.forceSimulation(rows)
+    
+    simulation.on("tick", () => {
         circles
             .attr('cx', d => d.newx)
             .attr('cy', d => d.newy)
