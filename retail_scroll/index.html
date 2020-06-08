@@ -527,6 +527,7 @@ function render(){
       var svg = d3
         .select(container)
         .append("svg")
+        .attr("class", "map")
         .attr("width", width)
         .attr("height", height)
         .style("position", "absolute")
@@ -666,7 +667,7 @@ if (error) throw error;
      
     }
 
-  function stepfour(){
+  function stepfive(){
     simulation.stop()
 
     svg
@@ -683,7 +684,13 @@ if (error) throw error;
         .attr('opacity',0)*/
     }
 
-    function stepthree(){
+    function stepfour(){
+
+      svg
+      .selectAll(".map")
+      .transition().duration(2000)
+      .attr('opacity', 0)
+
 
       simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
@@ -693,11 +700,25 @@ if (error) throw error;
         .alphaDecay([0.02])
 
       simulation.alpha(0.9).restart()
+
+      svg
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 5)
   
   }
 
-  function stepfive(){
+  function stepthree(){
 
+    map.flyTo({center: [-73.886056, 40.748706], zoom:11});
+
+    svg
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 1)
+          
+     
+    }
       
   
   }
