@@ -552,6 +552,7 @@ if (error) throw error;
           .force('charge', d3.forceManyBody().strength([-6]))
           .force('collide', d3.forceCollide(3))
           .alphaDecay(.0005)
+          .alpha(0.1)
           .velocityDecay(0.6)
           .on("tick", () => {
         d3.selectAll('.circle')
@@ -694,7 +695,7 @@ if (error) throw error;
       d3.select(container).transition(1000)
       .attr("opacity",0)
 
-      simulation.alpha(0.1).restart
+      simulation.restart
 
       /* simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
