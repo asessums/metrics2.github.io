@@ -549,8 +549,11 @@ if (error) throw error;
 // Add circles:
 
   simulation = d3.forceSimulation(rows)
-          .gravity(.02)
-          .charge(0)
+          .force('charge', d3.forceManyBody().strength([-6]))
+          .force('collide', d3.forceCollide(3))
+          .alphaDecay(.0005)
+          .velocityDecay(0.6)
+          .alpha(0.1)
           .on("tick", () => {
         d3.selectAll('.circle')
             .each(collide(.5))
@@ -699,8 +702,11 @@ if (error) throw error;
         .force('forceX', d3.forceX(d => d.newx).strength(.5))
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
         .force('collide', d3.forceCollide(3))
+        .force('charge', d3.forceManyBody().strength([-6]))
+        .force('collide', d3.forceCollide(3))
         .alphaDecay(.0005)
       .velocityDecay(0.6)
+      .alpha(0.1)
 
       simulation.alpha(0.1).restart*/
 
