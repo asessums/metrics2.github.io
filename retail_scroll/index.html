@@ -320,6 +320,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     </div>
   </div>
 
+  <div>
+      <h3>Section 5</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+  </div>
+
 
 </div>
 <br>
@@ -549,7 +555,7 @@ if (error) throw error;
             .attr('cy', d => d.y)
     })
 
-  simulation.stop()
+  //simulation.stop()
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
 
@@ -680,24 +686,27 @@ if (error) throw error;
 
     function stepfour(){
 
-      circles
-      .transition().duration(300).delay((d, i) => i * 5)
-      .attr('r', 2).on("end", function(d){
-        simulation  
+      simulation  
         .force('charge', d3.forceManyBody().strength([-6]))
         .force('forceX', d3.forceX(d => d.newx).strength(.5))
         .force('forceY', d3.forceY(d => d.newy).strength(.5))
         .force('collide', d3.forceCollide(3))
         .alphaDecay([0.02])
-    })
+  
+  }
 
+  function stepfive(){
+
+      
+  
   }
 
     let functions = [
         stepone,
         steptwo,
         stepthree,
-        stepfour]
+        stepfour,
+        stepfive]
 
 
 
