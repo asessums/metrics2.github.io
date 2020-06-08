@@ -671,7 +671,7 @@ if (error) throw error;
           .style('fill', 'orange')*/
 
     d3.select(window).on('resize', render)
-    
+
 
   function steptwo(){
     map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
@@ -706,8 +706,9 @@ if (error) throw error;
 
     function stepfour(){
 
-
-      map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
+      map.setPaintProperty('overlay', 'fill-opacity', 0)
+    
+      //map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
 
 
       simulation  
