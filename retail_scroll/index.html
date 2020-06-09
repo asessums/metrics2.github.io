@@ -565,7 +565,10 @@ function render(){
 if (error) throw error;
 // Add circles:
 
-  rows.forEach(function(d) { d.x = project([d.long, d.lat]).x; d.y = project([d.long, d.lat]).y; });
+  rows.forEach(function(d) { 
+    d.radius = 2;
+    d.x = project([d.long, d.lat]).x; 
+    d.y = project([d.long, d.lat]).y; });
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
 
@@ -591,19 +594,12 @@ if (error) throw error;
 
         function tick(e) {
         circle
-            .each(gravity(.2 * e.alpha))
             .each(collide(.5))
             .attr("cx", function(d) { return d.x; })
             .attr("cy", function(d) { return d.y; });
       }
 
-      // Move nodes toward cluster focus.
-      function gravity(alpha) {
-        return function(d) {
-          d.y += (d.cy - d.y) * alpha;
-          d.x += (d.cx - d.x) * alpha;
-        };
-      }
+      
 
       // Resolve collisions between nodes.
       function collide(alpha) {
