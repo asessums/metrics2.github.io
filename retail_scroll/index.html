@@ -864,7 +864,7 @@ console.log(rows)
       .eventId('uniqueId1')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-1 #sections > div'))
       // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
-      .on('active', function(i){
+      .on('active', function(i,step){
         functions[i](step)    
       })
 
