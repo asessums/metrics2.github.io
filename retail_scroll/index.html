@@ -568,7 +568,7 @@ if (error) throw error;
   simulation = d3.forceSimulation(rows)
 
   simulation.on('tick', () => {
-        circles
+        d3.selectAll('.circle')
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
     })
@@ -628,11 +628,9 @@ if (error) throw error;
       // Render method redraws circles
       function render() {
         d3.selectAll('.circle')
-          //.attr("cx", function(d){ return project([d.long, d.lat]).x })
-          //.attr("cy", function(d){ return project([d.long, d.lat]).y })
-          .attr("cx", function(d){ return d.newx })
-          .attr("cy", function(d){ return d.newy })
-          
+          .attr("cx", function(d){ return project([d.long, d.lat]).x })
+          .attr("cy", function(d){ return project([d.long, d.lat]).y })
+
       }
 
       // Call render method, and whenever map changes
