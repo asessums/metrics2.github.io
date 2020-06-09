@@ -670,7 +670,7 @@ if (error) throw error;
           'type': 'background',
           'paint': {
           'background-color': 'white',
-          'background-opacity': 1,
+          'background-opacity': 0,
           "background-opacity-transition": {
            "duration": 2000,
            "delay": 0
@@ -680,7 +680,7 @@ if (error) throw error;
         },
         'country-label'
         );
-    
+
     map.flyTo({center: [-73.923511, 40.783584], zoom:11});
       /*d3.select('.test')
         .attr('opacity',0)
