@@ -565,7 +565,7 @@ function render(){
 if (error) throw error;
 // Add circles:
 
-  
+  rows.forEach(function(d) { d.x = project([d.long, d.lat]).x; d.y = project([d.long, d.lat]).y; });
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
 
@@ -581,13 +581,63 @@ if (error) throw error;
         .attr("fill-opacity", 1)
         .style("fill", function(d){ return d.color});
 
-  simulation = d3.forceSimulation(rows)
+  simulation = d3.forceSimulation()
+    .data(rows)
+    .size([width, height])
+    .gravity(0)
+    .charge(0)
+    .on('tick', tick)
 
-  simulation.on('tick', () => {
+
+        function tick(e) {
+        circle
+            .each(gravity(.2 * e.alpha))
+            .each(collide(.5))
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+      }
+
+      // Move nodes toward cluster focus.
+      function gravity(alpha) {
+        return function(d) {
+          d.y += (d.cy - d.y) * alpha;
+          d.x += (d.cx - d.x) * alpha;
+        };
+      }
+
+      // Resolve collisions between nodes.
+      function collide(alpha) {
+        var quadtree = d3.geom.quadtree(rows);
+        return function(d) {
+          var r = d.radius,
+              nx1 = d.x - r,
+              nx2 = d.x + r,
+              ny1 = d.y - r,
+              ny2 = d.y + r;
+          quadtree.visit(function(quad, x1, y1, x2, y2) {
+            if (quad.point && (quad.point !== d)) {
+              var x = d.x - quad.point.x,
+                  y = d.y - quad.point.y,
+                  l = Math.sqrt(x * x + y * y),
+                  r = d.radius + quad.point.radius;
+              if (l < r) {
+                l = (l - r) / l * alpha;
+                d.x -= x *= l;
+                d.y -= y *= l;
+                quad.point.x += x;
+                quad.point.y += y;
+              }
+            }
+            return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+          });
+        };
+      }
+
+  /*simulation.on('tick', () => {
         d3.selectAll('.circle')
             .attr('cx', function(d){ return d.newx })
             .attr("cy", function(d){ return d.newy })
-    })
+    })*/
 
   simulation.stop()
 
@@ -751,15 +801,16 @@ if (error) throw error;
       //map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
 
 
-      simulation  
+      /*simulation  
         .force('charge', d3.forceManyBody().strength([-25]))
         .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.5))
         .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]).strength(.5))
         .force('collide', d3.forceCollide(3))
         .alphaDecay(.0005)
-      .velocityDecay(0.3)
+      .velocityDecay(0.3)*/
 
-      simulation.alpha(0.1).restart()
+      //simulation.alpha(0.1).restart()
+      simulation.restart()
 
       svg
       .selectAll(".circle")
