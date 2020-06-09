@@ -707,6 +707,7 @@ if (error) throw error;
   
     function stepthree(){
 
+        map.setPaintProperty('overlay2', 'background-opacity', 0)
         /*function paint(){
           //map.getLayer('water').setPaintProperty('fill-color-transition', {duration: 2000, delay: 0})
           map.setPaintProperty('water', 'fill-color', '#f32039', "transition")
@@ -761,6 +762,7 @@ if (error) throw error;
       svg
       .selectAll(".circle")
       .transition().duration(1000)
+      .style("fill", function(d){return d.color})
       .attr("r", 5)
   
   }
