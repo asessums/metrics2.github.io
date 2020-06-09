@@ -509,9 +509,9 @@ function render(){
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
   const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
 
-  const categoriesXY = {'Jackson': [(width/2), (height/3)],
-                        'Hub': [(width/3), (height/3)*2],
-                        'UES': [(height/3)*2, (height/3)*2]
+  const categoriesXY = {'Hub': [(width/2), (height/3)],
+                        'UES': [(width/3), (height/3)*2],
+                        'Jackson': [(height/3)*2, (height/3)*2]
                         }
 
   console.log(categoriesXY)
@@ -588,7 +588,7 @@ if (error) throw error;
     .force('charge', d3.forceManyBody().strength([-25]))
     .on('tick', tick)
 
-
+console.log(rows)
         function tick(e) {
         d3.selectAll('.circle')
             .each(collide(.5))
