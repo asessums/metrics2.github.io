@@ -635,6 +635,7 @@ console.log(rows)
 
   //simulation.stop()
 
+  var step = 0
 
   svg.selectAll('.circle')
         .on('mouseover', mouseOver)
@@ -710,6 +711,10 @@ console.log(rows)
 
   function stepone(){
 
+    if (step == 1){
+      console.log("Backwards, bro!")
+    }
+
     map.addLayer(
           {
           'id': 'overlay2',
@@ -736,6 +741,8 @@ console.log(rows)
           .style('fill', 'orange')*/
 
     d3.select(window).on('resize', render)
+
+    window.step = 1
   }
 
 
@@ -748,6 +755,7 @@ console.log(rows)
       .attr("r", 2)
           
      d3.select(window).on('resize', render)
+     window.step = 2
     }
 
   
@@ -857,13 +865,6 @@ console.log(rows)
       .sections(d3.selectAll('.container-1 #sections > div'))
       // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
       .on('active', function(i){
-
-        
-        /*circle.transition().duration(1000)
-            .attrs(pos)
-          .transition()
-            .style('fill', colors[i])*/
-
         functions[i]()    
       })
 
