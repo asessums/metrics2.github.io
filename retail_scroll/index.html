@@ -709,9 +709,9 @@ console.log(rows)
                     {cx: width - r, cy: height - r},
                     {cx: width/2,   cy: height/2} ]
 
-  function stepone(s){
+  function stepone(){
 
-    if (step == 1){
+    if (window.step == 2){
       console.log("Backwards, bro!")
     }
 
@@ -742,10 +742,12 @@ console.log(rows)
 
     d3.select(window).on('resize', render)
 
+    window.step = 1
+
   }
 
 
-  function steptwo(s){
+  function steptwo(){
     map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
 
       d3
@@ -755,10 +757,12 @@ console.log(rows)
           
      d3.select(window).on('resize', render)
 
+     window.step = 2
+
     }
 
   
-    function stepthree(s){
+    function stepthree(){
 
         map.setPaintProperty('overlay2', 'background-opacity', 0)
         /*function paint(){
@@ -781,7 +785,7 @@ console.log(rows)
         d3.select(window).on('resize', render)
         }
 
-    function stepfour(s){
+    function stepfour(){
 
         /*map.addLayer(
           {
@@ -824,7 +828,7 @@ console.log(rows)
   
   }
 
-    function stepfive(s){
+    function stepfive(){
       d3.selectAll(".circle")
       .transition().duration(1000)
       .style("fill", function(d){ return d.color2 } )
@@ -839,7 +843,7 @@ console.log(rows)
 
       }
       
-  function stepsix(s){
+  function stepsix(){
     d3.selectAll('.circle')
           .attr("cx", function(d){ return project([d.long, d.lat]).x })
           .attr("cy", function(d){ return project([d.long, d.lat]).y })
