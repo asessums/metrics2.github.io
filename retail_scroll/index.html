@@ -742,7 +742,6 @@ console.log(rows)
 
     d3.select(window).on('resize', render)
 
-    window.step = 1
   }
 
 
@@ -755,7 +754,7 @@ console.log(rows)
       .attr("r", 2)
           
      d3.select(window).on('resize', render)
-     window.step = 2
+
     }
 
   
@@ -864,8 +863,8 @@ console.log(rows)
       .eventId('uniqueId1')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-1 #sections > div'))
       // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
-      .on('active', function(i,step){
-        functions[i](step)    
+      .on('active', function(i){
+        functions[i]()    
       })
 
 
