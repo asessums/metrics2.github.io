@@ -534,22 +534,6 @@ function render(){
     attributionControl: false
   });
 
-  map.addLayer(
-          {
-          'id': 'overlay2',
-          'type': 'background',
-          'paint': {
-          'background-color': 'white',
-          'background-opacity': 1,
-          "background-opacity-transition": {
-           "duration": 2000,
-           "delay": 0
-            }
-          },
-          
-        },
-        'country-label'
-        );
   
    function project(d) {
         return map.project(new mapboxgl.LngLat(d[0], d[1]));
@@ -679,6 +663,24 @@ if (error) throw error;
                     {cx: width/2,   cy: height/2} ]
 
   function stepone(){
+
+    map.addLayer(
+          {
+          'id': 'overlay2',
+          'type': 'background',
+          'paint': {
+          'background-color': 'white',
+          'background-opacity': 1,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
+        },
+        'country-label'
+        );
+    
     map.flyTo({center: [-73.923511, 40.783584], zoom:11});
       /*d3.select('.test')
         .attr('opacity',0)
