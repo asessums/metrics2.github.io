@@ -584,11 +584,8 @@ if (error) throw error;
         .attr("fill-opacity", 1)
         .style("fill", function(d){ return d.color});
 
-  simulation = d3.forceSimulation()
-    .data(rows)
-    .size([width, height])
-    .gravity(0)
-    .charge(0)
+  simulation = d3.forceSimulation(rows)
+    .force('charge', d3.forceManyBody().strength([-25]))
     .on('tick', tick)
 
 
@@ -806,7 +803,7 @@ if (error) throw error;
       .velocityDecay(0.3)*/
 
       //simulation.alpha(0.1).restart()
-      simulation.restart()
+      simulation.alpha(0.1).restart()
 
       svg
       .selectAll(".circle")
