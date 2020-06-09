@@ -650,24 +650,7 @@ console.log(rows)
       map.on("move", render);
       map.on("moveend", render);
 
-      map.addLayer(
-          {
-          'id': 'overlay2',
-          'type': 'background',
-          'paint': {
-          'background-color': 'white',
-          'background-opacity': 0,
-          "background-opacity-transition": {
-           "duration": 2000,
-           "delay": 0
-            }
-          },
-          
-        },
-        'country-label'
-        );
     
-  });
  
 
   /*var circle = svg.append('circle')
@@ -688,6 +671,25 @@ console.log(rows)
 
 
   function stepone(){
+
+    map.addLayer(
+          {
+          'id': 'overlay2',
+          'type': 'background',
+          'paint': {
+          'background-color': 'white',
+          'background-opacity': 0,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
+        },
+        'country-label'
+        );
+    
+  });
 
     if (window.step == 2){
       console.log("Backwards, bro!")
