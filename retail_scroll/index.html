@@ -596,44 +596,7 @@ console.log(rows)
             .attr("cx", function(d) { return d.x; })
             .attr("cy", function(d) { return d.y; });
       }
-
-      
-
-      // Resolve collisions between nodes.
-      function collide(alpha) {
-        var quadtree = d3.geom.quadtree(rows);
-        return function(d) {
-          var r = d.radius,
-              nx1 = d.x - r,
-              nx2 = d.x + r,
-              ny1 = d.y - r,
-              ny2 = d.y + r;
-          quadtree.visit(function(quad, x1, y1, x2, y2) {
-            if (quad.point && (quad.point !== d)) {
-              var x = d.x - quad.point.x,
-                  y = d.y - quad.point.y,
-                  l = Math.sqrt(x * x + y * y),
-                  r = d.radius + quad.point.radius;
-              if (l < r) {
-                l = (l - r) / l * alpha;
-                d.x -= x *= l;
-                d.y -= y *= l;
-                quad.point.x += x;
-                quad.point.y += y;
-              }
-            }
-            return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-          });
-        };
-      }
-
-  /*simulation.on('tick', () => {
-        d3.selectAll('.circle')
-            .attr('cx', function(d){ return d.newx })
-            .attr("cy", function(d){ return d.newy })
-    })*/
-
-  //simulation.stop()
+  
 
   var step = 0
 
@@ -685,6 +648,23 @@ console.log(rows)
       map.on("viewreset", render);
       map.on("move", render);
       map.on("moveend", render);
+
+      map.addLayer(
+          {
+          'id': 'overlay2',
+          'type': 'background',
+          'paint': {
+          'background-color': 'white',
+          'background-opacity': 0,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
+        },
+        'country-label'
+        );
     
   });
  
@@ -704,10 +684,7 @@ console.log(rows)
         .attr('y',r)
         .attr('opacity',0)*/
 
-  var pos = [ {cx: width - r, cy: r},
-                    {cx: r,         cy: r},
-                    {cx: width - r, cy: height - r},
-                    {cx: width/2,   cy: height/2} ]
+
 
   function stepone(){
 
@@ -715,32 +692,7 @@ console.log(rows)
       console.log("Backwards, bro!")
     }
 
-    if (window.step == 0){
-    map.addLayer(
-          {
-          'id': 'overlay2',
-          'type': 'background',
-          'paint': {
-          'background-color': 'white',
-          'background-opacity': 0,
-          "background-opacity-transition": {
-           "duration": 2000,
-           "delay": 0
-            }
-          },
-          
-        },
-        'country-label'
-        );
-  }
-
     map.flyTo({center: [-73.923511, 40.783584], zoom:11});
-      /*d3.select('.test')
-        .attr('opacity',0)
-      circle.transition().duration(1000)
-          .attrs({cx: width - r, cy: r})
-        .transition()
-          .style('fill', 'orange')*/
 
     d3.select(window).on('resize', render)
 
@@ -768,7 +720,6 @@ console.log(rows)
 
       if (window.step == 4){
         simulation  
-        //.force('charge', d3.forceManyBody().strength([-25]))
         .force('forceX', d3.forceX(d => project([d.long, d.lat]).x).strength(.5))
         .force('forceY', d3.forceY(d => project([d.long, d.lat]).y).strength(.5))
         .stop()
@@ -776,16 +727,12 @@ console.log(rows)
       }
 
         map.setPaintProperty('overlay2', 'background-opacity', 0)
-        /*function paint(){
-          //map.getLayer('water').setPaintProperty('fill-color-transition', {duration: 2000, delay: 0})
-          map.setPaintProperty('water', 'fill-color', '#f32039', "transition")
-        }*/
+       
         
         d3.selectAll('.circle')
           .transition().duration(1000)
           .attr("cx", function(d){ return project([d.long, d.lat]).x })
           .attr("cy", function(d){ return project([d.long, d.lat]).y })
-        //map.setStyle("mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk")
         map.flyTo({center: [-73.923511, 40.783584], zoom:11})
 
         svg
@@ -799,38 +746,18 @@ console.log(rows)
 
     function stepfour(){
 
-        /*map.addLayer(
-          {
-          'id': 'overlay2',
-          'type': 'background',
-          'paint': {
-          'background-color': 'white',
-          'background-opacity': 1,
-          "background-opacity-transition": {
-           "duration": 2000,
-           "delay": 0
-            }
-          },
-          
-        },
-        'country-label'
-        ); */
+
 
       map.setPaintProperty('overlay2', 'background-opacity', 1)
-    
-      //map.setStyle('mapbox://styles/kpclyne/ckb6tijw309ej1jp919ixzpi4');
+
 
 
       simulation  
-        //.force('charge', d3.forceManyBody().strength([-25]))
         .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.5))
         .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]).strength(.5))
-        //.force('collide', d3.forceCollide(3))
-        //.alphaDecay(.0005)
-      //.velocityDecay(0.3)*/
 
       simulation.alpha(0.1).restart()
-      //simulation.alpha(0.1).restart()
+
 
       svg
       .selectAll(".circle")
@@ -848,21 +775,11 @@ console.log(rows)
       .style("fill", function(d){ return d.color2 } )
 
 
-        /*circle.transition().duration(1000)
-            .attrs({cx: width - r, cy: height - r})
-          .transition()
-            .style('fill', 'steelblue')
-        d3.select('.test')
-          .attr('opacity',0)*/
-
           window.step = 5
 
       }
       
   function stepsix(){
-    /*d3.selectAll('.circle')
-          .attr("cx", function(d){ return project([d.long, d.lat]).x })
-          .attr("cy", function(d){ return project([d.long, d.lat]).y })*/
 
           window.step = 6
     }
@@ -888,54 +805,6 @@ console.log(rows)
       .on('active', function(i){
         functions[i]()    
       })
-
-
-/*d3.queue()
-                .defer(d3.json, "gemeenten2017.topojson")
-                .defer(d3.json, "aardbevingen_NL.geojson")
-                .await(ready);
-            function ready(error, municipalities,earthquakes){
-                if (error) throw error;
-                let gemeenten = topojson.feature(municipalities, municipalities.objects.municipalities);
-                earthquakes.features.sort(function(a, b) { return b.properties.MAG - a.properties.MAG; });
-                let projection = d3.geoMercator()
-                    .fitSize([width, height], gemeenten);
-                let path = d3.geoPath()
-                    .projection(projection);
-                let tiles = d3.tile()
-                      .size([width, height])
-                      .scale(projection.scale() * tau)
-                      .translate(projection([0, 0]))
-                      ();
-                svg.selectAll("image")
-                    .data(tiles)
-                    .enter().append("image")
-                    .attr("xlink:href", function(d) { return "https://geodata.nationaalgeoregister.nl/tiles/service/wmts/brtachtergrondkaartgrijs/EPSG:3857/" + d[2] + "/" + d[0] + "/" + d[1] + ".png"; })
-                    .attr("x", function(d) { return (d[0] + tiles.translate[0]) * tiles.scale; })
-                    .attr("y", function(d) { return (d[1] + tiles.translate[1]) * tiles.scale; })
-                    .attr("width", tiles.scale)
-                    .attr("height", tiles.scale);
-                svg.append("g")
-                    .selectAll("path")
-                    .data(gemeenten.features)
-                    .enter()
-                    .append("path")
-                    .attr("class","gemeente")
-                    .attr("d", path)
-                    .append("title")
-                    .text(function(d) { return d.properties.name});
-                svg.selectAll(".quakes")
-                    .data(earthquakes.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", path.pointRadius(function(d) {
-                        return 2.5*Math.sqrt((Math.exp(parseFloat(d.properties.MAG))));
-                    })) 
-                    .attr("class",function(d) {
-                        return d.properties.TYPE == "ind" ? "quakes induced" : "quakes tectonic";
-                    });
-            } */
-
 
 
   var svg2 = d3.select('.container-2 #graph').html('')
