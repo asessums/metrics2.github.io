@@ -724,6 +724,7 @@ console.log(rows)
         simulation  
         .force('forceX', d3.forceX(d => project([d.long, d.lat]).x).strength(.5))
         .force('forceY', d3.forceY(d => project([d.long, d.lat]).y).strength(.5))
+        .alpha(0.1).restart()
         .stop()
 
       }
