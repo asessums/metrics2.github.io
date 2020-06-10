@@ -52,6 +52,10 @@
     max-width: 400px;
     z-index: 100;
 }
+    
+    .swatch{
+      fill: "rgb(255, 102, 102)";
+    }
 
     .title{
     color: #2d2d35;
@@ -634,7 +638,7 @@ function createSizeLegend2(){
         .shapePadding(55)
         .orient('horizontal')
         .title('Total Employment')
-        .labels(['10000', '500000', '4000000'])
+        .labels(['10,000', '500,000', '4,000,000'])
         .labelOffset(30)
         .cells(3)
 
@@ -1041,7 +1045,7 @@ function clean(chartType){
         .transition()
         //.attr('r', d => enrollmentSizeScale(d.Total) * .5)
         .attr('r', d => enrollmentSizeScale(d.Total))
-        .attr('fill', d => categoryColorScale(d.Category))
+        .attr('fill', "rgb(255, 102, 102)")
         .attr('opacity', 1)
 
 
