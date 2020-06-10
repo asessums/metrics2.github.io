@@ -1063,12 +1063,12 @@ function clean(chartType){
     svg.append('text')
             .text('All Occupations')
             .attr('class', 'all-occs')
-            .attr('x', ((width/10)+widthmargin))
+            .attr('x', ((width/2))
             .attr('y', ((height/10)+heightmargin))
             .attr('font-size', 24)
             .attr('color', "gray")
-            .attr('text-anchor', 'start')
-            .attr('opacity', 0)
+            .attr('text-anchor', 'middle')
+            .attr('opacity', 1)
     
 
     d3.select('.categoryLegend').transition().remove()
