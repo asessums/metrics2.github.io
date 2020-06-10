@@ -508,7 +508,7 @@ function render(){
   
   console.log(width)
   console.log(height)
-  
+
   width2 = (width/10)*8
   height2 = (height/10)*8
 
@@ -1178,19 +1178,19 @@ function clean(chartType){
 
 
       svg.selectAll('.occs')
-          .transition().duration(100).delay((d, i) => i * 2)
+          .transition().duration(100)
           .attr('r', d => enrollmentSizeScale(d.Total) * .2) //d => enrollmentSizeScale(d.Total) * .5
-          .attr('fill', d => categoryColorScale(d.Category))
-          
-      simulation
+          .attr('fill', d => categoryColorScale(d.Category)).then(
+          simulation
           .force('charge', d3.forceManyBody().strength([-35]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.75))
-          .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total)* .2)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', d3.forceCollide(3)) //d => enrollmentSizeScale(d.Total) * .5)
           .velocityDecay(0.6)
           .alphaDecay(.0005)
           .alpha(0.1)
-          .restart()
+          .restart())
+          
       }
       
     function stepsix(){
