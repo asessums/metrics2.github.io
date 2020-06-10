@@ -640,11 +640,22 @@ function drawInitial(){
   .attr("d", "M2,2 L2,11 L10,6 L2,2");
 
   var line = svg.append("line")
+            .attr("class","maleline")
              .attr("x1",width/2)  
              .attr("y1",0)  
              .attr("x2",width/2)  
              .attr("y2",height)  
-             .attr("stroke","red")  
+             .attr("stroke","black")  
+             .attr("stroke-width",2)  
+             .attr("marker-end","url(#arrow)");
+
+  var line = svg.append("line")
+            .attr("class","femaleline")
+             .attr("x1",width/2)  
+             .attr("y1",0)  
+             .attr("x2",width/2)  
+             .attr("y2",height)  
+             .attr("stroke","black")  
              .attr("stroke-width",2)  
              .attr("marker-end","url(#arrow)");
 
@@ -988,11 +999,11 @@ function clean(chartType){
         .attr('opacity', 1)
 
     simulation 
-        .force('charge', d3.forceManyBody().strength([-25]))
+        .force('charge', d3.forceManyBody().strength([-10]))
         .force('forceX', d3.forceX(width/2).strength(.5))
         .force('forceY', d3.forceY(height/2).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total)))
-        .velocityDecay(0.6)
+        .velocityDecay(0.4)
         .alpha(0.1)
         .alphaDecay(0.005)
         .restart()
@@ -1083,12 +1094,84 @@ function clean(chartType){
       }
 
     function stepfour(){
+
+    let svg = d3.select('#graph').select('svg')
+
+    svg.selectAll('.dash-line').transition().duration(300)
+    .attr('opacity', 0)
+
+    svg.selectAll('.female-text').transition().duration(300)
+    .attr('opacity', 0)
+
+    clean('isHist')
+
+    simulation.stop()
+
+    svg.selectAll('.occs')
+        .transition().duration(200).delay((d, i) => i * 1.2).ease(d3.easeBack)
+            .attr('r', 5)
+            .attr('cx', d => histXScale(d.Midpoint))
+            .attr('cy', d => histYScale(d.HistCol))
+            .attr('fill', d => categoryColorScale(d.Category))
+
+    let xAxis = d3.axisBottom(histXScale)
+    svg.append('g')
+        .attr('class', 'hist-axis')
+        .attr('transform', `translate(0, ${height + margin.top + 10})`)
+        .call(xAxis)
+
+    svg.selectAll('.lab-text')
+        .on('mouseout', )
       }
 
     function stepfive(){
+      let svg = d3.select("#graph").select('svg')
+      clean('isMultiples')
+
+      svg.selectAll('.hist-axis').transition().attr('opacity', 0)
+
+      svg.selectAll('.dash-line').transition().duration(300)
+      .attr('opacity', 1)
+
+      svg.selectAll('.arrow').transition().duration(300)
+      .attr('opacity', 1)
+
+      svg.selectAll('.female-text').transition().duration(300)
+      .attr('opacity', 1)
+
+
+
+      svg.selectAll('.occs')
+          .transition().duration(100).delay((d, i) => i * 2)
+          .attr('r', d => enrollmentSizeScale(d.Total) * .2) //d => enrollmentSizeScale(d.Total) * .5
+          .attr('fill', d => categoryColorScale(d.Category))
+          
+      simulation
+          .force('charge', d3.forceManyBody().strength([-6]))
+          .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
+          .force('forceY', d3.forceY(500).strength(.5))
+          .force('collide', d3.forceCollide(1)) //d => enrollmentSizeScale(d.Total) * .5)
+          .alpha(0.7).alphaDecay(0.02).restart()
       }
       
     function stepsix(){
+
+      let svg = d3.select("#graph").select('svg')
+      clean('isMultiples')
+
+      svg.selectAll('.hist-axis').transition().attr('opacity', 0)
+
+      svg.selectAll('.occs')
+          .transition().duration(400).delay((d, i) => i * 2)
+          .attr('r', d => enrollmentSizeScale(d.Total) * .2) //
+          .attr('fill', d => categoryColorScale(d.Category))
+          
+      simulation  
+          .force('charge', d3.forceManyBody().strength([-6]))
+          .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
+          .force('forceY', d3.forceY(500).strength(.5))
+          .force('collide', d3.forceCollide(1)) //d => enrollmentSizeScale(d.Total) * .5)
+          .alpha(0.7).alphaDecay(0.02).restart()
       }
 
 
