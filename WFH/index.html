@@ -968,7 +968,8 @@ function clean(chartType){
     let svg = d3.select('#vis').select('svg')
     svg.selectAll('.occs')
         .transition()
-        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
+        //.attr('r', d => enrollmentSizeScale(d.Total) * .5)
+        .attr('r', 5)
         .attr('fill', d => categoryColorScale(d.Category))
         .attr('opacity', 1)
 
