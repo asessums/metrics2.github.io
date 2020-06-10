@@ -544,8 +544,6 @@ if (error) throw error;
 // Add circles:
   dataset = data
   console.log(dataset)
-  createScales()
-  setTimeout(drawInitial(), 100)
   
  const colors = ['#64B3FF', '#002E5C', '#D9D9D9', '#A5A5A5']
 
@@ -1023,7 +1021,8 @@ function clean(chartType){
  });
   
 }
-render()
+createScales()
+setTimeout(drawInitial(), 100)
 
 
 
