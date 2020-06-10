@@ -934,7 +934,7 @@ function drawInitial(){
         .call(scatterxAxis)
         .attr('class', 'scatter-x')
         .attr('opacity', 0)
-        .attr('transform', `translate(0, ${height - heightmargin})`)
+        .attr('transform', `translate(0, ${height - heightmargin + 10})`)
         .call(g => g.select('.domain')
             .remove())
     
@@ -1032,11 +1032,13 @@ function clean(chartType){
         .force('charge', d3.forceManyBody().strength([2]))
         .force('forceX', d3.forceX(width/2))
         .force('forceY', d3.forceY(height/2))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 4))
+        .force('collide', 0)
         //.velocityDecay(0.2)
         .alphaDecay(0.02)
         .alpha(0.9)
         .restart()
+
+    simulation.force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 4))
 
     createLegend(20, 50)
       }
@@ -1156,7 +1158,7 @@ function clean(chartType){
     let xAxis = d3.axisBottom(histXScale)
     svg.append('g')
         .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${height - heightmargin})`)
+        .attr('transform', `translate(0, ${height - heightmargin + 10})`)
         .call(xAxis)
 
     svg.selectAll('.lab-text')
@@ -1195,7 +1197,7 @@ function clean(chartType){
           .force('charge', d3.forceManyBody().strength([-35]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender)).strength(1))
           .force('forceY', d3.forceY(height/2).strength(1))
-          .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 5)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 1)) //d => enrollmentSizeScale(d.Total) * .5)
           .velocityDecay(0.6)
           .alphaDecay(.0005)
           .alpha(0.1)
@@ -1220,7 +1222,7 @@ function clean(chartType){
           .force('charge', d3.forceManyBody().strength([-6]))
           .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.5))
-          .force('collide', d3.forceCollide(3)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) +1)) //d => enrollmentSizeScale(d.Total) * .5)
           .alpha(0.7).alphaDecay(0.02).restart()
       }
 
