@@ -551,6 +551,12 @@ if (error) throw error;
 // Add circles:
   dataset = data
   console.log(dataset)
+
+  dataset.forEach(function(d) { 
+    d.radius = 0;
+    d.x = width/2; 
+    d.y = height/2
+  };
   
  const colors = ['#64B3FF', '#002E5C', '#D9D9D9', '#A5A5A5']
 
