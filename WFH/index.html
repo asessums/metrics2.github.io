@@ -498,13 +498,14 @@ function render(){
   oldWidth = innerWidth
 
   var width = height = d3.select('#graph').node().offsetWidth
+  const margin = {left: 170, top: 50, bottom: 50, right: 20} 
   var r = 40
 
 
   if (innerWidth <= 925){
     width = innerWidth
     height = innerHeight*1.7
-    margin = {left: 170, top: 50, bottom: 50, right: 20} 
+    const margin = {left: 170, top: 50, bottom: 50, right: 20} 
   }
 
 let dataset, svg
