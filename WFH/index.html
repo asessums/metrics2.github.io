@@ -641,7 +641,8 @@ function drawInitial(){
 
   svg.append("svg:defs")
   .append("svg:marker")
-  .attr("id", "arrow")  
+  .attr("id", "arrow")
+  .style("fill","gray")  
   .attr("refX", 2)
   .attr("refY", 6)
   .attr("markerWidth", 5)
@@ -1132,7 +1133,7 @@ function clean(chartType){
     simulation.stop()
 
     svg.selectAll('.occs')
-        .transition().duration(1000).delay() //(d, i) => i * 1.2).ease(d3.easeBack)
+        .transition().duration(1000).delay(200) //(d, i) => i * 1.2).ease(d3.easeBack)
             .attr('r', 5)
             .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
