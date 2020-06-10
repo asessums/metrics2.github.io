@@ -1026,11 +1026,11 @@ function clean(chartType){
         .attr('opacity', 1)
 
     simulation 
-        .force('charge', d3.forceManyBody().strength([-10]))
+        .force('charge', d3.forceManyBody().strength([2]))
         .force('center', d3.forceCenter(width/2, height/2))
-        .force('cluster', cluster()
-        .strength(0.1))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total)))
+        .force('cluster', cluster())
+        .strength(0.1)
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total)) + 4)
         .velocityDecay(0.2)
         .alpha(0.1)
         .alphaDecay(0.005)
