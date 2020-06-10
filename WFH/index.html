@@ -522,31 +522,33 @@ const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37
   
   
   /////Import Data
-d3.csv('data/occupations.csv', function(d){
-    return {
-        Major: d.Major,
-        Total: +d.Total,
-        Men: +d.Men,
-        Women: +d.Women,
-        Median: +d.Median,
-        Unemployment: +d.Unemployment_rate,
-        Category: d.Major_category,
-        ShareWomen: +d.ShareWomen, 
-        HistCol: +d.Histogram_column,
-        Midpoint: +d.midpoint,
-        Gender: +d.gender,
-        Race: +d.race
-    };
-}).then(data => {
-    dataset = data
-    console.log(dataset)
-    createScales()
-    setTimeout(drawInitial(), 100)
-})
+d3.csv("data/occupations.csv", function(d){
+  return{
+    Major: d.Major,
+    Total: +d.Total,
+    Men: +d.Men,
+    Women: +d.Women,
+    Median: +d.Median,
+    Unemployment: +d.Unemployment_rate,
+    Category: d.Major_category,
+    ShareWomen: +d.ShareWomen, 
+    HistCol: +d.Histogram_column,
+    Midpoint: +d.midpoint,
+    Gender: +d.gender,
+    Race: +d.race
+  };
+}, function(error, data){
+if (error) throw error;
+// Add circles:
+  dataset = data
+  console.log(dataset)
+  createScales()
+  setTimeout(drawInitial(), 100)
+  
  
 
 
-
+    /////Steps
     function stepone(){
       }
 
@@ -595,7 +597,7 @@ d3.csv('data/occupations.csv', function(d){
       .attrs({width: width, height: height})
 
   
-
+ });
   
 }
 render()
