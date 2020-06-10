@@ -522,61 +522,48 @@ const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37
   
   
   /////Import Data
-  d3.csv("data/occupations.csv", function(d){
+  d3.csv("data.csv", function(d){
   return{
-    Major: d.Major,
-    Total: +d.Total,
-    Men: +d.Men,
-    Women: +d.Women,
-    Median: +d.Median,
-    Unemployment: +d.Unemployment_rate,
-    Category: d.Major_category,
-    ShareWomen: +d.ShareWomen, 
-    HistCol: +d.Histogram_column,
-    Midpoint: +d.midpoint,
-    Gender: +d.gender,
-    Race: +d.race
+    name: d.name,
+    long: +d.long,
+    lat: +d.lat,
+    category: d.category,
+    essential: d.essential_flag,
+    corridor: d.corridor,
+    color: d.color,
+    color2: d.color2,
+    newx: +d.newx,
+    newy: +d.newy
   };
-}).then(data => {
-    dataset = data
-    console.log(dataset)
-    createScales()
-    setTimeout(drawInitial(), 100)
-})
+}, function(error, rows){
+if (error) throw error;
+// Add circles:
 
-
-    const colors = ['#64B3FF', '#002E5C', '#D9D9D9', '#A5A5A5']
-
-  ///// Add circles:
-
-
-  /////Section 1
-  function stepone(){
-
-  }
-
-  /////Section 2
-  function steptwo(){
-    console.log("Section 2, whaddup")
-    }
-
-  /////Section 3
-    function stepthree(){
-
-        }
-  /////Section 4
-    function stepfour(){
   
-  }
 
-  /////Section 5
+    });
+ 
+
+
+
+    function stepone(){
+      }
+
+    function steptwo(){
+      console.log("Section 2, whaddup")
+      }
+
+    function stepthree(){
+      }
+
+    function stepfour(){
+      }
+
     function stepfive(){
       }
-  
-
-  /////Section 6    
-  function stepsix(){
-    }
+      
+    function stepsix(){
+      }
 
 
     let functions = [
@@ -629,6 +616,9 @@ const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37
             .attr('d', dArray[i])
             .style('fill', colors[i])
       })
+
+  
+}
 render()
 
 
