@@ -1167,7 +1167,7 @@ function clean(chartType){
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
         .force('collide', 0)
-        .velocityDecay(0.2)
+        .velocityDecay(0.5)
         .alphaDecay(.02)
 
     //Reheat simulation and restart
