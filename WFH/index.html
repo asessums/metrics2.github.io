@@ -505,6 +505,12 @@ function render(){
     const margin = {left: 170, top: 50, bottom: 50, right: 20} 
   }
 
+  width2 = (width/10)*8
+  height2 = (height/10)*8
+
+  widthmargin =  (width/10)
+  heightmargin =  (height/10)
+
 let dataset, svg
 let salarySizeScale, salaryXScale, categoryColorScale
 let simulation, nodes
@@ -982,8 +988,8 @@ function clean(chartType){
 
     let svg = d3.select("#graph")
                     .select('svg')
-                    .attr('width', 1000)
-                    .attr('height', 950)
+                    .attr('width', width)
+                    .attr('height',width)
     
 
     d3.select('.categoryLegend').transition().remove()
