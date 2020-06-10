@@ -131,11 +131,13 @@ function drawInitial(){
     //createSizeLegend()
     //createSizeLegend2()
 
-    let svg = d3.select("#vis")
+    let svg = d3.select("#graph")
                     .append('svg')
-                    .attr('width', 1000)
-                    .attr('height', 950)
+                    .attr('width', width)
+                    .attr('height', height)
                     .attr('opacity', 1)
+                    .style("position", "absolute")
+                    .style("z-index", 2);
 
     //SVG filter for the gooey effect
     //Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
