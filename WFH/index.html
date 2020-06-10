@@ -965,7 +965,7 @@ function clean(chartType){
 
       svg.selectAll('.occs')
           .transition().duration(300).delay((d, i) => i * 5)
-          .attr('r', d => enrollmentSizeScale(d.Total) * .5)
+          .attr('r', d => enrollmentSizeScale(d.Total) * .005)
           .attr('fill', d => categoryColorScale(d.Category))
 
 
