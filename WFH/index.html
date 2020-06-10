@@ -1113,7 +1113,7 @@ function clean(chartType){
     let xAxis = d3.axisBottom(histXScale)
     svg.append('g')
         .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${height + margin.top + 10})`)
+        .attr('transform', `translate(0, ${height})`)
         .call(xAxis)
 
     svg.selectAll('.lab-text')
