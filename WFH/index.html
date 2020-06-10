@@ -1031,8 +1031,8 @@ function clean(chartType){
         .force('forceY', d3.forceY(height/2).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 4))
         .velocityDecay(0.2)
-        .alpha(0.1)
-        .alphaDecay(0.005)
+        .alpha(0.9)
+        .alphaDecay(0.02)
         .restart()
 
     createLegend(20, 50)
