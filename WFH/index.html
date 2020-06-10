@@ -547,8 +547,8 @@ let categoryLegend, salaryLegend
 const categories = ['Job can be conducted virtually','Job can be made virtual','Cannot work remotely, non-essential','Cannot work remotely, essential']
 
 const categoriesXY = {'Job can be conducted virtually': [(width/4), (height/4), 42745, 23, 37532652],
-                        'Job can be made virtual': [ (width/4),  (height/4)*3, 36900, 19, 30292450],
-                        'Cannot work remotely, non-essential': [(width/4)*3,  (height/4), 36342, 19, 30289608],
+                        'Job can be made virtual': [(width/4)*3,  (height/4), 36342, 19, 30289608],
+                        'Cannot work remotely, non-essential': [ (width/4),  (height/4)*3, 36900, 19, 30292450], 
                         'Cannot work remotely, essential': [(width/4)*3,  (height/4)*3, 33062, 40, 64438818],
                         }
   
@@ -581,7 +581,7 @@ if (error) throw error;
     d.y = height/2
   });
   
- const colors = ['#64B3FF', '#002E5C', '#D9D9D9', '#A5A5A5']
+ const colors = ['#64B3FF', '#D9D9D9', '#002E5C', '#A5A5A5']
 
 //Create all the scales and save to global variables
 
