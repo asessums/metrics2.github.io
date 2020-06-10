@@ -674,8 +674,8 @@ function drawInitial(){
      // Define each tick of simulation
     simulation.on('tick', () => {
         nodes
-            .attr('cx', d => width/2)
-            .attr('cy', d => height/2)
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
     })
 
     // Stop the simulation until later
