@@ -522,26 +522,27 @@ const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37
   
   
   /////Import Data
-  d3.csv("data.csv", function(d){
+  d3.csv("data/occupations.csv", function(d){
   return{
-    name: d.name,
-    long: +d.long,
-    lat: +d.lat,
-    category: d.category,
-    essential: d.essential_flag,
-    corridor: d.corridor,
-    color: d.color,
-    color2: d.color2,
-    newx: +d.newx,
-    newy: +d.newy
+    Major: d.Major,
+    Total: +d.Total,
+    Men: +d.Men,
+    Women: +d.Women,
+    Median: +d.Median,
+    Unemployment: +d.Unemployment_rate,
+    Category: d.Major_category,
+    ShareWomen: +d.ShareWomen, 
+    HistCol: +d.Histogram_column,
+    Midpoint: +d.midpoint,
+    Gender: +d.gender,
+    Race: +d.race
   };
-}, function(error, rows){
-if (error) throw error;
-// Add circles:
-
-  
-
-    });
+}).then(data => {
+    dataset = data
+    console.log(dataset)
+    createScales()
+    setTimeout(drawInitial(), 100)
+})
  
 
 
