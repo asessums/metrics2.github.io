@@ -541,17 +541,17 @@ if (error) throw error;
 //Create all the scales and save to global variables
 
 function createScales(){
-    salarySizeScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [5, 35])
-    salaryXScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [width])
-    salaryYScale = d3.scaleLinear([20000, 110000], [height, margin.top])
+    salarySizeScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([5, 35])
+    salaryXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([margin.left, width])
+    salaryYScale = d3.scaleLinear().domain([20000, 110000]).range([height, margin.top])
     categoryColorScale = d3.scaleOrdinal(colors, categories)
-    shareWomenXScale = d3.scaleLinear(d3.extent(dataset, d => d.ShareWomen), [width])
-    GenderScale = d3.scaleLinear(d3.extent(dataset, d => d.Gender), [width])
-    RaceScale = d3.scaleLinear(d3.extent(dataset, d => d.Race), [width])
-    enrollmentScale = d3.scaleLinear(d3.extent(dataset, d => d.Total), [margin.left + 120, margin.left + width - 50])
+    shareWomenXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.ShareWomen)).range([margin.left, margin.left + width])
+    GenderScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Gender)).range([margin.left, margin.left + width])
+    RaceScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Race)).range([margin.left, margin.left + width])
+    enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([margin.left + 120, margin.left + width - 50])
     enrollmentSizeScale = d3.scaleLinear().domain(d3.extent(dataset, d=> d.Total)).range([10,60])
-    histXScale = d3.scaleLinear(d3.extent(dataset, d => d.Midpoint), [width])
-    histYScale = d3.scaleLinear(d3.extent(dataset, d => d.HistCol), [height, margin.top])
+    histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([margin.left, margin.left + width])
+    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([margin.top + height, margin.top])
 }
 
 function createLegend(x, y){
