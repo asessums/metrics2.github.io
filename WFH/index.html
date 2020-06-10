@@ -1208,10 +1208,10 @@ function clean(chartType){
       
     function stepsix(){
 
-      svg.selectAll('.male-text').transition().duration(300)
+      d3.selectAll('.male-text').transition().duration(300)
       .text('More Non-white')
 
-      svg.selectAll('.female-text').transition().duration(300)
+      d3.selectAll('.female-text').transition().duration(300)
       .text('More White')
 
       let svg = d3.select("#graph").select('svg')
