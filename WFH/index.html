@@ -351,38 +351,18 @@ margin-left: 50px;'>Scroll</p></div>
 
 </div>
 
-<h1>
-</h1>
-
-<!-- <div id='container' class='container-2'>
+<div id='container' class='container-2'>
   <div id='graph'></div>
 
   <div id='sections'>
     <div>
-      <h3>Section 1</h3>
-
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+     <b>3. Not all cities are created equal.</b>b><br> In New Orleans, where the economy is driven largely by tourism, hospitality, and service jobs, only 19% of jobs can currently be conducted virtually. Conversely, in Washington DC, 33% of jobs can already be conducted virtually. If New Orleans prioritized universal broadband access, training, and technology development, an additional 19% of people could work virtually, meaning the overall share of the economy that could withstand future shocks would be closer to 38%.
     </div>
 
     <div>
-      <h3>Section 2</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+      <b>4. Government will have to create markets, as it has in the past.</b><br> Technological innovation has transformed numerous consumer products and services, such as food delivery and transportation. Widespread adoption of technology by institutional sectors such as education, health care, and government has not occurred at the same pace. This is in large part because conventional sources of capital (e.g. venture investors) have yet to formulate strategies to navigate these sectors, which often have numerous stakeholders with sometimes competing agendas and complex regulatory barriers. Our long, successful history of government investing in medical research, military technology, space travel, and other major innovations, and then seeing the payoff in citizen well-being, is a precedent to which we should turn.<br><br>The COVID-19 pandemic is a reckoning for how we produce, consume, and learn. As a critical first response, to achieve magnitude of change needed, we need to tailor policy and funding approaches to local dynamics. Through strategic investments in high-speed internet, comprehensive training, and accelerated adoption of virtual technologies, more Americans could have the option to work virtually, allowing them to better withstand future shocks and enabling a more just and resilient path forward.
     </div>
-
-    <div>
-      <h3>Section 3</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-   </div>
-
-    <div>
-      <h3>Section 4</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-    </div>
-  </div>
-
-
-
-</div> -->
+</div>
 <br>
 <br>
 <br>
@@ -1356,6 +1336,11 @@ function clean(chartType){
   var svg2 = d3.select('.container-2 #graph').html('')
     .append('svg')
       .attrs({width: width, height: height})
+
+  var myimage = svg2.append('image')
+    .attr('xlink:href', '/WFH/img/picture2.png')
+    .attr('width',650)
+    .attr('height', 508)
 
   
 
