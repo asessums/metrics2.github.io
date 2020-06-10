@@ -549,7 +549,7 @@ function createScales(){
     GenderScale = d3.scaleLinear(d3.extent(dataset, d => d.Gender), [width])
     RaceScale = d3.scaleLinear(d3.extent(dataset, d => d.Race), [width])
     enrollmentScale = d3.scaleLinear(d3.extent(dataset, d => d.Total), [margin.left + 120, margin.left + width - 50])
-    enrollmentSizeScale = d3.scaleLinear([10,60], d3.extent(dataset, d=> d.Total))
+    enrollmentSizeScale = d3.scaleLinear().domain(d3.extent(dataset, d=> d.Total)).range([10,60])
     histXScale = d3.scaleLinear(d3.extent(dataset, d => d.Midpoint), [width])
     histYScale = d3.scaleLinear(d3.extent(dataset, d => d.HistCol), [height, margin.top])
 }
