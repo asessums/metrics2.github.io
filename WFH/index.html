@@ -627,6 +627,29 @@ function drawInitial(){
                     .attr('height', height)
                     .attr('opacity', 1)
 
+
+  svg.append("svg:defs")
+  .append("svg:marker")
+  .attr("id", "arrow")  
+  .attr("refX", 2)
+  .attr("refY", 6)
+  .attr("markerWidth", 13)
+  .attr("markerHeight", 13)
+  .attr("orient", "auto")
+  .append("svg:path")
+  .attr("d", "M2,2 L2,11 L10,6 L2,2");
+
+  var line = svg.append("line")
+             .attr("x1",width/2)  
+             .attr("y1",0)  
+             .attr("x2",width/2)  
+             .attr("y2",height)  
+             .attr("stroke","red")  
+             .attr("stroke-width",2)  
+             .attr("marker-end","url(#arrow)");
+
+
+
     //SVG filter for the gooey effect
     //Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
     var defs = svg.append("defs");
