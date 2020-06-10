@@ -960,7 +960,7 @@ function clean(chartType){
     svg.selectAll('.occs')
         .transition()
         //.attr('r', d => enrollmentSizeScale(d.Total) * .5)
-        .attr('r', 5)
+        .attr('r', d => enrollmentSizeScale(d.Total))
         .attr('fill', d => categoryColorScale(d.Category))
         .attr('opacity', 1)
 
@@ -988,7 +988,7 @@ function clean(chartType){
 
     svg.selectAll('.occs')
         .transition().duration(300).delay((d, i) => i * 5)
-        .attr('r', d => enrollmentSizeScale(d.Total) * .5)
+        .attr('r', d => enrollmentSizeScale(d.Total))
         .attr('fill', d => categoryColorScale(d.Category))
 
 
