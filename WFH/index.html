@@ -557,16 +557,16 @@ if (error) throw error;
 
 function createScales(){
     salarySizeScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([5, 35])
-    salaryXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([0, width])
-    salaryYScale = d3.scaleLinear().domain([20000, 110000]).range([height, 0])
+    salaryXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([widthmargin, width-widthmargin])
+    salaryYScale = d3.scaleLinear().domain([20000, 110000]).range([height-heightmargin, heightmargin])
     categoryColorScale = d3.scaleOrdinal(colors, categories)
-    shareWomenXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.ShareWomen)).range([0, width])
-    GenderScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Gender)).range([0, width])
-    RaceScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Race)).range([0, width])
-    enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([0,width ])
+    shareWomenXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.ShareWomen)).range([widthmargin, width-widthmargin])
+    GenderScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Gender)).range([widthmargin, width-widthmargin])
+    RaceScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Race)).range([widthmargin, width-widthmargin])
+    enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([widthmargin, width-widthmargin])
     enrollmentSizeScale = d3.scaleLinear().domain(d3.extent(dataset, d=> d.Total)).range([5,40])
-    histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([0, width])
-    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height, 0])
+    histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([widthmargin, width-widthmargin])
+    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height-heightmargin, heightmargin])
 }
 
 function createLegend(x, y){
@@ -1210,7 +1210,7 @@ function clean(chartType){
           .force('charge', d3.forceManyBody().strength([-6]))
           .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.5))
-          .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total)* .2)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', d3.forceCollide(3)) //d => enrollmentSizeScale(d.Total) * .5)
           .alpha(0.7).alphaDecay(0.02).restart()
       }
 
@@ -1229,8 +1229,8 @@ function clean(chartType){
       simulation  
           .force('charge', d3.forceManyBody().strength([-6]))
           .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
-          .force('forceY', d3.forceY(500).strength(.5))
-          .force('collide', d3.forceCollide(1)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('forceY', d3.forceY(height/2).strength(.5))
+          .force('collide', d3.forceCollide(3)) //d => enrollmentSizeScale(d.Total) * .5)
           .alpha(0.7).alphaDecay(0.02).restart()
       }
 
