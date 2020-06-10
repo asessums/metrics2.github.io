@@ -828,9 +828,9 @@ function drawInitial(){
             .style('left', (d3.event.pageX + 10)+ 'px')
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
-            .html(`<strong style='color: ${categoriesXY[d][6]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}
-                <br> <strong style='color: ${categoriesXY[d][6]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
-                <br> <strong style='color: ${categoriesXY[d][6]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
+            .html(`<strong style='color: ${categoriesXY[d][5]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}
+                <br> <strong style='color: ${categoriesXY[d][5]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
+                <br> <strong style='color: ${categoriesXY[d][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
     }
     
     function mouseOut(d, i){
@@ -1126,7 +1126,7 @@ function clean(chartType){
     svg.selectAll('.occs')
         .transition().duration(300)
         .attr('r', d => enrollmentSizeScale(d.Total))
-        .attr('fill', d => categoriesXY[d][6])
+        .attr('fill', d => categoriesXY[d][5])
 
 
     svg.selectAll('.cat-text').transition().duration(300).delay((d, i) => i * 30)
@@ -1264,7 +1264,7 @@ function clean(chartType){
       svg.selectAll('.occs')
           .transition().duration(100)
           .attr('r', d => enrollmentSizeScale(d.Total)) //d => enrollmentSizeScale(d.Total) * .5
-          .attr('fill', d => categoryColorScale(d.Category)).on("end", function(){
+          .attr('fill', d => categoriesXY[d][5]).on("end", function(){
           simulation
           .force('charge', d3.forceManyBody().strength([-5]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender)).strength(1))
@@ -1296,7 +1296,7 @@ function clean(chartType){
       svg.selectAll('.occs')
           .transition().duration(400)
           .attr('r', d => enrollmentSizeScale(d.Total)) //
-          .attr('fill', d => categoryColorScale(d.Category))
+          .attr('fill', d => categoriesXY[d][5])
           
       simulation  
           .force('charge', d3.forceManyBody().strength([-5]))
