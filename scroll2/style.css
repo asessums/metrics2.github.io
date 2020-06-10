@@ -20,9 +20,6 @@ body {
     padding-bottom: 100px;
 }
 
-#content{
-    margin-right: 1000;
-}
 
 #sections {
     position: relative;
@@ -119,4 +116,3 @@ a {
 .nodeCover{
                 fill: #1A818C;
             }
-
