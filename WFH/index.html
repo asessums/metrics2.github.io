@@ -965,7 +965,7 @@ function clean(chartType){
                                                     "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
                     });
 
-    let svg = d3.select('#vis').select('svg')
+    let svg = d3.select('#graph').select('svg')
     svg.selectAll('.occs')
         .transition()
         //.attr('r', d => enrollmentSizeScale(d.Total) * .5)
@@ -984,7 +984,7 @@ function clean(chartType){
       }
 
     function stepthree(){
-      let svg = d3.select("#vis").select('svg')
+      let svg = d3.select("#graph").select('svg')
     
     clean('none')
 
