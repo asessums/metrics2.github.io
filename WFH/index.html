@@ -516,13 +516,14 @@ let categoryLegend, salaryLegend
 
 const categories = ['Job can be conducted virtually','Job can be made virtual','Cannot work remotely, non-essential','Cannot work remotely, essential']
 
-const categoriesXY = {'Job can be conducted virtually': [333, 333, 42745, 23, 37532652],
-                        'Job can be made virtual': [333, 666, 36900, 19, 30292450],
-                        'Cannot work remotely, non-essential': [666, 333, 36342, 19, 30289608],
-                        'Cannot work remotely, essential': [666, 666, 33062, 40, 64438818],
+const categoriesXY = {'Job can be conducted virtually': [(width/4), (height/4), 42745, 23, 37532652],
+                        'Job can be made virtual': [ (width/4),  (height/4)*3, 36900, 19, 30292450],
+                        'Cannot work remotely, non-essential': [(width/4)*3,  (height/4), 36342, 19, 30289608],
+                        'Cannot work remotely, essential': [(width/4)*3,  (height/4)*3, 33062, 40, 64438818],
                         }
   
-  
+  (width/4)
+  (height/4)
   
   /////Import Data
 d3.csv("data/occupations.csv", function(d){
@@ -965,7 +966,8 @@ function clean(chartType){
 
       svg.selectAll('.occs')
           .transition().duration(300).delay((d, i) => i * 5)
-          .attr('r', d => enrollmentSizeScale(d.Total) * .05)
+          .attr('r', 5)
+          //.attr('r', d => enrollmentSizeScale(d.Total) * .05)
           .attr('fill', d => categoryColorScale(d.Category))
 
 
