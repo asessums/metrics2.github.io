@@ -965,11 +965,11 @@ function clean(chartType){
         .attr('opacity', 1)
 
     simulation 
-        .force('charge', d3.forceManyBody().strength([-6]))
-        .force('forceX', d3.forceX(500).strength(.5))
-        .force('forceY', d3.forceY(500).strength(.5))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) *.5 ))
-        .alpha(0.6).alphaDecay(0.05).restart()
+        .force('charge', d3.forceManyBody().strength([-25]))
+        .force('forceX', d3.forceX(width/2).strength(.5))
+        .force('forceY', d3.forceY(height/2).strength(.5))
+        .force('collide', d3.forceCollide(3)
+        .alpha(0.1).alphaDecay(0.05).restart()
 
     createLegend(20, 50)
       }
