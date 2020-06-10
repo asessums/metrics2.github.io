@@ -630,7 +630,7 @@ function drawInitial(){
     //createSizeLegend()
     //createSizeLegend2()
 
-    let svg = d3.select("#vis")
+    let svg = d3.select("#graph")
                     .append('svg')
                     .attr('width', 1000)
                     .attr('height', 950)
@@ -939,7 +939,7 @@ function drawInitial(){
 //Will hide all the elements which are not necessary for a given chart type 
 
 function clean(chartType){
-    let svg = d3.select('#vis').select('svg')
+    let svg = d3.select('#graph').select('svg')
     if (chartType !== "isScatter") {
         svg.select('.scatter-x').transition().attr('opacity', 0)
         svg.select('.scatter-y').transition().attr('opacity', 0)
