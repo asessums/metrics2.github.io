@@ -1225,16 +1225,16 @@ function clean(chartType){
 
       svg.selectAll('.occs')
           .transition().duration(100)
-          .attr('r', d => enrollmentSizeScale(d.Total) * .5) //d => enrollmentSizeScale(d.Total) * .5
+          .attr('r', d => enrollmentSizeScale(d.Total)) //d => enrollmentSizeScale(d.Total) * .5
           .attr('fill', d => categoryColorScale(d.Category)).on("end", function(){
           simulation
-          .force('charge', d3.forceManyBody().strength([-6]))
+          .force('charge', d3.forceManyBody().strength([-5]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender)).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.5))
-          .force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)*.5) + 2)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)) + 2)) //d => enrollmentSizeScale(d.Total) * .5)
           .velocityDecay(0.6)
           .alphaDecay(.02)
-          .alpha(0.1)
+          .alpha(0.9)
           .restart()
         })
           
@@ -1255,15 +1255,15 @@ function clean(chartType){
 
       svg.selectAll('.occs')
           .transition().duration(400)
-          .attr('r', d => enrollmentSizeScale(d.Total) * .5) //
+          .attr('r', d => enrollmentSizeScale(d.Total)) //
           .attr('fill', d => categoryColorScale(d.Category))
           
       simulation  
-          .force('charge', d3.forceManyBody().strength([-6]))
+          .force('charge', d3.forceManyBody().strength([-5]))
           .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.5))
-          .force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)*.5) +1)) //d => enrollmentSizeScale(d.Total) * .5)
-          .alpha(0.7).alphaDecay(0.02).restart()
+          .force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)) +1)) //d => enrollmentSizeScale(d.Total) * .5)
+          .alpha(0.9).alphaDecay(0.02).restart()
       }
 
        function stepseven(){
