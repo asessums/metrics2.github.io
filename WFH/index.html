@@ -1194,12 +1194,12 @@ function clean(chartType){
           .attr('r', d => enrollmentSizeScale(d.Total) * .5) //d => enrollmentSizeScale(d.Total) * .5
           .attr('fill', d => categoryColorScale(d.Category)).on("end", function(){
           simulation
-          .force('charge', d3.forceManyBody().strength([-35]))
+          .force('charge', d3.forceManyBody().strength([2]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender)).strength(1))
           .force('forceY', d3.forceY(height/2).strength(1))
           .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 1)) //d => enrollmentSizeScale(d.Total) * .5)
           .velocityDecay(0.6)
-          .alphaDecay(.0005)
+          .alphaDecay(.02)
           .alpha(0.1)
           .restart()
         })
