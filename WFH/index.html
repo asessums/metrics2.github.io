@@ -1124,7 +1124,7 @@ function clean(chartType){
     simulation.stop()
 
     svg.selectAll('.occs')
-        .transition().duration(200).delay(1000) //(d, i) => i * 1.2).ease(d3.easeBack)
+        .transition().duration(1000).delay() //(d, i) => i * 1.2).ease(d3.easeBack)
             .attr('r', 5)
             .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
@@ -1170,11 +1170,14 @@ function clean(chartType){
           .attr('fill', d => categoryColorScale(d.Category))
           
       simulation
-          .force('charge', d3.forceManyBody().strength([-25]))
+          .force('charge', d3.forceManyBody().strength([-35]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
-          .force('forceY', d3.forceY(500).strength(.5))
+          .force('forceY', d3.forceY(width/2).strength(.75))
           .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total))) //d => enrollmentSizeScale(d.Total) * .5)
-          .alpha(0.7).alphaDecay(0.02).restart()
+          .velocityDecay(0.6)
+          .alphaDecay(.0005)
+          .alpha(0.1)
+          .restart()
       }
       
     function stepsix(){
