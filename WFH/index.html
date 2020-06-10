@@ -1179,7 +1179,7 @@ function clean(chartType){
 
       svg.selectAll('.occs')
           .transition().duration(100)
-          .attr('r', d => enrollmentSizeScale(d.Total) * .2) //d => enrollmentSizeScale(d.Total) * .5
+          .attr('r', d => enrollmentSizeScale(d.Total) * .5) //d => enrollmentSizeScale(d.Total) * .5
           .attr('fill', d => categoryColorScale(d.Category)).then(
           simulation
           .force('charge', d3.forceManyBody().strength([-35]))
@@ -1201,8 +1201,8 @@ function clean(chartType){
       svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
       svg.selectAll('.occs')
-          .transition().duration(400).delay((d, i) => i * 2)
-          .attr('r', d => enrollmentSizeScale(d.Total) * .2) //
+          .transition().duration(400)
+          .attr('r', d => enrollmentSizeScale(d.Total) * .5) //
           .attr('fill', d => categoryColorScale(d.Category))
           
       simulation  
