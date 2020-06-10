@@ -652,7 +652,7 @@ function drawInitial(){
              .attr("x2",(width/10)*2)  
              .attr("y2",(height/10)*3)
              .attr("opacity",0)  
-             .attr("stroke","black")  
+             .attr("stroke","gray")  
              .attr("stroke-width",2)  
              .attr("marker-end","url(#arrow)");
 
@@ -663,7 +663,7 @@ function drawInitial(){
              .attr("x2",(width/10)*8)  
              .attr("y2",(height/10)*3)
              .attr("opacity",0)  
-             .attr("stroke","black")  
+             .attr("stroke","gray")  
              .attr("stroke-width",2)  
              .attr("marker-end","url(#arrow)");
 
@@ -794,6 +794,7 @@ function drawInitial(){
             .attr('x', ((width/10)*7)-5)
             .attr('y', ((height/10)*3)-10)
             .attr('font-size', 13)
+            .attr('color', "gray")
             .attr('text-anchor', 'middle')
             .attr('opacity', 0)
 
@@ -803,6 +804,7 @@ function drawInitial(){
             .attr('x', ((width/10)*3)-5)
             .attr('y', ((height/10)*3)-10)
             .attr('font-size', 13)
+            .attr('color', "gray")
             .attr('text-anchor', 'middle')
             .attr('opacity', 0)
     
@@ -882,7 +884,7 @@ function drawInitial(){
 
     svg.append('line')
         .attr('class', 'dash-line')
-        .style("stroke", "black")
+        .style("stroke", "gray")
         .style("stroke-dasharray", ("3, 3"))
         .attr("x1", width/2)
         .attr("y1", 300)    
