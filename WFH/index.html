@@ -550,13 +550,13 @@ function createScales(){
     salaryXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([margin.left, width])
     salaryYScale = d3.scaleLinear().domain([20000, 110000]).range([height, margin.top])
     categoryColorScale = d3.scaleOrdinal(colors, categories)
-    shareWomenXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.ShareWomen)).range([margin.left, margin.left + width])
-    GenderScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Gender)).range([margin.left, margin.left + width])
-    RaceScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Race)).range([margin.left, margin.left + width])
-    enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([margin.left + 120, margin.left + width - 50])
+    shareWomenXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.ShareWomen)).range([0, width])
+    GenderScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Gender)).range([0, width])
+    RaceScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Race)).range([0, width])
+    enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([0,width ])
     enrollmentSizeScale = d3.scaleLinear().domain(d3.extent(dataset, d=> d.Total)).range([5,40])
-    histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([margin.left, margin.left + width])
-    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([margin.top + height, margin.top])
+    histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([0, width])
+    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height, 0])
 }
 
 function createLegend(x, y){
@@ -882,9 +882,9 @@ function drawInitial(){
         .attr('class', 'dash-line')
         .style("stroke", "black")
         .style("stroke-dasharray", ("3, 3"))
-        .attr("x1", 500)
+        .attr("x1", width/2)
         .attr("y1", 300)    
-        .attr("x2", 500)      
+        .attr("x2", width/2)      
         .attr("y2", 700) 
         .attr('opacity', 0)
 
