@@ -1327,8 +1327,7 @@ function clean(chartType){
       .eventId('uniqueId1')  // namespace for scroll and resize events
       .sections(d3.selectAll('.container-1 #sections > div'))
       // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
-      .on('active', function(i){
-        functions[i]()    
+      .on('active', function(i){    
       })
 
 
@@ -1338,7 +1337,7 @@ function clean(chartType){
       .attrs({width: width, height: height})
 
   var myimage = svg2.append('image')
-    .attr('xlink:href', '/WFH/img/picture2.png')
+    .attr('xlink:href', '/WFH/img/Picture2.png')
     .attr('width',650)
     .attr('height', 508)
 
