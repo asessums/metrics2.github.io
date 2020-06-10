@@ -1115,7 +1115,7 @@ function clean(chartType){
         .force('charge', d3.forceManyBody().strength([2]))
         .force('forceX', d3.forceX(d => categoriesXY[d.Category][0]))
         .force('forceY', d3.forceY(d => categoriesXY[d.Category][1] ))
-        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 1))
+        .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 2))
         .velocityDecay(0.6)
         .alphaDecay(.02)
 
