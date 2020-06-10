@@ -657,10 +657,10 @@ function drawInitial(){
 
   var line = svg.append("line")
             .attr("class","femaleline")
-             .attr("x1",width/2)  
-             .attr("y1",0)  
-             .attr("x2",width/2)  
-             .attr("y2",height)
+             .attr("x1",(width/10)*6)  
+             .attr("y1",(height/10))  
+             .attr("x2",(width/10)*8)  
+             .attr("y2",(height/10))
              .attr("opacity",0)  
              .attr("stroke","black")  
              .attr("stroke-width",2)  
@@ -790,10 +790,10 @@ function drawInitial(){
     svg.append('text')
             .text('Female')
             .attr('class', 'female-text')
-            .attr('x', width/2)
-            .attr('y', height/2)
+            .attr('x', (width/10)*7)
+            .attr('y', (height/10)-10)
             .attr('font-size', 13)
-            .attr('text-anchor', 'end')
+            .attr('text-anchor', 'center')
             .attr('opacity', 0)
     
     //All the required components for the small multiples charts
@@ -1127,11 +1127,9 @@ function clean(chartType){
 
       svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
-      svg.selectAll('.dash-line').transition().duration(300)
+      svg.selectAll('.femaleline').transition().duration(300)
       .attr('opacity', 1)
 
-      svg.selectAll('.arrow').transition().duration(300)
-      .attr('opacity', 1)
 
       svg.selectAll('.female-text').transition().duration(300)
       .attr('opacity', 1)
