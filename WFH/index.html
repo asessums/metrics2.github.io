@@ -1105,7 +1105,7 @@ function clean(chartType){
     simulation.stop()
 
     svg.selectAll('.occs')
-        .transition().duration(200).delay((d, i) => i * 1.2).ease(d3.easeBack)
+        .transition().duration(200).delay(500) //(d, i) => i * 1.2).ease(d3.easeBack)
             .attr('r', 5)
             .attr('cx', d => histXScale(d.Midpoint))
             .attr('cy', d => histYScale(d.HistCol))
