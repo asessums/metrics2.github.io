@@ -647,10 +647,10 @@ function drawInitial(){
 
   var line = svg.append("line")
             .attr("class","maleline")
-             .attr("x1",width/2)  
-             .attr("y1",0)  
-             .attr("x2",width/2)  
-             .attr("y2",height)
+             .attr("x1",(width/10)*4)  
+             .attr("y1",(height/10))  
+             .attr("x2",(width/10)*2)  
+             .attr("y2",(height/10))
              .attr("opacity",0)  
              .attr("stroke","black")  
              .attr("stroke-width",2)  
@@ -789,9 +789,18 @@ function drawInitial(){
 
 
     svg.append('text')
-            .text('Female')
+            .text('More Female')
             .attr('class', 'female-text')
             .attr('x', ((width/10)*7)-5)
+            .attr('y', (height/10)-10)
+            .attr('font-size', 13)
+            .attr('text-anchor', 'center')
+            .attr('opacity', 0)
+
+    svg.append('text')
+            .text('More Male')
+            .attr('class', 'male-text')
+            .attr('x', ((width/10)*3)-5)
             .attr('y', (height/10)-10)
             .attr('font-size', 13)
             .attr('text-anchor', 'center')
@@ -1098,7 +1107,16 @@ function clean(chartType){
     svg.selectAll('.dash-line').transition().duration(300)
     .attr('opacity', 0)
 
+    svg.selectAll('.femaleline').transition().duration(300)
+    .attr('opacity', 0)
+
     svg.selectAll('.female-text').transition().duration(300)
+    .attr('opacity', 0)
+
+     svg.selectAll('.maleline').transition().duration(300)
+    .attr('opacity', 0)
+
+    svg.selectAll('.male-text').transition().duration(300)
     .attr('opacity', 0)
 
     clean('isHist')
@@ -1136,6 +1154,12 @@ function clean(chartType){
 
 
       svg.selectAll('.female-text').transition().duration(300)
+      .attr('opacity', 1)
+
+       svg.selectAll('.maleline').transition().duration(300)
+      .attr('opacity', 1)
+
+      svg.selectAll('.male-text').transition().duration(300)
       .attr('opacity', 1)
 
 
