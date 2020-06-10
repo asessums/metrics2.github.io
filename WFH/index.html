@@ -649,7 +649,8 @@ function drawInitial(){
              .attr("x1",width/2)  
              .attr("y1",0)  
              .attr("x2",width/2)  
-             .attr("y2",height)  
+             .attr("y2",height)
+             .attr("opacity",0)  
              .attr("stroke","black")  
              .attr("stroke-width",2)  
              .attr("marker-end","url(#arrow)");
@@ -903,7 +904,7 @@ function drawInitial(){
         .call(scatterxAxis)
         .attr('class', 'scatter-x')
         .attr('opacity', 0)
-        .attr('transform', `translate(0, ${height + margin.top})`)
+        .attr('transform', `translate(0, ${height})`)
         .call(g => g.select('.domain')
             .remove())
     
@@ -911,7 +912,7 @@ function drawInitial(){
         .call(scatteryAxis)
         .attr('class', 'scatter-y')
         .attr('opacity', 0)
-        .attr('transform', `translate(${margin.left - 20 + width}, 0)`)
+        .attr('transform', `translate(${width}, 0)`)
         .call(g => g.select('.domain')
             .remove())
         .call(g => g.selectAll('.tick line'))
@@ -1113,7 +1114,7 @@ function clean(chartType){
     let xAxis = d3.axisBottom(histXScale)
     svg.append('g')
         .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${height})`)
+        .attr('transform', `translate(0, ${height + 10})`)
         .call(xAxis)
 
     svg.selectAll('.lab-text')
