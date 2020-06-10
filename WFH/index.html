@@ -547,8 +547,8 @@ if (error) throw error;
 
 function createScales(){
     salarySizeScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([5, 35])
-    salaryXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([margin.left, width])
-    salaryYScale = d3.scaleLinear().domain([20000, 110000]).range([height, margin.top])
+    salaryXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Median)).range([0, width])
+    salaryYScale = d3.scaleLinear().domain([20000, 110000]).range([height, 0])
     categoryColorScale = d3.scaleOrdinal(colors, categories)
     shareWomenXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.ShareWomen)).range([0, width])
     GenderScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Gender)).range([0, width])
@@ -782,17 +782,7 @@ function drawInitial(){
     }
 
     //Small text label for first graph
-    svg.selectAll('.small-text')
-        .data(dataset)
-        .enter()
-        .append('text')
-            .text((d, i) => d.Major.toLowerCase())
-            .attr('class', 'small-text')
-            .attr('x', margin.left)
-            .attr('y', (d, i) => i * 5.2 + 30)
-            .attr('font-size', 7)
-            .attr('text-anchor', 'end')
-            .attr('opacity', 0)
+ 
 
 
     svg.append('text')
