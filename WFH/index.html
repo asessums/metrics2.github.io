@@ -260,6 +260,12 @@ Over the past few months, digital tools have become indispensable to those who c
     <div>
       <!--<h3>Show All Corridors; colored by category</h3>-->
       Recent studies from the St. Louis Fed and the University of Chicago’s Becker Friedman Institute estimate that between 33% and 37% of all occupations can be conducted virtually. While some occupations can easily transition to virtual work, such as web developers, accountants, and writers, jobholders in many other occupations, such as teachers, health care providers and researchers, will tell you that, while they can technically work from home, they cannot do their jobs effectively with only a home laptop and residential internet access.
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
 
     </div>
 
@@ -1008,6 +1014,14 @@ function clean(chartType){
 
     function steptwo(){
     clean('none')
+
+    let svg = d3.select("#graph")
+                    .select('svg')
+                    .attr('width', width)
+                    .attr('height',width)
+    
+
+    d3.select('.categoryLegend').transition().remove()
         
     d3.selectAll(".blurValues")
                     .transition().duration(4000)
@@ -1237,7 +1251,7 @@ function clean(chartType){
 
        function stepseven(){
 
-      let svg = d3.select("#graph").select('svg')
+      /*let svg = d3.select("#graph").select('svg')
       clean('isMultiples')
 
       svg.selectAll('.hist-axis').transition().attr('opacity', 0)
@@ -1253,11 +1267,12 @@ function clean(chartType){
           .force('forceY', d3.forceY(height/2).strength(.5))
           .force('collide', d3.forceCollide(3)) //d => enrollmentSizeScale(d.Total) * .5)
           .alpha(0.7).alphaDecay(0.02).restart()
+          */
       }
 
 
     let functions = [
-        stepone,
+        steptwo,
         steptwo,
         stepthree,
         stepfour,
