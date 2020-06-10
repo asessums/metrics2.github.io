@@ -1017,12 +1017,12 @@ function clean(chartType){
     .append('svg')
       .attrs({width: width, height: height})
 
-  
+  createScales()
+  setTimeout(drawInitial(), 100)
+
  });
-  
 }
-createScales()
-setTimeout(drawInitial(), 100)
+render()
 
 
 
