@@ -1180,7 +1180,7 @@ function clean(chartType){
       svg.selectAll('.occs')
           .transition().duration(100)
           .attr('r', d => enrollmentSizeScale(d.Total) * .5) //d => enrollmentSizeScale(d.Total) * .5
-          .attr('fill', d => categoryColorScale(d.Category)).then(
+          .attr('fill', d => categoryColorScale(d.Category)).on("end", function(){
           simulation
           .force('charge', d3.forceManyBody().strength([-35]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender) ).strength(1))
@@ -1189,7 +1189,8 @@ function clean(chartType){
           .velocityDecay(0.6)
           .alphaDecay(.0005)
           .alpha(0.1)
-          .restart())
+          .restart()
+        })
           
       }
       
