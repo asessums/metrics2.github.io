@@ -552,16 +552,16 @@ if (error) throw error;
 
 function createScales(){
     salarySizeScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [5, 35])
-    salaryXScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [margin.left, margin.left + width+250])
-    salaryYScale = d3.scaleLinear([20000, 110000], [margin.top + height, margin.top])
+    salaryXScale = d3.scaleLinear(d3.extent(dataset, d => d.Median), [width])
+    salaryYScale = d3.scaleLinear([20000, 110000], [height, margin.top])
     categoryColorScale = d3.scaleOrdinal(categories, colors)
-    shareWomenXScale = d3.scaleLinear(d3.extent(dataset, d => d.ShareWomen), [margin.left, margin.left + width])
-    GenderScale = d3.scaleLinear(d3.extent(dataset, d => d.Gender), [margin.left, margin.left + width])
-    RaceScale = d3.scaleLinear(d3.extent(dataset, d => d.Race), [margin.left, margin.left + width])
+    shareWomenXScale = d3.scaleLinear(d3.extent(dataset, d => d.ShareWomen), [width])
+    GenderScale = d3.scaleLinear(d3.extent(dataset, d => d.Gender), [width])
+    RaceScale = d3.scaleLinear(d3.extent(dataset, d => d.Race), [width])
     enrollmentScale = d3.scaleLinear(d3.extent(dataset, d => d.Total), [margin.left + 120, margin.left + width - 50])
     enrollmentSizeScale = d3.scaleLinear(d3.extent(dataset, d=> d.Total), [10,60])
-    histXScale = d3.scaleLinear(d3.extent(dataset, d => d.Midpoint), [margin.left, margin.left + width])
-    histYScale = d3.scaleLinear(d3.extent(dataset, d => d.HistCol), [margin.top + height, margin.top])
+    histXScale = d3.scaleLinear(d3.extent(dataset, d => d.Midpoint), [width])
+    histYScale = d3.scaleLinear(d3.extent(dataset, d => d.HistCol), [height, margin.top])
 }
 
 function createLegend(x, y){
