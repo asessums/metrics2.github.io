@@ -23,7 +23,7 @@
 
 @font-face {
   font-family: GothamLight;
-  src: url(/Users/ClyneKP/Documents/GitHub/graph-scroll-gh-pages/Gotham-Light.otf);
+  src: url(/WFH/fonts/Gotham-Light.otf);
 } 
 
   @font-face {
@@ -32,7 +32,7 @@
 
   @font-face {
   font-family: GothamMedium;
-  src: url(/Users/ClyneKP/Documents/GitHub/graph-scroll-gh-pages/Gotham-Medium.otf);
+  src: url(/WFH//fonts/Gotham-Medium.otf);
 }
 
 .mapboxgl-ctrl-logo {
@@ -566,10 +566,10 @@ let categoryLegend, salaryLegend
 
 const categories = ['Job can be conducted virtually','Job can be made virtual','Cannot work remotely, non-essential','Cannot work remotely, essential']
 
-const categoriesXY = {'Job can be conducted virtually': [(width/4), (height/4), 42745, 23, 37532652],
-                        'Job can be made virtual': [(width/4)*3,  (height/4), 36342, 19, 30289608],
-                        'Cannot work remotely, non-essential': [ (width/4),  (height/4)*3, 36900, 19, 30292450], 
-                        'Cannot work remotely, essential': [(width/4)*3,  (height/4)*3, 33062, 40, 64438818],
+const categoriesXY = {'Job can be conducted virtually': [(width/4), (height/4), 42745, 23, 37532652, '#64B3FF'],
+                        'Job can be made virtual': [(width/4)*3,  (height/4), 36342, 19, 30289608, '#002E5C'],
+                        'Cannot work remotely, non-essential': [ (width/4),  (height/4)*3, 36900, 19, 30292450, '#D9D9D9'], 
+                        'Cannot work remotely, essential': [(width/4)*3,  (height/4)*3, 33062, 40, 64438818, '#A5A5A5'],
                         }
   
   
@@ -826,9 +826,9 @@ function drawInitial(){
             .style('left', (d3.event.pageX + 10)+ 'px')
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
-            .html(`<strong style='color: ${categoryColorScale(d.Category)}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}
-                <br> <strong style='color: ${categoryColorScale(d.Category)}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
-                <br> <strong style='color: ${categoryColorScale(d.Category)}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
+            .html(`<strong style='color: ${categoriesXY[d][6]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}
+                <br> <strong style='color: ${categoriesXY[d][6]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
+                <br> <strong style='color: ${categoriesXY[d][6]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
     }
     
     function mouseOut(d, i){
@@ -941,6 +941,17 @@ function drawInitial(){
                 d3.select(this)
                     .text(d)
             })
+    svg.append('text')
+            .text('All Occupations')
+            .attr('class', 'all-occs')
+            .attr('x', (width/2))
+            .attr('y', ((height/10)+heightmargin))
+            .attr('font-size', 24)
+            .attr('color', "grey")
+            .attr('text-anchor', 'middle')
+            .attr('opacity', 0)
+            .transition(10000).delay(2000)
+            .attr('opacity', 0)
 
     svg.append('line')
         .attr('class', 'dash-line')
@@ -1059,16 +1070,8 @@ function clean(chartType){
                     .attr('width', width)
                     .attr('height',width)
 
-    svg.append('text')
-            .text('All Occupations')
-            .attr('class', 'all-occs')
-            .attr('x', (width/2))
-            .attr('y', ((height/10)+heightmargin))
-            .attr('font-size', 24)
-            .attr('color', "grey")
-            .attr('text-anchor', 'middle')
-            .attr('opacity', 0)
-            .transition(10000).delay(2000)
+    svg.selectAll('.all-occs')
+            .transition(2000).duration(4000)
             .attr('opacity', 1)
     
 
@@ -1121,7 +1124,7 @@ function clean(chartType){
     svg.selectAll('.occs')
         .transition().duration(300)
         .attr('r', d => enrollmentSizeScale(d.Total))
-        .attr('fill', d => categoryColorScale(d.Category))
+        .attr('fill', d => categoriesXY[d][6])
 
 
     svg.selectAll('.cat-text').transition().duration(300).delay((d, i) => i * 30)
