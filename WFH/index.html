@@ -633,8 +633,8 @@ function drawInitial(){
 
     let svg = d3.select("#graph")
                     .append('svg')
-                    .attr('width', 1000)
-                    .attr('height', 950)
+                    .attr('width', width)
+                    .attr('height', height)
                     .attr('opacity', 1)
 
     //SVG filter for the gooey effect
@@ -711,8 +711,8 @@ function drawInitial(){
             nodeWrapper.append("circle")
                 .attr("class", "nodeCover")
                 .attr("r", 0)
-                .attr("cx", 500)
-                .attr("cy", 500);
+                .attr("cx", width/2)
+                .attr("cy", height/2);
 
 
     // Add mouseover and mouseout events for all circles
@@ -769,8 +769,8 @@ function drawInitial(){
     svg.append('text')
             .text('Female')
             .attr('class', 'female-text')
-            .attr('x', 525)
-            .attr('y', 300)
+            .attr('x', width/2)
+            .attr('y', height/2)
             .attr('font-size', 13)
             .attr('text-anchor', 'end')
             .attr('opacity', 0)
@@ -778,33 +778,6 @@ function drawInitial(){
     //All the required components for the small multiples charts
     //Initialises the text and rectangles, and sets opacity to 0 
 
-    svg.append("svg:defs").append("svg:marker")
-    .attr("id", "triangle")
-    .attr('class', 'arrow')
-    .attr("refX", 6)
-    .attr("refY", 6)
-    .attr("markerWidth", 30)
-    .attr("markerHeight", 30)
-    .attr("markerUnits","userSpaceOnUse")
-    .attr("orient", "auto")
-    .append("path")
-    .attr("d", "M 0 0 12 6 0 12 3 6")
-    .style("fill", "black")
-    .attr('opacity', 0);
-
-    
-    
-    //line              
-        svg.append("line")
-            .attr('class', 'arrow')
-            .attr("x1",  525)
-            .attr("y1", 320)
-            .attr("x2", 550)
-            .attr("y2", 320)
-            .attr("stroke-width", 1)
-            .attr("stroke", "black")
-            .attr("marker-end", "url(#triangle)")
-            .attr('opacity', 0);
 
 
 
