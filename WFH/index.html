@@ -927,7 +927,7 @@ function drawInitial(){
         .call(scatterxAxis)
         .attr('class', 'scatter-x')
         .attr('opacity', 0)
-        .attr('transform', `translate(0, ${height})`)
+        .attr('transform', `translate(0, ${height2})`)
         .call(g => g.select('.domain')
             .remove())
     
@@ -935,7 +935,7 @@ function drawInitial(){
         .call(scatteryAxis)
         .attr('class', 'scatter-y')
         .attr('opacity', 0)
-        .attr('transform', `translate(${width}, 0)`)
+        .attr('transform', `translate(${width2}, 0)`)
         .call(g => g.select('.domain')
             .remove())
         .call(g => g.selectAll('.tick line'))
@@ -948,7 +948,7 @@ function drawInitial(){
 
     svg.append('g')
         .attr('class', 'enrolment-axis')
-        .attr('transform', 'translate(0, width)')
+        .attr('transform', 'translate(0, ${width2})')
         .attr('opacity', 0)
         .call(histxAxis)
 }
