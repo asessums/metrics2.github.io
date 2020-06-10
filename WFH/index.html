@@ -1251,11 +1251,13 @@ function clean(chartType){
           .force('charge', d3.forceManyBody().strength([-5]))
           .force('forceX', d3.forceX(d => GenderScale(d.Gender)).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.5))
-          .force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)) + 2)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', 0) //d => enrollmentSizeScale(d.Total) * .5)
           .velocityDecay(0.6)
           .alphaDecay(.02)
           .alpha(0.9)
           .restart()
+
+          simulation.force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)) + 2))
         })
           
       }
@@ -1282,8 +1284,10 @@ function clean(chartType){
           .force('charge', d3.forceManyBody().strength([-5]))
           .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
           .force('forceY', d3.forceY(height/2).strength(.5))
-          .force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)) +1)) //d => enrollmentSizeScale(d.Total) * .5)
+          .force('collide', 0) //d => enrollmentSizeScale(d.Total) * .5)
           .alpha(0.9).alphaDecay(0.02).restart()
+
+      simulation.force('collide', d3.forceCollide(d => (enrollmentSizeScale(d.Total)) +2))
       }
 
        function stepseven(){
