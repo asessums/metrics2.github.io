@@ -968,7 +968,7 @@ function clean(chartType){
         .force('charge', d3.forceManyBody().strength([-25]))
         .force('forceX', d3.forceX(width/2).strength(.5))
         .force('forceY', d3.forceY(height/2).strength(.5))
-        .force('collide', d3.forceCollide(3)
+        .force('collide', d3.forceCollide(3))
         .alpha(0.1).alphaDecay(0.05).restart()
 
     createLegend(20, 50)
