@@ -1030,7 +1030,7 @@ function clean(chartType){
         .force('forceX', d3.forceX(width/2).strength(.5))
         .force('forceY', d3.forceY(height/2).strength(.5))
         .force('collide', d3.forceCollide(d => enrollmentSizeScale(d.Total) + 4))
-        .velocityDecay(0.2)
+        //.velocityDecay(0.2)
         .alpha(0.9)
         .alphaDecay(0.02)
         .restart()
@@ -1153,7 +1153,7 @@ function clean(chartType){
     let xAxis = d3.axisBottom(histXScale)
     svg.append('g')
         .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${height + 10})`)
+        .attr('transform', `translate(0, ${height + heightmargin + 10})`)
         .call(xAxis)
 
     svg.selectAll('.lab-text')
