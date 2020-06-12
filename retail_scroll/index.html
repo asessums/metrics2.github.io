@@ -577,6 +577,7 @@ function render(){
 if (error) throw error;
 // Add circles:
 
+  console.log(rows)
   rows.forEach(function(d) { 
     d.radius = 2;
     d.x = project([d.long, d.lat]).x; 
