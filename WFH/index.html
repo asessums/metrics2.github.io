@@ -1004,7 +1004,7 @@ function drawInitial(){
 
     // Axes for Histogram 
 
-    let histxAxis = d3.axisBottom(enrollmentScale)
+    let histxAxis = d3.axisBottom(enrollmentScale).tickFormat(function(d) { return "$" + d3.format(",.2f")(d); });
 
    /*svg.append('g')
         .attr('class', 'enrolment-axis')
