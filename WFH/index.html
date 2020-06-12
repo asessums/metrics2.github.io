@@ -756,6 +756,7 @@ function drawInitial(){
     let xAxis = d3.axisBottom(salaryXScale)
                     .ticks(4)
                     .tickSize(height + 80)
+                    .tickFormat(d3.format("$.,2f"));
 
     let xAxisGroup = svg.append('g')
         .attr('class', 'first-axis')
