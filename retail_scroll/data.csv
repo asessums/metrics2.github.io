@@ -131,7 +131,6 @@
 40.81629795,-73.91909217,Chase Bank,Services,Essential,Hub,#B8A088,#002E5C,#f5f242
 40.8165468,-73.91891821,Tannen's Stationers,Home & Hobby,Non-essential,Hub,#F28A13,#A5A5A5,#A5A5A5
 40.81624687,-73.91889276,368 Pawnbrokers Inc.,Home & Hobby,Non-essential,Hub,#F28A13,#A5A5A5,#A5A5A5
-40.81651349,-73.91879974,,Misc,Non-essential,Hub,#000000,#A5A5A5,#A5A5A5
 40.81621535,-73.91878247,The Spot,Fashion,Non-essential,Hub,#F9D406,#A5A5A5,#A5A5A5
 40.81650586,-73.91876185,Sterling National Bank,Services,Essential,Hub,#B8A088,#002E5C,#A5A5A5
 40.81647852,-73.91866143,TD Bank,Services,Essential,Hub,#B8A088,#002E5C,#f5f242
@@ -206,7 +205,6 @@
 40.81865831,-73.91414619,Bee & Bee Department Store,Essentials,Essential,Hub,#2E8EF5,#002E5C,#A5A5A5
 40.81532673,-73.916284,149 Medical Supply,Home & Hobby,Essential,Hub,#F28A13,#002E5C,#A5A5A5
 40.81891428,-73.91425041,Blue Star Discount,Essentials,Essential,Hub,#2E8EF5,#002E5C,#A5A5A5
-40.81853537,-73.91426554,,Fashion,Non-essential,Hub,#F9D406,#A5A5A5,#A5A5A5
 40.81882093,-73.91433133,American Grill,Food,Non-essential,Hub,#2ACEE6,#A5A5A5,#A5A5A5
 40.81522711,-73.91603057,1st Bronxcare Pharmacy,Essentials,Essential,Hub,#2E8EF5,#002E5C,#A5A5A5
 40.81874993,-73.91441332,Ramee Fashion,Fashion,Non-essential,Hub,#F9D406,#A5A5A5,#A5A5A5
@@ -270,7 +268,6 @@
 40.81661036,-73.91718096,Ink Flow Tattoos,Body,Non-essential,Hub,#FF57CF,#A5A5A5,#A5A5A5
 40.81631124,-73.91619134,Jay Fish Market,Essentials,Non-essential,Hub,#2E8EF5,#A5A5A5,#A5A5A5
 40.81653791,-73.91704683,$5 Shoe Warehouse,Fashion,Non-essential,Hub,#F9D406,#A5A5A5,#A5A5A5
-40.81669251,-73.91677832,,Home & Hobby,Essential,Hub,#F28A13,#002E5C,#A5A5A5
 40.81650429,-73.91710839,Gold Finger,Fashion,Non-essential,Hub,#F9D406,#A5A5A5,#A5A5A5
 40.81636507,-73.91673222,Dr. Jays,Fashion,Non-essential,Hub,#F9D406,#A5A5A5,#f5f242
 40.81648006,-73.91714946,Sprint,Home & Hobby,Non-essential,Hub,#F28A13,#A5A5A5,#A5A5A5
@@ -382,10 +379,8 @@
 40.81650176,-73.92006277,EMC Pregnancy Center,Groups,Non-essential,Hub,#B9DB46,#A5A5A5,#A5A5A5
 40.81527097,-73.91614826,Bronx Connect ,Groups,Non-essential,Hub,#B9DB46,#A5A5A5,#A5A5A5
 40.81857916,-73.91422642,La Rubia Furniture,Home & Hobby,Non-essential,Hub,#F28A13,#A5A5A5,#A5A5A5
-40.81861691,-73.91419006,,Misc,Non-essential,Hub,#000000,#A5A5A5,#A5A5A5
 40.81675676,-73.92109249,Effort Tax Service,Services,Essential,Hub,#B8A088,#002E5C,#A5A5A5
 40.81724573,-73.92164631,Inks About It... Studios,Body,Non-essential,Hub,#FF57CF,#A5A5A5,#A5A5A5
-40.74646135,-73.89397345,,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74646882,-73.89391253,Deum,Drinks,Non-essential,Jackson,#933EEF,#A5A5A5,#A5A5A5
 40.74702503,-73.89091859,Baskin-Robbins,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#f5f242
 40.74643453,-73.8931609,Auto Repair,Auto,Essential,Jackson,#B29B83,#002E5C,#A5A5A5
@@ -420,7 +415,6 @@
 40.74669438,-73.89389887,Lavalle TV Computer Service,Services,Non-essential,Jackson,#B8A088,#A5A5A5,#A5A5A5
 40.74645068,-73.89407702,Jackson Center Islamic Center & Mosque Inc.,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
 40.74669952,-73.89386118,NICE New Immigrant Community Empowerment,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
-40.74671676,-73.89372481,,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74645447,-73.89403994,UFC - Unidentified Flying Chickens,Drinks,Non-essential,Jackson,#933EEF,#A5A5A5,#A5A5A5
 40.74677898,-73.89375041,Sherpa Consultancy,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.7464627,-73.89395999,Atlixc Bicycle Shop,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
@@ -450,7 +444,6 @@
 40.7470198,-73.89077654,Food Junction,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74702406,-73.89073851,Friends Corner Cafe,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74702863,-73.89069251,Roosevelt Pharmacy & Surgicals,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
-40.74703226,-73.89065921,,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74707264,-73.89032641,Chase Bank,Services,Essential,Jackson,#B8A088,#002E5C,#f5f242
 40.74709843,-73.89009015,Delgado Travel,Misc,Essential,Jackson,#000000,#002E5C,#f5f242
 40.74711008,-73.88998535,Spa Bellagio,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
@@ -480,7 +473,6 @@
 40.74746952,-73.8882728,Star Motors,Auto,Essential,Jackson,#B29B83,#002E5C,#A5A5A5
 40.74759125,-73.88759341,Kelly' Beauty Salon & Spa Unisex,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74737409,-73.88750327,Village Moon ,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
-40.74738453,-73.88740695,,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74738777,-73.88737365,Amor Karaoke & Bar,Drinks,Non-essential,Jackson,#933EEF,#A5A5A5,#A5A5A5
 40.74738975,-73.88735337,UNO Cafe & Billiards,Drinks,Non-essential,Jackson,#933EEF,#A5A5A5,#A5A5A5
 40.74739635,-73.88728317,La Nueva Escuelita Bar Lounge,Drinks,Non-essential,Jackson,#933EEF,#A5A5A5,#A5A5A5
@@ -506,7 +498,6 @@
 40.74752011,-73.88609938,True Colors Bar,Drinks,Non-essential,Jackson,#933EEF,#A5A5A5,#A5A5A5
 40.74750695,-73.88624286,Coatzingo Restaurante,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74656896,-73.89295327,HouseCalls Home Care,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
-40.7465793,-73.89286398,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74752958,-73.88601736,Sebra Salon & Spa,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74756447,-73.88566352,Ilan Ilan,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74753667,-73.88593511,Cositas Ricas,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
@@ -578,7 +569,6 @@
 40.74792711,-73.88221732,El PequeÃ±a Columbia,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74687211,-73.88998007,Agencia De Empleo,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74795882,-73.88191857,Electro Shack,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
-40.74685951,-73.88997866,,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74796902,-73.88181747,La Casa El Bebe,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74797449,-73.88176701,Oculistas Dr. Jorge Won,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74684545,-73.88997538,Consumer Coverage Corp. - Bob Shapiro - Auto Insurance,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
@@ -614,7 +604,6 @@
 40.74819031,-73.87969555,Fantasy Lingerie,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74699651,-73.88893406,Lechon Hornado Ecuatoriano,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74819883,-73.8796155,Pollos Mario,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
-40.74820808,-73.8795397,,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74701377,-73.88876712,PL$,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74698142,-73.88853618,Luna Health Spa,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74688664,-73.88851784,Lunaâ€™s Kitchen & Bar,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
@@ -657,7 +646,6 @@
 40.74739314,-73.88513407,Touch Of Beauty Nails & Spa,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74739632,-73.88510365,Gulxar,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
 40.74739982,-73.88506424,Ecuador Notaria,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
-40.74735371,-73.88505912,,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.7473287,-73.88505591,Reparacion De Computadoras,Services,Non-essential,Jackson,#B8A088,#A5A5A5,#A5A5A5
 40.74740807,-73.88499454,Goldcutz Barber Shop,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74727586,-73.88492306,Jet Peru,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
@@ -687,7 +675,6 @@
 40.74750465,-73.88408881,Botanica Caridad Del Conre,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74736244,-73.8837619,"Borja Law Firm, P.C.",Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74742759,-73.88377367,Threading Place,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
-40.74745784,-73.88377786,,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74747989,-73.88378196,New United Mobile,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
 40.74784585,-73.89454072,Tax Guru,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74750448,-73.88378691,Kung Fu Tea,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#f5f242
@@ -713,7 +700,6 @@
 40.74714281,-73.89284653,Smart Academia,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
 40.74775599,-73.88168553,Magic Garden Flower Shop,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74711586,-73.89280308,Pashmina,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
-40.74776052,-73.88164628,,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74776427,-73.88161102,BL Mobile ,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
 40.74776844,-73.88157294,Studio 316 Tattoos,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74777209,-73.88154108,Delgado Travel,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
@@ -811,7 +797,6 @@
 40.74737612,-73.89233206,Ittadi Bazar,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74741911,-73.89234063,Desh Bidesh Unisex Barber Shop,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74745615,-73.89234735,Massive Wireless,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
-40.7474925,-73.89235354,,Services,Non-essential,Jackson,#B8A088,#A5A5A5,#A5A5A5
 40.74779353,-73.8926495,Piran,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74837006,-73.89252967,Mannan Halal Supermarket,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74843683,-73.89254191,DTNY,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
@@ -909,7 +894,6 @@
 40.74719963,-73.89122274,Himalayan Salon,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74738059,-73.89164475,T Mobile,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#f5f242
 40.74785993,-73.89084906,CS Safety Specialist Corp.,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
-40.7484024,-73.89092316,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74863289,-73.89099297,Zhen & Wei Laundromat,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74860117,-73.89098656,Eshika Printers & Sign,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74893966,-73.89101701,Farine Baking Company,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
@@ -1035,7 +1019,6 @@
 40.74928561,-73.88746161,United States Post Office - Jackson heights ,Services,Essential,Jackson,#B8A088,#002E5C,#f5f242
 40.74660518,-73.89262705,Kanchanjunga Restaurant,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74646861,-73.89215761,BM Tax & Accounting,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
-40.74666577,-73.89184117,,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74567745,-73.88876527,Nachos Bike's Shop,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
 40.74604641,-73.88964889,Rojas Insurance Agency ,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74601465,-73.88957169,Law Office Of Mahfuzur Rahman,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
@@ -1088,7 +1071,6 @@
 40.74997645,-73.88321249,CafÃ© De Colombia Bakery,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74997003,-73.88326212,Taco Bell,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#f5f242
 40.75007404,-73.88425787,Nelly's Nail and More,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
-40.75011344,-73.88426457,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74983539,-73.88448349,The Vitamin Shoppe,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#f5f242
 40.74982922,-73.88454534,Nueva Vida Pharmacy,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74982403,-73.88460462,Chic Lashes & Nails,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
@@ -1126,7 +1108,6 @@
 40.74862351,-73.88422701,Pandora,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#f5f242
 40.74855861,-73.88421431,T-mobile,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#f5f242
 40.74843917,-73.88418992,Old Navy,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#f5f242
-40.74824617,-73.88415142,,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74814441,-73.88413105,Galleria Home Decor,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.7480741,-73.88411663,Fabco Shoes,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#f5f242
 40.74801497,-73.88410696,Ponce De Leon Federal Bank,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
@@ -1141,7 +1122,6 @@
 40.74810752,-73.88389699,Brands & Co,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74813039,-73.88390161,Jorge H. Robles,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74813335,-73.88387508,Teximport Express,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
-40.74821829,-73.88391603,,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74828813,-73.88392824,Emblem Health,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74831371,-73.88393501,N. Brands 26,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74837109,-73.8839447,Perfumania,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#f5f242
@@ -1161,13 +1141,11 @@
 40.74967225,-73.88400428,37th Avenue Grocery Inc.,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74968679,-73.88386978,Naima Pharmacy Corp.,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74970177,-73.88372998,Jackson House Restaurant,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
-40.74970993,-73.88366051,,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.7497227,-73.88354355,EZ Shop,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74951485,-73.88343357,Picanteria El Austro,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74800645,-73.88316394,Mary Beauty Salon,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74800342,-73.8832013,Oxalis Barber,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74796258,-73.88315675,ABC Business Services Corp,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
-40.74795876,-73.88319886,,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.7480297,-73.8829356,The UPS Store,Services,Essential,Jackson,#B8A088,#002E5C,#f5f242
 40.74810976,-73.8829512,Voces Latinas,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
 40.74950517,-73.88321409,Sompong Thai,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
@@ -1187,11 +1165,9 @@
 40.74986463,-73.8821726,JAG Orthotics & Prosthetics,Home & Hobby,Essential,Jackson,#F28A13,#002E5C,#A5A5A5
 40.74986875,-73.88213486,Don Alex,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74987201,-73.88210963,Comfort Shoes,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
-40.74987534,-73.88207966,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74988136,-73.88200624,Canella Beauty Lounge,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74989547,-73.88188625,Oceanic Boil,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74990341,-73.88180955,Samâ€™s Furniture,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
-40.74990797,-73.88175649,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74992023,-73.88164953,Jackson Fabric NY Inc.,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74824675,-73.88130911,Help Home Care ,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.7499488,-73.88136156,La Uruguaya CafÃ© Bar Restaurant,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
@@ -1280,7 +1256,6 @@
 40.74607856,-73.88350283,Budget Pawn EmpeÃ±o,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74609887,-73.8834896,Scape Beauty & Nails,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74614853,-73.88345612,Think Nail Too,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
-40.74612972,-73.88346689,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74617771,-73.88343429,Guayaco's Restaurant,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74624408,-73.88339043,Blue Moon Threading Salon Inc.,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74630763,-73.88334674,Cheong Hei Restaurant ,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
@@ -1300,7 +1275,6 @@
 40.74765137,-73.88044816,Galaxy Services,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74987406,-73.88420923,Rite Aid,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#f5f242
 40.74733938,-73.89141172,Mollika Electronics,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
-40.74697402,-73.89117771,,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74718653,-73.89351622,Big Design Professional Printing,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74775802,-73.8943048,Arafa Hajj Group,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74774589,-73.8942831,Tripway Travel,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
@@ -1322,12 +1296,10 @@
 40.7482581,-73.89312955,Janata Exchange Co Inc.,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74707365,-73.89160154,Prabhu Multiservices,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74825144,-73.8931849,Nabin - Prabin Haircut & Beauty Salon,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
-40.74823703,-73.89320031,,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
 40.74728131,-73.8917511,K2 Delights,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74821293,-73.89308478,Joy Tech Electronics & Computer,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74821795,-73.893041,FATS Friends Accounting & Tax Services,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74664319,-73.89163913,Rainbow Bakery,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
-40.74732602,-73.89148401,,Essentials,Essential,Jackson,#2E8EF5,#002E5C,#A5A5A5
 40.74752797,-73.89143079,Rahim Gift Shop,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74829437,-73.89182364,Marks Home Care,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74839336,-73.89188356,Everest Driving School,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
@@ -1346,7 +1318,6 @@
 40.74816939,-73.88902648,AAA Accounting & Income Tax,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74859669,-73.89102055,Bhima Astrologer,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74815981,-73.89087409,Emiliano Perez ,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
-40.74806833,-73.89090192,,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74787467,-73.89085094,Raza Associates Inc.,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74746218,-73.89038387,Bombay Bridal Boutique Inc.,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74950563,-73.89006093,J & F Hair Studio,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
@@ -1385,29 +1356,23 @@
 40.74728363,-73.89172981,Sukhi New York,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74680954,-73.89279556,The English School Inc.,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
 40.74665498,-73.89184076,SA Collective Academy,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
-40.74687494,-73.88983849,,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74719852,-73.88915055,Indigo Spa,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74719902,-73.88928981,Alca Corp.,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74731427,-73.88463533,Hernan Padilla,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.7471761,-73.88560068,80 St Bodywork,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74691895,-73.88746913,YLC Adult Day Care,Services,Non-essential,Jackson,#B8A088,#A5A5A5,#A5A5A5
 40.74733668,-73.88401505,S & A United Home Care Recruiting Office,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
-40.74678498,-73.88399957,,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74754002,-73.88356078,Yoga For Everyone,Fitness,Non-essential,Jackson,#61CC8C,#A5A5A5,#A5A5A5
-40.74775755,-73.88124524,,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.7478986,-73.88032603,La Piramide,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
-40.74780916,-73.88367512,,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74825814,-73.89184534,Khanâ€™s Tutorial,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
 40.74827447,-73.89181922,"Karnafully Tax, Inc",Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
 40.74827155,-73.89183761,Time Travel Inc,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74762752,-73.89044002,Bhurtel Law Firm,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74763183,-73.89041689,Guru Mitra Sharma,Home & Hobby,Non-essential,Jackson,#F28A13,#A5A5A5,#A5A5A5
 40.74835207,-73.89277269,Pupil Driving School,Groups,Non-essential,Jackson,#B9DB46,#A5A5A5,#A5A5A5
-40.7485235,-73.89163601,,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74644368,-73.89395814,AddN/Tech,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
 40.74810882,-73.88484587,Golden Spring ,Services,Non-essential,Jackson,#B8A088,#A5A5A5,#A5A5A5
 40.74664012,-73.89184048,Amjad Tax Services ,Services,Essential,Jackson,#B8A088,#002E5C,#A5A5A5
-40.74753721,-73.88312063,,Body,Non-essential,Jackson,#FF57CF,#A5A5A5,#A5A5A5
 40.74591355,-73.8904868,Bobba Hubba,Food,Non-essential,Jackson,#2ACEE6,#A5A5A5,#A5A5A5
 40.74876864,-73.88401008,$5 Shoe Wharehouse,Fashion,Non-essential,Jackson,#F9D406,#A5A5A5,#A5A5A5
 40.74772845,-73.88163727,Eliza Tours Travel,Misc,Non-essential,Jackson,#000000,#A5A5A5,#A5A5A5
@@ -1592,8 +1557,6 @@
 40.75261932,-73.97921883,The Change Group,Services,Essential,UES,#B8A088,#002E5C,#A5A5A5
 40.75311017,-73.97962839,Santander Bank,Services,Essential,UES,#B8A088,#002E5C,#f5f242
 40.75282557,-73.97972651,Sugarfina,Food,Non-essential,UES,#2ACEE6,#A5A5A5,#f5f242
-40.75283435,-73.97966232,,Essentials,Essential,UES,#2E8EF5,#002E5C,#A5A5A5
-40.75291185,-73.97941639,,Essentials,Essential,UES,#2E8EF5,#002E5C,#A5A5A5
 40.75259899,-73.97914695,Cohen's Fashion Optical,Fashion,Non-essential,UES,#F9D406,#A5A5A5,#f5f242
 40.75253841,-73.97900473,Chick-fil-A,Food,Non-essential,UES,#2ACEE6,#A5A5A5,#f5f242
 40.75933495,-73.9749862,Omni Berkshire Place,Lodging,Essential,UES,#B29B83,#002E5C,#f5f242
