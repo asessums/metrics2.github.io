@@ -1285,8 +1285,7 @@ function clean(chartType){
       
     function stepsix(){
 
-      svg.selectAll('.all-occs')
-            .attr('opacity', 0)
+
 
       d3.selectAll('.male-text').transition().duration(300)
       .text('More Non-white')
@@ -1296,6 +1295,9 @@ function clean(chartType){
 
       let svg = d3.select("#graph").select('svg')
       clean('isMultiples')
+
+      svg.selectAll('.all-occs')
+            .attr('opacity', 0)
 
       svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
