@@ -601,7 +601,8 @@ if (error) throw error;
   .attr("x",0)
   .attr("y",0)
   .attr("width",200)
-  ..attr("height",100)
+  .attr("height",100)
+  .style("z-index", 3);
 
   simulation = d3.forceSimulation(rows)
     .force('charge', d3.forceManyBody().strength([-25]))
