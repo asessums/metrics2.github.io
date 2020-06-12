@@ -1242,10 +1242,6 @@ function clean(chartType){
       let svg = d3.select("#graph").select('svg')
       clean('isMultiples')
 
-       svg.selectAll('.all-occs')
-            .transition().duration(500)
-            .attr('opacity', 0)
-
       svg.selectAll('.hist-axis').transition().attr('opacity', 0)
 
       svg.selectAll('.dash-line').transition().duration(300)
