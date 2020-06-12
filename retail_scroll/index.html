@@ -701,7 +701,7 @@ console.log(rows)
     
 
     if (window.step == 2){
-      console.log("Backwards, bro!")
+      
     }
 
     map.flyTo({center: [-73.923511, 40.783584], zoom:12});
@@ -721,9 +721,14 @@ console.log(rows)
       .transition().duration(1000)
       .attr("r", 2)
 
-      d3.select(svg)
-        .append("rect")
+      rect = d3.select(".graph")
+        .append("svg")
         .attr("class","rect")
+        .style("position", "absolute")
+        .style("z-index", 2);
+
+        rect
+        .append("rect")
         .attr("x",0)
         .attr("y",0)
         .attr("width", 200)
