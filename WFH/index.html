@@ -1223,7 +1223,7 @@ function clean(chartType){
             .attr('cy', d => histYScale(d.HistCol))
             .attr('fill', d => categoryColorScale(d.Category))
 
-    let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return "$" + d3.format(",.2")(d); });
+    let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return "$" + d3.format(",.0r")(d); });
     svg.append('g')
         .attr('class', 'hist-axis')
         .attr('transform', `translate(0, ${height - heightmargin + 10})`)
