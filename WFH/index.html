@@ -1114,7 +1114,7 @@ function clean(chartType){
     
     clean('none')
 
-    svg.selectAll(".all-occs").attr("opacity",0)
+    svg.selectAll(".all-occs").transition().duration(200).attr("opacity",0)
 
     d3.selectAll(".nodeCover")
                     .transition().duration(200)
