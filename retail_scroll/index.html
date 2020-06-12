@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<link rel="icon" type="image/x-icon" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/img/favicon.ico">
+<link rel="icon" type="image/png" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/img/favicon-16x16.png" sizes="16x16">
+<script src="https://www.hraadvisors.com/wp-includes/js/wp-emoji-release.min.js?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/javascript" defer=""></script>
+<link rel="stylesheet" id="dashicons-css" href="https://www.hraadvisors.com/wp-includes/css/dashicons.min.css?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="https://www.hraadvisors.com/wp-includes/css/dist/block-library/style.min.css?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css" href="https://www.hraadvisors.com/wp-content/themes/madeo/_include/css/bootstrap.min.css?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+
+<link rel="stylesheet" id="main-styles-css" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/style.css?ver=1.10.10" type="text/css" media="all">
+    <link rel="stylesheet" id="custom-css" href="https://www.hraadvisors.com/wp-content/themes/madeo/_include/css/custom.css.php?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+    <link rel="stylesheet" id="dynamic-colors-css" href="https://www.hraadvisors.com/wp-content/themes/madeo/_include/css/color.css.php?ver=a831c2bd8bc4349bb3674b1f5f4d29d3" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome" href="https://www.hraadvisors.com/wp-content/themes/madeo-child/_include/css/font-awesome.css" type="text/css" media="all">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+
+@font-face {
+  font-family: GothamLight;
+  src: url(/Users/ClyneKP/Documents/GitHub/graph-scroll-gh-pages/Gotham-Light.otf);
+} 
+
+  @font-face {
+  font-family: GothamBook;
+  src: url(Gotham-Book.otf);}
+
+  @font-face {
+  font-family: GothamMedium;
+  src: url(/Users/ClyneKP/Documents/GitHub/graph-scroll-gh-pages/Gotham-Medium.otf);
+}
+
+.mapboxgl-ctrl-logo {
+    display: none !important;
+}
+
+  #tooltip {
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, .7);
+    border-radius: 3px;
+    box-shadow: -3px 3px 15px #939393;
+    color: white;
+    padding: 6px;
+    font-family: "Merriweather";
+    font-size: 1.1em;
+    max-width: 400px;
+    z-index: 100;
+}
+
+    .title{
+    color: #2d2d35;
+    font-family: GothamMedium;
+    text-align: center;
+    pointer-events: all;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    margin: auto;
+    width: 80%;
+    font-size: 1.8em;
+    line-height: 1.2em;
+    opacity: 1;
+    justify-content: center
+    }
+
+    .timestamp{
+      user-select: none;
+    pointer-events: all;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    color: #626262;
+    text-align: center;
+    width: auto;
+    font-family: GothamLight;
+    margin: 10px auto;
+    font-size: 12px;
+    opacity: 1;
+    justify-content: center
+    }
+
+    .bodywrapper{
+     padding-left:10%;
+     padding-right:10%;
+    }
+
+body{
+  margin: 0px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1{
+  margin: 50px;
+}
+
+h1{
+  text-align: center;
+}
+
+
+#container{
+  position: relative;
+}
+
+#sections{
+  width: 340px;
+  position: relative;
+}
+
+#sections > div{
+  background: white;
+  opacity: .2;
+  margin-bottom: 200px;
+}
+#sections > div:last-child{
+  margin-bottom: 30px;
+}
+#sections > div.graph-scroll-active{
+  opacity: 1;
+}
+
+#graph{
+  margin-left: 40px;
+  width: 800px;
+  height: 800px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  float: right;
+  z-index: 0
+}
+
+#map {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+@media (max-width: 925px)  {
+  #graph{
+    width: 100%;
+    margin-left: 0px;
+    float: none;
+  }
+
+  #sections{
+    width: auto;
+    position: relative;
+    margin: 0px auto;
+  }
+
+  #sections > div{
+    background: rgba(255,255,255,.5);
+    padding: 10px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 80vh;
+  }
+
+  pre{
+    overflow: hidden;
+  }
+
+  h1{
+    margin: 10px;
+  }
+}
+
+
+circle{
+  fill: steelblue;
+}
+
+.mono{
+  font-family: monospace;
+}
+
+
+
+</style>
+<body class="home page-template page-template-homepage page-template-homepage-php page page-id-5319 chrome page-homepage az wpb-js-composer js-comp-ver-3.6.2 vc_responsive is-device" data-gr-c-s-loaded="true" style="zoom: 1;">
+<div id="tooltip"></div>
+<div id="bg-blue">
+  <header class="normal-header">
+
+  <div class="container">
+      <div class="row hidden-xs hidden-sm visible-md-block visible-lg-block">
+            
+    <div class="col-md-2 col-sm-3 col-xs-6">
+    <div id="logo">
+      <a href="https://www.hraadvisors.com" title="HR&amp;A">
+                              <img class="standard" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo.png" alt="HR&amp;A" width="89" height="41">
+            <img class="retina" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A" width="89" height="41">
+                        </a>
+    </div>
+    </div>
+            
+        <div class="col-md-10 col-sm-9 col-xs-6" style="font-size: 1em;
+    line-height: 1.750em;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;">
+            <!-- Mobile Menu -->
+            <a id="mobile-nav" class="menu-nav" href="#menu-nav"><span class="menu-icon"></span></a>
+            <a id="search-button" class="search-toggle" href="#"><i class="fa fa-search fa-1"></i></a>
+            <!-- Standard Menu -->
+            <div id="menu" class="ajax-menu">
+                <ul id="menu-nav" class="superfish">
+                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5457"><a href="https://www.hraadvisors.com/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8714"><a href="https://www.hraadvisors.com/team/">Team</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9885"><a href="https://www.hraadvisors.com/practice-areas/">Practice Areas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5354"><a href="https://www.hraadvisors.com/services/">Services</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5404"><a href="https://www.hraadvisors.com/portfolio/">Portfolio</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5419"><a href="https://www.hraadvisors.com/news/">News</a></li>
+  
+                <div id="marker" style="left: 838.969px; width: 63px; display: block;"></div>
+                </ul>
+            </div>
+        </div>
+      
+        </div>
+        
+            
+        <div class="row hidden-md hidden-lg visible-xs-block visible-sm-block">
+            
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <!-- Mobile Menu -->
+                <a id="mobile-nav" class="menu-trigger menu-nav" href="#"><span class="menu-icon"></span></a>
+                
+            </div>
+            
+            <div class="col-md-8 col-sm-8 col-xs-8 text-center">
+    <div id="logo">
+      <a href="https://www.hraadvisors.com" title="HR&amp;A">
+                              <img class="standard" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo.png" alt="HR&amp;A" width="89" height="41">
+            <img class="retina" src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A" width="89" height="41">
+                        </a>
+    </div>
+            </div>
+            
+            <div class="col-md-2 col-sm-2 col-xs-2 text-right">
+                <!-- Search Icon -->
+                <script src="https://kit.fontawesome.com/7a4305c6cb.js" crossorigin="anonymous"></script>
+                <a id="search-button" class="search-toggle" href="#"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+            </div>
+</header>
+</div>
+
+<div class="bodywrapper">
+<div class="title" style="opacity: 1;">HR&A Advisors / LiveXYZ Collab</div>
+<div class="timestamp" style="opacity: 1;">By <a target="_blank" href="https://twitter.com/clynekp" alt="@eroston">XXXXXX</a> , <a target="_blank" href="https://twitter.com/clynekp" alt="@eroston">XXXXX</a> , and <a target="_blank" href="https://twitter.com/clynekp" alt="@eroston">XXXXX</a>  | June 4, 2020</div>
+<br>
+<br>
+<br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<br>
+<br>
+<br>
+<div id='container' class='container-1'>
+  <div id='graph'></div>
+  <div id='sections'>
+    <div>
+      <h3>Show All Corridors; colored by category</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+
+    </div>
+
+    <div>
+      <h3>Zoom into one corridor</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Zoom into one corridor</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Zoom into one corridor</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+
+    <div>
+      <h3>Zoom back out</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Remove map; group by corridor</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Color by Essential/ Non-essential</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+    <h3></h3>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </div>
+
+  </div>
+
+</div>
+
+<h1>
+  Graphic Change
+</h1>
+
+<div id='container' class='container-2'>
+  <div id='graph'></div>
+
+  <div id='sections'>
+    <div>
+      <h3>Section 1</h3>
+
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Section 2</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Section 3</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+   </div>
+
+    <div>
+      <h3>Section 4</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+  </div>
+
+
+
+</div>
+<br>
+<br>
+<br>
+</div>
+<footer>
+
+<!-- Start Footer Credits -->
+<section id="footer-content">
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-12 locations">
+                <div class="col-md-6 col-xs-12 col-sm-6 hidden-lg hidden-md hidden-sm hidden-xs social-links-mobile">
+                    <div class="inner-content">
+                        <div class="social-links">
+                                    <li id="menu-item-7109" class="fa fa-linkedin menu-item menu-item-type-custom menu-item-object-custom menu-item-7109"><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/82288">LinkedIn</a></li>
+<li id="menu-item-7110" class="fa fa-twitter menu-item menu-item-type-custom menu-item-object-custom menu-item-7110"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/hraadvisors">Twitter</a></li>
+<li id="menu-item-7111" class="fa fa-facebook menu-item menu-item-type-custom menu-item-object-custom menu-item-7111"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hraadvisors/">Facebook</a></li>
+<li id="menu-item-7112" class="fa fa-slideshare menu-item menu-item-type-custom menu-item-object-custom menu-item-7112"><a target="_blank" rel="noopener noreferrer" href="http://www.slideshare.net/HRAadvisors">Slide Share</a></li>
+                        </div>
+                        
+                        
+                    </div>
+                </div>  
+                
+                
+                
+                               
+            </div>
+            
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                                        <div class="inner-content" id="footer-logo">
+                        <a href="https://www.hraadvisors.com" title="HR&amp;A">
+                        <!--<img src="http://hraadvisors.pairserver.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A" >-->
+                                                                    <img src="https://www.hraadvisors.com/wp-content/uploads/2015/10/logo-retina.png" alt="HR&amp;A">
+                                        </a>
+                    </div>
+            </div>
+                    <!--col-md-offset-4-->
+            <div class="col-md-8">
+            <!-- footer sign up form  -->
+            <div class="col-md-12 subscribe-done" style="display: none;">
+                <h3>Thanks for signing up for our email list. Look out for our insights and updates in your inbox!</h3>
+            </div>    
+            <div class="form-div-container">    
+                <div class="col-md-12 intro-form-desc">
+                    <p>Stay up to date with our insights on the future of city building</p>
+                </div>
+                <div class="col-md-12">
+                    <div class="footer-form">
+                        <div class="row">
+                        <!-- Mailchimp singup form -->
+                        <div id="mc_embed_signup">
+                        <form action="https://hraadvisors.us9.list-manage.com/subscribe/post-json?u=569e6215860c116586a158d8f&amp;id=0f2eb5bc7f&amp;c=?" method="post" class="signup-email-form" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" novalidate="novalidate">
+                        <!-- <div class="indicates-required"><span class="asterisk"></span> indicates required</div> -->
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            
+                                <!-- <label for="mce-FNAME">First Name </label> -->
+                                <input type="text" value="" name="FNAME" required="" class="form-control footer-input" id="mce-FNAME" placeholder="First Name" aria-required="true">
+                           
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            
+                                <!-- <label for="mce-LNAME">Last Name </label> -->
+                                <input type="text" value="" name="LNAME" required="" class="form-control footer-input" id="mce-LNAME" placeholder="Last Name" aria-required="true">
+                            
+                        </div>
+
+                        <div class="col-md-5 col-sm-5 col-xs-10">
+                            
+                                <!-- <label for="mce-EMAIL">Email Address <span class="asterisk"></span>
+                                </label> -->
+                                <input type="email" value="" name="EMAIL" required="" class="required email form-control footer-input" id="mce-EMAIL" placeholder="Email Address" aria-required="true">
+                            
+                        </div>
+                        
+                        
+                        <div id="mce-responses" class="clear">
+                        <div class="response" id="mce-error-response" style="display:none"></div>
+                        <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_569e6215860c116586a158d8f_0f2eb5bc7f" tabindex="-1" value=""></div>
+                        
+                        <div class="col-md-1 col-sm-1 col-xs-2 submit-col">
+                        <!-- <input type="submit" value="Subscribe" name="subscribe" class="submit-btn" id="mc-embedded-subscribe" class="button"> -->
+                            <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button submit-btn"><i class="fa fa-angle-right"></i></button>
+                        </div>
+
+                        <div class="col-md-12" id="subscribe-result"></div>
+                        </form>
+
+                        </div>
+                        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='text';fnames[4]='MMERGE4';ftypes[4]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+                        <!-- Mailchimp signup form end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- end of sign up form  -->
+
+                <div class="col-md-6">
+                    <div class="inner-content">
+                        <ul class="footer-menu">
+                            <li id="menu-item-6124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6124"><a href="https://www.hraadvisors.com/about/">About</a></li>
+<li id="menu-item-8715" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8715"><a href="https://www.hraadvisors.com/contact/">Contact</a></li>
+<li id="menu-item-6125" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6125"><a href="https://www.hraadvisors.com/clients/">Clients</a></li>
+<li id="menu-item-6126" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6126"><a href="https://www.hraadvisors.com/portfolio/">Portfolio</a></li>
+<li id="menu-item-4169" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4169"><a href="https://www.hraadvisors.com/about/awards-and-recognition/">Awards</a></li>
+<li id="menu-item-6127" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6127"><a href="https://www.hraadvisors.com/news/">News</a></li>
+<li id="menu-item-8557" class="no-ajaxy menu-item menu-item-type-post_type menu-item-object-page menu-item-8557"><a href="https://www.hraadvisors.com/career-opportunities/">Careers</a></li>
+<li id="menu-item-5625" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5625"><a href="https://www.hraadvisors.com/services/">Services</a></li>
+<li id="menu-item-7929" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7929"><a href="https://www.hraadvisors.com/privacy-policy/">Privacy Policy</a></li>
+    
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="inner-content">
+                        <div class="social-links visible-sm-block visible-md-block visible-lg-block visible-md-block">
+                                        <li class="fa fa-linkedin menu-item menu-item-type-custom menu-item-object-custom menu-item-7109"><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/82288">LinkedIn</a></li>
+<li class="fa fa-twitter menu-item menu-item-type-custom menu-item-object-custom menu-item-7110"><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/hraadvisors">Twitter</a></li>
+<li class="fa fa-facebook menu-item menu-item-type-custom menu-item-object-custom menu-item-7111"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/hraadvisors/">Facebook</a></li>
+<li class="fa fa-slideshare menu-item menu-item-type-custom menu-item-object-custom menu-item-7112"><a target="_blank" rel="noopener noreferrer" href="http://www.slideshare.net/HRAadvisors">Slide Share</a></li>
+                        </div>
+                        <ul>
+                                        <li>New York</li><li>Los Angeles</li><li>Washington, DC</li><li>Dallas</li><li>Raleigh</li>                                        
+                            
+                        </ul>
+                        <p class="copyright">© 2020 HR&amp;A Advisors. All Rights Reserved</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!-- Start Footer Credits -->
+
+</footer>
+</body>
+<script src="d3v4+jetpack.js"></script>
+<script src="graph-scroll.js"></script>
+<script>
+
+var oldWidth = 0
+function render(){
+  if (oldWidth == innerWidth) return
+  oldWidth = innerWidth
+
+  var width = height = d3.select('#graph').node().offsetWidth
+  var r = 40
+
+
+  if (innerWidth <= 925){
+    width = innerWidth
+    height = innerHeight*1.7
+  }
+
+
+  const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
+  const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
+
+  const categoriesXY = {'Hub': [(width/2), (height/3)],
+                        'UES': [(width/3), (height/3)*2],
+                        'Jackson': [(height/3)*2, (height/3)*2]
+                        }
+
+  console.log(categoriesXY)
+
+
+
+  categoryColorScale = d3.scaleOrdinal(categories, colors)
+  
+  //Mapbox Data
+  mapboxgl.accessToken = 'pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg';
+
+
+
+  var map = new mapboxgl.Map({
+    container: "graph",
+    style: "mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk",
+    center: [-73.923511, 40.783584],
+    zoom: 12,
+    interactive: false,
+    attributionControl: false
+  });
+
+  
+   function project(d) {
+        return map.project(new mapboxgl.LngLat(d[0], d[1]));
+      }
+  
+  var container = map.getCanvasContainer();
+      var svg = d3
+        .select(container)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .style("position", "absolute")
+        .style("z-index", 2);
+
+  d3.csv("data.csv", function(d){
+  return{
+    name: d.name,
+    long: +d.long,
+    lat: +d.lat,
+    category: d.category,
+    essential: d.essential_flag,
+    corridor: d.corridor,
+    color: d.color,
+    color2: d.color2,
+    newx: +d.newx,
+    newy: +d.newy
+  };
+}, function(error, rows){
+if (error) throw error;
+// Add circles:
+
+  rows.forEach(function(d) { 
+    d.radius = 2;
+    d.x = project([d.long, d.lat]).x; 
+    d.y = project([d.long, d.lat]).y; });
+
+  categoryColorScale = d3.scaleOrdinal(categories, colors)
+
+  var circles = svg
+      .selectAll("myCircles")
+      .data(rows)
+      .enter()
+      .append("circle")
+        .attr("r", 1)
+        .attr("class", "circle")
+        .attr("stroke", "#003E7A")
+        .attr("stroke-width", 0)
+        .attr("fill-opacity", 1)
+        .style("fill", function(d){ return d.color});
+
+  simulation = d3.forceSimulation(rows)
+    .force('charge', d3.forceManyBody().strength([-25]))
+    .force('collide', d3.forceCollide(3))
+    .on('tick', tick)
+    .stop()
+
+console.log(rows)
+        function tick(e) {
+        d3.selectAll('.circle')
+            .attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
+      }
+  
+
+  var step = 0
+
+  svg.selectAll('.circle')
+        .on('mouseover', mouseOver)
+        .on('mouseout', mouseOut)
+
+    function mouseOver(d, i){
+        d3.select(this)
+            .transition('mouseover').duration(100)
+            .attr('opacity', 1)
+            .attr('stroke-width', 5)
+            .attr('stroke', 'black')
+            
+        d3.select('#tooltip')
+            .style('left', (d3.event.pageX + 10)+ 'px')
+            .style('top', (d3.event.pageY - 25) + 'px')
+            .style('display', 'inline-block')
+            .html(`<strong>Name:</strong> ${d.name}`)
+
+       console.log(d)
+    }
+    
+    function mouseOut(d, i){
+        d3.select('#tooltip')
+            .style('display', 'none')
+
+        d3.select(this)
+            .transition('mouseout').duration(100)
+            .attr('opacity', 0.8)
+            .attr('stroke-width', 0)
+
+        svg.selectAll('.circle')
+            .attr('stroke-width', 0)
+    }
+  
+ 
+
+      // Render method redraws circles
+      function render() {
+        d3.selectAll('.circle')
+          .attr("cx", function(d){ return project([d.long, d.lat]).x })
+          .attr("cy", function(d){ return project([d.long, d.lat]).y })
+
+      }
+
+      // Call render method, and whenever map changes
+      render();
+      map.on("viewreset", render);
+      map.on("move", render);
+      map.on("moveend", render);
+
+    });
+ 
+
+  /*var circle = svg.append('circle')
+      .attrs({cx: 0, cy: 0, r: r})
+      .attr("opacity",0)*/
+
+  
+
+  /*svg.append('text')
+        .text("Hello")
+        .attr('class','test')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline','middle')
+        .attr('x',r)
+        .attr('y',r)
+        .attr('opacity',0)*/
+
+
+
+  function stepone(){
+
+    map.addLayer(
+          {
+          'id': 'overlay2',
+          'type': 'background',
+          'paint': {
+          'background-color': 'white',
+          'background-opacity': 0,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
+        },
+        'country-label'
+        );
+    
+
+    if (window.step == 2){
+      console.log("Backwards, bro!")
+    }
+
+    map.flyTo({center: [-73.923511, 40.783584], zoom:12});
+
+    d3.select(window).on('resize', render)
+
+    window.step = 1
+
+  }
+
+
+  function steptwo(){
+    map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
+
+      d3
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 2)
+          
+     d3.select(window).on('resize', render)
+
+     window.step = 2
+
+    }
+
+    function hub(){
+    map.flyTo({center: [-73.917654, 40.816110], zoom:15});
+
+      d3
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 2)
+          
+     d3.select(window).on('resize', render)
+
+     window.step = 2
+
+    }
+
+    function madison(){
+    map.flyTo({center: [ -73.974535, 40.759400], zoom:15});
+
+      d3
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 2)
+          
+     d3.select(window).on('resize', render)
+
+     window.step = 2
+
+    }
+
+  
+    function stepthree(){
+
+      if (window.step == 4){
+        simulation  
+        .force('forceX', d3.forceX(d => project([d.long, d.lat]).x).strength(.5))
+        .force('forceY', d3.forceY(d => project([d.long, d.lat]).y).strength(.5))
+        .alpha(0.1).restart()
+        .stop()
+
+      }
+
+        map.setPaintProperty('overlay2', 'background-opacity', 0)
+       
+        
+        d3.selectAll('.circle')
+          .transition().duration(1000)
+          .attr("cx", function(d){ return project([d.long, d.lat]).x })
+          .attr("cy", function(d){ return project([d.long, d.lat]).y })
+        map.flyTo({center: [-73.923511, 40.783584], zoom:12})
+
+        svg
+          .selectAll(".circle")
+          .transition().duration(1000)
+          .attr("r", 1)
+              
+        d3.select(window).on('resize', render)
+        window.step = 3
+        }
+
+    function stepfour(){
+
+
+
+      map.setPaintProperty('overlay2', 'background-opacity', 1)
+
+
+
+      simulation  
+        .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.5))
+        .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]).strength(.5))
+
+      simulation.alpha(0.1).restart()
+
+
+      svg
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .style("fill", function(d){return d.color})
+      .attr("r", 5)
+
+      window.step = 4
+  
+  }
+
+    function stepfive(){
+      d3.selectAll(".circle")
+      .transition().duration(1000)
+      .style("fill", function(d){ return d.color2 } )
+
+
+          window.step = 5
+
+      }
+      
+  function stepsix(){
+
+          window.step = 6
+    }
+
+
+    let functions = [
+        stepone,
+        steptwo,
+        hub,
+        madison,
+        stepthree,
+        stepfour,
+        stepfive,
+        stepsix]
+
+
+
+  
+  var gs = d3.graphScroll()
+      .container(d3.select('.container-1'))
+      .graph(d3.selectAll('container-1 #graph'))
+      .eventId('uniqueId1')  // namespace for scroll and resize events
+      .sections(d3.selectAll('.container-1 #sections > div'))
+      // .offset(innerWidth < 900 ? innerHeight - 30 : 200)
+      .on('active', function(i){
+        functions[i]()    
+      })
+
+
+  var svg2 = d3.select('.container-2 #graph').html('')
+    .append('svg')
+      .attrs({width: width, height: height})
+
+  var path = svg2.append('path')
+
+  var gs2 = d3.graphScroll()
+      .container(d3.select('.container-2'))
+      .graph(d3.selectAll('.container-2 #graph'))
+      .eventId('uniqueId2')  // namespace for scroll and resize events
+      .sections(d3.selectAll('.container-2 #sections > div'))
+      .on('active', function(i){
+        var h = height
+        var w = width
+        var dArray = [
+          [[w/4, h/4], [w*3/4, h/4],  [w*3/4, h*3/4], [w/4, h*3/4]],
+          [[0, 0],     [w*3/4, h/4],  [w*3/4, h*3/4], [w/4, h*3/4]],
+          [[w/2, h/2], [w, h/4],      [w, h],         [w/4, h]],
+          [[w/2, h/2], [w, h/4],      [w, h],         [w/4, h]],
+          [[w/2, h/2], [w, h/2],      [0, 0],         [w/4, h/2]],
+          [[w/2, h/2], [0, h/4],      [0, h/2],         [w/4, 0]],
+        ].map(function(d){ return 'M' + d.join(' L ') })
+
+
+        path.transition().duration(1000)
+            .attr('d', dArray[i])
+            .style('fill', colors[i])
+      })
+
+  
+}
+render()
+
+
+
+</script>
