@@ -720,6 +720,14 @@ console.log(rows)
       .selectAll(".circle")
       .transition().duration(1000)
       .attr("r", 2)
+
+      d3.select(svg)
+        .append("rect")
+        .attr("class","rect")
+        .attr("x",0)
+        .attr("y",0)
+        .attr("width", 200)
+        .attr("height", 100)
           
      d3.select(window).on('resize', render)
 
