@@ -720,19 +720,6 @@ console.log(rows)
       .selectAll(".circle")
       .transition().duration(1000)
       .attr("r", 2)
-
-      rect = d3.select(".graph")
-        .append("svg")
-        .attr("class","rect")
-        .style("position", "absolute")
-        .style("z-index", 2);
-
-        rect
-        .append("rect")
-        .attr("x",0)
-        .attr("y",0)
-        .attr("width", 200)
-        .attr("height", 100)
           
      d3.select(window).on('resize', render)
 
