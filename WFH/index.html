@@ -23,7 +23,7 @@
 
 @font-face {
   font-family: GothamLight;
-  src: url(/WFH/fonts/Gotham-Light.otf);
+  src: url(http://hraadvisors.com/WFH/fonts/Gotham-Light.otf);
 } 
 
   @font-face {
@@ -32,7 +32,7 @@
 
   @font-face {
   font-family: GothamMedium;
-  src: url(/WFH/fonts/Gotham-Medium.otf);
+  src: url(http://hraadvisors.com/WFH/fonts/Gotham-Medium.otf);
 }
 
 .mapboxgl-ctrl-logo {
@@ -82,6 +82,34 @@
     opacity: 1;
     justify-content: center
     }
+
+    .item2 { grid-area: aleft;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .item4 { grid-area: aright;
+      font-weight: bold;
+      cursor: pointer;}
+    .item3 { grid-area: title;
+      text-align: center;}
+    .item5 { grid-area: content; }
+    .item1 { grid-area: cityname;
+    background-color: #d8d8d8;
+      text-align: center;
+      font-weight: bold;
+    }
+
+
+    .grid-container {
+  display: grid;
+  grid-template-areas:
+    'cityname cityname cityname cityname cityname cityname cityname cityname cityname cityname'
+    'content content content content content content content content content content'
+    'content content content content content content content content content content'
+    'content content content content content content content content content content'
+    'content content content content content content content content content content';
+  grid-gap: 1px;
+}
 
     .legendTitle{
     font-family: "GothamMedium";
@@ -825,9 +853,12 @@ function drawInitial(){
             .style('left', (d3.event.pageX + 10)+ 'px')
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
-            .html(`<strong style='color: ${categoriesXY[d.Category][5]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}
+            /*.html(`<strong style='color: ${categoriesXY[d.Category][5]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toTitleCase()}
                 <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
-                <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
+                <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)*/
+            .html(`<div class='grid-container'><div class='item1'><div id = 'text1'> ${d.Major[0] + d.Major.slice(1,).toTitleCase()} </div></div><div class='item2'></div><div class='item4'><div class='item5'>
+              <strong style='color: ${categoriesXY[d.Category][5]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
+              <br><strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)})</div></div>`)
     }
     
     function mouseOut(d, i){
