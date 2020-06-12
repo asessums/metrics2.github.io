@@ -525,9 +525,6 @@ function render(){
                         'Jackson': [(height/3)*2, (height/3)*2]
                         }
 
-  console.log(categoriesXY)
-
-
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
   
@@ -600,7 +597,6 @@ if (error) throw error;
     .on('tick', tick)
     .stop()
 
-console.log(rows)
         function tick(e) {
         d3.selectAll('.circle')
             .attr("cx", function(d) { return d.x; })
@@ -627,7 +623,6 @@ console.log(rows)
             .style('display', 'inline-block')
             .html(`<strong>Name:</strong> ${d.name}`)
 
-       console.log(d)
     }
     
     function mouseOut(d, i){
@@ -700,7 +695,6 @@ console.log(rows)
     
 
     if (window.step == 2){
-      console.log("Backwards, bro!")
     }
 
     map.flyTo({center: [-73.923511, 40.783584], zoom:12});
