@@ -1114,7 +1114,7 @@ function clean(chartType){
     
     clean('none')
 
-    svg.selectAll(".all-occs").transition(500).attr("opacity",0)
+    svg.selectAll(".all-occs").attr("opacity",0)
 
     d3.selectAll(".nodeCover")
                     .transition().duration(200)
@@ -1216,6 +1216,11 @@ function clean(chartType){
 
     simulation.stop()
 
+    svg.selectAll('.all-occs')
+            .transition(2000).duration(2000).delay(1000)
+            .attr('opacity', 1)
+            .text('Occupations by Salary')
+
     svg.selectAll('.occs')
         .transition().duration(1000).delay(200) //(d, i) => i * 1.2).ease(d3.easeBack)
             .attr('r', 5)
@@ -1279,6 +1284,9 @@ function clean(chartType){
       }
       
     function stepsix(){
+
+      svg.selectAll('.all-occs')
+            .attr('opacity', 0)
 
       d3.selectAll('.male-text').transition().duration(300)
       .text('More Non-white')
