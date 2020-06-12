@@ -63,13 +63,13 @@
   border-color: #d8d8d8;
   font-size: 1.1em;
   max-width: 400px;
-  font-family: "GothamMedium";
+  font-family: GothamMedium;
   z-index: 100;
 }
     
     .title{
     color: #2d2d35;
-    font-family: "GothamMedium";
+    font-family: GothamMedium;
     text-align: center;
     pointer-events: all;
     box-sizing: border-box;
@@ -83,36 +83,8 @@
     justify-content: center
     }
 
-    .item2 { grid-area: aleft;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .item4 { grid-area: aright;
-      font-weight: bold;
-      cursor: pointer;}
-    .item3 { grid-area: title;
-      text-align: center;}
-    .item5 { grid-area: content; }
-    .item1 { grid-area: cityname;
-    background-color: #d8d8d8;
-      text-align: center;
-      font-weight: bold;
-    }
-
-
-    .grid-container {
-  display: grid;
-  grid-template-areas:
-    'cityname cityname cityname cityname cityname cityname cityname cityname cityname cityname'
-    'content content content content content content content content content content'
-    'content content content content content content content content content content'
-    'content content content content content content content content content content'
-    'content content content content content content content content content content';
-  grid-gap: 1px;
-}
-
     .legendTitle{
-    font-family: "GothamMedium";
+    font-family: GothamMedium;
     }
 
     .timestamp{
@@ -123,7 +95,7 @@
     color: #626262;
     text-align: center;
     width: auto;
-    font-family: "GothamLight";
+    font-family: GothamLight;
     margin: 10px auto;
     font-size: 12px;
     opacity: 1;
@@ -186,7 +158,7 @@ h1{
 .scrolldown{
 position: relative;
 cursor: initial;
-font-family: "GothamMedium",Helvetica,Arial;
+font-family: GothamMedium,Helvetica,Arial;
 color: #999999;
 background: url(/WFH/img/scroll_buttons.png) no-repeat 0px 0px;
 font-size: 18px;
@@ -853,12 +825,9 @@ function drawInitial(){
             .style('left', (d3.event.pageX + 10)+ 'px')
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
-            /*.html(`<strong style='color: ${categoriesXY[d.Category][5]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toTitleCase()}
+            .html(`<strong style='color: ${categoriesXY[d.Category][5]}'>Occupation:</strong> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}
                 <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
-                <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)*/
-            .html(`<div class='grid-container'><div class='item1'><div id = 'text1'> ${d.Major[0] + d.Major.slice(1,).toTitleCase()} </div></div><div class='item2'></div><div class='item4'><div class='item5'>
-              <strong style='color: ${categoriesXY[d.Category][5]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
-              <br><strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)})</div></div>`)
+                <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
     }
     
     function mouseOut(d, i){
