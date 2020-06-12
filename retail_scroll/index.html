@@ -278,6 +278,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
     </div>
 
+    <div>
+      <h3>Zoom into one corridor</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
+    <div>
+      <h3>Zoom into one corridor</h3>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+    </div>
+
 
     <div>
       <h3>Zoom back out</h3>
@@ -717,6 +727,34 @@ console.log(rows)
 
     }
 
+    function hub(){
+    map.flyTo({center: [-73.917654, 40.816110], zoom:15});
+
+      d3
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 2)
+          
+     d3.select(window).on('resize', render)
+
+     window.step = 2
+
+    }
+
+    function madison(){
+    map.flyTo({center: [ -73.974535, 40.759400], zoom:15});
+
+      d3
+      .selectAll(".circle")
+      .transition().duration(1000)
+      .attr("r", 2)
+          
+     d3.select(window).on('resize', render)
+
+     window.step = 2
+
+    }
+
   
     function stepthree(){
 
@@ -791,6 +829,8 @@ console.log(rows)
     let functions = [
         stepone,
         steptwo,
+        hub,
+        madison,
         stepthree,
         stepfour,
         stepfive,
