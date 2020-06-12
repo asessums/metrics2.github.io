@@ -1299,7 +1299,7 @@ function clean(chartType){
       simulation  
           .force('charge', d3.forceManyBody().strength([-5]))
           .force('forceX', d3.forceX(d => RaceScale(d.Race) ).strength(1))
-          .force('forceY', d3.forceY(height/2).strength(.25))
+          .force('forceY', d3.forceY(height/2).strength(.1))
           .force('collide', d3.forceY(height/2)) //d => enrollmentSizeScale(d.Total) * .5)
           .alpha(0.9).alphaDecay(0.02).restart()
 
