@@ -104,7 +104,10 @@ h1{
 
 
 #container{
-  position: relative;
+    width: auto;
+    position: relative;
+    margin: 0px auto;
+    /* position: relative*/;
 }
 
 #sections{
@@ -125,9 +128,10 @@ h1{
 }
 
 #graph{
-  margin-left: 40px;
-  width: 800px;
-  height: 800px;
+  margin-left: 0px;
+  /*width: 800px;
+  height: 800px;*/
+  width: 100%;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
@@ -605,7 +609,7 @@ if (error) throw error;
     .on('tick', tick)
     .stop()
 
-console.log(rows)
+
         function tick(e) {
         d3.selectAll('.circle')
             .attr("cx", function(d) { return d.x; })
@@ -632,7 +636,6 @@ console.log(rows)
             .style('display', 'inline-block')
             .html(`<strong>Name:</strong> ${d.name}`)
 
-       console.log(d)
     }
     
     function mouseOut(d, i){
