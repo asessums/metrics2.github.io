@@ -531,8 +531,6 @@ function render(){
                         'Jackson': [(height/3)*2, (height/3)*2]
                         }
 
-  console.log(categoriesXY)
-
 
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
@@ -615,7 +613,6 @@ if (error) throw error;
     .on('tick', tick)
     .stop()
 
-console.log(rows)
         function tick(e) {
         d3.selectAll('.circle')
             .attr("cx", function(d) { return d.x; })
@@ -642,7 +639,7 @@ console.log(rows)
             .style('display', 'inline-block')
             .html(`<strong>Name:</strong> ${d.name}`)
 
-       console.log(d)
+
     }
     
     function mouseOut(d, i){
@@ -739,6 +736,9 @@ console.log(rows)
 
      window.step = 2
 
+
+     circle2 = d3.selectAll(".circle")
+     console.log(circle2)
 
      d3.selectAll(".circle")
      .data.filter(function(d) { return d.name == "Envy Nail Salon"; })
