@@ -305,11 +305,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
     </div>
 
     <div>
-      <h3>Color by Chains</h3>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-    </div>
-
-    <div>
     <h3></h3>
     <br>
     <br>
@@ -327,6 +322,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 </div>
 
 <h1>
+  Graphic Change
 </h1>
 
 <div id='container' class='container-2'>
@@ -358,12 +354,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 
 </div>
-
+<br>
+<br>
+<br>
 </div>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-<br>
-<br>
-<br>
 <footer>
 
 <!-- Start Footer Credits -->
@@ -531,6 +525,8 @@ function render(){
                         'Jackson': [(height/3)*2, (height/3)*2]
                         }
 
+  console.log(categoriesXY)
+
 
 
   categoryColorScale = d3.scaleOrdinal(categories, colors)
@@ -573,7 +569,7 @@ function render(){
     corridor: d.corridor,
     color: d.color,
     color2: d.color2,
-    color3: d.color3,
+    color3: d.color3
   };
 }, function(error, rows){
 if (error) throw error;
@@ -598,21 +594,13 @@ if (error) throw error;
         .attr("fill-opacity", 1)
         .style("fill", function(d){ return d.color});
 
-  /*var rect = svg
-  .selectAll("rect")
-  .append("rect")
-  .attr("x",0)
-  .attr("y",0)
-  .attr("width",200)
-  .attr("height",100)
-  .style("z-index", 3);*/
-
   simulation = d3.forceSimulation(rows)
     .force('charge', d3.forceManyBody().strength([-25]))
     .force('collide', d3.forceCollide(3))
     .on('tick', tick)
     .stop()
 
+console.log(rows)
         function tick(e) {
         d3.selectAll('.circle')
             .attr("cx", function(d) { return d.x; })
@@ -639,7 +627,7 @@ if (error) throw error;
             .style('display', 'inline-block')
             .html(`<strong>Name:</strong> ${d.name}`)
 
-
+       console.log(d)
     }
     
     function mouseOut(d, i){
@@ -712,7 +700,7 @@ if (error) throw error;
     
 
     if (window.step == 2){
-      
+      console.log("Backwards, bro!")
     }
 
     map.flyTo({center: [-73.923511, 40.783584], zoom:12});
@@ -736,14 +724,6 @@ if (error) throw error;
 
      window.step = 2
 
-
-     /*circle2 = d3.selectAll(".circle")
-     console.log(circle2)
-
-     d3.selectAll(".circle")
-     .data.filter(function(d) { return d.name == "Envy Nail Salon"; })
-     .attr("r", 8);*/
-
     }
 
     function hub(){
@@ -761,7 +741,7 @@ if (error) throw error;
     }
 
     function madison(){
-    map.flyTo({center: [ -73.975554, 40.757905], zoom:15});
+    map.flyTo({center: [ -73.974535, 40.759400], zoom:15});
 
       d3
       .selectAll(".circle")
@@ -838,16 +818,6 @@ if (error) throw error;
           window.step = 5
 
       }
-
-    function chains(){
-      d3.selectAll(".circle")
-      .transition().duration(1000)
-      .style("fill", function(d){ return d.color3 } )
-
-
-          window.step = 5
-
-      }
       
   function stepsix(){
 
@@ -863,7 +833,6 @@ if (error) throw error;
         stepthree,
         stepfour,
         stepfive,
-        chains,
         stepsix]
 
 
