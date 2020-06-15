@@ -779,7 +779,7 @@ if (error) throw error;
 
       demo.append("rect")
               .attr("width", 300)
-              .attr("height", 250)
+              .attr("height", 100)
               .attr("z-index", 5)
               .style("fill", "white");
 
@@ -788,6 +788,7 @@ if (error) throw error;
               .text("Jackson Heights")
               .attr("dy", "1em")
               .attr("dx", "1em")
+              .attr("class","demotext")
               .style("fill", "black")
               .style("font-size","20px")
               .style("font-weight", "bold")
@@ -834,7 +835,7 @@ if (error) throw error;
 
               newbox.append('image')
               .attr('xlink:href', d.image)
-              .attr("y", 100)
+              .attr("y", 50)
               .attr("dx", "1em")
               .attr('width',200)
               .attr('height', 200)
@@ -884,6 +885,9 @@ if (error) throw error;
         .selectAll(".newbox")
         .attr("opacity", 0)
 
+      d3
+        .selectAll(".demotext")
+        .text("The Hub")
      window.step = 2
 
     }
@@ -898,12 +902,20 @@ if (error) throw error;
           
      d3.select(window).on('resize', render)
 
+     d3
+        .selectAll(".demotext")
+        .text("Madison Avenue")
+
      window.step = 2
 
     }
 
   
     function stepthree(){
+
+       d3
+        .selectAll("demo")
+        .attr("opacity", 0)
 
       if (window.step == 4){
         simulation  
