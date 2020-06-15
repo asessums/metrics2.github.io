@@ -616,7 +616,8 @@ function render(){
     corridor: d.corridor,
     color: d.color,
     color2: d.color2,
-    color3: d.color3
+    color3: d.color3,
+    image: d.image
   };
 }, function(error, rows){
 if (error) throw error;
@@ -798,9 +799,16 @@ if (error) throw error;
               newbox
               .append("text")
               .text(d.name)
-              .attr("dy", ".35em")
-              .attr("dx", ".35em")
+              .attr("dy", "1em")
+              .attr("dx", "1em")
               .style("fill", "black")
+
+              newbox.append('image')
+              .attr('xlink:href', d.image)
+              .attr("dy", "3em")
+              .attr("dx", "1em")
+              .attr('width',200)
+              .attr('height', 200)
               
               /*d3.select('#tooltip')
                   .style('left', (project([d.long, d.lat]).x + 10)+ 'px')
