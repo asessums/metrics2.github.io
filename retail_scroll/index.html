@@ -782,10 +782,15 @@ if (error) throw error;
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
             .html(`<strong>Name:</strong> ${d.name}`)
+
+          }
      d3
       .selectAll(".circle")
       .filter(function (d) { return d.name === "Mita Travel"; })
       .transition().duration(1000)
+      .on('transition', mouseOver)
+      .attr("r", 50)
+      .style("fill", "black")
 
     }
 
