@@ -827,8 +827,8 @@ function drawInitial(){
             .style('top', (d3.event.pageY - 25) + 'px')
             .style('display', 'inline-block')
             .html(`<img src='/WFH/img/${categoriesXY[d.Category][6]}.png' style="width:1.5em; height:1.3em"><strong style='color: ${categoriesXY[d.Category][5]}'><font style="font-size: 1.3em;"> ${d.Major[0] + d.Major.slice(1,).toLowerCase()}</font></strong>
-                <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
-                <br> <strong style='color: ${categoriesXY[d.Category][5]}'>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}`)
+                <br> <font color="black"><strong>Median Salary:</strong> $${d3.format(",.2r")(d.Median)}
+                <br> <strong>Total Employed:</strong> ${d3.format(",.2r")(d.Total)}</font>`)
     }
     
     function mouseOut(d, i){
