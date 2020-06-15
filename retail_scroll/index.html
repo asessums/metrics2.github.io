@@ -782,25 +782,36 @@ if (error) throw error;
               .attr('stroke', 'black')
 
               console.log(d)
+
+              svg
+              .append("rect")
+              .attr("x", (project([d.long, d.lat]).x + 10)+ 'px')
+              .attr("y", (project([d.long, d.lat]).y - 25) + 'px')
+              .attr("class","myrect")
+              .attr("width", 200)
+              .attr("height", 200)
+              .attr("z-index", 5)
+              .style("fill", "white");
               
               
-              d3.select('#tooltip')
+              /*d3.select('#tooltip')
                   .style('left', (project([d.long, d.lat]).x + 10)+ 'px')
                   .style('top', (project([d.long, d.lat]).y - 25) + 'px')
                   .style('display', 'inline-block')
-                  .html(`<strong>Name:</strong> ${d.name}`)
+                  .html(`<strong>Name:</strong> ${d.name}`)*/
 
             })
 
 
-        svg
+        /*svg
       .append("rect")
         .attr("x", width/2)
         .attr("y", height/2)
         .attr("class","myrect")
         .attr("width", 200)
         .attr("height", 200)
-        .style("fill", "white");
+        .attr("z-index", 5)
+        .style("fill", "white");*/
     }
 
     function hub(){
