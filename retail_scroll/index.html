@@ -769,19 +769,18 @@ if (error) throw error;
 
      d3.select(window).on('resize', function(){
 
+      console.log("Heyyyy")
+
       d3
         .selectAll(".circle")
         .filter(function (d) { return d.name === "Afghan Kebab & Grill"; })
         .each(function (d, i){
               var $this = d3.select(this)
               
-
-              $this.transition('mouseover').duration(100)
+              $this
               .attr('opacity', 1)
               .attr('stroke-width', 5)
               .attr('stroke', 'black')
-
-              console.log(d)
 
               newbox = svg
               .append("svg")
