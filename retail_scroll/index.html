@@ -779,10 +779,11 @@ if (error) throw error;
             .html(`<strong>Name:</strong> ${d.name}`)
 
           }
-     d3
+     var Mita = d3
       .selectAll(".circle")
       .filter(function (d) { return d.name === "Mita Travel"; })
-      .call(mouseOver)
+
+      mouseOver(Mita)
 
     }
 
