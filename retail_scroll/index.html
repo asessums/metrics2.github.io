@@ -781,10 +781,8 @@ if (error) throw error;
               .attr('stroke-width', 5)
               .attr('stroke', 'black')
 
-              var offset = $this.offset()
-
               console.log(d)
-              console.log(offset)
+              
               
               d3.select('#tooltip')
                   .style('left', (project([d.long, d.lat]).x + 10)+ 'px')
