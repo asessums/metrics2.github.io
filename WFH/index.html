@@ -616,7 +616,7 @@ function createScales(){
     enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([widthmargin, width-widthmargin])
     enrollmentSizeScale = d3.scaleLinear().domain(d3.extent(dataset, d=> d.Total)).range([3,30])
     histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([widthmargin, width-widthmargin])
-    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height-heightmargin-15, 0])
+    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height-heightmargin-15, heightmargin])
 }
 
 function createLegend(x, y){
