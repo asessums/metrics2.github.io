@@ -1232,7 +1232,7 @@ function clean(chartType){
     let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return "$" + d3.format(",.2r")(d); });
     svg.append('g')
         .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${height - heightmargin + 10})`)
+        .attr('transform', `translate(0, ${height - heightmargin + 10 - 25})`)
         .call(xAxis)
 
     svg.selectAll('.lab-text')
