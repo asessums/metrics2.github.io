@@ -766,8 +766,6 @@ if (error) throw error;
       .selectAll(".circle")
       .transition().duration(1000)
       .attr("r", 2)
-          
-     d3.select(window).on('resize', render)
 
       function render2(){
 
@@ -800,8 +798,6 @@ if (error) throw error;
               .attr("dx", "1em")
               .style("fill", "black")
               .style("font-weight", "bold")
-
-      console.log("Heyyyy")
 
       d3
         .selectAll(".circle")
@@ -913,9 +909,11 @@ if (error) throw error;
   
     function stepthree(){
 
+      map.off("moveend", render2)
+
        d3
         .selectAll(".demo")
-        .attr("opacity", 0)
+        .remove()
 
       if (window.step == 4){
         simulation  
