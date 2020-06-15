@@ -779,11 +779,11 @@ if (error) throw error;
               .attr('stroke-width', 5)
               .attr('stroke', 'black')
               
-          /*d3.select('#tooltip')
-              .style('left', (d3.event.pageX + 10)+ 'px')
-              .style('top', (d3.event.pageY - 25) + 'px')
+          d3.select('#tooltip')
+              .style('left', (project([d.long, d.lat]).x + 10)+ 'px')
+              .style('top', (project([d.long, d.lat]).y - 25) + 'px')
               .style('display', 'inline-block')
-              .html(`<strong>Name:</strong> ${d.name}`)*/
+              .html(`<strong>Name:</strong> ${d.name}`)
 
             })
 
