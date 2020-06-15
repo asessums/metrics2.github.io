@@ -790,6 +790,15 @@ if (error) throw error;
             })
 
 
+        svg
+      .selectAll("myRect")
+      .enter()
+      .append("rect")
+        .attr("x", width/2)
+        .attr("y", height/2)
+        .attr("width", 200)
+        .attr("height", 200)
+        .style("fill", "white");
     }
 
     function hub(){
