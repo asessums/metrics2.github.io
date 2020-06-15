@@ -53,6 +53,48 @@
     z-index: 100;
 }
 
+#photo1 {
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, .7);
+    border-radius: 3px;
+    box-shadow: -3px 3px 15px #939393;
+    color: white;
+    padding: 6px;
+    font-family: "Merriweather";
+    font-size: 1.1em;
+    max-width: 400px;
+    z-index: 100;
+}
+
+#photo2 {
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, .7);
+    border-radius: 3px;
+    box-shadow: -3px 3px 15px #939393;
+    color: white;
+    padding: 6px;
+    font-family: "Merriweather";
+    font-size: 1.1em;
+    max-width: 400px;
+    z-index: 100;
+}
+
+#photo3 {
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, .7);
+    border-radius: 3px;
+    box-shadow: -3px 3px 15px #939393;
+    color: white;
+    padding: 6px;
+    font-family: "Merriweather";
+    font-size: 1.1em;
+    max-width: 400px;
+    z-index: 100;
+}
+
     .title{
     color: #2d2d35;
     font-family: GothamMedium;
@@ -187,6 +229,9 @@ circle{
 </style>
 <body class="home page-template page-template-homepage page-template-homepage-php page page-id-5319 chrome page-homepage az wpb-js-composer js-comp-ver-3.6.2 vc_responsive is-device" data-gr-c-s-loaded="true" style="zoom: 1;">
 <div id="tooltip"></div>
+<div id="photo1"></div>
+<div id="photo2"></div>
+<div id="photo3"></div>
 <div id="bg-blue">
   <header class="normal-header">
 
@@ -728,6 +773,7 @@ if (error) throw error;
       .selectAll(".circle")
       .filter(function (d) { return d.name === "Mita Travel"; })
       .transition().duration(1000)
+      .on('transition', mouseOver)
       .attr("r", 50)
       .style("fill", "black")
 
