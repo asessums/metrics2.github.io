@@ -771,6 +771,34 @@ if (error) throw error;
 
       function render2(){
 
+      demo = svg
+              .append("svg")
+              .attr("x", 0)
+              .attr("y", 0)
+              .attr("class","demo")
+
+      demo.append("rect")
+              .attr("width", 300)
+              .attr("height", 250)
+              .attr("z-index", 5)
+              .style("fill", "white");
+
+      demo
+              .append("text")
+              .text("Jackson Heights")
+              .attr("dy", "1em")
+              .attr("dx", "1em")
+              .style("fill", "black")
+              .style("font-weight", "bold")
+
+      demo
+              .append("text")
+              .text("Poverty Rate:")
+              .attr("dy", "3em")
+              .attr("dx", "1em")
+              .style("fill", "black")
+              .style("font-weight", "bold")
+
       console.log("Heyyyy")
 
       d3
@@ -792,7 +820,7 @@ if (error) throw error;
               
               newbox.append("rect")
               .attr("width", 200)
-              .attr("height", 200)
+              .attr("height", 250)
               .attr("z-index", 5)
               .style("fill", "white");
               
@@ -805,7 +833,7 @@ if (error) throw error;
 
               newbox.append('image')
               .attr('xlink:href', d.image)
-              .attr("dy", "3em")
+              .attr("y", 100)
               .attr("dx", "1em")
               .attr('width',200)
               .attr('height', 200)
