@@ -811,7 +811,7 @@ if (error) throw error;
           
      d3.select(window).on('resize', render)
 
-     d3.select(window).on('resize', render2)
+     map.on("moveend", render2);
 
 
      window.step = 2
