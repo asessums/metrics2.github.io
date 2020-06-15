@@ -879,6 +879,10 @@ if (error) throw error;
           
      d3.select(window).on('resize', render)
 
+     d3
+        .selectAll(".newbox")
+        .attr("opacity", 0)
+
      window.step = 2
 
     }
