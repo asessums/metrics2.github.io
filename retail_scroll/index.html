@@ -773,13 +773,18 @@ if (error) throw error;
         .selectAll(".circle")
         .filter(function (d) { return d.name === "Mita Travel"; })
         .each(function (d, i){
-              d3.select(this)
-              .transition('mouseover').duration(100)
+              var $this = d3.select(this)
+              
+
+              $this.transition('mouseover').duration(100)
               .attr('opacity', 1)
               .attr('stroke-width', 5)
               .attr('stroke', 'black')
 
-              console.log(project([d.long, d.lat]).x)
+              var offset = $this.offset()
+
+              console.log(d)
+              console.log(offset)
               
               d3.select('#tooltip')
                   .style('left', (project([d.long, d.lat]).x + 10)+ 'px')
