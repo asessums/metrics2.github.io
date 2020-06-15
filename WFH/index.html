@@ -616,7 +616,7 @@ function createScales(){
     enrollmentScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Total)).range([widthmargin, width-widthmargin])
     enrollmentSizeScale = d3.scaleLinear().domain(d3.extent(dataset, d=> d.Total)).range([3,30])
     histXScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.Midpoint)).range([widthmargin, width-widthmargin])
-    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height-heightmargin-25, 0])
+    histYScale = d3.scaleLinear().domain(d3.extent(dataset, d => d.HistCol)).range([height-heightmargin-15, 0])
 }
 
 function createLegend(x, y){
@@ -988,7 +988,7 @@ function drawInitial(){
         .call(scatterxAxis)
         .attr('class', 'scatter-x')
         .attr('opacity', 0)
-        .attr('transform', `translate(0, ${height - heightmargin + 10 -25})`)
+        .attr('transform', `translate(0, ${height - heightmargin + 10 -15})`)
         .call(g => g.select('.domain')
             .remove())
     
@@ -1232,7 +1232,7 @@ function clean(chartType){
     let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return "$" + d3.format(",.2r")(d); });
     svg.append('g')
         .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${height - heightmargin + 10 - 25})`)
+        .attr('transform', `translate(0, ${height - heightmargin + 10 - 15})`)
         .call(xAxis)
 
     svg.selectAll('.lab-text')
