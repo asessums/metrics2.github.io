@@ -42,10 +42,12 @@
   #tooltip {
     position: absolute;
     display: none;
-    background: rgba(0, 0, 0, .7);
-    border-radius: 3px;
+    background: white;
+    border-style: solid;
+    border-radius: 1px;
+    border-color: #d8d8d8;
     box-shadow: -3px 3px 15px #939393;
-    color: white;
+    color: black;
     padding: 6px;
     font-family: "Merriweather";
     font-size: 1.1em;
@@ -987,6 +989,23 @@ if (error) throw error;
               .attr("dx", "1.8em")
               .style("fill", "black")
               .style("font-weight", "bold")
+      demo
+              .append("text")
+              .text("Percent Non-white:")
+              .attr('class','MHI')
+              .attr("dy", "4.5em")
+              .attr("dx", "1.8em")
+              .style("fill", "black")
+              .style("font-weight", "bold")
+
+      demo
+              .append("text")
+              .text("Worker Density:")
+              .attr('class','MHI')
+              .attr("dy", "5.5em")
+              .attr("dx", "1.8em")
+              .style("fill", "black")
+              .style("font-weight", "bold")         
 
       d3
         .selectAll(".circle")
