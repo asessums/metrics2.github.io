@@ -1007,22 +1007,28 @@ if (error) throw error;
               
               newbox.append("rect")
               .attr("width", 200)
-              .attr("height", 250)
+              .attr("height", 235)
               .attr("z-index", 5)
+              .attr("stroke", '#d8d8d8')
+              .attr('stroke-width', '2px')
+              .attr('rx', '10')
               .style("fill", "white");
               
               newbox
               .append("text")
               .text(d.name)
-              .attr("dy", "1em")
+              .attr("dy", "2em")
               .attr("dx", "1em")
               .style("fill", "black")
+              .style("font-weight", "bold")
 
               newbox.append('image')
               .attr('xlink:href', d.image)
-              .attr("y", 50)
+              .attr("y", 35)
               .attr("dx", "1em")
               .attr('width',200)
+              .attr('clip-path',"inset(0px 0px 0px 0px round 10px)")
+              .attr('rx', '10px 10px 10px 10px')
               .attr('height', 200)
               
               /*d3.select('#tooltip')
