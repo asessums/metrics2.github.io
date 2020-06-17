@@ -168,7 +168,7 @@ h1{
 
 #graph{
   margin-left: 40px;
-  width: 800px;
+  width: 53.4187179%;
   height: 800px;
   position: -webkit-sticky;
   position: sticky;
@@ -722,6 +722,20 @@ Many cities are deeply concerned that COVID-19-related shutdowns will put many r
 <script src="graph-scroll.js"></script>
 <script>
 
+var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+
+d3.select('#graph')
+  /*.attr("height",x*.853788)
+  .attr("width", y*.416666)*/
+  .attr("height",800)
+  .attr("width", 800)
+
 var oldWidth = 0
 function render(){
   if (oldWidth == innerWidth) return
@@ -840,13 +854,19 @@ if (error) throw error;
       .enter()
       .append("circle")
       .filter(function (d) { return d.status === "Occupied"; })
-        .attr("r", 1)
-        .attr("class", "circle")
-        .attr("id", "circle")
-        .attr("stroke", "#003E7A")
-        .attr("stroke-width", 0)
-        .attr("fill-opacity", 1)
-        .style("fill", function(d){ return categoryColors[d.category][0]});
+      .each(function (d, i){
+              var $this = d3.select(this)
+              
+              $this
+              .attr("r", 1)
+              .attr("class", "circle")
+              .attr("id", "circle")
+              .attr("stroke", "#003E7A")
+              .attr("stroke-width", 0)
+              .attr("fill-opacity", 1)
+              .style("fill", function(d){ return categoryColors[d.category][0]})
+
+            })
 
   var unoccupiedCircles = svg
       .selectAll("myCircles")
@@ -854,14 +874,20 @@ if (error) throw error;
       .enter()
       .append("circle")
       .filter(function (d) { return d.status === "Unoccupied"; })
-        .attr("r", 0)
-        .attr("opacity", 0)
-        .attr("class", "unoccupiedCircle")
-        .attr("id", "circle")
-        .attr("stroke", "#003E7A")
-        .attr("stroke-width", 0)
-        .attr("fill-opacity", 1)
-        .style("fill", "red");
+      .each(function (d, i){
+            var $this = d3.select(this)
+            
+            $this
+            .attr("r", 0)
+            .attr("opacity", 0)
+            .attr("class", "unoccupiedCircle")
+            .attr("id", "circle")
+            .attr("stroke", "#003E7A")
+            .attr("stroke-width", 0)
+            .attr("fill-opacity", 1)
+            .style("fill", "red");
+
+          })
 
 
   simulation = d3.forceSimulation(rows)
@@ -934,13 +960,16 @@ if (error) throw error;
 
       demo = svg
               .append("svg")
-              .attr("x", 0)
-              .attr("y", 0)
+              .attr("x", width*.05)
+              .attr("y", height*.05)
               .attr("class","demo")
 
       demo.append("rect")
               .attr("width", 300)
               .attr("height", 100)
+              .attr("stroke", '#d8d8d8')
+              .attr('stroke-width', '2px')
+              .attr('rx', '10')
               .attr("z-index", 5)
               .style("fill", "white");
 
@@ -958,8 +987,8 @@ if (error) throw error;
               .append("text")
               .text("Median Household Income:")
               .attr('class','MHI')
-              .attr("dy", "3em")
-              .attr("dx", "1em")
+              .attr("dy", "3.5em")
+              .attr("dx", "1.8em")
               .style("fill", "black")
               .style("font-weight", "bold")
 
