@@ -722,9 +722,15 @@ Many cities are deeply concerned that COVID-19-related shutdowns will put many r
 <script src="graph-scroll.js"></script>
 <script>
 
-graph = document.getElementById('graph')
-graphwidth = graph.getAttribute('width')
-nodewidth = graphwidth*.00625
+var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+nodewidth = x*.00260416666
+
+console.log(nodewidth)
 
 
 var oldWidth = 0
@@ -832,7 +838,6 @@ function render(){
 if (error) throw error;
 // Add circles:
 
-  console.log(rows)
   rows.forEach(function(d) { 
     d.radius = 2;
     d.x = project([d.long, d.lat]).x; 
