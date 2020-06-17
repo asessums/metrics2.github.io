@@ -169,7 +169,7 @@ h1{
 #graph{
   margin-left: 40px;
   width: 53.4187179%;
-  height: 800px;
+  height: 90vh;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
@@ -722,19 +722,10 @@ Many cities are deeply concerned that COVID-19-related shutdowns will put many r
 <script src="graph-scroll.js"></script>
 <script>
 
-var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-    x = w.innerWidth || e.clientWidth || g.clientWidth,
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+graph = document.getElementById('graph')
+graphwidth = graph.getAttribute('width')
+nodewidth = graphwidth*.00625
 
-
-d3.select('#graph')
-  /*.attr("height",x*.853788)
-  .attr("width", y*.416666)*/
-  .attr("height",800)
-  .attr("width", 800)
 
 var oldWidth = 0
 function render(){
@@ -765,7 +756,7 @@ function render(){
 
   const chainColors = {'TRUE':['#A5A5A5'],'FALSE':['#f5f242']}
 
-  const occRadius = {'Occupied':[6],'Unoccupied':[0]}
+  const occRadius = {'Occupied':[nodewidth+1],'Unoccupied':[0]}
 
 
   categoryColorScale = d3.scaleOrdinal(colors, categories)
@@ -1261,7 +1252,7 @@ if (error) throw error;
       .selectAll(".circle")
       .transition().duration(1000)
       .style("fill", function(d){return categoryColors[d.category][0]})
-      .attr("r", 5)
+      .attr("r", nodewidth)
 
       window.step = 4
   
@@ -1348,7 +1339,7 @@ if (error) throw error;
       .attr("r",0)
       d3.selectAll(".unoccupiedCircle")
       .transition().duration(2000)
-      .attr("r",5)
+      .attr("r",nodewidth)
 
 
 
@@ -1392,7 +1383,7 @@ if (error) throw error;
 
       if(window.step == 8){
         d3.selectAll(".circle")
-        .attr("r", 5)
+        .attr("r", nodewidth)
 
         simulation.restart()
       }
