@@ -753,9 +753,9 @@ function render(){
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
   const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
 
-  const categoriesXY = {'Hub': [(width/2), (height/3)],
-                        'Madison': [(width/3), (height/3)*2],
-                        'Jackson': [(height/3)*2, (height/3)*2]
+  const categoriesXY = {'Hub': [(width/2), (height/3), '#012169'],
+                        'Madison': [(width/3), (height/3)*2, '#EB001B'],
+                        'Jackson': [(height/3)*2, (height/3)*2, '#009A00']
                         }
 
   const categoryColors = {'Food':['#2ACEE6'],'Body':['#FF57CF'],'Groups':['#B9DB46'],'Misc':['#000000'],'Fitness':['#61CC8C'],'Essentials':['#2E8EF5'],'Services':['#B8A088'],'Lodging':['#B29B83'],'Home & Hobby':['#F28A13'],'Fashion':['#F9D406'],'Auto':['#B29B83'],'Drinks':['#933EEF'],'Arts & Culture':['#E0A0FD'],'Entertainment':['#C35E4B']}
@@ -963,8 +963,8 @@ if (error) throw error;
               .attr("class","demo")
 
       demo.append("rect")
-              .attr("width", 300)
-              .attr("height", 100)
+              .attr("width", 375)
+              .attr("height", 75)
               .attr("stroke", '#d8d8d8')
               .attr('stroke-width', '2px')
               .attr('rx', '10')
@@ -974,38 +974,40 @@ if (error) throw error;
       demo
               .append("text")
               .text("Jackson Heights")
-              .attr("dy", "1em")
+              .attr("dy", "1.5em")
               .attr("dx", "1em")
               .attr("class","demotext")
-              .style("fill", "black")
+              .style("fill", '#009A00')
               .style("font-size","20px")
               .style("font-weight", "bold")
 
-      demo
+      var MHI = demo
               .append("text")
-              .text("Median Household Income:")
+              .text("Median Household Income: ")
               .attr('class','MHI')
-              .attr("dy", "3.5em")
+              .attr("dy", "4em")
               .attr("dx", "1.8em")
               .style("fill", "black")
               .style("font-weight", "bold")
-      demo
+      
+      MHI.append("tspan")
+              .style("font-weight", "normal")
+              .text('$56,000 (Citywide: $62,000)')
+              .attr("class","MHItext")
+      
+      var Density = demo
               .append("text")
-              .text("Percent Non-white:")
+              .text("Worker Density: ")
               .attr('class','MHI')
-              .attr("dy", "4.5em")
+              .attr("dy", "5em")
               .attr("dx", "1.8em")
               .style("fill", "black")
               .style("font-weight", "bold")
 
-      demo
-              .append("text")
-              .text("Worker Density:")
-              .attr('class','MHI')
-              .attr("dy", "5.5em")
-              .attr("dx", "1.8em")
-              .style("fill", "black")
-              .style("font-weight", "bold")         
+      Density.append("tspan")
+              .style("font-weight", "normal")
+              .text('4K Workers per Square Mile (Citywide: 7K)')
+              .attr("class","Densitytext")         
 
       d3
         .selectAll(".circle")
@@ -1061,17 +1063,41 @@ if (error) throw error;
      }
 
 
+    function load_Hub(){
+
+      d3.selectAll('.MHItext')
+      .text('$21,800 (Citywide: $62,000)')
+
+      d3.selectAll('.Densitytext')
+      .text('8K Workers per Square Mile (Citywide: 7K)')
+
+      d3
+        .selectAll(".demotext")
+        .text("The Hub")
+        .style('fill', '#012169')
+
+
+     }
+
+     function load_Madison(){
+
+      d3.selectAll('.MHItext')
+      .text('$146,600 (Citywide: $62,000)')
+
+      d3.selectAll('.Densitytext')
+      .text('312K Workers per Square Mile (Citywide: 7K)')
+
+     d3
+        .selectAll(".demotext")
+        .text("Madison Avenue")
+        .style('fill','#EB001B')
+
+
+     }
+
+
 
   function stepone(){
-
-    map.off("moveend", load_Jackson)
-    d3
-        .selectAll(".demo")
-        .remove()
-
-    d3
-        .selectAll(".newbox")
-        .remove()
 
     map.addLayer(
           {
@@ -1089,6 +1115,16 @@ if (error) throw error;
         },
         'country-label'
         );
+
+
+    map.off("moveend", load_Jackson)
+    d3
+        .selectAll(".demo")
+        .remove()
+
+    d3
+        .selectAll(".newbox")
+        .remove()
     
 
     if (window.step == 2){
@@ -1131,7 +1167,12 @@ if (error) throw error;
 
     function hub(){
 
+    d3
+        .selectAll(".newbox")
+        .remove()
+
     map.off("moveend", load_Jackson)
+    map.on("moveend", load_Hub);
 
     map.flyTo({center: [-73.917654, 40.816110], zoom:15});
 
@@ -1140,20 +1181,17 @@ if (error) throw error;
       .transition().duration(1000)
       .attr("r", 2)
           
-     d3.select(window).on('resize', render)
 
-     d3
-        .selectAll(".newbox")
-        .remove()
-
-      d3
-        .selectAll(".demotext")
-        .text("The Hub")
      window.step = 2
 
     }
 
     function madison(){
+
+    map.setPaintProperty('overlay2', 'background-opacity', 0)
+
+    map.off("moveend", load_Hub)
+    map.on("moveend", load_Madison);
     map.flyTo({center: [ -73.974535, 40.759400], zoom:15});
 
       d3
@@ -1161,11 +1199,6 @@ if (error) throw error;
       .transition().duration(1000)
       .attr("r", 2)
           
-     d3.select(window).on('resize', render)
-
-     d3
-        .selectAll(".demotext")
-        .text("Madison Avenue")
 
      window.step = 2
 
@@ -1173,6 +1206,8 @@ if (error) throw error;
 
   
     function stepthree(){
+
+      map.off("moveend", load_Madison)
 
       d3.selectAll(".label")
       .remove()
@@ -1211,6 +1246,10 @@ if (error) throw error;
 
     function stepfour(){
 
+       d3
+        .selectAll(".citywide")
+        .remove()
+
       svg.selectAll('.circle')
             .attr('stroke-width', 0)
 
@@ -1233,7 +1272,7 @@ if (error) throw error;
               .attr("x", width*.23958)
               .attr("y", height*.816666)
               .attr("class","label")
-              .style("fill", "black")
+              .style("fill", '#EB001B')
               .attr("opacity",0)
               .style("font-size","20px")
               .style("font-weight", "bold")
@@ -1245,7 +1284,7 @@ if (error) throw error;
               .attr("x", width*.716666)
               .attr("y", height*.816666)
               .attr("class","label")
-              .style("fill", "black")
+              .style("fill", '#009A00')
               .attr("opacity",0)
               .style("font-size","20px")
               .style("font-weight", "bold")
@@ -1257,15 +1296,13 @@ if (error) throw error;
               .attr("x", width*.4875)
               .attr("y", height*.364583)
               .attr("class","label")
-              .style("fill", "black")
+              .style("fill", '#012169')
               .attr("opacity",0)
               .style("font-size","20px")
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
               .transition(2000).duration(2000).delay(1000)
               .attr("opacity",1)
-
-
 
       simulation
         .force('charge', d3.forceManyBody().strength([-3]))  
@@ -1290,10 +1327,54 @@ if (error) throw error;
 
     function vacancy(){
 
+      map.setPaintProperty('overlay2', 'background-opacity', 1)
+
+    
+
       let svg = d3.select("#graph")
                     .select('svg')
                     .attr('width', width)
                     .attr('height',width)
+
+
+      citywide = svg
+              .append("svg")
+              .attr("x", width*.05)
+              .attr("y", height*.05)
+              .attr("class","citywide")
+              .attr('opacity',0)
+
+      citywide.append("rect")
+              .attr("width", 140)
+              .attr("height", 70)
+              .attr("stroke", '#d8d8d8')
+              .attr('stroke-width', '2px')
+              .attr('rx', '10')
+              .attr("z-index", 5)
+              .style("fill", "white");
+
+      citywide
+              .append("text")
+              .text("Citywide")
+              .attr("dy", "1.5em")
+              .attr("dx", "1em")
+              .attr("class","demotext")
+              .style("fill", "black")
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+
+      var value = citywide
+              .append("text")
+              .text("15%")
+              .attr('class','cityvalue')
+              .attr("dy", "3.75em")
+              .style("font-size","14px")
+              .attr("dx", "1.5em")
+              .style("fill", "black")
+              .style("font-weight", "bold")
+
+      citywide.transition().duration(1000)
+      .attr('opacity',1)
 
       if(window.step == 6){
       d3.selectAll("#hub_text")
@@ -1379,6 +1460,11 @@ if (error) throw error;
 
       function essential(){
 
+      d3.selectAll('.cityvalue')
+      .text('29%')
+
+      map.setPaintProperty('overlay2', 'background-opacity', 1)
+
       simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
       simulation.velocityDecay(0.6).alpha(0.9).restart()
 
@@ -1410,6 +1496,14 @@ if (error) throw error;
       }
 
   function chains(){
+
+    d3.selectAll('.cityvalue')
+      .text('11%')
+
+    map.setPaintProperty('overlay2', 'background-opacity', 1)
+
+      d3.select('.histlabel')
+      .attr('opacity', 0)
 
       if(window.step == 8){
         d3.selectAll(".circle")
@@ -1460,6 +1554,11 @@ if (error) throw error;
       
   function histogram(){
 
+    d3.selectAll('.citywide')
+      .remove()
+
+    map.setPaintProperty('overlay2', 'background-opacity', 1)
+
     d3.selectAll('.label')
       .attr("opacity",0)
 
@@ -1471,14 +1570,24 @@ if (error) throw error;
         .each(function (d, i){
               var $this = d3.select(this)
               $this
+              .transition().duration(1000).delay(200)
               .attr('opacity', 0)
+              .attr('cx', 0)
+              .attr('cy', 0)
             })
 
     svg.selectAll('.circle')
-        .transition().duration(1000).delay(200) //(d, i) => i * 1.2).ease(d3.easeBack)
-            .attr('r', 7)
-            .attr('cx', d => histXScale(d.sidewalk))
-            .attr('cy', d => histYScale(d.histogram_column))
+    .filter(function (d) { return isNaN(d.histogram_column) === false; })
+    .each(function (d, i){
+              var $this = d3.select(this)
+              $this
+              .transition().duration(1000).delay(200)
+              .attr('r', 7)
+              .attr('cx', d => histXScale(d.sidewalk))
+              .attr('cy', d => histYScale(d.histogram_column))
+              .style('fill', d => categoriesXY[d.corridor][2])
+            })
+        
             //.attr('fill', d => categoryColorScale(d.Category))
 
 
@@ -1488,6 +1597,15 @@ if (error) throw error;
         .attr('transform', `translate(0, ${(height*.9) + 8})`)
         .call(xAxis)
 
+    svg.append("text")             
+      .attr("transform",
+            "translate("+ (width/2) + " ," + 
+                           (height*.98) + ")")
+      .style("text-anchor", "middle")
+      .text("Sidewalk Width")
+      .attr('class','histlabel')
+      .style("font-weight", "bold")
+      .style("font-size", "14px");
 
           window.step = 8
     }
