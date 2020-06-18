@@ -774,7 +774,7 @@ function render(){
 
   //Make Histogram Axis
   histXScale = d3.scaleLinear().domain([1,25]).range([width*.1, width*.9])
-  histYScale = d3.scaleLinear().domain([42, 1]).range([height*.1,height*.9])
+  histYScale = d3.scaleLinear().domain([48, 1]).range([height*.1,height*.9])
 
   var map = new mapboxgl.Map({
     container: "graph",
@@ -904,6 +904,10 @@ if (error) throw error;
   var step = 0
 
   svg.selectAll('.circle')
+        .on('mouseover', mouseOver)
+        .on('mouseout', mouseOut)
+
+  svg.selectAll('.unoccupiedCircle')
         .on('mouseover', mouseOver)
         .on('mouseout', mouseOut)
 
@@ -1192,7 +1196,7 @@ if (error) throw error;
 
     map.off("moveend", load_Hub)
     map.on("moveend", load_Madison);
-    map.flyTo({center: [ -73.974535, 40.759400], zoom:15});
+    map.flyTo({center: [ -73.977439, 40.755377], zoom:14});
 
       d3
       .selectAll(".circle")
@@ -1582,7 +1586,7 @@ if (error) throw error;
               var $this = d3.select(this)
               $this
               .transition().duration(1000).delay(200)
-              .attr('r', 7)
+              .attr('r', 6)
               .attr('cx', d => histXScale(d.sidewalk))
               .attr('cy', d => histYScale(d.histogram_column))
               .style('fill', d => categoriesXY[d.corridor][2])
