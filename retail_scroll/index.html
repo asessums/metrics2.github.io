@@ -621,7 +621,7 @@ function render(){
   if (oldWidth == innerWidth) return
   oldWidth = innerWidth
 
-  var width = height = d3.select('#graph').node().offsetWidth
+  var width = height = d3.select('#graph').node().offsetHeight
   var r = 40
 
 
@@ -1099,7 +1099,7 @@ console.log(rows)
     if (window.step == 2){
     }
 
-    map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round(width*.01476)});
+    map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round((width*.0027)+9.8378)});
 
     d3
         .selectAll(".newbox")
@@ -1157,63 +1157,129 @@ console.log(rows)
         .attr("opacity",0)
 
     svg.append("text")             
-      .attr("transform",
-            "translate("+ width*.1 + " ," + 
-                           height*.1 + ")")
-      .style("text-anchor", "start")
+      .attr('x',width/2)
+      .attr('y',height*.2)
+      .style("text-anchor", "middle")
       .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("19% Food; Diverse food offerings with large number of Indian, Tibetan, and Colombian restaurants")
+      .style("fill","#2ACEE6")
+      .text("19% Food")
       .style('stroke', '#FFFFFF')
       .style('stroke-opacity', .8)
-      .attr('stroke-width', 3)
+      .attr('stroke-width', 5)
       .style('paint-order', 'stroke')
       .attr('class','mixlabel')
       .attr('id','mixlabel1')
       .style("font-weight", "bold")
-      .style("font-size", "14px")
+      .style("font-size", "25px")
       .attr("opacity",0)
-      .transition().duration(1000).delay(300)
+      .transition().duration(1000).delay(100)
       .attr("opacity",1)
 
-      svg.append("text")             
-      .attr("transform",
-            "translate("+ width*.1 + " ," + 
-                           height*.15 + ")")
-      .style("text-anchor", "start")
+
+      svg.append("text")
+      .attr('x',(width/2))
+      .attr('y',height*.22)             
+      .style("text-anchor", "middle")
       .style("vertical-align", "middle")
       .style("fill","black")
-      .text("16% Fashion; General clothing and jewelry stores")
+      .text("diverse offerings including Indian, Tibetan, and Colombian")
       .style('stroke', '#FFFFFF')
       .style('stroke-opacity', .8)
       .attr('stroke-width', 3)
+      .style('paint-order', 'stroke')
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel1')
+      .style("font-weight", "bold")
+      .style("font-size", "14px")
+      .attr("opacity",0)
+      .transition().duration(1000).delay(100)
+      .attr("opacity",1)
+
+
+
+
+      svg.append("text")             
+      .attr('x',width/4)
+      .attr('y',height*.8)
+      .style("text-anchor", "middle")
+      .style("vertical-align", "middle")
+      .style("fill","#F9D406")
+      .text("16% Fashion")
+      .style('stroke', '#FFFFFF')
+      .style('stroke-opacity', .8)
+      .attr('stroke-width', 5)
       .style('paint-order', 'stroke')
       .attr('class','mixlabel')
       .attr('id','mixlabel2')
       .style("font-weight", "bold")
-      .style("font-size", "14px")
+      .style("font-size", "25px")
       .attr("opacity",0)
-      .transition().duration(1000).delay(300)
+      .transition().duration(1000).delay(100)
       .attr("opacity",1)
 
-      svg.append("text")             
-      .attr("transform",
-            "translate("+ width*.1 + " ," + 
-                           height*.2 + ")")
-      .style("text-anchor", "start")
+
+
+      svg.append("text")
+      .attr('x',(width/4))
+      .attr('y',height*.82)             
+      .style("text-anchor", "middle")
       .style("vertical-align", "middle")
       .style("fill","black")
-      .text("13% Body; barber shops; hair and threading salons, and massage parlors ")
+      .text("largely general clothing and jewelry stores")
       .style('stroke', '#FFFFFF')
       .style('stroke-opacity', .8)
       .attr('stroke-width', 3)
       .style('paint-order', 'stroke')
       .attr('class','mixlabel')
-      .attr('id','mixlabel3')
+      .attr('id','mixsublabel2')
       .style("font-weight", "bold")
       .style("font-size", "14px")
       .attr("opacity",0)
-      .transition().duration(1000).delay(300)
+      .transition().duration(1000).delay(100)
+      .attr("opacity",1)
+
+
+
+
+
+
+      svg.append("text")             
+      .attr('x',(width/4)*2.8)
+      .attr('y',height*.8)
+      .style("text-anchor", "middle")
+      .style("vertical-align", "middle")
+      .style("fill","#FF57CF")
+      .text("13% Body")
+      .style('stroke', '#FFFFFF')
+      .style('stroke-opacity', .8)
+      .attr('stroke-width', 5)
+      .style('paint-order', 'stroke')
+      .attr('class','mixlabel')
+      .attr('id','mixlabel3')
+      .style("font-weight", "bold")
+      .style("font-size", "25px")
+      .attr("opacity",0)
+      .transition().duration(1000).delay(100)
+      .attr("opacity",1)
+
+
+      svg.append("text")
+      .attr('x',(width/4)*2.8)
+      .attr('y',height*.82)             
+      .style("text-anchor", "middle")
+      .style("vertical-align", "middle")
+      .style("fill","black")
+      .text("including barber shops, salons, and massage parlors")
+      .style('stroke', '#FFFFFF')
+      .style('stroke-opacity', .8)
+      .attr('stroke-width', 3)
+      .style('paint-order', 'stroke')
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel3')
+      .style("font-weight", "bold")
+      .style("font-size", "14px")
+      .attr("opacity",0)
+      .transition().duration(1000).delay(100)
       .attr("opacity",1)
 
   }
@@ -1248,18 +1314,39 @@ console.log(rows)
 
       d3.select('#mixlabel1')
       .transition().duration(1000)
+      .style('fill','#F9D406')
       .attr("opacity",1)
-      .text("18% Fashion; Adult and Children's Clothing Stores")
+      .text("18% Fashion")
 
       d3.select('#mixlabel2')
       .transition().duration(1000)
+      .style('fill','#F28A13')
       .attr("opacity",1)
-      .text("17% Home; Furniture and Discount Stores")
+      .text("17% Home")
 
       d3.select('#mixlabel3')
       .transition().duration(1000)
+      .style('fill','#2E8EF5')
       .attr("opacity",1)
-      .text("16% Essentials; Pharmacies; Convenience Stores; and a large number of Mobile Phone Stores")
+      .text("16% Essentials")
+
+
+      d3.select('#mixsublabel1')
+      .transition().duration(1000)
+      .attr("opacity",1)
+      .text("variety of adult and children's clothing stores")
+
+      d3.select('#mixsublabel2')
+      .transition().duration(1000)
+      .attr("opacity",1)
+      .text("dominated by big box furniture \n and discount stores")
+
+      d3.select('#mixsublabel3')
+      .transition().duration(1000)
+      .attr("opacity",1)
+      .text("including pharmacies, and mobile phone stores")
+
+
 
       d3
         .selectAll(".demo")
@@ -1297,18 +1384,38 @@ console.log(rows)
 
       d3.select('#mixlabel1')
       .transition().duration(1000)
+      .style('fill','#F9D406')
       .attr("opacity",1)
-      .text("32% Fashion; High concentration of Men's Clothing Stores; Formalwear; Watch and Jewelry Stores")
+      .text("32% Fashion")
 
       d3.select('#mixlabel2')
       .transition().duration(1000)
+      .style('fill','#2ACEE6')
       .attr("opacity",1)
-      .text("22% Food; Italian and Mediterranean restaurants and salad shops")
+      .text("22% Food")
 
       d3.select('#mixlabel3')
       .transition().duration(1000)
+      .style('fill','#BAA38C')
       .attr("opacity",1)
-      .text("9% Services; Inflated by a large number of banks")
+      .text("9% Services")
+
+      d3.select('#mixsublabel1')
+      .transition().duration(1000)
+      .attr("opacity",1)
+      .text("high concentration of men's clothing, formalwear, and accessory stores")
+
+      d3.select('#mixsublabel2')
+      .transition().duration(1000)
+      .attr("opacity",1)
+      .text("including many Italian & Mediterranean restaurants")
+
+      d3.select('#mixsublabel3')
+      .transition().duration(1000)
+      .attr("opacity",1)
+      .text("large number of banks")
+
+
 
       d3
         .selectAll(".demo")
