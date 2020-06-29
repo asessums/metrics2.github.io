@@ -101,6 +101,7 @@ p.solid {
   padding: 1px;}
 
 body{
+  max-width: 900px;
   margin: 0px auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -138,7 +139,7 @@ h1{
 
 #graph{
   margin-left: 40px;
-  width: 54%;
+  width: 500px;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
@@ -177,7 +178,17 @@ h1{
     border-top: 1px solid;
     border-bottom: 1px solid;
     margin-bottom: 80vh;
+
+
   }
+
+  #map {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
 
   pre{
     overflow: hidden;
@@ -472,7 +483,7 @@ circle{
 <br>
 Among the limited set of potential risk factors we analyzed, The Hub, Jackson Heights, and Madison Avenue all have different combinations of strengths and weaknesses.<br><br><br>
 
-<center><img src="http://hraadvisors.com/interactive/retail/img/matrix.PNG"></center><br><br>
+<!--<center><img src="http://hraadvisors.com/interactive/retail/img/matrix.PNG"></center><br><br>-->
 
 While there are many policy tools that could benefit businesses and corridors across the board, more effective recovery strategies will need to be tailored to local conditions.<br><br>
 
@@ -653,15 +664,19 @@ function render(){
   oldWidth = innerWidth
 
   
-  var width = height = e.clientWidth*.54
+  /*var width = height = e.clientWidth*.54
   //var width = height = d3.select('#graph').node().offsetHeight
-  var r = 40
+  var r = 40*/
 
 
-  /*if (innerWidth <= 925){
-    width = innerWidth
-    height = innerHeight*1.7
-  }*/
+  if (innerWidth <= 925){
+    width = e.clientWidth
+    height = e.clientHeight
+
+    document.getElementById("graph").style.height = (e.clientHeight) + 'px';
+
+    document.getElementById("graph").style.width = 340 + 'px';
+  }
 
   console.log('height: '+ height)
   console.log('width: '+ width)
@@ -1865,8 +1880,6 @@ console.log(rows)
 
         let svg = d3.select("#graph")
               .select('svg')
-              .attr('width', width)
-              .attr('height',width)
 
     
         svg.selectAll('.circle')
