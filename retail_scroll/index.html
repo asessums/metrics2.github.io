@@ -55,48 +55,6 @@
     z-index: 100;
 }
 
-#photo1 {
-    position: absolute;
-    display: none;
-    background: rgba(0, 0, 0, .7);
-    border-radius: 3px;
-    box-shadow: -3px 3px 15px #939393;
-    color: white;
-    padding: 6px;
-    font-family: "Merriweather";
-    font-size: 1.1em;
-    max-width: 400px;
-    z-index: 100;
-}
-
-#photo2 {
-    position: absolute;
-    display: none;
-    background: rgba(0, 0, 0, .7);
-    border-radius: 3px;
-    box-shadow: -3px 3px 15px #939393;
-    color: white;
-    padding: 6px;
-    font-family: "Merriweather";
-    font-size: 1.1em;
-    max-width: 400px;
-    z-index: 100;
-}
-
-#photo3 {
-    position: absolute;
-    display: none;
-    background: rgba(0, 0, 0, .7);
-    border-radius: 3px;
-    box-shadow: -3px 3px 15px #939393;
-    color: white;
-    padding: 6px;
-    font-family: "Merriweather";
-    font-size: 1.1em;
-    max-width: 400px;
-    z-index: 100;
-}
-
     .title{
     color: #2d2d35;
     font-family: GothamMedium;
@@ -181,11 +139,10 @@ h1{
 #graph{
   margin-left: 40px;
   width: 53.4187179%;
-  height: 90vh;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  float: right;
+  float: none;
   z-index: 0
 }
 
@@ -350,6 +307,27 @@ circle{
       <br>
       <br>
       <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
 
     <div>
@@ -366,11 +344,63 @@ circle{
       <br>
       <br>
       <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
 
     <div>
       <h3>Madison Avenue, Manhattan</h3>
       Madison Avenue in Midtown Manhattan serves both office workers and high-income residents. The majority of neighborhood residents are white, and the borough’s COVID case rate is well below the citywide average. Manhattan unemployment has increased less than in the other boroughs. While high levels of wealth would suggest faster recovery, shifts to remote work could mean a decline in office workers that frequent these stores. Residents in wealthier New York City neighborhoods have left in greater numbers – an estimated 30% left this neighborhood – raising the question of whether the residential customer base will be diminished.
+    </div>
+
+    <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
 
     <div>
@@ -685,6 +715,26 @@ function render(){
     attributionControl: false
   });
 
+  map.on('load',function(){
+     map.addLayer(
+          {
+          'id': 'overlay2',
+          'type': 'background',
+          'paint': {
+          'background-color': 'white',
+          'background-opacity': 0,
+          "background-opacity-transition": {
+           "duration": 2000,
+           "delay": 0
+            }
+          },
+          
+        },
+        'country-label'
+        );
+  })
+ 
+
   
    function project(d) {
         return map.project(new mapboxgl.LngLat(d[0], d[1]));
@@ -694,18 +744,19 @@ function render(){
       var svg = d3
         .select(container)
         .append("svg")
+        .attr('class',"svg")
         .attr("width", width)
         .attr("height", height)
         .style("position", "absolute")
         .style("z-index", 2);
 
 
-  let xAxis = d3.axisBottom(histXScale)
+  /*let xAxis = d3.axisBottom(histXScale)
                     .ticks(4)
                     .tickSize(height + 80)
-                    .tickFormat(function(d) { return "$" + d3.format(",.2f")(d); });
+                    .tickFormat(function(d) { return "$" + d3.format(",.2f")(d); });*/
 
-  let xAxisGroup = svg.append('g')
+  /*let xAxisGroup = svg.append('g')
         .attr('class', 'first-axis')
         .attr('transform', 'translate(0, 0)')
         .call(xAxis)
@@ -716,7 +767,473 @@ function render(){
             .attr('stroke-dasharray', 0)
             .attr('opacity', 0)
 
-  let histxAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return "$" + d3.format(",.2f")(d); });
+  let histxAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return "$" + d3.format(",.2f")(d); });*/
+
+
+  ////Create White Map Overlay Layer
+
+
+
+  ////CREATE ALL NECESSARY OBJECTS; SET OPACITY TO ZERO
+      
+      ///Corner Demographic Box
+      demo = svg
+              .append("svg")
+              .attr("x", width*.05)
+              .attr("y", height*.05)
+              .attr("class","demo")
+              .attr('opacity',0)
+              .style('cursor','default')
+
+
+      //Underlying Rectangle
+      demo.append("rect")
+              .attr("width", width*.46)
+              .attr("height", height*.11)
+              .attr('rx', '10')
+              .attr("z-index", 5)
+              .attr("opacity",.75)
+              .style("fill", "#000000")
+            
+
+      //Corridor Text
+      var title = demo
+              .append("text")
+              .text("Jackson Heights")
+              .attr("dy", "1.5em")
+              .attr("dx", "1em")
+              .attr("class","demotext")
+              .style("fill","white")
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+
+      title.append("tspan")
+              .style("font-weight", "normal")
+              .text(': Demographics')
+              //.attr("class","MHItext")
+
+          
+
+      //Stat Text
+      var MHI = demo
+              .append("text")
+              .text("Median Household Income: ")
+              .attr('class','MHI')
+              .attr("dy", "4em")
+              .attr("dx", "1.8em")
+              .style("fill","white")
+              .style("font-weight", "bold")
+        
+
+      MHI.append("tspan")
+              .style("font-weight", "normal")
+              .style("fill","white")
+              .text('$56,000 (Citywide: $62,000)')
+              .attr("class","MHItext")
+           
+      
+      var Density = demo
+              .append("text")
+              .text("Worker Density: ")
+              .attr('class','MHI')
+              .attr("dy", "5em")
+              .attr("dx", "1.8em")
+              .style("fill","white")
+              .style("font-weight", "bold")
+             
+      Density.append("tspan")
+              .style("font-weight", "normal")
+              .style("fill","white")
+              .text('4K Workers per Square Mile (Citywide: 7K)')
+              .attr("class","Densitytext")
+             
+        
+
+      var COVID = demo
+              .append("text")
+              .text("COVID Rate: ")
+              .attr('class','COVID')
+              .attr("dy", "6em")
+              .attr("dx", "1.8em")
+              .style("fill","white")
+              .style("font-weight", "bold")
+         
+
+      COVID.append("tspan")
+              .style("font-weight", "normal")
+              .style("fill","white")
+              .text('3.6% of Residents (Citywide: 2.3%)')
+              .attr("class","COVIDtext")
+
+      d3.select('.demo').lower()
+
+
+
+    ////Retail Mix Labels
+
+    mix = svg
+              .append("svg")
+              .attr("x", width*.05)
+              .attr("y", height*.05)
+              .attr('class','mixlabel')
+              .attr('opacity',0)
+              .style('cursor','default')
+
+
+      //Underlying Rectangle
+    mix.append("rect")
+              .attr("width", width*.55)
+              .attr("height", height*.11)
+              //.attr("stroke", '#000000')
+              //.attr('stroke-width', '2px')
+              .attr('rx', '10')
+              .attr("opacity",.75)
+              .style("fill", "#000000")
+
+    var mixtitle = mix
+              .append("text")
+              .text("Jackson Heights")
+              .attr("dy", "1.5em")
+              .attr("dx", "1em")
+              .attr('class','mixlabel')
+              .attr('id','mixtitle')
+              .style("fill", 'white')
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+
+    mixtitle.append("tspan")
+              .style("font-weight", "normal")
+              .text(': Retail Mix')
+
+
+
+    var mixone = mix.append("text")             
+      //.attr('x',width/2)
+      //.attr('y',height*.2)
+      .attr("dy", "4em")
+      .attr("dx", "1.8em")
+      .style("text-anchor", "start")
+      .style("vertical-align", "start")
+      .style("fill","#2ACEE6")
+      .text("19% Food")
+      //.style('stroke', '#ffffff')
+      //.style('stroke-opacity', .8)
+      //.attr('stroke-width', 6)
+      //.style('paint-order', 'stroke')
+      .attr('class','mixlabel')
+      .attr('id','mixlabel1')
+      .style("font-weight", "bold")
+      //.style("font-size", "25px")
+
+      mixone.append("tspan")
+      .style("fill","white")
+      .text(": diverse offerings including Indian, Tibetan, and Colombian")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel1')
+      .style("font-weight", "normal")
+
+      var mixtwo = mix.append("text")             
+      .attr("dy", "5em")
+      .attr("dx", "1.8em")
+      .style("text-anchor", "start")
+      .style("vertical-align", "start")
+      .style("fill","#F9D406")
+      .text("16% Fashion")
+      .attr('class','mixlabel')
+      .attr('id','mixlabel2')
+      .style("font-weight", "bold")
+
+      mixtwo.append("tspan")             
+      .style("fill","white")
+      .text(": largely general clothing and jewelry stores")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
+
+
+      var mixthree = mix.append("text")             
+      .attr("dy", "6em")
+      .attr("dx", "1.8em")
+      .style("text-anchor", "start")
+      .style("vertical-align", "start")
+      .style("fill","#FF57CF")
+      .text("13% Body")
+      .attr('class','mixlabel')
+      .attr('id','mixlabel3')
+      .style("font-weight", "bold")
+
+      mixthree.append("tspan")
+      .style("fill","white")
+      .text(": including barber shops, salons, and massage parlors")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel3')
+      .style("font-weight", "normal")
+
+
+      d3.selectAll('.mixlabel')
+      .attr('opacity',0)
+      .style('cursor','default')
+      .lower()
+
+  //CREATE HIST LEGENDS    
+  var legend = d3.select(".legend").append("svg")
+      .attr("width", 960)
+      .attr("height", 500);
+    
+    legend.append("g")
+      .attr("class", "legendOrdinal")
+      .attr("transform", "translate(20,20)");
+    
+    var legendcategories = ['The Hub','Madison Avenue','Jackson Heights'];
+
+    var legendcolors = ['#FE4A49','#FED766','#009FB7']
+
+    
+    var ordinal = d3.scaleOrdinal()
+      .domain(legendcategories)
+      .range(legendcolors);
+    
+    var legendOrdinal = d3.legendColor()
+      .scale(ordinal);
+    
+    legend.select(".legendOrdinal")
+      .call(legendOrdinal);
+
+
+      let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return d3.format(",.2")(d) +"ft"; });
+
+
+    svg.append('g')
+        .attr('class', 'hist-axis')
+        .attr('transform', `translate(0, ${histYScale(0)})`)
+        .call(xAxis)
+
+    svg.append('g')
+        .attr('class', 'hist-axis')
+        .attr('transform', `translate(0, ${histYScale(37)})`)
+        .call(xAxis)
+    
+    svg.append('g')
+        .attr('class', 'hist-axis')
+        .attr('transform', `translate(0, ${histYScale(74)})`)
+        .call(xAxis)
+
+
+    svg.append("text")             
+      .attr("transform",
+            "translate("+ histXScale(10.5) + " ," + 
+                           (height*.09) + ")")
+      .style("text-anchor", "middle")
+      .text("Food and Drink Establishments by Sidewalk Width")
+      .attr('class','histtitle')
+      .style("font-weight", "bold")
+      .style("text-anchor", "middle")
+      .style("font-size", "16px")
+
+
+    svg.append("text")             
+      .attr("transform",
+            "translate("+ histXScale(16) + " ," + 
+                           (height/10)*1.45 + ")")
+      .style("text-anchor", "middle")
+      .style("fill","gray")
+      .text(">11 ft Available for Sidewalk Seating")
+      .attr('class','histlabel')
+      .style("font-weight", "regular")
+      .style("font-size", "14px")
+
+
+
+    svg.append("text")             
+      .attr("transform",
+            "translate("+ histXScale(22) + " ," + 
+                           histYScale(13) + ")")
+      .style("text-anchor", "end")
+      .style("vertical-align", "middle")
+      .style("fill","black")
+      .text("64%")
+      .attr('class','histlabel')
+      .style("font-weight", "bold")
+      .style("font-size", "20px")
+
+
+    svg.append("text")             
+      .attr("transform",
+            "translate("+ histXScale(22) + " ," + 
+                           histYScale(88) + ")")
+      .style("text-anchor", "end")
+      .style("vertical-align", "middle")
+      .style("fill","black")
+      .text("40%")
+      .attr('class','histlabel')
+      .style("font-weight", "bold")
+      .style("font-size", "20px")
+
+
+    svg.append("text")             
+      .attr("transform",
+            "translate("+ histXScale(22) + " ," + 
+                           histYScale(51) + ")")
+      .style("text-anchor", "end")
+      .style("vertical-align", "middle")
+      .style("fill","black")
+      .text("65%")
+      .attr('class','histlabel')
+      .style("font-weight", "bold")
+      .style("font-size", "20px")
+
+
+    svg.append('line')
+        .attr('class', 'dash-line')
+        .style("stroke", "gray")
+        .style("stroke-dasharray", ("3, 3"))
+        .attr("x1", histXScale(10.5))
+        .attr("y1", (height/10)*1.45)    
+        .attr("x2", histXScale(10.5))      
+        .attr("y2", histYScale(.5)) 
+
+    d3.selectAll('.hist-axis')
+    .attr('opacity',0)
+    .style('cursor','default')
+    .lower()
+
+    d3.selectAll('.dash-line')
+    .attr('opacity',0)
+    .style('cursor','default')
+    .lower()
+
+    d3.selectAll('.histlabel')
+    .attr('opacity',0)
+    .style('cursor','default')
+    .lower()
+
+    d3.selectAll('.histtitle')
+    .attr('opacity',0)
+    .style('cursor','default')
+    .lower()
+
+
+
+
+  ///Main Corridor Labels
+  svg.append("text")
+                .text("Madison Avenue")
+                .attr("x", width*.23958)
+                .attr("y", height*.816666)
+                .attr("class","labels")
+                .attr("id","madison_label")
+                .style("fill", 'black')
+                .attr("opacity",0)
+                .style("font-size","20px")
+                .style("font-weight", "bold")
+                .style("text-anchor", "middle")
+
+  
+  svg.append("text")
+                .text("Jackson Heights")
+                .attr("x", width*.716666)
+                .attr("y", height*.816666)
+                .attr("class","labels")
+                .attr("id","jackson_label")
+                .style("fill", 'black')
+                .attr("opacity",0)
+                .style("font-size","20px")
+                .style("font-weight", "bold")
+                .style("text-anchor", "middle")
+                .transition(2000).duration(2000).delay(1000)
+
+ 
+ svg.append("text")
+                .text("The Hub")
+                .attr("x", width*.4875)
+                .attr("y", height*.364583)
+                .attr("class","labels")
+                .attr("id","hub_label")
+                .style("fill", 'black')
+                .attr("opacity",0)
+                .style("font-size","20px")
+                .style("font-weight", "bold")
+                .style("text-anchor", "middle")
+
+  svg.append("text")
+              .text("12% Vacant")
+              .attr("x", width*.2395833)
+              .attr("y", height*.85416667)
+              .attr("class","labels")
+              .attr("id","madison_text")
+              .style("fill", "black")
+              .attr("opacity",0)
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+              .style("text-anchor", "middle")
+
+      svg.append("text")
+              .text("8% Vacant")
+              .attr("x", width*.7166666)
+              .attr("y", height*.85416667)
+              .attr("class","labels")
+              .attr("id","jackson_text")
+              .style("fill", "black")
+              .attr("opacity",0)
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+              .style("text-anchor", "middle")
+
+      svg.append("text")
+              .text("14% Vacant")
+              .attr("x", width*.4875)
+              .attr("y", height*.40208333)
+              .attr("class","labels")
+              .attr("opacity",0)
+              .attr("id","hub_text")
+              .style("fill", "black")
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+              .style("text-anchor", "middle")
+
+  d3.selectAll('.labels')
+  .attr('opacity',0)
+  .style('cursor','default')
+  .lower()
+
+
+    citywide = svg
+              .append("svg")
+              .attr("x", width*.05)
+              .attr("y", height*.05)
+              .attr("class","citywide")
+
+      citywide.append("rect")
+              .attr("width", 140)
+              .attr("height", 70)
+              .attr("stroke", '#d8d8d8')
+              .attr('stroke-width', '2px')
+              .attr('rx', '10')
+              .style("fill", "white");
+
+      citywide
+              .append("text")
+              .text("Citywide")
+              .attr("dy", "1.5em")
+              .attr("dx", "1em")
+              .style("fill", "black")
+              .style("font-size","20px")
+              .style("font-weight", "bold")
+
+      var value = citywide
+              .append("text")
+              .text("15%")
+              .attr('class','cityvalue')
+              .attr("dy", "3.75em")
+              .style("font-size","14px")
+              .attr("dx", "1.5em")
+              .style("fill", "black")
+              .style("font-weight", "bold")
+
+    d3.selectAll('.citywide')
+    .attr('opacity',0)
+    .style('cursor','default')
+    .lower()
 
 
 
@@ -861,6 +1378,8 @@ console.log(rows)
             .attr('stroke-width', 3)
 
     }
+
+    
   
  
 
@@ -881,140 +1400,61 @@ console.log(rows)
 
     });
  
-  function addPlace(id, name, xoffset, yoffset){
-     d3
-        .selectAll(".circle")
-        .filter(function (d) { return d.id === id; })
-        .each(function (d, i){
-              var $this = d3.select(this)
-              
-              img = 'http://hraadvisors.imgix.net/' + name + '.jpg?w=200&h=200&dpr=1&fit=crop&fm=pjpg&q=40'
+  function clean(list,duration,name){
+    
+    for (i in list){
 
-              $this
-              .attr('opacity', 1)
-              .attr('stroke-width', 5)
-              .attr('stroke', 'black')
+      transition_name = name + '_' + i
 
-              newbox = svg
-              .append("svg")
-              .attr("x", (project([d.long, d.lat]).x ) + xoffset)
-              .attr("y", (project([d.long, d.lat]).y ) + yoffset)
-              .attr("class","newbox")
-              
-              newbox.append("rect")
-              .attr("width", 200)
-              .attr("height", 235)
-              .attr("z-index", 5)
-              .attr("stroke", '#d8d8d8')
-              .attr('stroke-width', '2px')
-              .attr('rx', '10')
-              .style("fill", "white");
-              
-              newbox
-              .append("text")
-              .text(d.name)
-              .attr("dy", "2em")
-              .attr("dx", "1em")
-              .style("fill", "black")
-              .style("font-weight", "bold")
+      d3.selectAll(list[i])
+      .lower()
 
-              newbox.append('image')
-              .attr('xlink:href', img)
-              .attr("y", 35)
-              .attr("dx", "1em")
-              .attr('width',200)
-              .attr('clip-path',"inset(0px 0px 0px 0px round 10px)")
-              .attr('rx', '10px 10px 10px 10px')
-              .attr('height', 200)
-
-
-            })
+      d3.selectAll(list[i])
+      .transition(transition_name).duration(duration)
+      .attr('opacity',0)
+      .attr('cursor','default')
+    }
   }
-  function load_Jackson(){
 
-      demo = svg
-              .append("svg")
-              .attr("x", width*.05)
-              .attr("y", height*.05)
-              .attr("class","demo")
+  function activate(list,duration,name){
+    
+    for (i in list){
+      transition_name = name + "_" + i
 
-      console.log("width: " + width)
-      console.log("height: " + height)
+      d3.selectAll(list[i])
+      .raise()
 
-      demo.append("rect")
-              .attr("width", width*.46)
-              .attr("height", height*.11)
-              .attr("stroke", '#d8d8d8')
-              .attr('stroke-width', '2px')
-              .attr('rx', '10')
-              .attr("z-index", 5)
-              .style("fill", "white");
+      d3.selectAll(list[i])
+      .transition(transition_name).duration(duration)
+      .attr('opacity',1)
+      .attr('cursor','auto')
+    }
+  }
 
-      demo
-              .append("text")
-              .text("Jackson Heights")
-              .attr("dy", "1.5em")
-              .attr("dx", "1em")
-              .attr("class","demotext")
-              .style("fill", 'black')
-              .style("font-size","20px")
-              .style("font-weight", "bold")
+ 
+    function load_Jackson(){
+      d3
+        .selectAll(".demo")
+        .lower()
+        .attr("opacity",1)
+        .style('cursor','auto')
 
-      var MHI = demo
-              .append("text")
-              .text("Median Household Income: ")
-              .attr('class','MHI')
-              .attr("dy", "4em")
-              .attr("dx", "1.8em")
-              .style("fill", "black")
-              .style("font-weight", "bold")
-      
-      MHI.append("tspan")
+      d3
+        .selectAll(".demotext")
+        .text("Jackson Avenue")
+        .style("fill","white")
+        .append("tspan")
               .style("font-weight", "normal")
-              .text('$56,000 (Citywide: $62,000)')
-              .attr("class","MHItext")
-      
-      var Density = demo
-              .append("text")
-              .text("Worker Density: ")
-              .attr('class','MHI')
-              .attr("dy", "5em")
-              .attr("dx", "1.8em")
-              .style("fill", "black")
-              .style("font-weight", "bold")
-
-      Density.append("tspan")
-              .style("font-weight", "normal")
-              .text('4K Workers per Square Mile (Citywide: 7K)')
-              .attr("class","Densitytext")
-
-      var COVID = demo
-              .append("text")
-              .text("COVID Rate: ")
-              .attr('class','COVID')
-              .attr("dy", "6em")
-              .attr("dx", "1.8em")
-              .style("fill", "black")
-              .style("font-weight", "bold")
-
-      COVID.append("tspan")
-              .style("font-weight", "normal")
-              .text('3.6% of Residents (Citywide: 2.3%)')
-              .attr("class","COVIDtext")       
-
-      //addPlace(286, 'Jackson1')
-      //addPlace(435, 'Jackson1',0,-235)
-      //addPlace(562, 'Jackson2',0,0)
-      //addPlace(415, 'Jackson3',-200,0)
-
-     }
-
+              .text(': Demographics')
+    }
 
     function load_Hub(){
 
       d3
         .selectAll(".demo")
+        .lower()
         .attr("opacity",1)
+        .style('cursor','auto')
 
       d3.selectAll('.MHItext')
       .text('$21,800 (Citywide: $62,000)')
@@ -1028,20 +1468,20 @@ console.log(rows)
       d3
         .selectAll(".demotext")
         .text("The Hub")
-        .style('fill', 'black')
-
-      //addPlace(914, 'Hub1',-200,0)
-      //addPlace(840, 'Hub2',0,0)
-      //addPlace(742, 'Hub3',0,-235)
-
-
+        .style("fill","white")
+        .append("tspan")
+              .style("font-weight", "normal")
+              .text(': Demographics')
      }
+
 
      function load_Madison(){
 
       d3
         .selectAll(".demo")
+        .lower()
         .attr("opacity",1)
+        .style('cursor','auto')
 
       d3.selectAll('.MHItext')
       .text('$146,600 (Citywide: $62,000)')
@@ -1055,699 +1495,451 @@ console.log(rows)
      d3
         .selectAll(".demotext")
         .text("Madison Avenue")
-        .style('fill', 'black')
-
-    //addPlace(1174, 'Madison1',0,0)
-    //addPlace(1336, 'Madison2',-200,0)
-    //addPlace(1332, 'Madison3',-200,-235)
+        .style("fill","white")
+        .append("tspan")
+              .style("font-weight", "normal")
+              .text(': Demographics')
 
      }
 
 
+
+////////////////STEP FUNCTIONS
   function stepone(){
 
-    map.addLayer(
-          {
-          'id': 'overlay2',
-          'type': 'background',
-          'paint': {
-          'background-color': 'white',
-          'background-opacity': 0,
-          "background-opacity-transition": {
-           "duration": 2000,
-           "delay": 0
-            }
-          },
-          
-        },
-        'country-label'
-        );
-
-
-    map.off("moveend", load_Jackson)
-    map.off("moveend", load_Madison)
-    map.off("moveend", load_Hub)
-    d3
-        .selectAll(".demo")
-        .remove()
-
-    d3
-        .selectAll(".newbox")
-        .remove()
-    
-
+    //Set Reverse 
     if (window.step == 2){
+      clean(['.demo','.mixlabel'],500,'hide_demo1')
+
+      d3
+      .selectAll(".circle")
+      .transition("shrink1").duration(500)
+      .attr("r", 1)
+
+      map.off("moveend", load_Jackson)
+      map.off("moveend", load_Madison)
+      map.off("moveend", load_Hub)
     }
 
+    //Actions
     map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round((width*.0027)+9.8378)});
 
-    d3
-        .selectAll(".newbox")
-        .remove()
-
+    //Set Step
     window.step = 1
 
   }
 
 
   function steptwo(){
+    //Set Reverse
+      if (window.step == 3){
+        //Remove Retail Mix Labels
+        clean(['.mixlabel'],500,'hide_demo2')
+      }
 
-     d3
-      .selectAll(".mixlabel")
-      .attr('opacity',0)
+    //Actions
+      //Zoom in to Jackson Heights
+      map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
 
-
-    map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
-
+      //Make Circles Bigger
       d3
       .selectAll(".circle")
-      .transition().duration(1000)
+      .transition("enhance").duration(1000)
       .attr("r", 2)
-    d3
-        .selectAll(".newbox")
-        .remove()
 
-     map.on("moveend", load_Jackson);
+      //When map is done moving, load the Demographic Box
+      map.on("moveend", load_Jackson);
 
-
+    ///Set Step
      window.step = 2
 
 
-
-        /*svg
-      .append("rect")
-        .attr("x", width/2)
-        .attr("y", height/2)
-        .attr("class","myrect")
-        .attr("width", 200)
-        .attr("height", 200)
-        .attr("z-index", 5)
-        .style("fill", "white");*/
     }
 
   function jackson_two(){
 
-    let svg = d3.select("#graph")
-                    .select('svg')
-                    .attr('width', width)
-                    .attr('height',width)
+    //Set Reverse
+      if (window.step == 4){
+        //Remove Retail Mix Labels
+        clean(['.demo'],500,'hide_demo3')
+        map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
 
-    d3
-        .selectAll(".demo")
-        .attr("opacity",0)
+        d3.select('#mixtitle')
+        .text('Jackson Heights')
+        .append("tspan")
+              .style("font-weight", "normal")
+              .text(': Retail Mix')
 
-    svg.append("text")             
-      .attr('x',width/2)
-      .attr('y',height*.2)
-      .style("text-anchor", "middle")
-      .style("vertical-align", "middle")
-      .style("fill","#2ACEE6")
+        d3.select('#mixlabel1')
+      .style('fill','#2ACEE6')
       .text("19% Food")
-      .style('stroke', '#000000')
-      .style('stroke-opacity', .8)
-      .attr('stroke-width', 6)
-      .style('paint-order', 'stroke')
-      .attr('class','mixlabel')
-      .attr('id','mixlabel1')
-      .style("font-weight", "bold")
-      .style("font-size", "25px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(100)
-      .attr("opacity",1)
-
-
-      svg.append("text")
-      .attr('x',(width/2))
-      .attr('y',height*.22)             
-      .style("text-anchor", "middle")
-      .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("diverse offerings including Indian, Tibetan, and Colombian")
-      .style('stroke', '#FFFFFF')
-      .style('stroke-opacity', .8)
-      .attr('stroke-width', 3)
-      .style('paint-order', 'stroke')
-      .attr('class','mixlabel')
-      .attr('id','mixsublabel1')
-      .style("font-weight", "bold")
-      .style("font-size", "14px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(100)
-      .attr("opacity",1)
-
-
-
-
-      svg.append("text")             
-      .attr('x',width/4)
-      .attr('y',height*.8)
-      .style("text-anchor", "middle")
-      .style("vertical-align", "middle")
-      .style("fill","#F9D406")
-      .text("16% Fashion")
-      .style('stroke', '#000000')
-      .style('stroke-opacity', .8)
-      .attr('stroke-width', 6)
-      .style('paint-order', 'stroke')
-      .attr('class','mixlabel')
-      .attr('id','mixlabel2')
-      .style("font-weight", "bold")
-      .style("font-size", "25px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(100)
-      .attr("opacity",1)
-
-
-
-      svg.append("text")
-      .attr('x',(width/4))
-      .attr('y',height*.82)             
-      .style("text-anchor", "middle")
-      .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("largely general clothing and jewelry stores")
-      .style('stroke', '#FFFFFF')
-      .style('stroke-opacity', .8)
-      .attr('stroke-width', 3)
-      .style('paint-order', 'stroke')
+      .append("tspan")             
+      .style("fill","white")
+      .text(": diverse offerings including Indian, Tibetan, and Colombian")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
-      .style("font-weight", "bold")
-      .style("font-size", "14px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(100)
-      .attr("opacity",1)
+      .style("font-weight", "normal")
 
+      d3.select('#mixlabel2')
+      .style('fill','#F9D406')
+      .text("16% Fashion")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": largely general clothing and jewelry stores")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
 
-
-
-
-
-      svg.append("text")             
-      .attr('x',(width/4)*2.8)
-      .attr('y',height*.8)
-      .style("text-anchor", "middle")
-      .style("vertical-align", "middle")
-      .style("fill","#FF57CF")
+      d3.select('#mixlabel3')
+      .style('fill','#FF57CF')
       .text("13% Body")
-      .style('stroke', '#000000')
-      .style('stroke-opacity', .8)
-      .attr('stroke-width', 6)
-      .style('paint-order', 'stroke')
+      .append("tspan")             
+      .style("fill","white")
+      .text(": including barber shops, salons, and massage parlors")
       .attr('class','mixlabel')
-      .attr('id','mixlabel3')
-      .style("font-weight", "bold")
-      .style("font-size", "25px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(100)
-      .attr("opacity",1)
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
+      }
+
+    //Actions
+
+    clean(['.demo'],'hide_demo4')
+    activate(['.mixlabel'],500,'mixlabel')
 
 
-      svg.append("text")
-      .attr('x',(width/4)*2.8)
-      .attr('y',height*.82)             
-      .style("text-anchor", "middle")
-      .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("including barber shops, salons, and massage parlors")
-      .style('stroke', '#FFFFFF')
-      .style('stroke-opacity', .8)
-      .attr('stroke-width', 3)
-      .style('paint-order', 'stroke')
-      .attr('class','mixlabel')
-      .attr('id','mixsublabel3')
-      .style("font-weight", "bold")
-      .style("font-size", "14px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(100)
-      .attr("opacity",1)
+    ///Set Step
+    window.step = 3
+
 
   }
 
     function hub(){
 
-      d3
-      .selectAll(".mixlabel")
-      .attr('opacity',0)
+      //Set Reverse
+      if (window.step == 5){
+        //Remove Retail Mix Labels
+        clean(['.mixlabel'],500,'hide_mix1')
+      }
 
-    d3
-        .selectAll(".newbox")
-        .remove()
+      //Actions
+      clean(['.mixlabel'],500,'hide_mix2')
 
+      map.off("moveend", load_Jackson)
+      map.on("moveend", load_Hub);
 
-    map.off("moveend", load_Jackson)
-    map.on("moveend", load_Hub);
-
-    map.flyTo({center: [-73.917654, 40.816110], zoom:15});
+      map.flyTo({center: [-73.917654, 40.816110], zoom:15});
 
       d3
       .selectAll(".circle")
-      .transition().duration(1000)
+      .transition("grow2").duration(1000)
       .attr("r", 2)
           
-
-     window.step = 2
+      //Set Step
+      window.step = 4
 
     }
 
     function hub_two(){
 
+      //Set Reverse
+      if (window.step == 6){
+        //Remove Retail Mix Labels
+        clean(['.demo'],500,'hide_demo5')
+        map.flyTo({center: [-73.917654, 40.816110], zoom:15});
+      }
+
+      //Actions
+      clean(['.demo'],500,'hide_demo6')
+
+      d3.select('#mixtitle')
+        .text('The Hub')
+        .append("tspan")
+              .style("font-weight", "normal")
+              .text(': Retail Mix')
+
       d3.select('#mixlabel1')
-      .transition().duration(1000)
       .style('fill','#F9D406')
-      .attr("opacity",1)
       .text("18% Fashion")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": variety of adult and children's clothing stores")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
 
       d3.select('#mixlabel2')
-      .transition().duration(1000)
       .style('fill','#F28A13')
-      .attr("opacity",1)
       .text("17% Home")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": big box furniture and discount stores")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
 
       d3.select('#mixlabel3')
-      .transition().duration(1000)
       .style('fill','#2E8EF5')
-      .attr("opacity",1)
       .text("16% Essentials")
-
-
-      d3.select('#mixsublabel1')
-      .transition().duration(1000)
-      .attr("opacity",1)
-      .text("variety of adult and children's clothing stores")
-
-      d3.select('#mixsublabel2')
-      .transition().duration(1000)
-      .attr("opacity",1)
-      .text("dominated by big box furniture \n and discount stores")
-
-      d3.select('#mixsublabel3')
-      .transition().duration(1000)
-      .attr("opacity",1)
-      .text("including pharmacies, and mobile phone stores")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": including pharmacies and mobile phone stores")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
 
 
 
-      d3
-        .selectAll(".demo")
-        .attr("opacity",0)
+      activate(['.mixlabel'],500,'mixlabel4')
+
+      //Set Step
+      window.step = 5
     
   }
 
     function madison(){
 
-      d3
-      .selectAll(".mixlabel")
-      .attr('opacity',0)
+    //Set Reverse
+      if (window.step == 7){
+        //Remove Retail Mix Labels
+        clean(['.mixlabel'],500,'hide_mix3')
+        activate(['.demo'],500,'demo1')        
+      }
 
-      d3
-        .selectAll(".newbox")
-        .remove()
 
-    map.setPaintProperty('overlay2', 'background-opacity', 0)
-
-    map.off("moveend", load_Hub)
-    map.on("moveend", load_Madison);
-    map.flyTo({center: [-73.974733,40.759157], zoom:14});
+    if(window.step == 5){
+      map.off("moveend", load_Hub)
+      clean(['.mixlabel','.citywide'],500,'hide_mix4')
+      map.flyTo({center: [-73.974733,40.759157], zoom:14});
+      map.on("moveend", load_Madison);
 
       d3
       .selectAll(".circle")
-      .transition().duration(1000)
+      .transition("grow3").duration(1000)
       .attr("r", 2)
-          
+    }
 
-     window.step = 2
+     window.step = 6
 
     }
 
     function madison_two(){
 
-      d3.select('#mixlabel1')
-      .transition().duration(1000)
-      .style('fill','#F9D406')
-      .attr("opacity",1)
-      .text("32% Fashion")
+      if (window.step == 8){
+        map.flyTo({center: [-73.974733,40.759157], zoom:14});
 
-      d3.select('#mixlabel2')
-      .transition().duration(1000)
-      .style('fill','#2ACEE6')
-      .attr("opacity",1)
-      .text("22% Food")
-
-      d3.select('#mixlabel3')
-      .transition().duration(1000)
-      .style('fill','#BAA38C')
-      .attr("opacity",1)
-      .text("9% Services")
-
-      d3.select('#mixsublabel1')
-      .transition().duration(1000)
-      .attr("opacity",1)
-      .text("high concentration of men's clothing, formalwear, and accessory stores")
-
-      d3.select('#mixsublabel2')
-      .transition().duration(1000)
-      .attr("opacity",1)
-      .text("including many Italian & Mediterranean restaurants")
-
-      d3.select('#mixsublabel3')
-      .transition().duration(1000)
-      .attr("opacity",1)
-      .text("large number of banks")
-
-
-
-      d3
-        .selectAll(".demo")
-        .attr("opacity",0)
-
-      d3.selectAll('.circle')
-      .style("fill", function(d){ return categoryColors[d.category][0]})
-
-
-      if (window.step == 5){
-        simulation  
-        .force('forceX', d3.forceX(d => project([d.long, d.lat]).x).strength(.5))
-        .force('forceY', d3.forceY(d => project([d.long, d.lat]).y).strength(.5))
-        .alpha(0.1).restart()
-        .stop()
-
+        d3
+      .selectAll(".circle")
+      .transition("make_small").duration(1000)
+      .attr("r", 2)
       }
 
+      d3.select('#mixtitle')
+        .text('Madison Avenue')
+        .append("tspan")
+              .style("font-weight", "normal")
+              .text(': Retail Mix')
 
+
+      clean(['.demo','.labels','.citywide'],500,'hide_demo7')
       map.off("moveend", load_Madison)
 
-      d3.selectAll(".labels")
-      .remove()
+      d3.select('#mixlabel1')
+      .style('fill','#F9D406')
+      .text("32% Fashion")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": men's clothing, formalwear, and accessory stores")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
 
-      d3
-        .selectAll(".citywide")
-        .remove()
+      d3.select('#mixlabel2')
+      .style('fill','#2ACEE6')
+      .text("22% Food")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": including many Italian & Mediterranean restaurants")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
+
+      d3.select('#mixlabel3')
+      .style('fill','#BAA38C')
+      .text("9% Services")
+      .append("tspan")             
+      .style("fill","white")
+      .text(": large number of banks")
+      .attr('class','mixlabel')
+      .attr('id','mixsublabel2')
+      .style("font-weight", "normal")
+
+      activate(['.mixlabel'],500,'mixlabel2')
+
+
 
       svg.selectAll('.circle')
             .attr('stroke-width', 0)
 
-      d3.selectAll(".unoccupiedCircle")
-      .attr("r", 0)
-      .attr("opacity", 0)
 
-      d3.selectAll("#hub_text")
-      .remove()
-      d3.selectAll("#jackson_text")
-      .remove()
-      d3.selectAll("#madison_text")
-      .remove()
+      window.step = 7
     
   }
 
   
     function stepthree(){
 
-      d3
-      .selectAll(".mixlabel")
-      .attr('opacity',0)
-
-      d3
-        .selectAll(".newbox")
-        .remove()
-
-      map.off("moveend", load_Madison)
-
-      d3.selectAll(".labels")
-      .remove()
-
-
-       d3
-        .selectAll(".demo")
-        .attr("opacity",0)
-
-      if (window.step == 4){
-        simulation  
-        .force('forceX', d3.forceX(d => project([d.long, d.lat]).x).strength(.5))
-        .force('forceY', d3.forceY(d => project([d.long, d.lat]).y).strength(.5))
-        .alpha(0.1).restart()
-        .stop()
-
+      if(window.step == 7){
+        map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round(width*.01476)})
       }
 
+
+
+      if (window.step == 9){
+        clean(['.citywide','.demo','.mixlabel'],500,'hide_demo8')
         map.setPaintProperty('overlay2', 'background-opacity', 0)
-       
-        
+
         d3.selectAll('.circle')
-          .transition().duration(1000)
+        .transition('re_color').duration(500)
+        .style("fill", function(d){ return categoryColors[d.category][0]})
+        .attr("r",1)
+
+        simulation  
+        .force('forceX', d3.forceX(d => project([d.long, d.lat]).x).strength(1))
+        .force('forceY', d3.forceY(d => project([d.long, d.lat]).y).strength(1))
+        .force('charge', d3.forceManyBody().strength([0])) 
+        .force('collide', d3.forceCollide(0))
+        .alpha(0.7).restart()
+
+        setTimeout(function(){
+          simulation.stop()
+
+          d3.selectAll('.circle')
+          .transition("truly_idk").duration(500)
           .attr("cx", function(d){ return project([d.long, d.lat]).x })
           .attr("cy", function(d){ return project([d.long, d.lat]).y })
-        map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round(width*.01476)})
+
+        }, 1000)
+        
+        //Hide Vacant Circles
+        d3.selectAll(".unoccupiedCircle")
+        .transition("hide_unocc").duration(500)
+        .attr("r", 0)
+        .attr("opacity", 0)
+
+        }
+
+        map.off("moveend", load_Madison)
+
+        clean(['.demo','.mixlabel','.labels'],500,'hide_demo9')
+
+        
 
         svg
           .selectAll(".circle")
-          .transition().duration(1000)
+          .transition("shrink").duration(500)
           .attr("r", 1)
               
-        d3.select(window).on('resize', render)
-        window.step = 3
+        //d3.select(window).on('resize', render)
+
+        window.step = 8
+
         }
 
     function stepfour(){
 
-      d3
-        .selectAll(".newbox")
-        .remove()
 
-       d3
-        .selectAll(".citywide")
-        .remove()
+        let svg = d3.select("#graph")
+              .select('svg')
+              .attr('width', width)
+              .attr('height',width)
 
-      svg.selectAll('.circle')
-            .attr('stroke-width', 0)
+    
+        svg.selectAll('.circle')
+              .attr('stroke-width', 0)
 
-      d3.selectAll(".unoccupiedCircle")
-      .transition().duration(2000)
-      .attr("r", 0)
-      .attr("opacity", 0)
+        d3.selectAll(".unoccupiedCircle")
+        .transition("hide").duration(500)
+        .attr("r", 0)
+        .attr("opacity", 0)
 
-      d3.selectAll("#hub_text")
-      .remove()
-      d3.selectAll("#jackson_text")
-      .remove()
-      d3.selectAll("#madison_text")
-      .remove()
+        clean(['.labels','.citywide'],500,'hide_citywide')
 
-      map.setPaintProperty('overlay2', 'background-opacity', 1)
+        map.setPaintProperty('overlay2', 'background-opacity', 1)
 
-      svg.append("text")
-              .text("Madison Avenue")
-              .attr("x", width*.23958)
-              .attr("y", height*.816666)
-              .attr("class","labels")
-              .attr("id","madison_label")
-              .style("fill", 'black')
-              .attr("opacity",0)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              .transition(2000).duration(2000).delay(1000)
-              .attr("opacity",1)
-      svg.append("text")
-              .text("Jackson Heights")
-              .attr("x", width*.716666)
-              .attr("y", height*.816666)
-              .attr("class","labels")
-              .attr("id","jackson_label")
-              .style("fill", 'black')
-              .attr("opacity",0)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              .transition(2000).duration(2000).delay(1000)
-              .attr("opacity",1)
-      svg.append("text")
-              .text("The Hub")
-              .attr("x", width*.4875)
-              .attr("y", height*.364583)
-              .attr("class","labels")
-              .attr("id","hub_label")
-              .style("fill", 'black')
-              .attr("opacity",0)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              .transition(2000).duration(2000).delay(1000)
-              .attr("opacity",1)
+        activate(['.labels'],1000,'labels2')
 
-      simulation
-        .force('charge', d3.forceManyBody().strength([-3]))  
-        .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]))
-        .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8))
-        .force('collide', d3.forceCollide(0))
-        .alphaDecay([0.02])
-        //.velocityDecay([.05])
+        simulation
+          .force('charge', d3.forceManyBody().strength([-3]))  
+          .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]))
+          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8))
+          .force('collide', d3.forceCollide(0))
+          .alphaDecay([0.02])
+          //.velocityDecay([.05])
 
-      simulation.alpha(0.1).restart()
-      simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
+        simulation.alpha(0.1).restart()
+        simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
 
 
-      svg
-      .selectAll(".circle")
-      .transition().duration(1000)
-      .style("fill", function(d){return categoryColors[d.category][0]})
-      .attr("r", nodewidth)
-
-      window.step = 4
-  
-  }
+        svg
+        .selectAll(".circle")
+        .transition("category_fill").duration(500)
+        .style("fill", function(d){return categoryColors[d.category][0]})
+        .attr("r", nodewidth)
+     }
 
     function vacancy(){
 
-      if (window.step == 2){
-      stepthree()
+      if (window.step == 8){
+      clean(['.demo','.mixlabel'],500,'hide_demo10')
+      //stepthree()
       stepfour()
+      map.setPaintProperty('overlay2', 'background-opacity', 1)
     }
 
 
-      d3
-        .selectAll(".newbox")
-        .remove()
 
-      d3.selectAll('.circle')
-            .attr("opacity", 1);
-
-      map.setPaintProperty('overlay2', 'background-opacity', 1)
-
-    
-
-      let svg = d3.select("#graph")
-                    .select('svg')
-                    .attr('width', width)
-                    .attr('height',width)
-
-
-      citywide = svg
-              .append("svg")
-              .attr("x", width*.05)
-              .attr("y", height*.05)
-              .attr("class","citywide")
-              .attr('opacity',0)
-
-      citywide.append("rect")
-              .attr("width", 140)
-              .attr("height", 70)
-              .attr("stroke", '#d8d8d8')
-              .attr('stroke-width', '2px')
-              .attr('rx', '10')
-              .attr("z-index", 5)
-              .style("fill", "white");
-
-      citywide
-              .append("text")
-              .text("Citywide")
-              .attr("dy", "1.5em")
-              .attr("dx", "1em")
-              .attr("class","demotext")
-              .style("fill", "black")
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-
-      var value = citywide
-              .append("text")
-              .text("15%")
-              .attr('class','cityvalue')
-              .attr("dy", "3.75em")
-              .style("font-size","14px")
-              .attr("dx", "1.5em")
-              .style("fill", "black")
-              .style("font-weight", "bold")
-
-      citywide.transition().duration(1000)
-      .attr('opacity',1)
-
-      if(window.step == 6){
       d3.selectAll("#hub_text")
       .text("12% Vacant")
       d3.selectAll("#jackson_text")
       .text("8% Vacant")
       d3.selectAll("#madison_text")
       .text("14% Vacant")
-      }
 
-      if(window.step==4){
 
-       svg.append("text")
-              .text("12% Vacant")
-              .attr("x", width*.2395833)
-              .attr("y", height*.85416667)
-              .attr("class","labels")
-              .attr("id","madison_text")
-              .style("fill", "black")
-              .attr("opacity",0)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              .transition(2000).duration(2000)
-              .attr("opacity",1)
-      svg.append("text")
-              .text("8% Vacant")
-              .attr("x", width*.7166666)
-              .attr("y", height*.85416667)
-              .attr("class","labels")
-              .attr("id","jackson_text")
-              .style("fill", "black")
-              .attr("opacity",0)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              .transition(2000).duration(2000)
-              .attr("opacity",1)
-      svg.append("text")
-              .text("14% Vacant")
-              .attr("x", width*.4875)
-              .attr("y", height*.40208333)
-              .attr("class","labels")
-              .attr("opacity",0)
-              .attr("id","hub_text")
-              .style("fill", "black")
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              .transition(2000).duration(2000)
-              .attr("opacity",1)
-      }
+      activate(['.citywide',"#jackson_text",'#madison_text','#hub_text'],1000,'demos')
 
-      /*d3.selectAll(".circle")
-      .transition().duration(1000)
-      .style("fill", "#A5A5A5" )*/
+
+    
+   
 
       simulation.on('tick', tick)
-    //.stop()
+
 
         function tick(e) {
-        d3.selectAll('#circle')
-            .attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; })
-
-        //d3.selectAll('.unoccupiedCircle')
-            //.attr("opacity", 1);
-      }
+          d3.selectAll('#circle')
+              .attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; })
+        }
 
       simulation.force('collide', d3.forceCollide(6))
       simulation.velocityDecay(0.6).alpha(0.9).restart()
 
       d3.selectAll(".unoccupiedCircle")
-      .transition().duration(2000)
       .attr("r",0)
 
       d3.selectAll(".unoccupiedCircle")
-      .transition().duration(2000).delay(400)
+      .transition("grow_unocc").duration(500)
       .attr("r",nodewidth)
       .attr("opacity", 1);
 
       d3.selectAll(".circle")
-          .transition().duration(1000)
+          .transition("vacancy_fill").duration(500)
           .style('fill','#FED766')
+          .attr("opacity", 1)
           .attr("r",nodewidth)
 
 
-          window.step = 5
+      window.step = 9
 
       }
 
@@ -1762,72 +1954,87 @@ console.log(rows)
       //simulation.velocityDecay(0.6).alpha(0.9).restart()
 
       d3.selectAll(".unoccupiedCircle")
-      .transition().duration(2000)
+      .transition("go_away").duration(500)
       .attr("r", 0)
       .attr("opacity", 0)
       
 
       d3.selectAll(".circle")
-      .transition().duration(1000)
+      .transition("essential_change").duration(500)
       .attr("opacity", function(d){ return essentialOpacity[d.essential][0] } )
       .style('fill',function(d){ return essentialColors[d.essential]})
-          //.style("fill", function(d){ return essentialColors[d.essential][0] } )
 
 
       d3.selectAll("#hub_text")
-      .transition().duration(1000)
+      .transition("essential1").duration(500)
       .text("27% Essential")
 
       d3.selectAll("#jackson_text")
-      .transition().duration(1000)
+      .transition("essential2").duration(500)
       .text("26% Essential")
 
       d3.selectAll("#madison_text")
-      .transition().duration(1000)
+      .transition("essential3").duration(500)
       .text("15% Essential")
 
-          window.step = 6
+      window.step = 10
 
       }
 
   function chains(){
 
-    d3.selectAll("#madison_label")
-    .transition().duration(1000)
-              .attr("x", width*.23958)
-              .attr("y", height*.816666)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-           
-     d3.selectAll("#jackson_label")
-    .transition().duration(1000)
-              .attr("x", width*.716666)
-              .attr("y", height*.816666)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              
-      d3.selectAll("#hub_label")
-    .transition().duration(1000)
-              .attr("x", width*.4875)
-              .attr("y", height*.364583)
-              .style("font-size","20px")
-              .style("font-weight", "bold")
-              .style("text-anchor", "middle")
-              
+    if(window.step == 10){
+      d3.selectAll("#hub_text")
+      .text("16% Chains")
 
-    d3.selectAll('.cityvalue')
-      .text('11%')
+      d3.selectAll("#jackson_text")
+      .text("6% Chains")
 
-    map.setPaintProperty('overlay2', 'background-opacity', 1)
+      d3.selectAll("#madison_text")
+      .text("30% Chains")
+    }
 
+    if (window.step == 12){
+      activate(['#hub_text','#jackson_text','#madison_text'],500,'labels3')
+      clean(['.hist-axis','.dash-line','.histtitle','.histlabel'],500,'hide_hist')
 
-      if(window.step == 8){
+        d3.selectAll("#madison_label")
+        .transition("l4").duration(500)
+                  .attr("x", width*.23958)
+                  .attr("y", height*.816666)
+                  .style("font-size","20px")
+                  .style("font-weight", "bold")
+                  .style("text-anchor", "middle")
+             
+       d3.selectAll("#jackson_label")
+        .transition("l5").duration(500)
+                  .attr("x", width*.716666)
+                  .attr("y", height*.816666)
+                  .style("font-size","20px")
+                  .style("font-weight", "bold")
+                  .style("text-anchor", "middle")
+                
+        d3.selectAll("#hub_label")
+        .transition("l6").duration(500)
+                  .attr("x", width*.4875)
+                  .attr("y", height*.364583)
+                  .style("font-size","20px")
+                  .style("font-weight", "bold")
+                  .style("text-anchor", "middle")
+
         d3.selectAll(".circle")
         .attr("r", nodewidth)
 
-        simulation.restart()
+        simulation.alpha(.1).restart()
+
+        simulation
+          .force('charge', d3.forceManyBody().strength([-3]))  
+          .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]))
+          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8))
+          //.alphaDecay([0.02])
+          .velocityDecay([.07])
+
+        simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
 
         d3
         .selectAll(".circle")
@@ -1835,111 +2042,69 @@ console.log(rows)
         .each(function (d, i){
               var $this = d3.select(this)
               $this
+              .transition('reappear').duration(500)
               .attr('opacity', 1)
             })
-      }
+    }
 
-      d3.selectAll('.hist-axis')
-      .attr("opacity",0)
-
-      d3.selectAll('.dash-line')
-      .attr("opacity",0)
-
-      d3.selectAll('.histtitle')
-      .attr("opacity",0)
-
-      d3.selectAll('.histlabel')
-      .attr("opacity",0)
+      //Actions
+      d3.selectAll(".circle")
+        .transition("c1").duration(500)
+        .attr("opacity", function(d){ return chainOpacity[d.chain][0] } )
+        .style('fill',function(d){ return chainColors[d.chain]})
+      
+      d3.selectAll('.cityvalue')
+        .text('11%')
 
       d3.selectAll(".unoccupiedCircle")
-      .transition().duration(2000)
+      .transition("c2").duration(500)
       .attr("r", 0)
       .attr("opacity", 0)
-      
+        
 
-      d3.selectAll(".circle")
-      .transition().duration(1000)
-      //.style("fill", function(d){ return chainColors[d.chain][0] } )
-      .attr("opacity", function(d){ return chainOpacity[d.chain][0] } )
-      .style('fill',function(d){ return chainColors[d.chain]})
-
-
-      d3.selectAll("#hub_text")
-      .transition().duration(1000)
-      .text("16% Chains")
-
-      d3.selectAll("#jackson_text")
-      .transition().duration(1000)
-      .text("6% Chains")
-
-      d3.selectAll("#madison_text")
-      .transition().duration(1000)
-      .text("30% Chains")
-
-          window.step = 7
+      window.step = 11
 
       }
 
-  //CREATE HIST LEGENDS    
-  var legend = d3.select(".legend").append("svg")
-      .attr("width", 960)
-      .attr("height", 500);
-    
-    legend.append("g")
-      .attr("class", "legendOrdinal")
-      .attr("transform", "translate(20,20)");
-    
-    var legendcategories = ['The Hub','Madison Avenue','Jackson Heights'];
-
-    var legendcolors = ['#FE4A49','#FED766','#009FB7']
-
-    
-    var ordinal = d3.scaleOrdinal()
-      .domain(legendcategories)
-      .range(legendcolors);
-    
-    var legendOrdinal = d3.legendColor()
-      .scale(ordinal);
-    
-    legend.select(".legendOrdinal")
-      .call(legendOrdinal);
 
   function histogram(){
 
-    d3.selectAll('.citywide')
-      .remove()
 
-    map.setPaintProperty('overlay2', 'background-opacity', 1)
+    if(window.step == 11){
 
-    d3.selectAll('#madison_text')
-      .attr("opacity",0)
-    d3.selectAll('#jackson_text')
-    .attr("opacity",0)
-    d3.selectAll('#hub_text')
-    .attr("opacity",0)
+      simulation
+        .force('charge', d3.forceManyBody().strength([0])) 
+        .force('collide', d3.forceCollide(0))
+        .force('forceX', d => histXScale(d.sidewalk))
+        .force('forceY', d => histYScale(d.histogram_column+(categoriesXY[d.fincat][3]*37)))
 
+        simulation.stop()
+    }
+    
+    clean(['.citywide','#madison_text','#jackson_text','#hub_text'],500,'hide_labels')
+
+    //Move Labels
     d3.selectAll('#madison_label')
-    .transition().duration(1000).delay(300)
+    .transition("l1").duration(500).delay(100)
       .attr("x",width*.25)
       .attr("y",histYScale(38))
       .style("font-size","18px")
       .style("text-anchor", "end")
 
     d3.selectAll('#jackson_label')
-    .transition().duration(1000).delay(300)
+    .transition("l2").duration(500).delay(100)
       .attr("x",width*.25)
       .attr("y",histYScale(1))
       .style("font-size","18px")
       .style("text-anchor", "end")
 
     d3.selectAll('#hub_label')
-    .transition().duration(1000).delay(300)
+    .transition("l3").duration(500).delay(100)
       .attr("x",width*.25)
       .attr("y",histYScale(75))
       .style("font-size","18px")
       .style("text-anchor", "end")
 
-    simulation.stop()
 
     d3
         .selectAll(".circle")
@@ -1947,9 +2112,9 @@ console.log(rows)
         .each(function (d, i){
               var $this = d3.select(this)
               $this
-              .transition().duration(1000)
+              .transition("fade_away").duration(500)
               .attr('opacity', 0)
-              .transition().duration(1000).delay(300)
+              .transition("move_offscreen").duration(500).delay(100)
               .attr('cx', 0)
               .attr('cy', 0)
             })
@@ -1959,9 +2124,9 @@ console.log(rows)
     .each(function (d, i){
               var $this = d3.select(this)
               $this
-              .transition().duration(1000).delay(300)
+              .transition("change_opacity").duration(500).delay(100)
               .attr('opacity', function(d){
-                if (d.sidewalk >= 13){
+                if (d.sidewalk >= 11){
                   return 1
                 }else{
                   return .3
@@ -1975,262 +2140,21 @@ console.log(rows)
         
             //.attr('fill', d => categoryColorScale(d.Category))
 
+      activate(['.hist-axis','.dash-line','.histlabel','.histtitle'],500,'hist')
 
-    let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return d3.format(",.2")(d) +"ft"; });
+    
 
-
-    svg.append('g')
-        .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${histYScale(0)})`)
-        .attr("opacity",0)
-        .call(xAxis)
-        .transition().duration(1000).delay(300)
-        .attr("opacity",1)
-
-    svg.append('g')
-        .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${histYScale(37)})`)
-        .attr("opacity",0)
-        .call(xAxis)
-        .transition().duration(1000).delay(300)
-        .attr("opacity",1)
-
-    svg.append('g')
-        .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${histYScale(74)})`)
-        .attr("opacity",0)
-        .call(xAxis)
-        .transition().duration(1000).delay(300)
-        .attr("opacity",1)
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ histXScale(12.5) + " ," + 
-                           (height*.09) + ")")
-      .style("text-anchor", "middle")
-      .text("Food and Drink Establishments by Sidewalk Width")
-      .attr('class','histtitle')
-      .style("font-weight", "bold")
-      .style("text-anchor", "middle")
-      .style("font-size", "16px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(300)
-      .attr("opacity",1);
-
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ histXScale(17.5) + " ," + 
-                           (height/10)*1.45 + ")")
-      .style("text-anchor", "middle")
-      .style("fill","gray")
-      .text(">13 ft Available for Sidewalk Seating")
-      .attr('class','histlabel')
-      .style("font-weight", "regular")
-      .style("font-size", "14px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(300)
-      .attr("opacity",1)
-
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ histXScale(22) + " ," + 
-                           histYScale(13) + ")")
-      .style("text-anchor", "end")
-      .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("41%")
-      .attr('class','histlabel')
-      .style("font-weight", "bold")
-      .style("font-size", "20px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(300)
-      .attr("opacity",1)
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ histXScale(22) + " ," + 
-                           histYScale(88) + ")")
-      .style("text-anchor", "end")
-      .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("28%")
-      .attr('class','histlabel')
-      .style("font-weight", "bold")
-      .style("font-size", "20px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(300)
-      .attr("opacity",1)
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ histXScale(22) + " ," + 
-                           histYScale(51) + ")")
-      .style("text-anchor", "end")
-      .style("vertical-align", "middle")
-      .style("fill","black")
-      .text("44%")
-      .attr('class','histlabel')
-      .style("font-weight", "bold")
-      .style("font-size", "20px")
-      .attr("opacity",0)
-      .transition().duration(1000).delay(300)
-      .attr("opacity",1)
-
-
-    svg.append('line')
-        .attr('class', 'dash-line')
-        .style("stroke", "gray")
-        .style("stroke-dasharray", ("3, 3"))
-        .attr("x1", histXScale(12.5))
-        .attr("y1", (height/10)*1.45)    
-        .attr("x2", histXScale(12.5))      
-        .attr("y2", histYScale(.5)) 
-        .attr("opacity",0)
-      .transition().duration(1000).delay(300)
-      .attr("opacity",1)
-
-      ///Sidewalk Legend
-
-
-    d3.selectAll(".label")
-      .attr("opacity", 1)
   
-
       //STEP
-          window.step = 8
+          window.step = 12
     }
 
 
 
-    /*function histogram2(){
-
-
-
-
-    d3.selectAll('.citywide')
-      .remove()
-
-    map.setPaintProperty('overlay2', 'background-opacity', 1)
-
-    d3.selectAll('#madison_text')
-      .attr("opacity",0)
-    d3.selectAll('#jackson_text')
-    .attr("opacity",0)
-    d3.selectAll('#hub_text')
-    .attr("opacity",0)
-
-    d3.selectAll('#madison_label')
-    .transition().duration(1000)
-      .attr("x",histXScale(1))
-      .attr("y",(height/4)*2*.95)
-
-    d3.selectAll('#jackson_label')
-    .transition().duration(1000)
-      .attr("x",histXScale(1))
-      .attr("y",(height/4)*3*.95)
-
-    d3.selectAll('#hub_label')
-    .transition().duration(1000)
-      .attr("x",histXScale(1))
-      .attr("y",(height/4)*.95)
-
-
-    d3
-        .selectAll(".circle")
-        .filter(function (d) { return isNaN(d.histogram_column) === true; })
-        .each(function (d, i){
-              var $this = d3.select(this)
-              $this
-              //.remove()
-              //.transition().duration(1000).delay(200)
-              .attr('opacity', 0)
-              //.attr('cx', 0)
-              //.attr('cy', 0)
-            })
-
-    svg.selectAll('.circle')
-    .filter(function (d) { return isNaN(d.histogram_column) === false; })
-    .each(function (d, i){
-              var $this = d3.select(this)
-              $this
-              .transition().duration(1000).delay(200)
-              .attr('opacity', 1)
-              //.attr('r', 6)
-              .style('fill', d => categoriesXY[d.corridor][2])
-            })
-
-    simulation
-        .force('charge', d3.forceManyBody().strength([-3]))  
-        .force('forceX', d3.forceX(d => histXScale(d.sidewalk)).strength(.5))
-        .force('forceY', d3.forceY(d => categoriesXY[d.fincat][3]).strength(.5))
-        .force('collide', d3.forceCollide(6))
-
-    simulation.alphaDecay(.02)
-          .alpha(0.9)
-          .restart()
-        
-            //.attr('fill', d => categoryColorScale(d.Category))
-
-
-    let xAxis = d3.axisBottom(histXScale).tickFormat(function(d) { return d3.format(",.2")(d) +"ft"; });
-    svg.append('g')
-        .attr('class', 'hist-axis')
-        .attr('transform', `translate(0, ${(height*.9) + 8})`)
-        .call(xAxis)
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ (width/2) + " ," + 
-                           (height*.07) + ")")
-      .style("text-anchor", "middle")
-      .text("Food and Drink Establishments by Sidewalk Width")
-      .attr('class','histtitle')
-      .style("font-weight", "bold")
-      .style("font-size", "14px");
-
-
-    svg.append("text")             
-      .attr("transform",
-            "translate("+ histXScale(8.5) + " ," + 
-                           (height/10)*1.5 + ")")
-      .style("text-anchor", "middle")
-      .style("fill","gray")
-      .text("Minimum for Sidewalk Seating")
-      .attr('class','histlabel')
-      .style("font-weight", "bold")
-      .style("font-size", "14px")
-
-
- 
-
-      
-
-    svg.append('line')
-        .attr('class', 'dash-line')
-        .style("stroke", "gray")
-        .style("stroke-dasharray", ("3, 3"))
-        .attr("x1", histXScale(12.5))
-        .attr("y1", (height/10)*1.5)    
-        .attr("x2", histXScale(12.5))      
-        .attr("y2", histYScale(.5)) 
-        .attr('opacity', 1)
-
-      ///Sidewalk Legend
-
-
-    d3.selectAll(".label")
-      .attr("opacity", 1)
   
-
-      //STEP
-          window.step = 8
-    }*/
-
   function buffer(){
 
-          window.step = 9
+          window.step = 13
     }
 
 
@@ -2242,8 +2166,7 @@ console.log(rows)
         hub_two,
         madison,
         madison_two,
-        //stepthree,
-        //stepfour,
+        stepthree,
         vacancy,
         essential,
         chains,
