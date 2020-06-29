@@ -120,8 +120,8 @@ h1{
 
 #sections{
   width: 340px;
-  position: relative;
-  line-height: 1.2;
+  /*position: relative;
+  line-height: 1.2;*/
 }
 
 #sections > div{
@@ -138,12 +138,11 @@ h1{
 
 #graph{
   margin-left: 40px;
-  width: 53.4187179%;
+  width: 54%;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
-  float: none;
-  z-index: 0
+  float: right;
 }
 
 
@@ -203,9 +202,7 @@ circle{
 </style>
 <body class="home page-template page-template-homepage page-template-homepage-php page page-id-5319 chrome page-homepage az wpb-js-composer js-comp-ver-3.6.2 vc_responsive is-device" data-gr-c-s-loaded="true" style="zoom: 1;">
 <div id="tooltip"></div>
-<div id="photo1"></div>
-<div id="photo2"></div>
-<div id="photo3"></div>
+<div id="em" style="height:0;width:0;outline:none;border:none;padding:none;margin:none;box-sizing:content-box;"></div>
 <div id="bg-blue">
   <header class="normal-header">
 
@@ -642,8 +639,12 @@ var w = window,
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-nodewidth = x*.00260416666
+nodewidth = x*.002
 
+
+document.getElementById("graph").style.height = (e.clientWidth*.54) + 'px';
+
+document.getElementById("graph").style.width = (e.clientWidth*.54) + 'px';
 
 
 var oldWidth = 0
@@ -651,14 +652,28 @@ function render(){
   if (oldWidth == innerWidth) return
   oldWidth = innerWidth
 
-  var width = height = d3.select('#graph').node().offsetHeight
+  
+  var width = height = e.clientWidth*.54
+  //var width = height = d3.select('#graph').node().offsetHeight
   var r = 40
 
 
-  if (innerWidth <= 925){
+  /*if (innerWidth <= 925){
     width = innerWidth
     height = innerHeight*1.7
+  }*/
+
+  console.log('height: '+ height)
+  console.log('width: '+ width)
+
+  var em;
+  function getValue(id){
+    var div = document.getElementById(id);
+    div.style.height = '1em';
+    return ( em = div.offsetHeight );
   }
+
+  getValue('em')
 
 
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
@@ -694,7 +709,7 @@ function render(){
   const chainColors = {'TRUE':['#FE4A49'],'FALSE':['#FE4A49']}
   const chainOpacity = {'TRUE':[.1],'FALSE':[1]}
 
-  const occRadius = {'Occupied':[nodewidth+1],'Unoccupied':[0]}
+  const occRadius = {'Occupied':[nodewidth*1.2],'Unoccupied':[0]}
 
 
   categoryColorScale = d3.scaleOrdinal(colors, categories)
@@ -703,8 +718,8 @@ function render(){
   mapboxgl.accessToken = 'pk.eyJ1Ijoia3BjbHluZSIsImEiOiJjanN3MzlpY2EwZGpjM3lsaGNhb3NqY3JmIn0._sGjIhmL5Xt08WIMWRsSsg';
 
   //Make Histogram Axis
-  histXScale = d3.scaleLinear().domain([4,22]).range([width*.3, width*.9])
-  histYScale = d3.scaleLinear().domain([100, 1]).range([height*.1,height*.95])
+  histXScale = d3.scaleLinear().domain([4,22]).range([width*.3, width*.75])
+  histYScale = d3.scaleLinear().domain([100, 1]).range([height*.1,height*.8])
 
   var map = new mapboxgl.Map({
     container: "graph",
@@ -788,8 +803,8 @@ function render(){
 
       //Underlying Rectangle
       demo.append("rect")
-              .attr("width", width*.46)
-              .attr("height", height*.11)
+              .attr("width", em*25)
+              .attr("height", em*6)
               .attr('rx', '10')
               .attr("z-index", 5)
               .attr("opacity",.75)
@@ -882,8 +897,8 @@ function render(){
 
       //Underlying Rectangle
     mix.append("rect")
-              .attr("width", width*.55)
-              .attr("height", height*.11)
+              .attr("width", em*25)
+              .attr("height", em*6)
               //.attr("stroke", '#000000')
               //.attr('stroke-width', '2px')
               .attr('rx', '10')
@@ -1028,7 +1043,7 @@ function render(){
       .attr('class','histtitle')
       .style("font-weight", "bold")
       .style("text-anchor", "middle")
-      .style("font-size", "16px")
+      .style("font-size", "1.4em")
 
 
     svg.append("text")             
@@ -1040,7 +1055,7 @@ function render(){
       .text(">11 ft Available for Sidewalk Seating")
       .attr('class','histlabel')
       .style("font-weight", "regular")
-      .style("font-size", "14px")
+      .style("font-size", ".9em")
 
 
 
@@ -1054,7 +1069,7 @@ function render(){
       .text("64%")
       .attr('class','histlabel')
       .style("font-weight", "bold")
-      .style("font-size", "20px")
+      .style("font-size", "1.3em")
 
 
     svg.append("text")             
@@ -1067,7 +1082,7 @@ function render(){
       .text("40%")
       .attr('class','histlabel')
       .style("font-weight", "bold")
-      .style("font-size", "20px")
+      .style("font-size", "1.3em")
 
 
     svg.append("text")             
@@ -1080,7 +1095,7 @@ function render(){
       .text("65%")
       .attr('class','histlabel')
       .style("font-weight", "bold")
-      .style("font-size", "20px")
+      .style("font-size", "1.3em")
 
 
     svg.append('line')
@@ -1118,26 +1133,26 @@ function render(){
   ///Main Corridor Labels
   svg.append("text")
                 .text("Madison Avenue")
-                .attr("x", width*.23958)
-                .attr("y", height*.816666)
+                .attr("x", width*.333)
+                .attr("y", (height*.666)+(nodewidth*25))
                 .attr("class","labels")
                 .attr("id","madison_label")
                 .style("fill", 'black')
                 .attr("opacity",0)
-                .style("font-size","20px")
+                .style("font-size","1.5em")
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
 
   
   svg.append("text")
                 .text("Jackson Heights")
-                .attr("x", width*.716666)
-                .attr("y", height*.816666)
+                .attr("x", width*.666)
+                .attr("y", (height*.666)+(nodewidth*25))
                 .attr("class","labels")
                 .attr("id","jackson_label")
                 .style("fill", 'black')
                 .attr("opacity",0)
-                .style("font-size","20px")
+                .style("font-size","1.5em")
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
                 .transition(2000).duration(2000).delay(1000)
@@ -1145,49 +1160,49 @@ function render(){
  
  svg.append("text")
                 .text("The Hub")
-                .attr("x", width*.4875)
-                .attr("y", height*.364583)
+                .attr("x", width*.5)
+                .attr("y", (height*.333)+(nodewidth*15))
                 .attr("class","labels")
                 .attr("id","hub_label")
                 .style("fill", 'black')
                 .attr("opacity",0)
-                .style("font-size","20px")
+                .style("font-size","1.5em")
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
 
   svg.append("text")
               .text("12% Vacant")
-              .attr("x", width*.2395833)
-              .attr("y", height*.85416667)
+              .attr("x", width*.5)
+              .attr("y", (height*.333)+(nodewidth*15) + (em*1.5))
               .attr("class","labels")
               .attr("id","madison_text")
               .style("fill", "black")
               .attr("opacity",0)
-              .style("font-size","20px")
+              .style("font-size","1.5em")
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
 
       svg.append("text")
               .text("8% Vacant")
-              .attr("x", width*.7166666)
-              .attr("y", height*.85416667)
+              .attr("x", width*.666)
+              .attr("y", (height*.666)+(nodewidth*25) + (em*1.5))
               .attr("class","labels")
               .attr("id","jackson_text")
               .style("fill", "black")
               .attr("opacity",0)
-              .style("font-size","20px")
+              .style("font-size","1.5em")
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
 
       svg.append("text")
               .text("14% Vacant")
-              .attr("x", width*.4875)
-              .attr("y", height*.40208333)
+              .attr("x", width*.333)
+              .attr("y", (height*.666)+(nodewidth*25) + (em*1.5))
               .attr("class","labels")
               .attr("opacity",0)
               .attr("id","hub_text")
               .style("fill", "black")
-              .style("font-size","20px")
+              .style("font-size","1.5em")
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
 
@@ -1318,8 +1333,8 @@ console.log(rows)
 
 
   simulation = d3.forceSimulation(rows)
-    .force('charge', d3.forceManyBody().strength([-25]))
-    .force('collide', d3.forceCollide(3))
+    .force('charge', d3.forceManyBody().strength([nodewidth*-.8]))
+    .force('collide', d3.forceCollide(0))
     .on('tick', tick)
     .stop()
 
@@ -1522,7 +1537,7 @@ console.log(rows)
     }
 
     //Actions
-    map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round((width*.0027)+9.8378)});
+    map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round((width*.002)+9.8378)});
 
     //Set Step
     window.step = 1
@@ -1789,7 +1804,7 @@ console.log(rows)
     function stepthree(){
 
       if(window.step == 7){
-        map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round(width*.01476)})
+        map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round((width*.002)+9.8378)});
       }
 
 
@@ -1869,7 +1884,7 @@ console.log(rows)
         activate(['.labels'],1000,'labels2')
 
         simulation
-          .force('charge', d3.forceManyBody().strength([-3]))  
+          .force('charge', d3.forceManyBody().strength([nodewidth*-.8]))  
           .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]))
           .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8))
           .force('collide', d3.forceCollide(0))
@@ -1921,7 +1936,7 @@ console.log(rows)
               .attr("cy", function(d) { return d.y; })
         }
 
-      simulation.force('collide', d3.forceCollide(6))
+      simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
       simulation.velocityDecay(0.6).alpha(0.9).restart()
 
       d3.selectAll(".unoccupiedCircle")
@@ -2000,24 +2015,24 @@ console.log(rows)
 
         d3.selectAll("#madison_label")
         .transition("l4").duration(500)
-                  .attr("x", width*.23958)
-                  .attr("y", height*.816666)
+                  .attr("x", width*.333)
+                  .attr("y", (height*.666)+(nodewidth*25))
                   .style("font-size","20px")
                   .style("font-weight", "bold")
                   .style("text-anchor", "middle")
              
        d3.selectAll("#jackson_label")
         .transition("l5").duration(500)
-                  .attr("x", width*.716666)
-                  .attr("y", height*.816666)
+                .attr("x", width*.666)
+                .attr("y", (height*.666)+(nodewidth*25))
                   .style("font-size","20px")
                   .style("font-weight", "bold")
                   .style("text-anchor", "middle")
                 
         d3.selectAll("#hub_label")
         .transition("l6").duration(500)
-                  .attr("x", width*.4875)
-                  .attr("y", height*.364583)
+                  .attr("x", width*.5)
+                  .attr("y", (height*.333)+(nodewidth*15))
                   .style("font-size","20px")
                   .style("font-weight", "bold")
                   .style("text-anchor", "middle")
@@ -2028,7 +2043,7 @@ console.log(rows)
         simulation.alpha(.1).restart()
 
         simulation
-          .force('charge', d3.forceManyBody().strength([-3]))  
+          .force('charge', d3.forceManyBody().strength([nodewidth*-.8]))  
           .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]))
           .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8))
           //.alphaDecay([0.02])
