@@ -668,19 +668,6 @@ function render(){
   //var width = height = d3.select('#graph').node().offsetHeight
   var r = 40*/
 
-
-  if (innerWidth <= 925){
-    width = e.clientWidth
-    height = e.clientHeight
-
-    document.getElementById("graph").style.height = (e.clientHeight) + 'px';
-
-    document.getElementById("graph").style.width = 340 + 'px';
-  }
-
-  console.log('height: '+ height)
-  console.log('width: '+ width)
-
   var em;
   function getValue(id){
     var div = document.getElementById(id);
@@ -689,6 +676,20 @@ function render(){
   }
 
   getValue('em')
+
+
+  if (innerWidth <= 925){
+    width = e.clientWidth
+    height = e.clientHeight
+
+    document.getElementById("graph").style.height = (e.clientHeight) + 'px';
+    document.getElementById("graph").style.width = 340 + 'px';
+  }
+
+  console.log('height: '+ height)
+  console.log('width: '+ width)
+
+  
 
 
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
