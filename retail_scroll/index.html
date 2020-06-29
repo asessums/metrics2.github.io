@@ -101,7 +101,6 @@ p.solid {
   padding: 1px;}
 
 body{
-  max-width: 900px;
   margin: 0px auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -139,7 +138,7 @@ h1{
 
 #graph{
   margin-left: 40px;
-  width: 500px;
+  width: 54%;
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
@@ -178,17 +177,7 @@ h1{
     border-top: 1px solid;
     border-bottom: 1px solid;
     margin-bottom: 80vh;
-
-
   }
-
-  #map {
-        position: absolute;
-        z-index: 0;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
 
   pre{
     overflow: hidden;
@@ -664,9 +653,22 @@ function render(){
   oldWidth = innerWidth
 
   
-  /*var width = height = e.clientWidth*.54
+  var width = height = e.clientWidth*.54
   //var width = height = d3.select('#graph').node().offsetHeight
-  var r = 40*/
+  var r = 40
+
+
+  if (innerWidth <= 925){
+    width = 340
+    height = e.clientHeight
+
+    document.getElementById("graph").style.height = (e.clientHeight) + 'px';
+
+document.getElementById("graph").style.width = 340 + 'px';
+  }
+
+  console.log('height: '+ height)
+  console.log('width: '+ width)
 
   var em;
   function getValue(id){
@@ -676,20 +678,6 @@ function render(){
   }
 
   getValue('em')
-
-
-  if (innerWidth <= 925){
-    width = e.clientWidth
-    height = e.clientHeight
-
-    document.getElementById("graph").style.height = (e.clientHeight) + 'px';
-    document.getElementById("graph").style.width = 340 + 'px';
-  }
-
-  console.log('height: '+ height)
-  console.log('width: '+ width)
-
-  
 
 
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
@@ -1882,7 +1870,6 @@ console.log(rows)
         let svg = d3.select("#graph")
               .select('svg')
 
-    
         svg.selectAll('.circle')
               .attr('stroke-width', 0)
 
