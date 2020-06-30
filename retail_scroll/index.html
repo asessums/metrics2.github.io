@@ -2061,15 +2061,27 @@ if (error) throw error;
 
       d3.selectAll("#hub_text")
       .text("12% Vacant")
-      .style('fill', '#FED766')
+      .style('fill', '#FFFFFF')
+      .style('stroke', '#345D80')
+      .style('stroke-opacity', 1)
+      .attr('stroke-width', 3)
+      .style('paint-order', 'stroke')
 
       d3.selectAll("#jackson_text")
       .text("8% Vacant")
-      .style('fill', '#FED766')
+      .style('fill', '#FFFFFF')
+      .style('stroke', '#345D80')
+      .style('stroke-opacity', 1)
+      .attr('stroke-width', 3)
+      .style('paint-order', 'stroke')
 
       d3.selectAll("#madison_text")
       .text("14% Vacant")
-      .style('fill', '#FED766')
+      .style('fill', '#FFFFFF')
+      .style('stroke', '#345D80')
+      .style('stroke-opacity', 1)
+      .attr('stroke-width', 3)
+      .style('paint-order', 'stroke')
 
 
       activate(['.citywide',"#jackson_text",'#madison_text','#hub_text'],500,'demos')
