@@ -437,13 +437,13 @@ margin-left: 50px;'><i class="fas fa-mouse"></i>&nbsp&nbspHover over the graphic
       Essential businesses may be more likely to survive, since they never closed and may provide goods consumers are less likely to seek online. They could provide a baseline of strength upon which retail corridors can build.  
       <br>
       <br>
-      Essential services include auto dealers & repair, banks & ATMs, beauty product stores, bicycle repair and stores, gas stations, groceries & convenience stores, hardware & home improvement stores, laundry/dry cleaners & tailors, liquor & wine shops, pawn shops, pet stores, pharmacies, printing & shipping/postal services, vapes/cigars & accessory shops, vitamin & supplement stores, and other listed in New York State’s essential services definition, with the exception of hotels, which this analysis excluded.
+      Essential services include auto dealers & repair, banks & ATMs, beauty product stores, bicycle repair and stores, gas stations, groceries & convenience stores, hardware & home improvement stores, laundry/dry cleaners & tailors, liquor & wine shops, pawn shops, pet stores, pharmacies, printing & shipping/postal services, vapes/cigars & accessory shops, vitamin & supplement stores, and other listed in <a href="https://esd.ny.gov/guidance-executive-order-2026">New York State’s essential services definition</a>, with the exception of hotels, which this analysis excluded.
 
     </div>
 
     <div style='padding-bottom: 300px'>
       <h4>Chains</h4>
-      Chains, i.e. businesses with more than one same-named establishment in NYC, <b>may be more resilient post-COVID compared to independent retailers</b>; approximately <a href="https://www.nber.org/papers/w26989.pdf">one half of small businesses</a> have only one to two months of cash on hand. Corridors with relatively high percentages of chains could be buoyed, although the outcome would be an even greater concentration of chains and loss of retail character. 
+      Chains, i.e. businesses with more than five same-named establishment in NYC, <b>may be more resilient post-COVID compared to independent retailers</b>; approximately <a href="https://www.nber.org/papers/w26989.pdf">one half of small businesses</a> have only one to two months of cash on hand. Corridors with relatively high percentages of chains could be buoyed, although the outcome would be an even greater concentration of chains and loss of retail character. 
     </div>
 
      <div style='padding-bottom: 300px'>
@@ -453,7 +453,7 @@ margin-left: 50px;'><i class="fas fa-mouse"></i>&nbsp&nbspHover over the graphic
       </div>-->
       <br>
       <br>
-      However, to maintain required clearance for pedestrians, sidewalk seating is only permissible on <a href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">sidewalks 11 feet or wider></a>. Only <b>one in four such establishments in The Hub</b> have the <b>physical adaptability</b> to create sidewalk seating. In <b>Jackson Heights</b>, although <b>41% of businesses could create sidewalk seating</b>, many are under an elevated subway. 
+      However, to maintain required clearance for pedestrians, sidewalk seating is only permissible on <a href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">sidewalks 11 feet or wider></a>. Only <b>less than half of such establishments in the Hub</b> have the physical adaptability create sidewalk seating. In <b>Jackson Heights and on Madison Avenue, almost two-thirds of businesses could create sidewalk seating.</b>  
     </div>
 
 
@@ -473,7 +473,7 @@ margin-left: 50px;'><i class="fas fa-mouse"></i>&nbsp&nbspHover over the graphic
 <h3><b>Conclusion</b></h3><br>
 Retail corridor recovery will be driven by a confluence of many factors with different levels of impact. Among the potential risk factors we analyzed, <b>The Hub, Jackson Heights, and Madison Avenue all have different combinations of strengths and weaknesses.</b> However, the multiple indicators we analyzed suggest that The Hub may be the least resilient of the three – unfortunately no surprise given that this is also a low-income community of color.<br><br>
 
-<font color='black'>
+<!--<font color='black'>
 <table>
   <tr>
     <th></th>
@@ -523,14 +523,16 @@ Retail corridor recovery will be driven by a confluence of many factors with dif
 <tr> <td style='background-color:#079FB5'>Lower Risk</td></tr>
 </table>
 </small>
-</font>
-
-<br><br>
+</font>-->
+<center>
+<img src="https://clynekp.github.io/retail_scroll/img/matrix2.PNG" width="60%" class="matrix">
+</center>
+<br>
 Cities should leverage analysis like this to inform how they allocate resources and tailor recovery policies to meet local needs.<br><br>
 
 <b>Support for the Hub should address the devastating toll that COVID-19 has had on the community.</b> We should track the supply of essential retail services for resource-constrained residents, who may have more limited ability to access other neighborhoods, and provide targeted support for these businesses based on their identification of need, such as loosened access to credit and support for rent renegotiation.<br><br>
 
-<b>Jackson Heights’ small, immigrant-owned businesses may have particular trouble navigating recovery resources and red tape.</b> We should assess their challenges and provide technical assistance as needed.<br><br>
+<b>Jackson Heights’ small, immigrant-owned businesses may have particular trouble navigating recovery resources and red tape.</b> We should assess their challenges and provide technical assistance, as needed, for challenges such as accessing emergency loans or adapting business operations to comply with new social distancing requirements.<br><br>
 
 <b>On Madison Avenue, if office workers and/or residents permanently decamp, the prior mix and amount of retail may no longer be viable.</b> Midtown contains many large buildings in which ground floor retail generates a relatively small share of rent. The City might encourage property owners to acknowledge retail may not be the rent generator it once was, fill spaces with experiential uses, and/or offer lower-rent spaces to small retailers to activate the street.<br><br>
 This crisis is unprecedented and these ideas will need to be tested based on outreach to retailers and continued data review and analysis. We will need data such as Live XYZ’s to undertake that testing and provide corridors with the tailored support they need.<br><br> 
@@ -773,8 +775,8 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
   if (m == 1){
       opac = .3
 
-      d3.select('.interactive_info')
-      .style('max-width','100%')
+      d3.select('.matrix')
+      .style('width','100%')
   }
 
 
@@ -1027,7 +1029,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
 
       mixone.append("tspan")
       .style("fill","white")
-      .text(": diverse offerings including Indian, Tibetan, Colombian")
+      .text(": diverse offerings such as Indian, Tibetan, Colombian")
       .attr('class','mixlabel')
       .attr('id','mixsublabel1')
       .style("font-weight", "normal")
