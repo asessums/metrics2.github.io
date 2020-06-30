@@ -49,7 +49,7 @@
     box-shadow: -3px 3px 15px #939393;
     color: black;
     /*padding: 6px;*/
-    font-family: "Merriweather";
+    font-family: 'Open Sans', sans-serif;;
     font-size: 1.1em;
     max-width: 400px;
     z-index: 100;
@@ -57,7 +57,7 @@
 
     .title{
     color: #2d2d35;
-    font-family: GothamMedium;
+    font-family: 'Open Sans', sans-serif;;
     text-align: center;
     pointer-events: all;
     box-sizing: border-box;
@@ -79,7 +79,7 @@
     color: #626262;
     text-align: center;
     width: auto;
-    font-family: GothamLight;
+    font-family: 'Open Sans', sans-serif;;
     margin: 10px auto;
     font-size: 12px;
     opacity: 1;
@@ -102,7 +102,7 @@ p.solid {
 
 body{
   margin: 0px auto;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 h1{
@@ -116,13 +116,12 @@ h1{
 .scrolldown{
 position: relative;
 cursor: initial;
-font-family: "Helvetica Neue",Helvetica,Arial;
+font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial;
 color: #999999;
-background: url(retail_scroll/img/finger.svg) no-repeat 4px 4px;
-font-size: 18px;
-line-height: 40px;
-font-weight: normal;
-max-width: 11.5em;
+background-size: 5em 5em;
+font-size: 20px;
+font-weight: bold;
+max-width: 23em;
 text-anchor: middle;
 margin: 0px auto;
 text-transform: capitalize;
@@ -130,10 +129,44 @@ margin-bottom: 4px;
 z-index: 1;
 opacity: 1;
 transition: opacity .15s ease-in-out;
+/*border: solid;
+border-width: 2px;
+border-radius: 5px;*/
+padding-top: 4px;
+}
+
+.interactive_info{
+position: relative;
+cursor: initial;
+line-height: 1;
+font-size: 16px;
+font-weight: normal;
+max-width: 50%;
+text-anchor: middle;
+margin: 0px auto;
+margin-bottom: 4px;
+z-index: 1;
+opacity: 1;
+transition: opacity .15s ease-in-out;
+font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial;
+color: #999999;
+color: #999999;
 border: solid;
 border-width: 2px;
 border-radius: 5px;
-padding: 4px;
+padding: 15px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ffffff;
+  text-align: right;
+  padding: 2px;
 }
 
 
@@ -200,7 +233,13 @@ padding: 4px;
     border-top: 1px solid;
     border-bottom: 1px solid;
     margin-bottom: 80vh;
+
+
   }
+
+  table {
+  font-size: 8px;
+}
 
   pre{
     overflow: hidden;
@@ -217,7 +256,7 @@ circle{
 }
 
 .mono{
-  font-family: monospace;
+  font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -295,20 +334,45 @@ circle{
 
 <div class="bodywrapper">
 <div class="title" style="opacity: 1;">Saving Our Retail Corridors Requires Good Data</div>
-<div class="timestamp" style="opacity: 1;">By <a target="_blank" href="https://www.hraadvisors.com/team/sulin-carling/" >Sulin Carling</a> , <a target="_blank" href="https://www.hraadvisors.com/team/kevin-clyne/">Kevin Clyne</a> , <a target="_blank" href="https://www.hraadvisors.com/team/corey-hebert/">Corey Hebert</a>, and <a target="_blank" href="https://live.xyz">LiveXYZ</a>  | June 17, 2020</div>
+<div class="timestamp" style="opacity: 1;">By <a target="_blank" href="https://www.hraadvisors.com/team/sulin-carling/" >Sulin Carling</a>, <a target="_blank" href="https://www.hraadvisors.com/team/kevin-clyne/">Kevin Clyne</a>, <a target="_blank" href="https://www.hraadvisors.com/team/corey-hebert/">Corey Hebert</a> (HR&A), and Phoebe Holtzman, Sarah Brown, and Dan Langus<a target="_blank" href="https://live.xyz"> (LiveXYZ)</a> | June 30, 2020</div>
 <br>
 <br>
-<div style='line-height: 1.2'>On June 22nd, New York City entered the second phase of its post-COVID reopening, which allows restaurants and bars to reopen with a simple self-certification process for outdoor dining. As of the time of publication, X,XXX businesses had already completed the application process; it remains to be seen the extent to which this action will help businesses stay afloat and what corridors will fare best.</div> 
+<!--<script>
+  //Update open restaurant number 
+fetch("https://services.arcgis.com/wmZOI9vyUBq1zTZx/arcgis/rest/services/NYC_Open_Restaurants_Application_Public_View/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&outStatistics=%5B%7B%22statisticType%22%3A%22count%22%2C%22onStatisticField%22%3A%22objectid%22%2C%22outStatisticFieldName%22%3A%22value%22%7D%5D&resultType=standard&cacheHint=true").then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Error: ' +
+          response.status);
+        return;
+      }
+      response.json().then(function(data) {
+        document.getElementById('open').textContent = d3.format(",d")(data.features[0].attributes.value)
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+</script>-->
+<div style='line-height: 1.2'>On June 22nd, New York City entered the second phase of its post-COVID reopening, which allows restaurants and bars to reopen with a simple self-certification process for outdoor dining. As of the time of publication, <a href="https://nycdot.maps.arcgis.com/apps/opsdashboard/index.html#/0e60718f237c43c48c4be16a1a92ffde">6501</a> businesses had already completed the application process; it remains to be seen the extent to which this action will help businesses stay afloat and what corridors will fare best. While there are many policy tools that could have broad benefit for small business, we believe effective recovery strategies will need to focus on short-term reactivation strategies – and those will need to be tailored to local conditions.<br><br>
+
+HR&A partnered with <a href="https://livexyz.com/">Live XYZ</a>, a New York City-based startup that delivers precise, complete storefront and point-of-interest data and technology. Through Live XYZ’s proprietary mapping methodology, it has created a hyper-accurate map of places and how they change over time. Leveraging Live XYZ’s data set, HR&A analyzed retail conditions in three New York City neighborhoods to understand their vulnerabilities and adaptability.  
+</div> 
 <br>
 <br>
+<div class ="interactive_info">
+Live XYZ’s unique data captures the use and business located within every single storefront in New York City, allowing us to do a granular analysis of corridor conditions.<br>
+
 <div class="scrolldown"><p style='cursor: initial;
-font-family: "HaasTextBold",Arial,Helvetica;
+font-family: "Open Sans","HaasTextBold",Arial,Helvetica;
 color: #999999;
-font-size: 18px;
+font-size: 20px;
 line-height: 40px;
-font-weight: normal;
+font-weight: bold;
 text-transform: capitalize;
-margin-left: 50px;'>Hover to Interact</p></div>
+margin-left: 50px;'><i class="fas fa-mouse"></i>&nbsp&nbspHover over the graphics to interact.</p></div>
+</div>
 <br>
 <br>
 <div id='container' class='container-1'>
@@ -316,192 +380,85 @@ margin-left: 50px;'>Hover to Interact</p></div>
   <div id='sections'>
     <div>
     </div>
-    <div>
-      <h3></h3>
-      HR&A partnered with Live XYZ, a New York City-based startup that delivers precise, complete storefront and point-of-interest data and technology. Through Live XYZ’s proprietary mapping methodology, it has created a hyper-accurate map of places and how they change over time. Leveraging Live XYZ’s unique dataset, HR&A analyzed retail conditions in three New York City neighborhoods to understand their vulnerabilities and adaptability. <br>
-      <br>
-      <h3><u>Our Thesis</u></h3>
-      <br>
-      Retail streets that are reactivated most quickly will have the greatest chance of thriving again. The three retail strips we examined are very differently positioned for reactivation. To shape an equitable retail corridor recovery, cities will need access to accurate, complete, and trustworthy data on city storefronts to develop tailored, high-impact, equitable strategies for retail corridor reactivation and recovery post-COVID.  
+    <div style='padding-bottom: 300px'>
+      <h3><b>Our Thesis</b></h3><br>
+<b>Retail streets that are reactivated most quickly will have the greatest chance of thriving again.</b> The three retail strips we examined are very differently positioned for reactivation. To shape an equitable retail corridor recovery, cities will need access to accurate, complete, and trustworthy data on city storefronts to develop tailored, high-impact, equitable strategies for retail corridor reactivation and recovery post-COVID.  
+    </div>
 
+    <div style='padding-bottom: 300px'>
+      <h3><b>The Neighborhoods</b></h3>
+      <br>
+      <h3>Jackson Heights, Queens</h3>
+      <b>Jackson Heights is one of the most diverse neighborhoods in the country - middle-income with a large number of South American and Southeast Asian residents, many foreign-born.</b> The neighborhood attracts shoppers from across the city seeking international goods; to the extent that transit use regains acceptance, Jackson Heights should continue to attract regional shoppers.<br><br>
 
     </div>
 
-    <div>
-      <h3><u>The Neighborhoods</u></h3>
-      <br>
-      <b>Jackson Heights, Queens is one of the most diverse neighborhoods in the country - middle-income with a large number of South American and Southeast Asian residents, many foreign-born.</b> The neighborhood attracts shoppers from across the city seeking international goods; to the extent that transit use regains acceptance, Jackson Heights should continue to attract regional shoppers.
+    <div style='padding-bottom: 300px'>
+      
+       More local shopping may be constrained: the borough’s <b><a href="https://www.cnn.com/interactive/2020/health/coronavirus-us-maps-and-cases/">COVID case rate</a> is 1.6 times the citywide average</b>, and its <b><a href="https://www.labor.ny.gov/stats/nyc/">unemployment rate</a> has more than tripled to 16.4%</b>. The many immigrant-owned businesses are likely to have had difficulty securing Paycheck Protection Program (PPP) loans or other relief.
+     
     </div>
 
-    <div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-        <br>
-        More local shopping may be constrained: the borough’s <b> COVID case rate is 1.6 times the citywide average</b>, and its <b>unemployment rate has more than tripled to 16.4%</b>. The many immigrant-owned businesses are likely to have had difficulty securing Paycheck Protection Program (PPP) loans or other relief.
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
-
-    <div>
-      <!--<h3>The Hub</h3>-->
-      <b>The Hub in the Bronx is a bustling shopping destination for many Bronx residents.</b> The immediately surrounding neighborhood – a community of color with 67% Hispanic and 29% black residents – has a 46% poverty rate, one of the highest rates in the city. 
+    <div style='padding-bottom: 300px'>
+      <h4>The Hub in the Bronx</h4> is a bustling shopping destination for many Bronx residents. The <a href="https://data.census.gov/cedsci/table?q=ACS%205-Year%202018&hidePreview=true&tid=ACSDP5Y2018.DP05&y=2018&vintage=2018&t=Counts,%20Estimates,%20and%20Projections%3APopulations%20and%20People%3ARace%20and%20Ethnicity&g=7950000US3603710">immediately surrounding neighborhood</a> – a community of color with 67% Hispanic and 29% black residents – has a 46% poverty rate, one of the highest rates in the city. 
+ 
 
     </div>
 
-    <div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      The borough’s COVID case rate is higher than the citywide average, and its unemployment rate increased from 4.9% to 16.5% between January and April 2020. These devastating impacts may limit both the neighborhood and other Bronx consumers’ ability to support Hub businesses.
-      <br>
-        <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <div style='padding-bottom: 300px'>
+     
+      The borough’s <a href="https://www.cnn.com/interactive/2020/health/coronavirus-us-maps-and-cases/">COVID case rate is higher than the citywide average</a>, and its <a href="https://www.labor.ny.gov/stats/nyc/">unemployment rate</a> increased from 4.9% to 16.5% between January and April 2020. These devastating impacts may limit both the neighborhood and other Bronx consumers’ ability to support Hub businesses.
+      
     </div>
 
-    <div>
-      <!--<h3>Madison Avenue, Manhattan</h3>-->
-      <b>Madison Avenue in Midtown Manhattan serves both office workers and high-income residents.</b> The majority of neighborhood residents are white, and <b>the borough’s COVID case rate is well below the citywide average.</b> Manhattan <b>unemployment has increased less</b> than in the other boroughs. 
+    <div style='padding-bottom: 300px'>
+      <h4>Madison Avenue in Midtown Manhattan</h4> serves both office workers and high-income residents. The majority of neighborhood residents are white, and <b>the borough’s <a href="https://www.cnn.com/interactive/2020/health/coronavirus-us-maps-and-cases/">COVID case rate</a> is well below the citywide average.</b> Manhattan <b>unemployment has increased less</b> than in the other boroughs.  
     </div>
 
-    <div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-        <br>
-        While high levels of prosperity would suggest faster recovery, <b>shifts to remote work</b> could mean a decline in office workers that frequent these stores. Residents in wealthier New York City neighborhoods have left in greater numbers – <b>an estimated 30% of residents left this neighborhood</b> – raising the question of whether the residential customer base will be diminished.
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <div style='padding-bottom: 300px'>
+      
+        While high levels of prosperity would suggest faster recovery, <b>shifts to remote work</b> could mean a decline in office workers that frequent these stores. Residents in wealthier New York City neighborhoods have <a href="https://www.nytimes.com/interactive/2020/05/15/upshot/who-left-new-york-coronavirus.html">left in greater numbers</a> – <b>an estimated 30% of residents left this neighborhood</b> – raising the question of whether the residential customer base will be diminished.
+      
     </div>
 
-    <div>
-       <h3><u>The Odds for Short-Term Reactivation</u></h3>
-       <br>
+    <div style='padding-bottom: 300px'>
+       <h3><b>The Odds for Short-Term Reactivation</b></h3><br>
       We examined four surrogates for capacity to reactivate a retail strip – <b>pre-existing vacancy, percentage of “essential” businesses</b>, which were never required to close; <b>percentage of chain stores</b>, with presumably deeper pockets; and <b>ability to take advantage of loosened outdoor seating</b> regulations. Among that set of potential risk factors, The Hub, Jackson Heights, and Madison Avenue all have different combinations of strengths and weaknesses. While we fear that corridors in the most vulnerable communities will suffer the most, we also identified areas of strengths in the Hub and weaknesses on Madison Avenue.
     </div>
-   <!-- <div>
- <br>
-    </div>
-    <div>
-  <br>
-    </div>-->
 
 
-    <div>
-      <!--<h3>Storefront Vacancy</h3>-->
-      <br>
-      According to the NYC Department of City Planning, prior to COVID, <b>storefront vacancy rates varied widely</b> across neighborhoods. If vacancy rates increase post-COVID, corridors starting out with lower vacancy may bounce back faster, attracting consumers to more activated streets.  
+    <div style='padding-bottom: 300px'>
+      <h4>Storefront Vacancy</h4>
+      According to the <a href="https://www1.nyc.gov/assets/planning/download/pdf/planning-level/housing-economy/assessing-storefront-vacancy-nyc.pdf">NYC Department of City Planning</a>, prior to COVID, <b>storefront vacancy rates varied widely</b> across neighborhoods. If vacancy rates increase post-COVID, corridors starting out with lower vacancy may bounce back faster, attracting consumers to more activated streets.  
     </div>
 
-    <div>
-      <!--<h3>Essential Businesses</h3>-->
+    <div style='padding-bottom: 300px'>
+      <h4>Essential Businesses</h4>
+      Essential businesses may be more likely to survive, since they never closed and may provide goods consumers are less likely to seek online. They could provide a baseline of strength upon which retail corridors can build.  
       <br>
-      <b>Essential businesses may be more likely to survive</b>, since they never closed and may provide goods consumers are less likely to seek online. They could provide a baseline of strength upon which retail corridors can build. 
       <br>
-      <br>
-      <font style='font-size: x-small'>Note: essential services in this analysis include: auto dealers & repair; banks & ATMs; beauty product stores; bicycle repair and stores; gas stations; groceries & convenience stores, hardware & home improvement stores; laundry, cleaners & tailors; liquor & wine shops; pawn shops; pet stores; pharmacies; printing, shipping & postal services; vapes, cigars & accessory shops; vitamin & supplement stores; and other services listed in New York State’s essential services definition, with the exception of hotels, which this analysis excluded.</font>
+      Essential services include auto dealers & repair, banks & ATMs, beauty product stores, bicycle repair and stores, gas stations, groceries & convenience stores, hardware & home improvement stores, laundry/dry cleaners & tailors, liquor & wine shops, pawn shops, pet stores, pharmacies, printing & shipping/postal services, vapes/cigars & accessory shops, vitamin & supplement stores, and other listed in New York State’s essential services definition, with the exception of hotels, which this analysis excluded.
 
     </div>
 
-    <div>
-      <!--<h3>Independents vs. chains</h3>-->
-      <br>
-      <b>Chains</b> i.e. businesses with more than one same-named establishment in NYC, <b>may be more resilient post-COVID compared to independent retailers</b>; approximately one half of small businesses have only one to two months of cash on hand. Corridors with relatively high percentages of chains could be buoyed, although the outcome would be an even greater concentration of chains and loss of retail character
-      <br>
-      <br>
-      <!--<font style='font-size: x-small'>Note: chains are defined as any storefront business with more than one establishment in New York City.</font>-->  
-
+    <div style='padding-bottom: 300px'>
+      <h4>Chains</h4>
+      Chains, i.e. businesses with more than one same-named establishment in NYC, <b>may be more resilient post-COVID compared to independent retailers</b>; approximately <a href="https://www.nber.org/papers/w26989.pdf">one half of small businesses</a> have only one to two months of cash on hand. Corridors with relatively high percentages of chains could be buoyed, although the outcome would be an even greater concentration of chains and loss of retail character. 
     </div>
 
-     <div>
-      <!--<h3>Physical Adaptability</h3>-->
-      <br>
-      Restaurants and bars can now easily <b>create outdoor seating on sidewalks or in parking spots</b>. While the city may enter its third phase of reopening on July 6th, allowing indoor dining at 50% capacity, outdoor dining is likely to remain important to make up for lost indoor capacity. 
+     <div style='padding-bottom: 300px'>
+      <h4>Physical Adaptability</h4>
+      Restaurants and bars can now easily <b>create outdoor seating on sidewalks or in parking spots.</b> While the city may enter its third phase of reopening on July 6th, allowing indoor dining at 50% capacity, outdoor dining is likely to remain important to make up for lost indoor capacity.  
       <!--<div class='legend'>
       </div>-->
       <br>
       <br>
-      However, to maintain required clearance for pedestrians, sidewalk seating is only permissible on sidewalks 11 feet or wider. <b>Only one in four such establishments in The Hub</b> have the <b>physical adaptability</b> to be able to create sidewalk seating. In <b>Jackson Heights</b>, although <b>41% of businesses could create sidewalk seating</b>, many are under an elevated subway. 
+      However, to maintain required clearance for pedestrians, sidewalk seating is only permissible on <a href="https://www1.nyc.gov/html/dot/html/pedestrians/openrestaurants.shtml">sidewalks 11 feet or wider></a>. Only <b>one in four such establishments in The Hub</b> have the <b>physical adaptability</b> to create sidewalk seating. In <b>Jackson Heights</b>, although <b>41% of businesses could create sidewalk seating</b>, many are under an elevated subway. 
     </div>
 
 
     <div>
-    <h3></h3>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
     </div>
 
   </div>
@@ -513,20 +470,72 @@ margin-left: 50px;'>Hover to Interact</p></div>
 
 <br>
 <br>
-<h3><u>Conclusion</u></h3>
-Among the potential risk factors we analyzed, <b>The Hub, Jackson Heights, and Madison Avenue all have different combinations of strengths and weaknesses,</b> and ultimate outcomes will be based on a confluence of different factors.<br><br><br>
+<h3><b>Conclusion</b></h3><br>
+Retail corridor recovery will be driven by a confluence of many factors with different levels of impact. Among the potential risk factors we analyzed, <b>The Hub, Jackson Heights, and Madison Avenue all have different combinations of strengths and weaknesses.</b> However, the multiple indicators we analyzed suggest that The Hub may be the least resilient of the three – unfortunately no surprise given that this is also a low-income community of color.<br><br>
 
-<!--<center><img src="http://hraadvisors.com/interactive/retail/img/matrix.PNG"></center><br><br>-->
+<font color='black'>
+<table>
+  <tr>
+    <th></th>
+    <th><b>Median Household Income</b></th>
+    <th><b>Workers/mi²</b></th>
+    <th><b>Vacancy Rate</b></th>
+    <th><b>Share Essential Stores</b></th>
+    <th><b>Share Chain Stores</b></th>
+    <th><b>Share Sidewalks >11 ft.</b></th>
+  </tr>
+  <tr>
+    <td><b>Jackson Heights</b></td>
+    <td style='background-color:#FED766'>$56,000</td>
+    <td style='background-color:#079FB5'>4,000</td>
+    <td style='background-color:#079FB5'>8%</td>
+    <td style='background-color:#FED766'>26%</td>
+    <td style='background-color:#FE4A49'>6%</td>
+    <td style='background-color:#079FB5'>64%</td>
+  </tr>
+  <tr>
+    <td><b>The Hub</b></td>
+    <td style='background-color:#FE4A49'>$21,000</td>
+    <td style='background-color:#FED766'>8,000</td>
+    <td style='background-color:#FE4A49'>14%</td>
+    <td style='background-color:#FED766'>27%</td>
+    <td style='background-color:#FED766'>16%</td>
+    <td style='background-color:#FED766'>40%</td>
+  </tr>
+  <tr>
+    <td><b>Madison Avenue</b></td>
+    <td style='background-color:#079FB5'>$146,000</td>
+    <td style='background-color:#FE4A49'>312,000</td>
+    <td style='background-color:#FE4A49'>14%</td>
+    <td style='background-color:#FE4A49'>13%</td>
+    <td style='background-color:#079FB5'>35%</td>
+    <td style='background-color:#079FB5'>65%</td>
+  </tr>
 
-While there are many policy tools that could have broad benefit for small business, we believe effective recovery strategies will need to focus on short-term reactivation strategies – and those will need to be tailored to local conditions.<br><br>
+</table>
+<br>
+<br>
 
-<b>Support for the Hub should address the devastating toll that COVID-19 has had on the community.</b> We should track the supply of essential retail services for resource-constrained residents who may have more limited ability to access other neighborhoods and provide targeted support for these businesses, based on their identification of need, but which might be expected to include loosened access to credit and support for rent renegotiation.<br><br>
+<small>
+<table style="width:150px; margin-left:50%;">
+<tr> <td style='background-color:#FE4A49'>Higher Risk</td></tr>
+<tr> <td style='background-color:#FED766'>Moderate Risk</td></tr>
+<tr> <td style='background-color:#079FB5'>Lower Risk</td></tr>
+</table>
+</small>
+</font>
+
+<br><br>
+Cities should leverage analysis like this to inform how they allocate resources and tailor recovery policies to meet local needs.<br><br>
+
+<b>Support for the Hub should address the devastating toll that COVID-19 has had on the community.</b> We should track the supply of essential retail services for resource-constrained residents, who may have more limited ability to access other neighborhoods, and provide targeted support for these businesses based on their identification of need, such as loosened access to credit and support for rent renegotiation.<br><br>
 
 <b>Jackson Heights’ small, immigrant-owned businesses may have particular trouble navigating recovery resources and red tape.</b> We should assess their challenges and provide technical assistance as needed.<br><br>
 
 <b>On Madison Avenue, if office workers and/or residents permanently decamp, the prior mix and amount of retail may no longer be viable.</b> Midtown contains many large buildings in which ground floor retail generates a relatively small share of rent. The City might encourage property owners to acknowledge retail may not be the rent generator it once was, fill spaces with experiential uses, and/or offer lower-rent spaces to small retailers to activate the street.<br><br>
+This crisis is unprecedented and these ideas will need to be tested based on outreach to retailers and continued data review and analysis. We will need data such as Live XYZ’s to undertake that testing and provide corridors with the tailored support they need.<br><br> 
 
-This crisis is unprecedented and these ideas will need to be tested based on outreach to retailers and continued data review and analysis. We will need data such as Live XYZ’s to undertake that testing and provide corridors with the tailored support they need.  <br><br><br>
+
 </div>
 
 <footer>
@@ -675,7 +684,10 @@ This crisis is unprecedented and these ideas will need to be tested based on out
 <script src="https://unpkg.com/d3-force-attract@latest"></script>
     <script src="https://unpkg.com/d3-force-cluster@latest"></script>
 
+
 <script>
+
+
 
 var w = window,
     d = document,
@@ -697,7 +709,6 @@ function render(){
   oldWidth = innerWidth
 
   
-  console.log('eClientWidth: ' + e.clientWidth)
   var width = height = e.clientWidth*.4
   //var width = height = d3.select('#graph').node().offsetHeight
   var r = 40
@@ -709,13 +720,11 @@ function render(){
     m = 1
     document.getElementById("graph").style.height = (e.clientHeight) + 'px';
 
-  console.log('m:' + m)
 
 document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
   }
 
-  console.log('height: '+ height)
-  console.log('width: '+ width)
+
 
   var em;
   function getValue(id){
@@ -727,11 +736,11 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
   getValue('em')
 
   //Font Sizes
-  var h1 = (e.clientWidth*.0003)+.8368
+  var h1 = (e.clientWidth*.0003)+.9368
   var h2 = (e.clientWidth*.0003)+.6968
   var h3 = (e.clientWidth*.0003)+.4968
 
-  const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
+  const categories = ['Food','Body','Groups','Misc','Fitness','Markets/Pharmacies','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
   const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
 
   const categoriesXY = {'Hub': [(width/2), (height/3), '#FE4A49',2],
@@ -741,7 +750,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
                         }
 
 
-  const categoryColors = {'Food':['#2ACEE6'],'Body':['#FF57CF'],'Groups':['#B9DB46'],'Misc':['#000000'],'Fitness':['#61CC8C'],'Essentials':['#2E8EF5'],'Services':['#B8A088'],'Lodging':['#B29B83'],'Home & Hobby':['#F28A13'],'Fashion':['#F9D406'],'Auto':['#B29B83'],'Drinks':['#933EEF'],'Arts & Culture':['#E0A0FD'],'Entertainment':['#C35E4B'],'':['#FFFFFF']}
+  const categoryColors = {'Food':['#2ACEE6'],'Body':['#FF57CF'],'Groups':['#B9DB46'],'Misc':['#000000'],'Fitness':['#61CC8C'],'Markets/Pharmacies':['#2E8EF5'],'Services':['#B8A088'],'Lodging':['#B29B83'],'Home & Hobby':['#F28A13'],'Fashion':['#F9D406'],'Auto':['#B29B83'],'Drinks':['#933EEF'],'Arts & Culture':['#E0A0FD'],'Entertainment':['#C35E4B'],'':['#FFFFFF']}
 
   
   for (i in categoriesXY){
@@ -758,13 +767,25 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
 
   }
 
+
+  //Mobile Opacity Adjustment
+  var opac = .1
+  if (m == 1){
+      opac = .3
+
+      d3.select('.interactive_info')
+      .style('max-width','100%')
+  }
+
+
+
   const essentialColors = {'Essential':['#009FB7'],'Non-essential':['#009FB7']}
-  const essentialOpacity = {'Essential':[1],'Non-essential':[.1]}
+  const essentialOpacity = {'Essential':[1],'Non-essential':[opac]}
 
   const chainColors = {'TRUE':['#FE4A49'],'FALSE':['#FE4A49']}
-  const chainOpacity = {'TRUE':[.1],'FALSE':[1]}
+  const chainOpacity = {'TRUE':[opac],'FALSE':[1]}
 
-  const occRadius = {'Occupied':[nodewidth*1.3],'Unoccupied':[0]}
+  const occRadius = {'Occupied':[nodewidth+1],'Unoccupied':[0]}
 
 
   categoryColorScale = d3.scaleOrdinal(colors, categories)
@@ -780,7 +801,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
     container: "graph",
     style: "mapbox://styles/kpclyne/ck82gt47u0gc11il8fmks6fqk",
     center: [-73.923511, 40.783584],
-    zoom: 12,
+    zoom: Math.round((width*.002)+9.8378),
     interactive: false,
     attributionControl: false
   });
@@ -876,6 +897,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .style("fill","white")
               .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
+              .style('font-family','Open Sans')
 
       title.append("tspan")
               .style("font-weight", "normal")
@@ -894,6 +916,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .style("fill","white")
               .style("font-weight", "bold")
               .style("font-size",h2 + 'em')
+              .style('font-family','Open Sans')
         
 
       MHI.append("tspan")
@@ -907,16 +930,17 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .append("text")
               .text("Worker Density: ")
               .attr('class','MHI')
-              .attr("dy", "5em")
+              .attr("dy", "5.5em")
               .attr("dx", "1em")
               .style("fill","white")
               .style("font-weight", "bold")
               .style("font-size",h2 + 'em')
+              .style('font-family','Open Sans')
              
       Density.append("tspan")
               .style("font-weight", "normal")
               .style("fill","white")
-              .text('4K Workers per Square Mile (Citywide: 7K)')
+              .text('4K Workers/mi² (Citywide: 7K)')
               .attr("class","Densitytext")
              
 
@@ -924,11 +948,12 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .append("text")
               .text("COVID Rate: ")
               .attr('class','COVID')
-              .attr("dy", "6em")
+              .attr("dy", "7em")
               .attr("dx", "1em")
               .style("fill","white")
               .style("font-weight", "bold")
               .style("font-size",h2 + 'em')
+              .style('font-family','Open Sans')
          
 
       COVID.append("tspan")
@@ -972,6 +997,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .style("fill", 'white')
               .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
+              .style('font-family','Open Sans')
 
     mixtitle.append("tspan")
               .style("font-weight", "normal")
@@ -996,6 +1022,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .attr('id','mixlabel1')
       .style("font-weight", "bold")
       .style("font-size",h2 + 'em')
+      .style('font-family','Open Sans')
       //.style("font-size", "25px")
 
       mixone.append("tspan")
@@ -1006,7 +1033,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .style("font-weight", "normal")
 
       var mixtwo = mix.append("text")             
-      .attr("dy", "5em")
+      .attr("dy", "5.5em")
       .attr("dx", "1em")
       .style("text-anchor", "start")
       .style("vertical-align", "start")
@@ -1016,17 +1043,18 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .attr('id','mixlabel2')
       .style("font-weight", "bold")
       .style("font-size",h2 + 'em')
+      .style('font-family','Open Sans')
 
       mixtwo.append("tspan")             
       .style("fill","white")
-      .text(": largely general clothing and jewelry stores")
+      .text(": mostly general clothing and jewelry stores")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
 
 
       var mixthree = mix.append("text")             
-      .attr("dy", "6em")
+      .attr("dy", "7em")
       .attr("dx", "1em")
       .style("text-anchor", "start")
       .style("vertical-align", "start")
@@ -1036,10 +1064,11 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .attr('id','mixlabel3')
       .style("font-weight", "bold")
       .style("font-size",h2 + 'em')
+      .style('font-family','Open Sans')
 
       mixthree.append("tspan")
       .style("fill","white")
-      .text(": including barber shops, salons, and massage parlors")
+      .text(": including barber shops, salons, massage parlors")
       .attr('class','mixlabel')
       .attr('id','mixsublabel3')
       .style("font-weight", "normal")
@@ -1104,6 +1133,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .style("font-weight", "bold")
       .style("text-anchor", "middle")
       .style("font-size", h1 + "em")
+      .style('font-family','Open Sans')
 
 
     svg.append("text")             
@@ -1112,10 +1142,11 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
                            (height/10)*1.3 + ")")
       .style("text-anchor", "middle")
       .style("fill","gray")
-      .text(">11 ft Available for Sidewalk Seating")
+      .text(">11 ft for Sidewalk Seating")
       .attr('class','histlabel')
       .style("font-weight", "regular")
       .style("font-size", h2+"em")
+      .style('font-family','Open Sans')
 
 
 
@@ -1130,6 +1161,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .attr('class','histlabel')
       .style("font-weight", "bold")
       .style("font-size", h2+"em")
+      .style('font-family','Open Sans')
 
 
     svg.append("text")             
@@ -1143,6 +1175,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .attr('class','histlabel')
       .style("font-weight", "bold")
       .style("font-size", h2+"em")
+      .style('font-family','Open Sans')
 
 
     svg.append("text")             
@@ -1156,6 +1189,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
       .attr('class','histlabel')
       .style("font-weight", "bold")
       .style("font-size", h2+"em")
+      .style('font-family','Open Sans')
 
 
     svg.append('line')
@@ -1202,6 +1236,7 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
                 .style("font-size",h1 + 'em')
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
+                .style('font-family','Open Sans')
 
   
   svg.append("text")
@@ -1215,7 +1250,8 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
                 .style("font-size",h1 + 'em')
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
-                .transition(2000).duration(2000).delay(1000)
+                .style('font-family','Open Sans')
+              
 
  
  svg.append("text")
@@ -1229,18 +1265,20 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
                 .style("font-size",h1 + 'em')
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
+                .style('font-family','Open Sans')
 
   svg.append("text")
               .text("12% Vacant")
-              .attr("x", width*.5)
-              .attr("y", (height*.333)+(nodewidth*15) + (em*1.5))
+              .attr("x", width*.333)
+              .attr("y", (height*.666)+(nodewidth*25) + (em*1.5))
               .attr("class","labels")
               .attr("id","madison_text")
               .style("fill", "black")
               .attr("opacity",0)
-              .style("font-size",h1 + 'em')
+              .style("font-size",h1*1.2 + 'em')
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
+              .style('font-family','Open Sans')
 
       svg.append("text")
               .text("8% Vacant")
@@ -1250,21 +1288,23 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .attr("id","jackson_text")
               .style("fill", "black")
               .attr("opacity",0)
-              .style("font-size",h1 + 'em')
+              .style("font-size",h1*1.2 + 'em')
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
+              .style('font-family','Open Sans')
 
       svg.append("text")
               .text("14% Vacant")
-              .attr("x", width*.333)
-              .attr("y", (height*.666)+(nodewidth*25) + (em*1.5))
+              .attr("x", width*.5)
+              .attr("y", (height*.333)+(nodewidth*15) + (em*1.5))
               .attr("class","labels")
               .attr("opacity",0)
               .attr("id","hub_text")
               .style("fill", "black")
-              .style("font-size",h1 + 'em')
+              .style("font-size",h1*1.2 + 'em')
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
+              .style('font-family','Open Sans')
 
   d3.selectAll('.labels')
   .attr('opacity',0)
@@ -1294,16 +1334,18 @@ document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
               .style("fill", "black")
               .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
+              .style('font-family','Open Sans')
 
       var value = citywide
               .append("text")
               .text("15%")
               .attr('class','cityvalue')
-              .attr("dy", "3.75em")
+              .attr("dy", "3em")
               .style("font-size",h1 + 'em')
               .attr("dx", "1.5em")
               .style("fill", "black")
               .style("font-weight", "bold")
+              .style('font-family','Open Sans')
 
     d3.selectAll('.citywide')
     .attr('opacity',0)
@@ -1347,7 +1389,6 @@ if (error) throw error;
     d.x = project([d.long, d.lat]).x; 
     d.y = project([d.long, d.lat]).y; });
 
-console.log(rows)
 
   var circles = svg
       .selectAll("myCircles")
@@ -1526,7 +1567,7 @@ console.log(rows)
       .text('$56,000 (Citywide: $62,000)')
 
       d3.selectAll('.Densitytext')
-      .text('4K Workers per Square Mile (Citywide: 7K)')
+      .text('4K Workers/mi² (Citywide: 7K)')
 
       d3.selectAll('.COVIDtext')
       .text('3.6% of Residents (Citywide: 2.3%)')
@@ -1544,7 +1585,7 @@ console.log(rows)
       .text('$21,800 (Citywide: $62,000)')
 
       d3.selectAll('.Densitytext')
-      .text('8K Workers per Square Mile (Citywide: 7K)')
+      .text('8K Workers/mi² (Citywide: 7K)')
 
       d3.selectAll('.COVIDtext')
       .text('3.1% of Residents (Citywide: 2.3%)')
@@ -1571,7 +1612,7 @@ console.log(rows)
       .text('$146,600 (Citywide: $62,000)')
 
       d3.selectAll('.Densitytext')
-      .text('312K Workers per Square Mile (Citywide: 7K)')
+      .text('312K Workers/mi² (Citywide: 7K)')
 
       d3.selectAll('.COVIDtext')
       .text('1.4% of Residents (Citywide: 2.3%)')
@@ -1593,7 +1634,7 @@ console.log(rows)
   function initialize(){
 
     if (m == 1){
-    console.log("Um, hello")
+    console.log("whatsup, Arjun?")
 
     d3.selectAll('.graph-scroll-active')
     .style('background','rgba(255,255,255,0)')
@@ -1664,7 +1705,7 @@ console.log(rows)
       //Make Circles Bigger
       d3
       .selectAll(".circle")
-      .transition("enhance").duration(1000)
+      .transition("enhance").duration(500)
       .attr("r", 2)
 
       //When map is done moving, load the Demographic Box
@@ -1706,7 +1747,7 @@ console.log(rows)
       .text("16% Fashion")
       .append("tspan")             
       .style("fill","white")
-      .text(": largely general clothing and jewelry stores")
+      .text(": mostly general clothing; jewelry stores")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1716,7 +1757,7 @@ console.log(rows)
       .text("13% Body")
       .append("tspan")             
       .style("fill","white")
-      .text(": including barber shops, salons, and massage parlors")
+      .text(": including barber shops, salons, massage parlors")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1752,7 +1793,7 @@ console.log(rows)
 
       d3
       .selectAll(".circle")
-      .transition("grow2").duration(1000)
+      .transition("grow2").duration(500)
       .attr("r", 2)
           
       //Set Step
@@ -1783,7 +1824,7 @@ console.log(rows)
       .text("18% Fashion")
       .append("tspan")             
       .style("fill","white")
-      .text(": variety of adult and children's clothing stores")
+      .text(": adult and children's clothing stores")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1793,7 +1834,7 @@ console.log(rows)
       .text("17% Home")
       .append("tspan")             
       .style("fill","white")
-      .text(": big box furniture and discount stores")
+      .text(": big box furniture; discount stores")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1803,7 +1844,7 @@ console.log(rows)
       .text("16% Essentials")
       .append("tspan")             
       .style("fill","white")
-      .text(": including pharmacies and mobile phone stores")
+      .text(": pharmacies; mobile phone stores")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1835,7 +1876,7 @@ console.log(rows)
 
       d3
       .selectAll(".circle")
-      .transition("grow3").duration(1000)
+      .transition("grow3").duration(500)
       .attr("r", 2)
     }
 
@@ -1850,7 +1891,7 @@ console.log(rows)
 
         d3
       .selectAll(".circle")
-      .transition("make_small").duration(1000)
+      .transition("make_small").duration(500)
       .attr("r", 2)
       }
 
@@ -1869,7 +1910,7 @@ console.log(rows)
       .text("32% Fashion")
       .append("tspan")             
       .style("fill","white")
-      .text(": men's clothing, formalwear, and accessory stores")
+      .text(": men's clothing; accessory stores")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1879,7 +1920,7 @@ console.log(rows)
       .text("22% Food")
       .append("tspan")             
       .style("fill","white")
-      .text(": including many Italian & Mediterranean restaurants")
+      .text(": Italian & Mediterranean restaurants")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -1984,17 +2025,17 @@ console.log(rows)
 
         map.setPaintProperty('overlay2', 'background-opacity', 1)
 
-        activate(['.labels'],1000,'labels2')
+        activate(['.labels'],500,'labels2')
 
-        simulation
+        /*simulation
           .force('charge', d3.forceManyBody().strength([nodewidth*-.8]))  
           .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.2))
-          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8).strength(.2))
-          .force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
+          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8).strength(.2))*/
+          /*.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
           .alphaDecay([0.00001])
-          //.velocityDecay([.05])
+          .velocityDecay([.8])
 
-        simulation.alpha(0.1).restart()
+        simulation.alpha(.01).restart()*/
         
 
 
@@ -2018,16 +2059,22 @@ console.log(rows)
 
       d3.selectAll("#hub_text")
       .text("12% Vacant")
+      .style('fill', '#FED766')
+
       d3.selectAll("#jackson_text")
       .text("8% Vacant")
+      .style('fill', '#FED766')
+
       d3.selectAll("#madison_text")
       .text("14% Vacant")
+      .style('fill', '#FED766')
 
 
-      activate(['.citywide',"#jackson_text",'#madison_text','#hub_text'],1000,'demos')
+      activate(['.citywide',"#jackson_text",'#madison_text','#hub_text'],500,'demos')
 
 
-    
+      d3.selectAll('.cityvalue')
+      .text('15%')
    
 
       simulation.on('tick', tick)
@@ -2039,8 +2086,14 @@ console.log(rows)
               .attr("cy", function(d) { return d.y; })
         }
 
-      simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
       simulation.velocityDecay(0.6).alpha(0.9).restart()
+      simulation
+          .force('charge', d3.forceManyBody().strength([nodewidth*-.8]))  
+          .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.2))
+          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8).strength(.2))
+
+      simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
+      
 
       d3.selectAll(".unoccupiedCircle")
       .attr("r",0)
@@ -2086,14 +2139,17 @@ console.log(rows)
       d3.selectAll("#hub_text")
       .transition("essential1").duration(500)
       .text("27% Essential")
+      .style('fill', '#009FB7')
 
       d3.selectAll("#jackson_text")
       .transition("essential2").duration(500)
       .text("26% Essential")
+      .style('fill', '#009FB7')
 
       d3.selectAll("#madison_text")
       .transition("essential3").duration(500)
       .text("15% Essential")
+      .style('fill', '#009FB7')
 
       window.step = 10
 
@@ -2104,17 +2160,20 @@ console.log(rows)
     if(window.step == 10){
       d3.selectAll("#hub_text")
       .text("16% Chains")
+      .style('fill', '#FE4A49')
 
       d3.selectAll("#jackson_text")
       .text("6% Chains")
+      .style('fill', '#FE4A49')
 
       d3.selectAll("#madison_text")
       .text("30% Chains")
+      .style('fill', '#FE4A49')
     }
 
     if (window.step == 12){
       activate(['#hub_text','#jackson_text','#madison_text'],500,'labels3')
-      clean(['.hist-axis','.dash-line','.histtitle','.histlabel'],500,'hide_hist')
+      clean(['.hist-axis','.dash-line','.histtitle','.histlabel'],600,'hide_hist')
 
         d3.selectAll("#madison_label")
         .transition("l4").duration(500)
@@ -2143,16 +2202,18 @@ console.log(rows)
         d3.selectAll(".circle")
         .attr("r", nodewidth)
 
-        simulation.alpha(.1).restart()
+  
 
         simulation
           .force('charge', d3.forceManyBody().strength([nodewidth*-.8]))  
-          .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]))
-          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8))
-          //.alphaDecay([0.02])
-          .velocityDecay([.07])
+          .force('forceX', d3.forceX(d => categoriesXY[d.corridor][0]).strength(.2))
+          .force('forceY', d3.forceY(d => categoriesXY[d.corridor][1]*.8).strength(.2))
+          .alphaDecay([0.001])
+          //.velocityDecay([.07])
 
         simulation.force('collide', d3.forceCollide(d => occRadius[d.status[0]]))
+
+        simulation.alpha(1).restart()
 
         d3
         .selectAll(".circle")
