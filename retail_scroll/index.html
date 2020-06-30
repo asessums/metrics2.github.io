@@ -315,6 +315,8 @@ margin-left: 50px;'>Hover to Interact</p></div>
   <div id='graph'></div>
   <div id='sections'>
     <div>
+    </div>
+    <div>
       <h3></h3>
       HR&A partnered with Live XYZ, a New York City-based startup that delivers precise, complete storefront and point-of-interest data and technology. Through Live XYZ’s proprietary mapping methodology, it has created a hyper-accurate map of places and how they change over time. Leveraging Live XYZ’s unique dataset, HR&A analyzed retail conditions in three New York City neighborhoods to understand their vulnerabilities and adaptability. <br>
       <br>
@@ -684,9 +686,9 @@ var w = window,
 nodewidth = x*.002
 
 
-document.getElementById("graph").style.height = (e.clientWidth*.54) + 'px';
+document.getElementById("graph").style.height = (e.clientWidth*.4) + 'px';
 
-document.getElementById("graph").style.width = (e.clientWidth*.54) + 'px';
+document.getElementById("graph").style.width = (e.clientWidth*.4) + 'px';
 
 
 var oldWidth = 0
@@ -695,18 +697,21 @@ function render(){
   oldWidth = innerWidth
 
   
-  var width = height = e.clientWidth*.54
+  console.log('eClientWidth: ' + e.clientWidth)
+  var width = height = e.clientWidth*.4
   //var width = height = d3.select('#graph').node().offsetHeight
   var r = 40
 
-
+  var m = 0
   if (innerWidth <= 925){
-    width = 340
+    width = e.clientWidth*.8 //340
     height = e.clientHeight
-
+    m = 1
     document.getElementById("graph").style.height = (e.clientHeight) + 'px';
 
-document.getElementById("graph").style.width = 340 + 'px';
+  console.log('m:' + m)
+
+document.getElementById("graph").style.width = e.clientWidth*.8 + 'px';
   }
 
   console.log('height: '+ height)
@@ -721,13 +726,17 @@ document.getElementById("graph").style.width = 340 + 'px';
 
   getValue('em')
 
+  //Font Sizes
+  var h1 = (e.clientWidth*.0003)+.8368
+  var h2 = (e.clientWidth*.0003)+.6968
+  var h3 = (e.clientWidth*.0003)+.4968
 
   const categories = ['Food','Body','Groups','Misc','Fitness','Essentials','Services','Lodging','Home & Hobby','Fashion','Auto','Drinks','Arts & Culture','Entertainment',]
   const colors = ['#2ACEE6','#FF57CF','#B9DB46','#000000','#61CC8C','#2E8EF5','#B8A088','#B29B83','#F28A13','#F9D406','#B29B83','#933EEF','#E0A0FD','#C35E4B']
 
   const categoriesXY = {'Hub': [(width/2), (height/3), '#FE4A49',2],
                         'Madison': [(width/3), (height/3)*2, '#FED766',1],
-                        'Jackson': [(height/3)*2, (height/3)*2, '#009FB7',0],
+                        'Jackson': [(width/3)*2, (height/3)*2, '#009FB7',0],
                         'None': [(width/2), (height/3), '#FE4A49', -2000]
                         }
 
@@ -840,7 +849,7 @@ document.getElementById("graph").style.width = 340 + 'px';
       ///Corner Demographic Box
       demo = svg
               .append("svg")
-              .attr("x", width*.05)
+              .attr("x", width*.02)
               .attr("y", height*.05)
               .attr("class","demo")
               .attr('opacity',0)
@@ -849,8 +858,8 @@ document.getElementById("graph").style.width = 340 + 'px';
 
       //Underlying Rectangle
       demo.append("rect")
-              .attr("width", em*25)
-              .attr("height", em*6)
+              .attr("width", h1*340)
+              .attr("height", h1*80)
               .attr('rx', '10')
               .attr("z-index", 5)
               .attr("opacity",.75)
@@ -865,7 +874,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr("dx", "1em")
               .attr("class","demotext")
               .style("fill","white")
-              .style("font-size","20px")
+              .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
 
       title.append("tspan")
@@ -881,9 +890,10 @@ document.getElementById("graph").style.width = 340 + 'px';
               .text("Median Household Income: ")
               .attr('class','MHI')
               .attr("dy", "4em")
-              .attr("dx", "1.8em")
+              .attr("dx", "1em")
               .style("fill","white")
               .style("font-weight", "bold")
+              .style("font-size",h2 + 'em')
         
 
       MHI.append("tspan")
@@ -898,9 +908,10 @@ document.getElementById("graph").style.width = 340 + 'px';
               .text("Worker Density: ")
               .attr('class','MHI')
               .attr("dy", "5em")
-              .attr("dx", "1.8em")
+              .attr("dx", "1em")
               .style("fill","white")
               .style("font-weight", "bold")
+              .style("font-size",h2 + 'em')
              
       Density.append("tspan")
               .style("font-weight", "normal")
@@ -908,16 +919,16 @@ document.getElementById("graph").style.width = 340 + 'px';
               .text('4K Workers per Square Mile (Citywide: 7K)')
               .attr("class","Densitytext")
              
-        
 
       var COVID = demo
               .append("text")
               .text("COVID Rate: ")
               .attr('class','COVID')
               .attr("dy", "6em")
-              .attr("dx", "1.8em")
+              .attr("dx", "1em")
               .style("fill","white")
               .style("font-weight", "bold")
+              .style("font-size",h2 + 'em')
          
 
       COVID.append("tspan")
@@ -934,7 +945,7 @@ document.getElementById("graph").style.width = 340 + 'px';
 
     mix = svg
               .append("svg")
-              .attr("x", width*.05)
+              .attr("x", width*.02)
               .attr("y", height*.05)
               .attr('class','mixlabel')
               .attr('opacity',0)
@@ -943,8 +954,8 @@ document.getElementById("graph").style.width = 340 + 'px';
 
       //Underlying Rectangle
     mix.append("rect")
-              .attr("width", em*28)
-              .attr("height", em*6)
+              .attr("width", h1*340)
+              .attr("height", h1*80)
               //.attr("stroke", '#000000')
               //.attr('stroke-width', '2px')
               .attr('rx', '10')
@@ -959,7 +970,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr('class','mixlabel')
               .attr('id','mixtitle')
               .style("fill", 'white')
-              .style("font-size","20px")
+              .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
 
     mixtitle.append("tspan")
@@ -972,7 +983,7 @@ document.getElementById("graph").style.width = 340 + 'px';
       //.attr('x',width/2)
       //.attr('y',height*.2)
       .attr("dy", "4em")
-      .attr("dx", "1.8em")
+      .attr("dx", "1em")
       .style("text-anchor", "start")
       .style("vertical-align", "start")
       .style("fill","#2ACEE6")
@@ -984,18 +995,19 @@ document.getElementById("graph").style.width = 340 + 'px';
       .attr('class','mixlabel')
       .attr('id','mixlabel1')
       .style("font-weight", "bold")
+      .style("font-size",h2 + 'em')
       //.style("font-size", "25px")
 
       mixone.append("tspan")
       .style("fill","white")
-      .text(": diverse offerings including Indian, Tibetan, and Colombian")
+      .text(": diverse offerings including Indian, Tibetan, Colombian")
       .attr('class','mixlabel')
       .attr('id','mixsublabel1')
       .style("font-weight", "normal")
 
       var mixtwo = mix.append("text")             
       .attr("dy", "5em")
-      .attr("dx", "1.8em")
+      .attr("dx", "1em")
       .style("text-anchor", "start")
       .style("vertical-align", "start")
       .style("fill","#F9D406")
@@ -1003,6 +1015,7 @@ document.getElementById("graph").style.width = 340 + 'px';
       .attr('class','mixlabel')
       .attr('id','mixlabel2')
       .style("font-weight", "bold")
+      .style("font-size",h2 + 'em')
 
       mixtwo.append("tspan")             
       .style("fill","white")
@@ -1014,7 +1027,7 @@ document.getElementById("graph").style.width = 340 + 'px';
 
       var mixthree = mix.append("text")             
       .attr("dy", "6em")
-      .attr("dx", "1.8em")
+      .attr("dx", "1em")
       .style("text-anchor", "start")
       .style("vertical-align", "start")
       .style("fill","#FF57CF")
@@ -1022,6 +1035,7 @@ document.getElementById("graph").style.width = 340 + 'px';
       .attr('class','mixlabel')
       .attr('id','mixlabel3')
       .style("font-weight", "bold")
+      .style("font-size",h2 + 'em')
 
       mixthree.append("tspan")
       .style("fill","white")
@@ -1089,59 +1103,59 @@ document.getElementById("graph").style.width = 340 + 'px';
       .attr('class','histtitle')
       .style("font-weight", "bold")
       .style("text-anchor", "middle")
-      .style("font-size", "1.4em")
+      .style("font-size", h1 + "em")
 
 
     svg.append("text")             
       .attr("transform",
             "translate("+ histXScale(16) + " ," + 
-                           (height/10)*1.45 + ")")
+                           (height/10)*1.3 + ")")
       .style("text-anchor", "middle")
       .style("fill","gray")
       .text(">11 ft Available for Sidewalk Seating")
       .attr('class','histlabel')
       .style("font-weight", "regular")
-      .style("font-size", ".9em")
+      .style("font-size", h2+"em")
 
 
 
     svg.append("text")             
       .attr("transform",
             "translate("+ histXScale(22) + " ," + 
-                           histYScale(13) + ")")
+                           histYScale(10) + ")")
       .style("text-anchor", "end")
       .style("vertical-align", "middle")
       .style("fill","black")
       .text("64%")
       .attr('class','histlabel')
       .style("font-weight", "bold")
-      .style("font-size", "1.3em")
+      .style("font-size", h2+"em")
 
 
     svg.append("text")             
       .attr("transform",
             "translate("+ histXScale(22) + " ," + 
-                           histYScale(88) + ")")
+                           histYScale(85) + ")")
       .style("text-anchor", "end")
       .style("vertical-align", "middle")
       .style("fill","black")
       .text("40%")
       .attr('class','histlabel')
       .style("font-weight", "bold")
-      .style("font-size", "1.3em")
+      .style("font-size", h2+"em")
 
 
     svg.append("text")             
       .attr("transform",
             "translate("+ histXScale(22) + " ," + 
-                           histYScale(51) + ")")
+                           histYScale(48) + ")")
       .style("text-anchor", "end")
       .style("vertical-align", "middle")
       .style("fill","black")
       .text("65%")
       .attr('class','histlabel')
       .style("font-weight", "bold")
-      .style("font-size", "1.3em")
+      .style("font-size", h2+"em")
 
 
     svg.append('line')
@@ -1185,7 +1199,7 @@ document.getElementById("graph").style.width = 340 + 'px';
                 .attr("id","madison_label")
                 .style("fill", 'black')
                 .attr("opacity",0)
-                .style("font-size","1.5em")
+                .style("font-size",h1 + 'em')
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
 
@@ -1198,7 +1212,7 @@ document.getElementById("graph").style.width = 340 + 'px';
                 .attr("id","jackson_label")
                 .style("fill", 'black')
                 .attr("opacity",0)
-                .style("font-size","1.5em")
+                .style("font-size",h1 + 'em')
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
                 .transition(2000).duration(2000).delay(1000)
@@ -1212,7 +1226,7 @@ document.getElementById("graph").style.width = 340 + 'px';
                 .attr("id","hub_label")
                 .style("fill", 'black')
                 .attr("opacity",0)
-                .style("font-size","1.5em")
+                .style("font-size",h1 + 'em')
                 .style("font-weight", "bold")
                 .style("text-anchor", "middle")
 
@@ -1224,7 +1238,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr("id","madison_text")
               .style("fill", "black")
               .attr("opacity",0)
-              .style("font-size","1.5em")
+              .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
 
@@ -1236,7 +1250,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr("id","jackson_text")
               .style("fill", "black")
               .attr("opacity",0)
-              .style("font-size","1.5em")
+              .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
 
@@ -1248,7 +1262,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr("opacity",0)
               .attr("id","hub_text")
               .style("fill", "black")
-              .style("font-size","1.5em")
+              .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
               .style("text-anchor", "middle")
 
@@ -1265,7 +1279,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr("class","citywide")
 
       citywide.append("rect")
-              .attr("width", 140)
+              .attr("width", h1*80)
               .attr("height", 70)
               .attr("stroke", '#d8d8d8')
               .attr('stroke-width', '2px')
@@ -1278,7 +1292,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .attr("dy", "1.5em")
               .attr("dx", "1em")
               .style("fill", "black")
-              .style("font-size","20px")
+              .style("font-size",h1 + 'em')
               .style("font-weight", "bold")
 
       var value = citywide
@@ -1286,7 +1300,7 @@ document.getElementById("graph").style.width = 340 + 'px';
               .text("15%")
               .attr('class','cityvalue')
               .attr("dy", "3.75em")
-              .style("font-size","14px")
+              .style("font-size",h1 + 'em')
               .attr("dx", "1.5em")
               .style("fill", "black")
               .style("font-weight", "bold")
@@ -1496,24 +1510,33 @@ console.log(rows)
     function load_Jackson(){
       d3
         .selectAll(".demo")
-        .lower()
+        .raise()
         .attr("opacity",1)
         .style('cursor','auto')
 
       d3
         .selectAll(".demotext")
-        .text("Jackson Avenue")
+        .text("Jackson Heights")
         .style("fill","white")
         .append("tspan")
               .style("font-weight", "normal")
               .text(': Overview')
+
+      d3.selectAll('.MHItext')
+      .text('$56,000 (Citywide: $62,000)')
+
+      d3.selectAll('.Densitytext')
+      .text('4K Workers per Square Mile (Citywide: 7K)')
+
+      d3.selectAll('.COVIDtext')
+      .text('3.6% of Residents (Citywide: 2.3%)')
     }
 
     function load_Hub(){
 
       d3
         .selectAll(".demo")
-        .lower()
+        .raise()
         .attr("opacity",1)
         .style('cursor','auto')
 
@@ -1540,7 +1563,7 @@ console.log(rows)
 
       d3
         .selectAll(".demo")
-        .lower()
+        .raise()
         .attr("opacity",1)
         .style('cursor','auto')
 
@@ -1566,6 +1589,41 @@ console.log(rows)
 
 
 ////////////////STEP FUNCTIONS
+  
+  function initialize(){
+
+    if (m == 1){
+    console.log("Um, hello")
+
+    d3.selectAll('.graph-scroll-active')
+    .style('background','rgba(255,255,255,0)')
+    .style('border-top','0px')
+    .style('border-bottom','0px')
+    }
+
+    //Set Reverse 
+    if (window.step == 2){
+      clean(['.demo','.mixlabel'],500,'hide_demo1')
+
+      d3
+      .selectAll(".circle")
+      .transition("shrink1").duration(500)
+      .attr("r", 1)
+
+      map.off("moveend", load_Jackson)
+      map.off("moveend", load_Madison)
+      map.off("moveend", load_Hub)
+    }
+
+    //Actions
+    map.flyTo({center: [-73.923511, 40.783584], zoom:Math.round((width*.002)+9.8378)});
+
+    //Set Step
+    window.step = 1
+
+  }
+
+
   function stepone(){
 
     //Set Reverse 
@@ -1595,6 +1653,7 @@ console.log(rows)
     //Set Reverse
       if (window.step == 3){
         //Remove Retail Mix Labels
+        map.off("moveend")
         clean(['.mixlabel'],500,'hide_demo2')
       }
 
@@ -1621,6 +1680,7 @@ console.log(rows)
 
     //Set Reverse
       if (window.step == 4){
+        map.off("moveend", load_Hub)
         //Remove Retail Mix Labels
         clean(['.demo'],500,'hide_demo3')
         map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
@@ -1636,7 +1696,7 @@ console.log(rows)
       .text("19% Food")
       .append("tspan")             
       .style("fill","white")
-      .text(": diverse offerings including Indian, Tibetan, and Colombian")
+      .text(": diverse offerings including Indian, Tibetan, Colombian")
       .attr('class','mixlabel')
       .attr('id','mixsublabel2')
       .style("font-weight", "normal")
@@ -2060,7 +2120,7 @@ console.log(rows)
         .transition("l4").duration(500)
                   .attr("x", width*.333)
                   .attr("y", (height*.666)+(nodewidth*25))
-                  .style("font-size","20px")
+                  //.style("font-size",h1 + 'em')
                   .style("font-weight", "bold")
                   .style("text-anchor", "middle")
              
@@ -2068,7 +2128,7 @@ console.log(rows)
         .transition("l5").duration(500)
                 .attr("x", width*.666)
                 .attr("y", (height*.666)+(nodewidth*25))
-                  .style("font-size","20px")
+                  //.style("font-size",h1 + 'em')
                   .style("font-weight", "bold")
                   .style("text-anchor", "middle")
                 
@@ -2076,7 +2136,7 @@ console.log(rows)
         .transition("l6").duration(500)
                   .attr("x", width*.5)
                   .attr("y", (height*.333)+(nodewidth*15))
-                  .style("font-size","20px")
+                  //.style("font-size",h1 + 'em')
                   .style("font-weight", "bold")
                   .style("text-anchor", "middle")
 
@@ -2144,23 +2204,23 @@ console.log(rows)
     //Move Labels
     d3.selectAll('#madison_label')
     .transition("l1").duration(500).delay(100)
-      .attr("x",width*.25)
-      .attr("y",histYScale(38))
-      .style("font-size","18px")
+      .attr("x",width*.3)
+      .attr("y",histYScale(48))
+      //.style("font-size",h2 + 'em')
       .style("text-anchor", "end")
 
     d3.selectAll('#jackson_label')
     .transition("l2").duration(500).delay(100)
-      .attr("x",width*.25)
-      .attr("y",histYScale(1))
-      .style("font-size","18px")
+      .attr("x",width*.3)
+      .attr("y",histYScale(10))
+      //.style("font-size",h2 + 'em')
       .style("text-anchor", "end")
 
     d3.selectAll('#hub_label')
     .transition("l3").duration(500).delay(100)
-      .attr("x",width*.25)
-      .attr("y",histYScale(75))
-      .style("font-size","18px")
+      .attr("x",width*.3)
+      .attr("y",histYScale(85))
+      //.style("font-size",h2 + 'em')
       .style("text-anchor", "end")
 
 
@@ -2217,6 +2277,7 @@ console.log(rows)
 
 
     let functions = [
+        initialize,
         stepone,
         steptwo,
         jackson_two,
