@@ -1659,7 +1659,7 @@ console.log(rows)
 
     //Actions
       //Zoom in to Jackson Heights
-      map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
+      map.flyTo({center: [ -73.888122, 40.748345], zoom:Math.round((width*.002)+12.8378)});
 
       //Make Circles Bigger
       d3
@@ -1683,7 +1683,7 @@ console.log(rows)
         map.off("moveend", load_Hub)
         //Remove Retail Mix Labels
         clean(['.demo'],500,'hide_demo3')
-        map.flyTo({center: [ -73.888122, 40.748345], zoom:15});
+        map.flyTo({center: [ -73.888122, 40.748345], zoom:Math.round((width*.002)+12.8378)});
 
         d3.select('#mixtitle')
         .text('Jackson Heights')
@@ -1748,7 +1748,7 @@ console.log(rows)
       map.off("moveend", load_Jackson)
       map.on("moveend", load_Hub);
 
-      map.flyTo({center: [-73.917654, 40.816110], zoom:15});
+      map.flyTo({center: [-73.917654, 40.816110], zoom:Math.round((width*.002)+12.8378)});
 
       d3
       .selectAll(".circle")
@@ -1766,7 +1766,7 @@ console.log(rows)
       if (window.step == 6){
         //Remove Retail Mix Labels
         clean(['.demo'],500,'hide_demo5')
-        map.flyTo({center: [-73.917654, 40.816110], zoom:15});
+        map.flyTo({center: [-73.917654, 40.816110], zoom:Math.round((width*.002)+12.8378)});
       }
 
       //Actions
@@ -1830,7 +1830,7 @@ console.log(rows)
     if(window.step == 5){
       map.off("moveend", load_Hub)
       clean(['.mixlabel','.citywide'],500,'hide_mix4')
-      map.flyTo({center: [-73.976957, 40.756015], zoom:14});
+      map.flyTo({center: [-73.976957, 40.756015], zoom:Math.round((width*.002)+11.8378)});
       map.on("moveend", load_Madison);
 
       d3
@@ -1846,7 +1846,7 @@ console.log(rows)
     function madison_two(){
 
       if (window.step == 8){
-        map.flyTo({center: [-73.976957, 40.756015], zoom:14});
+        map.flyTo({center: [-73.976957, 40.756015], zoom:Math.round((width*.002)+11.8378)});
 
         d3
       .selectAll(".circle")
