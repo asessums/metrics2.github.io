@@ -62,12 +62,12 @@
         .button.active {
             color: #003E7A;
         }
-        #btn-spin {
+        /*#btn-spin {
          position: absolute;
         left: 200px;
         z-index: 10;
         font-size: 1.5em;
-        }
+        }*/
         #export {
             position: absolute;
             top:50px;
@@ -617,7 +617,7 @@ If the transit system you are looking for is not represented, check <a href="htt
             marker = L.marker((e.latlng), {icon: markerimage}).addTo(map);
             async function setData(medium) {
                 const selector = `btn-${medium}`;
-                map.spin(true);
+                map.spin(false);
 
                 // you need to define some options for the polygon service
                 const options = {
@@ -682,7 +682,7 @@ If the transit system you are looking for is not represented, check <a href="htt
 
         async function setData(mode) {
                 const selector = `btn-${mode}`;
-                map.spin(true);
+                map.spin(false);
                 document.getElementsByClassName('active')[0].classList.remove('active');
                 document.getElementById(selector).classList.add('active');
 
